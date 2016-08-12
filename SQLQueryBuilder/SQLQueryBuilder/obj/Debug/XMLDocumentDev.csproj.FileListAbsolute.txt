@@ -1,0 +1,9 @@
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\bin\Debug\XMLDocumentDev.exe.config
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\bin\Debug\XMLDocumentDev.exe
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\bin\Debug\XMLDocumentDev.pdb
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\obj\Debug\XMLDocumentDev.csprojResolveAssemblyReference.cache
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\obj\Debug\XMLDocumentDev.csproj.GenerateResource.Cache
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\obj\Debug\XMLDocumentDev.exe
+c:\users\charles\documents\visual studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\obj\Debug\XMLDocumentDev.pdb
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\obj\Debug\SQLQueryBuilder.windowMain.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\XMLDocumentDev\XMLDocumentDev\obj\Debug\SQLQueryBuilder.Properties.Resources.resources

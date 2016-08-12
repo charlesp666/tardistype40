@@ -1,0 +1,10 @@
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.csprojResolveAssemblyReference.cache
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.windowMain.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.Properties.Resources.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.ShowSQLTables.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.csproj.GenerateResource.Cache
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.exe.config
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.exe
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.pdb
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.exe
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.pdb

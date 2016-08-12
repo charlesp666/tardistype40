@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+ <data-set xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SQLTables>
+	<SQLTable>
+		<databaseName></databaseName>
+		<tableName></tableName>
+		<tableAbbreviation></tableAbbreviation>
+        <columns>
+			<column>
+				<columnName></columnName>
+				<columnDataType></columnDataType>
+				<isNull></isNull>
+			</column>
+        </columns>
+        <joins>
+             <join>
+                <rightsideDatabase></rightsideDatabase>
+                <rightsideTableName></rightsideTableName>
+                <joindef>
+                    <leftsideColumnName></leftsideColumnName>
+                    <leftsideModifier></leftsideModifier>
+                    <relation></relation>
+                    <rightsideColumnName></rightsideColumnName>
+                    <rightsideModifier></rightsideModifier>
+                </joindef>
+            </join>
+        </joins>
+	</SQLTable>
+  </SQLTables>
+ </data-set>
