@@ -8,3 +8,13 @@ C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryB
 C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.pdb
 C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.exe
 C:\Users\Charles\Documents\Visual Studio 2012\Projects\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.pdb
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.exe.config
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.exe
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.pdb
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.exe
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\bin\Debug\SQLQueryBuilder.pdb
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.csprojResolveAssemblyReference.cache
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.windowMain.resources
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.Properties.Resources.resources
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.ShowSQLTables.resources
+C:\Users\Charles\Source\Repos\tardistype40\SQLQueryBuilder\SQLQueryBuilder\obj\Debug\SQLQueryBuilder.csproj.GenerateResource.Cache
