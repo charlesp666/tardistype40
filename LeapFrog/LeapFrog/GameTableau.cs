@@ -6,10 +6,7 @@
  * Author:              Charles J Pilgrim
  * Created:             24-September-2013
  * 
- * Last Maintained By:  Charles J Pilgrim
- * Last Maintained:     04-February-2016
- * 
- * @Copyright (c) 2013-2016 Charles J. Pilgrim
+ * @Copyright (c) 2013-2017 Charles J. Pilgrim
  * All Rights Reserved.
  */
 
@@ -68,7 +65,7 @@ namespace LeapFrog
         private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
         private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
-        private static int displayDelayMS = 200;      //Action display delay so user can see changes
+        private static int displayDelayMS = 150;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DateTime gameStartTime;                                            //Game Start Time
@@ -134,8 +131,7 @@ namespace LeapFrog
 
         private void gameTimerTick(object sender, EventArgs e)
         {
-            gameEndTime = System.DateTime.Now;                  //Set the Current Game Time to "Now"
-            TimeSpan elapsedTime = gameEndTime - gameStartTime;          //Compute Current Game Time
+            TimeSpan elapsedTime = computeTimePlayed();                  //Compute Current Game Time
 
             String timeDisplay;                        //String to Store the Elapsed Time to Display
             timeDisplay = elapsedTime.ToString();                     //Convert Elapsed Time to Text
@@ -270,6 +266,18 @@ namespace LeapFrog
                     dataGridGameBoard[aCol, aRow].Value = aDeck.getCardBack();
                 }
             }
+        }
+
+        /*******************************************************************************************
+         * Method: computeTimePlayed
+         * Computes the Time Played for Last Game
+         */
+        private TimeSpan computeTimePlayed()
+        {
+            gameEndTime = System.DateTime.Now;                  //Set the Current Game Time to "Now"
+            TimeSpan elapsedTime = gameEndTime - gameStartTime;          //Compute Current Game Time
+
+            return elapsedTime;
         }
 
         /*******************************************************************************************
@@ -704,8 +712,9 @@ namespace LeapFrog
             //Adjust current game score for buy-in and record to Player's stats
             scoreThisGame -= gameBuyIn;                             // Deduct the Game Buy-In Amount
 
-            myPlayer.finishGameForPlayer(scoreThisGame, moveCount);  //Update Player Game Statistics
-            myPlayer.displayPlayerStats(scoreThisGame, moveCount);         //Display Game Statistics
+            //Update Player Statistics then Display Results
+            myPlayer.finishGameForPlayer(scoreThisGame, moveCount, computeTimePlayed()); 
+            myPlayer.displayPlayerStats(scoreThisGame, moveCount, computeTimePlayed());
         }
 
         /*******************************************************************************************

@@ -7,10 +7,7 @@
  * Author:              Charles J Pilgrim
  * Created:             25-January-2016
  * 
- * Last Maintained By:  Charles J Pilgrim
- * Last Maintained:     26-January-2016
- * 
- * @Copyright (c) 2013-2016 Charles J. Pilgrim
+ * @Copyright (c) 2013-2017 Charles J. Pilgrim
  * All Rights Reserved.
  */
 
@@ -44,7 +41,7 @@ namespace LeapFrog
         private Color colorForeground;                //Color to assignt to Foreground of game board
 
         //Constants
-        private String copyrightNotice = "Copyright (c) 2013-2016 Charles J. Pilgrim";
+        private String copyrightNotice = "Copyright (c) 2013-2017 Charles J. Pilgrim";
         private String rightsNotice = "All Rights Reserved";
 
         /*******************************************************************************************
