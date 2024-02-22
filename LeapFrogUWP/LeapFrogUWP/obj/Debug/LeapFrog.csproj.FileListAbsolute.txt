@@ -1,0 +1,169 @@
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe.config
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csprojResolveAssemblyReference.cache
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.Cache
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.pdb
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\10c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\10d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\10h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\10s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\2C.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\2D.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\2H.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\2S.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\3C.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\3D.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\3H.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\3S.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\4c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\4d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\4h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\4s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\5c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\5d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\5h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\5s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\6c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\6d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\6h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\6s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\7c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\7d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\7h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\7s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\8c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\8d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\8h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\8s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\9c.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\9d.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\9h.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\9s.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\ac.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\ad.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\ah.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\as.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\CardsIcon.png
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\frog1_color.jpg
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\jc.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\jd.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\jh.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\js.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\kc.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\kd.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\kh.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\ks.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\qc.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\qd.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\qh.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\qs.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\sad.gif
+C:\Users\Charles\Documents\Visual Studio 2012\Projects\LeapFrog\LeapFrog\bin\Debug\Images\smiley.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe.config
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\10c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\10d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\10h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\10s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\2C.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\2D.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\2H.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\2S.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\3C.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\3D.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\3H.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\3S.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\4c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\4d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\4h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\4s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\5c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\5d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\5h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\5s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\6c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\6d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\6h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\6s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\7c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\7d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\7h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\7s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\8c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\8d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\8h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\8s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\9c.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\9d.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\9h.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\9s.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\ac.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\ad.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\ah.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\as.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\CardsIcon.png
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\frog1_color.jpg
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\jc.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\jd.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\jh.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\js.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\kc.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\kd.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\kh.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\ks.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\qc.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\qd.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\qh.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\qs.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\sad.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\Images\smiley.gif
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.pdb
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csprojResolveAssemblyReference.cache
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\Charles\Documents\VSProjects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.Cache
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe.config
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\bin\Debug\LeapFrog.pdb
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csprojResolveAssemblyReference.cache
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.Cache
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameAbout.resources
+C:\Users\Charles\Documents\Visual Studio 2015\Projects\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameHelp.resources
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe.config
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.pdb
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csprojResolveAssemblyReference.cache
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameAbout.resources
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameHelp.resources
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.Cache
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
+C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe.config
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameAbout.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameHelp.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.CoreCompileInputs.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.AssemblyReference.cache

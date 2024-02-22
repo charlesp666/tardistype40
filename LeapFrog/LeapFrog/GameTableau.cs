@@ -64,7 +64,12 @@ namespace LeapFrog
 
         private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
-        private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
+        /*******************************************************************************************
+        * Class Variables and Constants
+        */
+        private Stack<UndoItem> myUndoItems = new Stack<UndoItem>();
+
+        //private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
         private static int displayDelayMS = 150;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
@@ -373,7 +378,7 @@ namespace LeapFrog
 
             clearBoard(gameDeck);                                                //Clear the tableau
             lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
-            moveCount = -1;                                                  //Reset the move counter
+            moveCount = -1;                                                 //Reset the move counter
             txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
         }
 
@@ -730,6 +735,8 @@ namespace LeapFrog
             dealCards(aDeck);                                        //Deal the Cards to the Tableau
             removeAces();                                    //Remove Aces to Initialize Play Spaces
 
+            myUndoItems.Clear();                                             //Clear the Undo Buffer
+
             moveCount = 0;                              //Initialize the Move Counter for a New Game
             txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
 
@@ -754,14 +761,18 @@ namespace LeapFrog
             dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Tag = playSpace;
             dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Value = playSpaceIcon;
 
-            myUndoBuffer.push(sourceCard, destinationCard);             //Push Move onto Undo Buffer
+            UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
+            myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
         }
 
         private void undoMove()
         {
-            UndoBuffer.UndoItem myItem;                                //Local Storage for Undo Item
-            myItem = myUndoBuffer.pop();                                 //Get the last Move Made...
-            swapPlayCards(myItem.getToPosition(), myItem.getFromPosition());           //And Undo it
+            UndoItem undoMove = new UndoItem();                     //Object to store Undo Positions
+            undoMove = myUndoItems.Pop();                             //Get the last move from stack
+
+            //UndoBuffer.UndoItem myItem;                                //Local Storage for Undo Item
+            //myItem = myUndoBuffer.pop();                                 //Get the last Move Made...
+            swapPlayCards(undoMove.getToPosition(), undoMove.getFromPosition());      //And Undo it
         }
 
     }
@@ -909,11 +920,11 @@ namespace LeapFrog
 
     /***********************************************************************************************
      * Class: Undo Buffer
-     * Simulates a Stack to provide for "Undo" functionality.
+     * Defines an object that stores the from and to card locations for a move.
      **********************************************************************************************/
     #region
-    public partial class UndoBuffer
-    {
+    //public partial class UndoBuffer
+    //{
         /*******************************************************************************************
         * Sub-Class UndoItem
         * Defines the structure of a single Undo Item.
@@ -922,6 +933,10 @@ namespace LeapFrog
         {
             private PlayPosition fromPosition;                    //Card Position that move was from
             private PlayPosition toPosition;                        //Card Position that move was to
+
+            public UndoItem()
+            {
+            }
 
             public UndoItem(PlayPosition aFromPosition, PlayPosition aToPosition)
             {
@@ -941,46 +956,41 @@ namespace LeapFrog
         }
 
         /*******************************************************************************************
-         * Class Variables and Constants
-         */
-         private List<UndoItem> myUndoItems = new List<UndoItem>();
-
-        /*******************************************************************************************
          * Constructor: UndoBuffer (Default)
          * Initializes the Undo Buffer.
          */
-        public UndoBuffer()
-        {
-             //No Initialization State required
-        }
+        //public UndoBuffer()
+        //{
+        //     //No Initialization State required
+        //}
 
         /*******************************************************************************************
          * Method: pop
          * "Pops" the last move made from the Stack
          */
-        public UndoItem pop()
-        {
-            int bufferItem = myUndoItems.Count - 1;                             //Top Item in Buffer
-            UndoItem myItem = null;                                                //Local Undo Item
+        //public UndoItem pop()
+        //{
+        //    int bufferItem = myUndoItems.Count - 1;                             //Top Item in Buffer
+        //    UndoItem myItem = null;                                                //Local Undo Item
 
-            if(bufferItem >= 0)
-            {
-                myItem = myUndoItems[bufferItem];                      //Get the most recent move...
-                myUndoItems.RemoveAt(bufferItem);              //and Remove "popped" item from stack
-            }
-            return (myItem);
-        }
+        //    if(bufferItem >= 0)
+        //    {
+        //        myItem = myUndoItems[bufferItem];                      //Get the most recent move...
+        //        myUndoItems.RemoveAt(bufferItem);              //and Remove "popped" item from stack
+        //    }
+        //    return (myItem);
+        //}
 
         /*******************************************************************************************
          * Method: push
          * "Pushes" the most recent move made to the Stack
          */
-        public void push(PlayPosition aFromPosition, PlayPosition aToPosition)
-        {
-            UndoItem newItem = new UndoItem(aFromPosition, aToPosition);
-            myUndoItems.Add(newItem);
-        }
-    }
+        //public void push(PlayPosition aFromPosition, PlayPosition aToPosition)
+        //{
+        //    UndoItem newItem = new UndoItem(aFromPosition, aToPosition);
+        //    myUndoItems.Add(newItem);
+        //}
+    //}
 
     #endregion
 }
