@@ -1,0 +1,14 @@
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\bin\Debug\LeapFrog.exe.config
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\bin\Debug\LeapFrog.exe
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\bin\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrogUWP.csproj.AssemblyReference.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrogUWP.csproj.SuggestedBindingRedirects.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.frmGameAbout.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.frmGameHelp.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrogUWP.csproj.GenerateResource.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrogUWP.csproj.CoreCompileInputs.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.exe
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\LeapFrogUWP\obj\Debug\LeapFrog.pdb
