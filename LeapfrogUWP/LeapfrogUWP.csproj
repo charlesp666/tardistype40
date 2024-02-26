@@ -214,17 +214,12 @@
     <Content Include="CardImages\Qd.gif" />
     <Content Include="CardImages\Qh.gif" />
     <Content Include="CardImages\Qs.gif" />
-    <Content Include="CardsIcon.png" />
     <Content Include="Data\GameInstructions.txt" />
-    <Content Include="defaultBack.gif" />
     <Content Include="GameImages\CardsIcon.png" />
     <Content Include="GameImages\defaultBack.gif" />
     <Content Include="GameImages\LeapFrog.jpg" />
     <Content Include="GameImages\NotPlayable.gif" />
     <Content Include="GameImages\Playable.gif" />
-    <Content Include="LeapFrog.jpg" />
-    <Content Include="NotPlayable.gif" />
-    <Content Include="Playable.gif" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
