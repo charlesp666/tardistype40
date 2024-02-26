@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gNeLle6Ch09T2+kH6SnM/qCdn5ca9Md8ycr6QeTvRDXFI4npUwcTHftkdn2hJDaxFch/TRsC9FcSs9257pXRLQ==",
+  "dgSpecHash": "RNRu5VlP8HwbcAOgPQZwOuSDKRGjyjGy49dZBpc4nrgfUfaG5/m+w5IHcRVsEEvll3qDdcnWtExJPyG0xp8gFw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj",
+  "projectFilePath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapfrogUWP.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.net.native.compiler\\2.2.11-rel-30601-02\\microsoft.net.native.compiler.2.2.11-rel-30601-02.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.net.uwpcoreruntimesdk\\2.2.13\\microsoft.net.uwpcoreruntimesdk.2.2.13.nupkg.sha512",

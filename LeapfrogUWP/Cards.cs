@@ -19,8 +19,8 @@
  */
 using System;
 using System.Linq;
-using System.Drawing;                                                                //For Image Use
 using System.Resources;                                     //To Pull Images from Assembly Resources
+using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 
 /***************************************************************************************************
  * Namespace Definition

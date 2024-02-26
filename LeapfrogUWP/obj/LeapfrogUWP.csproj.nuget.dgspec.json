@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj": {}
+    "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapfrogUWP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj": {
+    "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapfrogUWP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj",
+        "projectUniqueName": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapfrogUWP.csproj",
         "projectName": "LeapfrogUWP",
-        "projectPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj",
+        "projectPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapfrogUWP.csproj",
         "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\obj\\",
+        "outputPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
