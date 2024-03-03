@@ -120,40 +120,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Cards.cs" />
-    <Compile Include="GameAbout.cs" />
-    <Compile Include="GameAbout.Designer.cs" />
-    <Compile Include="GameAbout1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GameAbout.resx</DependentUpon>
-    </Compile>
-    <Compile Include="GameHelp.cs" />
-    <Compile Include="GameHelp.Designer.cs" />
-    <Compile Include="GameHelp1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GameHelp.resx</DependentUpon>
-    </Compile>
-    <Compile Include="GameInformation.cs" />
-    <Compile Include="GameTableau.cs" />
-    <Compile Include="GameTableau.Designer.cs" />
-    <Compile Include="GameTableau1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GameTableau.resx</DependentUpon>
-    </Compile>
-    <Compile Include="LeapFrog.cs" />
-    <Compile Include="LeapFrog.Designer.cs" />
-    <Compile Include="LeapFrog1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LeapFrog.resx</DependentUpon>
-    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Player.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -243,24 +212,6 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.13</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="GameAbout.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GameAbout1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GameHelp.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GameHelp1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GameTableau.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GameTableau1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LeapFrog.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LeapFrog1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

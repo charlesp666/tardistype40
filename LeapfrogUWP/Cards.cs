@@ -21,6 +21,7 @@ using System;
 using System.Linq;
 using System.Resources;                                     //To Pull Images from Assembly Resources
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
+using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 
 /***************************************************************************************************
  * Namespace Definition
@@ -41,11 +42,16 @@ namespace LeapFrog
         {
             private String cardRank;              //Contains the Rank (Ace through King) of the card
             private char cardSuit; //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of the Card
-            private Image cardFace = LeapFrog.Properties.Resources.NotPlayable;  //Default Card Face
+
+            //Set CardFace to Default "NotPlayable" Image
+            private BitmapImage bmpNotPlayable = new BitmapImage(new Uri("./GameImages/NotPlayable.jpg", UriKind.Absolute));
+            
+            private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
+
 
             /* Define arrays storing to possible values for rank and suit; make public to be viewable by
              * anyone wanting to build a card or deck of cards.
-             ***** Q: how to handle (should) jokers?
+             ***** Q: how to handle (should?) jokers?
              */
             public static String[] possibleRanks = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
             public static char[] possibleSuits = { 'S', 'H', 'C', 'D' }; //Possible Values for Suits
@@ -57,11 +63,12 @@ namespace LeapFrog
              */
             public Card()
             {
-                Image aFace = cardFace;
+                Image aFace = new Image();        //Create temporary storage to convert bitmap image
+                aFace.Source = bmpNotPlayable;           //Load Temporary Storage with bitmap object
 
-                this.cardRank = "";                  //initialize Card's Rank to null
-                this.cardSuit = ' ';                 //initialize Card's suit to null
-                this.setCardFace(aFace);               //Initialize Card's Face Image
+                this.cardRank = "";                                 //initialize Card's Rank to null
+                this.cardSuit = ' ';                                //initialize Card's suit to null
+                this.setCardFace(aFace);                              //Initialize Card's Face Image
             }
 
             /***************************************************************************************
@@ -254,7 +261,10 @@ namespace LeapFrog
             private static Random aRandom = new Random();   //Parameter for Random Number Generation
 
             private Card[] deckCards = new Card[52]; //Array of Card to contain a full deck of cards
-            private Image cardBack = LeapFrog.Properties.Resources.defaultBack;    //Card Back Image
+
+            private BitmapImage bmpCardBack = new BitmapImage(new Uri("./GameImages/defaultBack.jpg", UriKind.Absolute));
+
+            private Image cardBack = new Image();    //Card Back Image
 
             /***************************************************************************************
              * Constructor: Deck
