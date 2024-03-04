@@ -19,6 +19,7 @@
 using System;
 using System.Linq;
 using System.Resources;                                     //To Pull Images from Assembly Resources
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 
 using Microsoft.Win32;                                               //For Interacting with Registry
@@ -33,10 +34,7 @@ namespace LeapFrog
      **********************************************************************************************/
     public class Player
     {
-        private static String keyName = "SOFTWARE\\LeapFrog";         //Name of App and Registry Key
-        private static RegistryKey playerBaseKey = Registry.CurrentUser; //Base Key Game Information
-        private RegistryKey playerSubKey;
-
+        private Windows.Storage.ApplicationDataContainer PlayerStats = Windows.Storage.ApplicationData.Current.LocalSettings;
         private System.Security.Principal.WindowsIdentity playerID = System.Security.Principal.WindowsIdentity.GetCurrent();
 
         private int gamesPlayed = 0;                             //Cumulative Number of Games Played
@@ -96,7 +94,8 @@ namespace LeapFrog
           */
         private TimeSpan convertRegistryTimePlayed()
         {
-            String theRegTime = playerSubKey.GetValue("TimePlayed").ToString();      //Read Registry
+            String theRegTime = (string)PlayerStats.Values["TimePlayed"]; //Read Current Time Played
+
             String[] theTime = theRegTime.Split('.');                          //Remove Milliseconds
             String[] timeConvert = theTime[0].Split(':');         //Split Hours, Minutes and Seconds
 
@@ -228,18 +227,18 @@ namespace LeapFrog
          */
         private void loadPlayerStats()
         {
-            playerSubKey = playerBaseKey.OpenSubKey(keyName, true); //Attempt to Open the Sub Key...
-            if (playerSubKey == null)                                       //If no Sub Key found...
+            namePlayer = (string)PlayerStats.Values["PlayerName"];
+
+            if (namePlayer == null)                                       //If no Sub Key found...
             {
-                playerSubKey = playerBaseKey.CreateSubKey(keyName);          //Create the Sub Key...
                 writePlayerStats();                                        //And Save Default Values
             }
             else                                    //Otherwise, load the Stats from the Registry...
              {
-                setPlayerName((string)playerSubKey.GetValue("PlayerName"));
-                setGamesPlayed((int)playerSubKey.GetValue("GamesPlayed"));
-                setGameWinnings((int)playerSubKey.GetValue("Winnings"));
-                setCountMoves((int)playerSubKey.GetValue("Moves"));
+                setPlayerName((string)PlayerStats.Values["PlayerName"]);
+                setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
+                setGameWinnings((int)PlayerStats.Values["Winnings"]);
+                setCountMoves((int)PlayerStats.Values["Moves"];
  
                 setTimePlayed(convertRegistryTimePlayed());
              }
@@ -297,11 +296,11 @@ namespace LeapFrog
          */
         private void writePlayerStats()
         {
-            playerSubKey.SetValue("PlayerName", this.namePlayer);
-            playerSubKey.SetValue("GamesPlayed", this.gamesPlayed);
-            playerSubKey.SetValue("Winnings", this.gameWinnings);
-            playerSubKey.SetValue("Moves", this.countMoves);
-            playerSubKey.SetValue("TimePlayed", this.timePlayed);
+            PlayerStats.Values["PlayerName"]  = this.namePlayer;
+            PlayerStats.Values["GamesPlayed"] = this.gamesPlayed;
+            PlayerStats.Values["Winnings"]    = this.gameWinnings;
+            PlayerStats.Values["Moves"]       = this.countMoves;
+            PlayerStats.Values["TimePlayed"]  = this.timePlayed;
         }
     }
 }
