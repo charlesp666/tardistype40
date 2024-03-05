@@ -25,6 +25,9 @@ namespace LeapfrogUWP
         public MainPage()
         {
             this.InitializeComponent();
+
+            //Get or Initialize the Player Object
+            Player myAvatar = new Player();
         }
     }
 }
