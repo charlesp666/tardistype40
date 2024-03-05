@@ -6,7 +6,7 @@
  * Author:           Charles J Pilgrim
  * Created:          04-March-2024
  * 
- * LastMaintained:   04-March-2024
+ * LastMaintained:   05-March-2024
  * LastMaintainedBy: cjpilgrim
  * 
  * @Copyright (c) 2024 Charles J. Pilgrim
@@ -84,7 +84,7 @@ public class Player
       */
     private TimeSpan convertRegistryTimePlayed()
     {
-        String theRegTime = (string)PlayerStats.Values["TimePlayed"]; //Read Current Time Played
+        String theRegTime = PlayerStats.Values["TimePlayed"].ToString(); //Read Current Time Played
 
         String[] theTime = theRegTime.Split('.');                          //Remove Milliseconds
         String[] timeConvert = theTime[0].Split(':');         //Split Hours, Minutes and Seconds
