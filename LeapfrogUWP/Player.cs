@@ -17,6 +17,8 @@
  * System Class/Library Declarations
  */
 using System;
+using System.Collections.Generic;
+using Windows.System;
 using Windows.UI.Popups;
 
 /***********************************************************************************************
@@ -24,26 +26,30 @@ using Windows.UI.Popups;
  **********************************************************************************************/
 public class Player
 {
-    private Windows.Storage.ApplicationDataContainer PlayerStats = Windows.Storage.ApplicationData.Current.LocalSettings;
-    private System.Security.Principal.WindowsIdentity playerID = System.Security.Principal.WindowsIdentity.GetCurrent();
 
     private int gamesPlayed = 0;                             //Cumulative Number of Games Played
     private int gameWinnings = 0;                                          //Cumulative Winnings
     private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
-    private String namePlayer = "";                         //Name or Identity of Current Player
+    private String namePlayer = "jdoe@somewhere.net";       //Default Identity of Current Player
     private TimeSpan timePlayed = new TimeSpan(0,0,0);         //Total Time for All Games Played
-    
+
+    private String localSettingsName = "PlayerStatistics";
+    private Windows.Storage.ApplicationDataContainer PlayerStats = Windows.Storage.ApplicationData.Current.LocalSettings;
+    private Windows.Storage.ApplicationDataCompositeValue localStats = new Windows.Storage.ApplicationDataCompositeValue();
+
     /*******************************************************************************************
      * Constructor: Player (Default)
      */
     public Player()
     {
-        //Set Default Values before Attempting to Load Stats from Registry
-        setPlayerName(playerID.Name);          //Set the Player Name to the Logged In User Name
-        setGameWinnings(0);                                 // Initialize the Player's Winnings
-        setGamesPlayed(0);                        // Initialize the Player's Games Played Count
+        //initializePlayerName();
 
-        loadPlayerStats();                                    //Load Player Stats from Registry
+        //Set Default Values before Attempting to Load Stats from Registry
+        //setPlayerName(namePlayer);             //Set the Player Name to the Logged In User Name
+        //setGameWinnings(0);                                 // Initialize the Player's Winnings
+        //setGamesPlayed(0);                        // Initialize the Player's Games Played Count
+
+        loadPlayerStats();                            //Load Player Stats from Application Data
     }
 
     /*******************************************************************************************
@@ -65,7 +71,9 @@ public class Player
      */
     public void addToWinnings(int aValue)
     {
-        this.gameWinnings += aValue;
+        var currentWinnings = getGameWinnings();
+        currentWinnings += aValue;
+        setGameWinnings(currentWinnings);
     }
 
     /*******************************************************************************************
@@ -102,7 +110,7 @@ public class Player
      * Method: displayPlayerStats
      * Display the Current Statistics
      */
-    public void displayPlayerStats()
+    public async void displayPlayerStats()
     {
         String messageBoxTitle = "Player Statistics for " + getPlayerName() + ":";
 
@@ -120,7 +128,7 @@ public class Player
         PlayerStats.Commands.Add(new UICommand("Close"));
         PlayerStats.DefaultCommandIndex = 0;
 
-        PlayerStats.ShowAsync();
+        await PlayerStats.ShowAsync();
     }
 
     /*******************************************************************************************
@@ -128,7 +136,7 @@ public class Player
      * Display the Current Statistics (Name
      * @param currentScore - Score for Current Game
      */
-    public void displayPlayerStats(int currentScore, int currentMoves, TimeSpan gameTime)
+    public async void displayPlayerStats(int currentScore, int currentMoves, TimeSpan gameTime)
     {
         String messageBoxTitle = "Player Score";
 
@@ -150,7 +158,7 @@ public class Player
         PlayerStats.Commands.Add(new UICommand("Close"));
         PlayerStats.DefaultCommandIndex = 0;
 
-        PlayerStats.ShowAsync();
+        await PlayerStats.ShowAsync();
     }
 
     /*******************************************************************************************
@@ -177,7 +185,7 @@ public class Player
      */
     public int getCountMoves()
     {
-        return (this.countMoves);
+        return ((int)PlayerStats.Values["Moves"]);
     }
 
     /*******************************************************************************************
@@ -186,7 +194,7 @@ public class Player
      */
     public int getGameWinnings()
     {
-        return (this.gameWinnings);
+        return ((int)PlayerStats.Values["Winnings"]);
     }
     
     /*******************************************************************************************
@@ -195,7 +203,7 @@ public class Player
      */
     public int getGamesPlayed()
     {
-        return (this.gamesPlayed);
+        return ((int)PlayerStats.Values["GamesPlayed"]);
     }
     
     /*******************************************************************************************
@@ -204,7 +212,7 @@ public class Player
      */
     public String getPlayerName()
     {
-        return this.namePlayer;
+        return ((string)PlayerStats.Values["PlayerName"]);
     }
 
     /*******************************************************************************************
@@ -224,20 +232,40 @@ public class Player
     {
         this.gamesPlayed++;                                            //Add One to Game Counter
     }
-    
+
+    /*******************************************************************************************
+     * Method: initializePlayerName
+     * Initializes the Player Name to tbe Current User.
+     */
+    private async void initializePlayerName()
+    {
+        var domainUser = "";
+
+        IReadOnlyList<User> users = await User.FindAllAsync();
+       // var currentUser = users[0];
+
+        // Get the AccountName for the Current User grabbed above
+        var accountName = await users[0].GetPropertyAsync(KnownUserProperties.AccountName);
+        domainUser = (string)accountName;
+
+        this.namePlayer = domainUser;
+    }
+
     /*******************************************************************************************
      * Method: loadPlayerStats
      * Loads the Player Stats from the Registry for the Current User.
      */
     private void loadPlayerStats()
     {
-        namePlayer = (string)PlayerStats.Values["PlayerName"];
+        localStats = (Windows.Storage.ApplicationDataCompositeValue) PlayerStats.Values[localSettingsName];
+        var testPlayerName = localStats["PlayerName"];            //PlayerName to Test for Entry
 
-        if (namePlayer == null)                                       //If no Sub Key found...
+        //Check if Current User has Application Data; if not, Create Entry
+        if ((localStats == null) || (testPlayerName == null) || (testPlayerName == "")) 
         {
-            writePlayerStats();                                        //And Save Default Values
+            writePlayerStats();                       //And Save Default Application Data Values
         }
-        else                                    //Otherwise, load the Stats from the Registry...
+        else                            //Otherwise, load the Stats from the Application Data...
          {
             setPlayerName((string)PlayerStats.Values["PlayerName"]);
             setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
@@ -300,10 +328,14 @@ public class Player
      */
     private void writePlayerStats()
     {
-        PlayerStats.Values["PlayerName"]  = this.namePlayer;
-        PlayerStats.Values["GamesPlayed"] = this.gamesPlayed;
-        PlayerStats.Values["Winnings"]    = this.gameWinnings;
-        PlayerStats.Values["Moves"]       = this.countMoves;
-        PlayerStats.Values["TimePlayed"]  = this.timePlayed;
+        //Windows.Storage.ApplicationDataCompositeValue localStats = new Windows.Storage.ApplicationDataCompositeValue();
+
+        localStats["PlayerName"]  = this.namePlayer;
+        localStats["GamesPlayed"] = this.gamesPlayed;
+        localStats["Winnings"]    = this.gameWinnings;
+        localStats["Moves"]       = this.countMoves;
+        localStats["TimePlayed"]  = this.timePlayed;
+
+        PlayerStats.Values[localSettingsName] = localStats;
     }
 }

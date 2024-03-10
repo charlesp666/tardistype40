@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>B3A60D88EAF79D2ED6FF205A584F64FC460C5543A1F52B3D6920AB5F1B8E3A94</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>44F044D4E1A2BFD19CBD669DEC987D965AD3E53DB2549852D56AD28163C3AABA</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>596dae36-391a-48aa-accd-b24ec9366db5_1.0.0.0_x86__4h31kwvp0rte4</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>596dae36-391a-48aa-accd-b24ec9366db5_4h31kwvp0rte4!App</RegisteredUserModeAppID>
     <RegisteredPackageID>596dae36-391a-48aa-accd-b24ec9366db5</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-03-05T18:23:17.684</Modified>
+      <Modified>2024-03-10T17:28:01.905</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\LeapfrogUWP.exe">
       <PackagePath>entrypoint\LeapfrogUWP.exe</PackagePath>
-      <Modified>2024-03-05T18:23:16.866</Modified>
+      <Modified>2024-03-10T17:28:00.765</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.13\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -318,15 +318,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\LeapfrogUWP.xr.xml">
       <PackagePath>LeapfrogUWP.xr.xml</PackagePath>
-      <Modified>2024-03-04T18:03:41.057</Modified>
+      <Modified>2024-03-10T17:21:13.286</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2024-03-05T18:23:16.789</Modified>
+      <Modified>2024-03-10T17:28:00.575</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2024-03-05T18:23:16.789</Modified>
+      <Modified>2024-03-10T17:28:00.575</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -334,11 +334,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-03-04T19:27:04.702</Modified>
+      <Modified>2024-03-10T17:21:14.086</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x86\Debug\Core\LeapfrogUWP.exe">
       <PackagePath>LeapfrogUWP.exe</PackagePath>
-      <Modified>2024-03-05T18:23:17.677</Modified>
+      <Modified>2024-03-10T17:28:01.896</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

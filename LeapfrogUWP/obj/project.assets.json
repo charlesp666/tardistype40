@@ -8166,11 +8166,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj",
+      "projectUniqueName": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapFrogUWP.csproj",
       "projectName": "LeapfrogUWP",
-      "projectPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\LeapfrogUWP.csproj",
+      "projectPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\LeapFrogUWP.csproj",
       "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\obj\\",
+      "outputPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapFrogUWP\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
