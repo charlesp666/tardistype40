@@ -30,7 +30,9 @@ namespace LeapfrogUWP
             Player myAvatar = new Player();
 
             myAvatar.displayPlayerStats();
-            myAvatar.addToWinnings(100);
+
+            myAvatar.finishGameForPlayer(100, 99, TimeSpan.FromSeconds(90));
+
             myAvatar.displayPlayerStats();
         }
     }

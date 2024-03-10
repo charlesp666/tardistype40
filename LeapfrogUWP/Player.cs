@@ -44,11 +44,6 @@ public class Player
     {
         //initializePlayerName();
 
-        //Set Default Values before Attempting to Load Stats from Registry
-        //setPlayerName(namePlayer);             //Set the Player Name to the Logged In User Name
-        //setGameWinnings(0);                                 // Initialize the Player's Winnings
-        //setGamesPlayed(0);                        // Initialize the Player's Games Played Count
-
         loadPlayerStats();                            //Load Player Stats from Application Data
     }
 
@@ -60,7 +55,9 @@ public class Player
      */
     public void addToMoves(int aValue)
     {
+        this.countMoves = getCountMoves();
         this.countMoves += aValue;
+        localStats["Moves"] = this.countMoves;
     }
 
     /*******************************************************************************************
@@ -83,7 +80,9 @@ public class Player
       */
     public void addToTime(TimeSpan aValue)
     {
+        this.timePlayed = getTimePlayed();
         this.timePlayed += aValue;
+        setTimePlayed(this.timePlayed);
     }
 
     /*******************************************************************************************
@@ -92,7 +91,7 @@ public class Player
       */
     private TimeSpan convertRegistryTimePlayed()
     {
-        String theRegTime = PlayerStats.Values["TimePlayed"].ToString(); //Read Current Time Played
+        String theRegTime = localStats["TimePlayed"].ToString();      //Read Current Time Played
 
         String[] theTime = theRegTime.Split('.');                          //Remove Milliseconds
         String[] timeConvert = theTime[0].Split(':');         //Split Hours, Minutes and Seconds
@@ -169,8 +168,6 @@ public class Player
      */
     public void finishGameForPlayer(int currentScore, int numberMoves, TimeSpan gameTime)
     {
-        loadPlayerStats();                                      //Get the Player's current stats
-        
         this.incrementGamesPlayed();                 //Increment count of number of games played
         this.addToWinnings(currentScore);                       //Add Winnings to Player's Total
         this.addToMoves(numberMoves);                      //Add Moves to Move Count Accumulator
@@ -185,7 +182,7 @@ public class Player
      */
     public int getCountMoves()
     {
-        return ((int)PlayerStats.Values["Moves"]);
+        return ((int)localStats["Moves"]);
     }
 
     /*******************************************************************************************
@@ -194,7 +191,7 @@ public class Player
      */
     public int getGameWinnings()
     {
-        return ((int)PlayerStats.Values["Winnings"]);
+        return ((int)localStats["Winnings"]);
     }
     
     /*******************************************************************************************
@@ -203,7 +200,7 @@ public class Player
      */
     public int getGamesPlayed()
     {
-        return ((int)PlayerStats.Values["GamesPlayed"]);
+        return ((int)localStats["GamesPlayed"]);
     }
     
     /*******************************************************************************************
@@ -212,7 +209,7 @@ public class Player
      */
     public String getPlayerName()
     {
-        return ((string)PlayerStats.Values["PlayerName"]);
+        return ((string)localStats["PlayerName"]);
     }
 
     /*******************************************************************************************
@@ -221,7 +218,7 @@ public class Player
      */
     public TimeSpan getTimePlayed()
     {
-        return this.timePlayed;
+        return (TimeSpan)localStats["TimePlayed"];
     }
 
     /*******************************************************************************************
@@ -230,7 +227,9 @@ public class Player
      */
     private void incrementGamesPlayed()
     {
-        this.gamesPlayed++;                                            //Add One to Game Counter
+        this.gamesPlayed = getGamesPlayed();
+        this.gamesPlayed++;
+        localStats["GamesPlayed"] = this.gamesPlayed;
     }
 
     /*******************************************************************************************
@@ -258,7 +257,7 @@ public class Player
     private void loadPlayerStats()
     {
         localStats = (Windows.Storage.ApplicationDataCompositeValue) PlayerStats.Values[localSettingsName];
-        var testPlayerName = localStats["PlayerName"];            //PlayerName to Test for Entry
+        var testPlayerName = (string)localStats["PlayerName"];    //PlayerName to Test for Entry
 
         //Check if Current User has Application Data; if not, Create Entry
         if ((localStats == null) || (testPlayerName == null) || (testPlayerName == "")) 
@@ -267,10 +266,10 @@ public class Player
         }
         else                            //Otherwise, load the Stats from the Application Data...
          {
-            setPlayerName((string)PlayerStats.Values["PlayerName"]);
-            setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
-            setGameWinnings((int)PlayerStats.Values["Winnings"]);
-            setCountMoves((int)PlayerStats.Values["Moves"]);
+            setPlayerName((string)localStats["PlayerName"]);
+            setGamesPlayed((int)localStats["GamesPlayed"]);
+            setGameWinnings((int)localStats["Winnings"]);
+            setCountMoves((int)localStats["Moves"]);
 
             setTimePlayed(convertRegistryTimePlayed());
          }
@@ -282,6 +281,7 @@ public class Player
      */
     public void setCountMoves(int aValue)
     {
+
         this.countMoves = aValue;
     }
 
