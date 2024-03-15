@@ -24,6 +24,8 @@ namespace LeapfrogUWP
     {
         public MainPage()
         {
+            Frame rootFrame = Window.Current.Content as Frame;
+
             this.InitializeComponent();
 
             //Get or Initialize the Player Object
@@ -34,6 +36,16 @@ namespace LeapfrogUWP
             myAvatar.finishGameForPlayer(100, 99, TimeSpan.FromSeconds(90));
 
             myAvatar.displayPlayerStats();
+
+            //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash();
+
+            if (rootFrame.Content == null)
+            {
+                rootFrame.Navigate(typeof(LeapFrogUWPSplash));
+            }
+
+            // Ensure the current window is active
+            Window.Current.Activate();
         }
     }
 }

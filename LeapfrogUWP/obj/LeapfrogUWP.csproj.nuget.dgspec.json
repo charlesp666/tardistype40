@@ -41,7 +41,7 @@
           "dependencies": {
             "Microsoft.NETCore.UniversalWindowsPlatform": {
               "target": "Package",
-              "version": "[6.2.13, )"
+              "version": "[6.2.14, )"
             }
           },
           "imports": [
