@@ -3,12 +3,6 @@
  * 
  * Defines the Properties and Methods for the Player Object. 
  * 
- * Author:           Charles J Pilgrim
- * Created:          04-March-2024
- * 
- * LastMaintained:   05-March-2024
- * LastMaintainedBy: cjpilgrim
- * 
  * @Copyright (c) 2024 Charles J. Pilgrim
  * All Rights Reserved.
  */
@@ -33,9 +27,10 @@ public class Player
     private String namePlayer = "jdoe@somewhere.net";       //Default Identity of Current Player
     private TimeSpan timePlayed = new TimeSpan(0,0,0);         //Total Time for All Games Played
 
+    //Parameters to track User Statistics
     private String localSettingsName = "PlayerStatistics";
     private Windows.Storage.ApplicationDataContainer PlayerStats = Windows.Storage.ApplicationData.Current.LocalSettings;
-    private Windows.Storage.ApplicationDataCompositeValue localStats = new Windows.Storage.ApplicationDataCompositeValue();
+    //private Windows.Storage.ApplicationDataCompositeValue localStats = new Windows.Storage.ApplicationDataCompositeValue();
 
     /*******************************************************************************************
      * Constructor: Player (Default)
@@ -57,7 +52,8 @@ public class Player
     {
         this.countMoves = getCountMoves();
         this.countMoves += aValue;
-        localStats["Moves"] = this.countMoves;
+        //localStats["Moves"] = this.countMoves;
+        PlayerStats.Values["Moves"] = this.countMoves;
     }
 
     /*******************************************************************************************
@@ -91,7 +87,8 @@ public class Player
       */
     private TimeSpan convertRegistryTimePlayed()
     {
-        String theRegTime = localStats["TimePlayed"].ToString();      //Read Current Time Played
+        //String theRegTime = localStats["TimePlayed"].ToString();      //Read Current Time Played
+        String theRegTime = PlayerStats.Values["TimePlayed"].ToString();//Read Current Time Played
 
         String[] theTime = theRegTime.Split('.');                          //Remove Milliseconds
         String[] timeConvert = theTime[0].Split(':');         //Split Hours, Minutes and Seconds
@@ -182,7 +179,8 @@ public class Player
      */
     public int getCountMoves()
     {
-        return ((int)localStats["Moves"]);
+        //return ((int)localStats["Moves"]);
+        return ((int)PlayerStats.Values["Moves"]);
     }
 
     /*******************************************************************************************
@@ -191,7 +189,8 @@ public class Player
      */
     public int getGameWinnings()
     {
-        return ((int)localStats["Winnings"]);
+        //return ((int)localStats["Winnings"]);
+        return ((int)PlayerStats.Values["Winnings"]);
     }
     
     /*******************************************************************************************
@@ -200,16 +199,18 @@ public class Player
      */
     public int getGamesPlayed()
     {
-        return ((int)localStats["GamesPlayed"]);
+        //return ((int)localStats["GamesPlayed"]);
+        return ((int)PlayerStats.Values["GamesPlayed"]);
     }
-    
+
     /*******************************************************************************************
      * Method: getPlayerName
      * Returns the Name of the Player of the Object that Invoked the Method.
      */
     public String getPlayerName()
     {
-        return ((string)localStats["PlayerName"]);
+        //return ((string)localStats["PlayerName"]);
+        return ((string)PlayerStats.Values["PlayerName"]);
     }
 
     /*******************************************************************************************
@@ -218,7 +219,8 @@ public class Player
      */
     public TimeSpan getTimePlayed()
     {
-        return (TimeSpan)localStats["TimePlayed"];
+        //return (TimeSpan)localStats["TimePlayed"];
+        return (TimeSpan)PlayerStats.Values["TimePlayed"];
     }
 
     /*******************************************************************************************
@@ -229,7 +231,8 @@ public class Player
     {
         this.gamesPlayed = getGamesPlayed();
         this.gamesPlayed++;
-        localStats["GamesPlayed"] = this.gamesPlayed;
+        //localStats["GamesPlayed"] = this.gamesPlayed;
+        PlayerStats.Values["GamesPlayed"] = this.gamesPlayed;
     }
 
     /*******************************************************************************************
@@ -256,23 +259,27 @@ public class Player
      */
     private void loadPlayerStats()
     {
-        localStats = (Windows.Storage.ApplicationDataCompositeValue) PlayerStats.Values[localSettingsName];
-        var testPlayerName = (string)localStats["PlayerName"];    //PlayerName to Test for Entry
+        //localStats = (Windows.Storage.ApplicationDataCompositeValue) PlayerStats.Values[localSettingsName];
+        //var testPlayerName = (string)localStats["PlayerName"];    //PlayerName to Test for Entry
 
         //Check if Current User has Application Data; if not, Create Entry
-        if ((localStats == null) || (testPlayerName == null) || (testPlayerName == "")) 
-        {
-            writePlayerStats();                       //And Save Default Application Data Values
-        }
-        else                            //Otherwise, load the Stats from the Application Data...
-         {
-            setPlayerName((string)localStats["PlayerName"]);
-            setGamesPlayed((int)localStats["GamesPlayed"]);
-            setGameWinnings((int)localStats["Winnings"]);
-            setCountMoves((int)localStats["Moves"]);
+        //if (localStats == null) //|| (testPlayerName == null) || (testPlayerName == "")) 
+        //{
+        //    writePlayerStats();                       //And Save Default Application Data Values
+        //}
+        //else                            //Otherwise, load the Stats from the Application Data...
+        // {
+            // setPlayerName((string)localStats["PlayerName"]);
+            //setGamesPlayed((int)localStats["GamesPlayed"]);
+            //setGameWinnings((int)localStats["Winnings"]);
+            //setCountMoves((int)localStats["Moves"]);
+
+            setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
+            setGameWinnings((int)PlayerStats.Values["Winnings"]);
+            setCountMoves((int)PlayerStats.Values["Moves"]);
 
             setTimePlayed(convertRegistryTimePlayed());
-         }
+         //}
     }
 
     /*******************************************************************************************
@@ -328,14 +335,17 @@ public class Player
      */
     private void writePlayerStats()
     {
-        //Windows.Storage.ApplicationDataCompositeValue localStats = new Windows.Storage.ApplicationDataCompositeValue();
+        //localStats["PlayerName"] = this.namePlayer;
+        //localStats["GamesPlayed"] = this.gamesPlayed;
+        //localStats["Winnings"] = this.gameWinnings;
+        //localStats["Moves"] = this.countMoves;
+        //localStats["TimePlayed"] = this.timePlayed;
 
-        localStats["PlayerName"]  = this.namePlayer;
-        localStats["GamesPlayed"] = this.gamesPlayed;
-        localStats["Winnings"]    = this.gameWinnings;
-        localStats["Moves"]       = this.countMoves;
-        localStats["TimePlayed"]  = this.timePlayed;
+        //PlayerStats.Values[localSettingsName] = localStats;
 
-        PlayerStats.Values[localSettingsName] = localStats;
+        PlayerStats.Values["GamesPlayed"] = this.gamesPlayed;
+        PlayerStats.Values["Winnings"] = this.gameWinnings;
+        PlayerStats.Values["Moves"] = this.countMoves;
+        PlayerStats.Values["TimePlayed"] = this.timePlayed;
     }
 }
