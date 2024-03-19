@@ -35,7 +35,7 @@ namespace LeapfrogUWP
 
             myAvatar.finishGameForPlayer(100, 99, TimeSpan.FromSeconds(90));
 
-            myAvatar.displayPlayerStats();
+            myAvatar.displayPlayerStats(100, 99, TimeSpan.FromSeconds(90));
 
             //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash();
 
