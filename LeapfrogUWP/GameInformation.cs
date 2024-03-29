@@ -12,11 +12,12 @@
  * System Class/Library Declarations
  */
 using System;
-using System.Drawing;
 using System.IO;
 using System.Resources;                                     //To Pull Images from Assembly Resources
 using Windows.ApplicationModel.Resources;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 
 /***********************************************************************************************
@@ -27,7 +28,7 @@ public class GameInformation
     /*******************************************************************************************
      * Class Variables and Constants
      */
-    private ResourceLoader appResources = ResourceLoader.GetForCurrentView();
+    private ResourceLoader appResources = new ResourceLoader("LeapFromUWP/Resources");//.GetForCurrentView();
 
     private String helpText;                                      //Text for the display of Help
     private String nameOfGame;                         //Storage for the Name of the Game Object
@@ -38,8 +39,8 @@ public class GameInformation
     private BitmapImage gameImage = new BitmapImage(new Uri("./GameImages/LeapFrog.jpg", UriKind.Absolute)); //"Froggy" image
     //private BitmapIcon mainWindowIcon = "./GameImages/CardsIcon.png";          //Icon to Use for Main Window
 
-    private Color colorBackground;             //Color to assign to the Background of game board
-    private Color colorForeground;                //Color to assignt to Foreground of game board
+    private SolidColorBrush colorBackground;   //Color to assign to the Background of game board
+    private SolidColorBrush colorForeground;      //Color to assignt to Foreground of game board
 
     //Constants
     private String copyrightNotice = "Copyright (c) 2024 Charles J. Pilgrim";
@@ -76,15 +77,15 @@ public class GameInformation
         //{
         //helpText = sr.ReadToEndAsync();
         helpText = (new StreamReader("..\\Data\\GameInstructions.txt")).ReadToEnd();
-            //}
+        //}
         //}
         //catch (FileNotFoundException ex)
         //{
         //    ResultBlock.Text = ex.Message;
         //}
 
-        colorBackground = Color.Blue;              //Set the value for the Game board background
-        colorForeground = Color.White;             //Set the value for the Game board foreground
+        colorBackground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255)); //Game board background
+        colorForeground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));   //Game board foreground
 
         //Get the Window Icon Image and Convert to Icon
         //BitmapImage tempImage = LeapFrog.Properties.Resources.CardsIcon;
@@ -98,38 +99,38 @@ public class GameInformation
      *******************************************************************************************
      ******************************************************************************************/
     #region
-        /*******************************************************************************************
-          * Method: getBackgroundColor
-          * Returns Background color.
-          */
-        public Color getBackgroundColor()
-        {
-            return (colorBackground);
-        }
+    /*******************************************************************************************
+      * Method: getBackgroundColor
+      * Returns Background color.
+      */
+    public SolidColorBrush getBackgroundColor()
+    {
+        return (colorBackground);
+    }
 
-        /*******************************************************************************************
-          * Method: getCopyrightNotice
-          * Returns the Copyright Notice Text.
-          */
-        public String getCopyrightNotice()
+    /*******************************************************************************************
+      * Method: getCopyrightNotice
+      * Returns the Copyright Notice Text.
+      */
+    public String getCopyrightNotice()
         {
             return (copyrightNotice);
         }
 
-        /*******************************************************************************************
-          * Method: getForegroundColor
-          * Returns the Copyright Notice Text.
-          */
-        public Color getForegroundColor()
-        {
-            return (colorForeground);
-        }
+    /*******************************************************************************************
+      * Method: getForegroundColor
+      * Returns the Copyright Notice Text.
+      */
+    public SolidColorBrush getForegroundColor()
+    {
+        return (colorForeground);
+    }
 
-        /*******************************************************************************************
-          * Method: getGameImage
-          * Returns the Game Sub-title.
-          */
-        public BitmapImage getGameImage()
+    /*******************************************************************************************
+      * Method: getGameImage
+      * Returns the Game Sub-title.
+      */
+    public BitmapImage getGameImage()
         {
             return (gameImage);
         }

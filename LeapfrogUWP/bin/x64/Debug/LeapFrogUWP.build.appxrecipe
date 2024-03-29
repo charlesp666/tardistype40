@@ -190,20 +190,20 @@
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Qs.gif">
       <PackagePath>CardImages\Qs.gif</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\GameImages\defaultBack.gif">
-      <PackagePath>GameImages\defaultBack.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\defaultBack.gif">
+      <PackagePath>Assets\GameImages\defaultBack.gif</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\GameImages\NotPlayable.gif">
-      <PackagePath>GameImages\NotPlayable.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\NotPlayable.gif">
+      <PackagePath>Assets\GameImages\NotPlayable.gif</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\GameImages\Playable.gif">
-      <PackagePath>GameImages\Playable.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\Playable.gif">
+      <PackagePath>Assets\GameImages\Playable.gif</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Data\GameInstructions.txt">
       <PackagePath>Data\GameInstructions.txt</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\GameImages\CardsIcon.png">
-      <PackagePath>GameImages\CardsIcon.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\CardsIcon.png">
+      <PackagePath>Assets\GameImages\CardsIcon.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -232,8 +232,8 @@
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\GameImages\LeapFrog.jpg">
-      <PackagePath>GameImages\LeapFrog.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\LeapFrog.jpg">
+      <PackagePath>Assets\GameImages\LeapFrog.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>

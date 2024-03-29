@@ -1,4 +1,9 @@
 WinMetadata\Windows.winmd
+Assets\GameImages\CardsIcon.png
+Assets\GameImages\defaultBack.gif
+Assets\GameImages\LeapFrog.jpg
+Assets\GameImages\NotPlayable.gif
+Assets\GameImages\Playable.gif
 Assets\LockScreenLogo.scale-200.png
 Assets\SplashScreen.scale-200.png
 Assets\Square150x150Logo.scale-200.png
@@ -63,9 +68,4 @@ CardImages\Qd.gif
 CardImages\Qh.gif
 CardImages\Qs.gif
 Data\GameInstructions.txt
-GameImages\CardsIcon.png
-GameImages\defaultBack.gif
-GameImages\LeapFrog.jpg
-GameImages\NotPlayable.gif
-GameImages\Playable.gif
 Properties\Default.rd.xml

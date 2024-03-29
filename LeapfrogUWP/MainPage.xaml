@@ -8,9 +8,27 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="200,200,0,0" TextWrapping="Wrap" Text="HelloWorld" VerticalAlignment="Top"/>
-        <Button Content="Button" Margin="532,393,0,0" VerticalAlignment="Top"/>
+    <Grid Background="#FF0000C0">
+        <Grid Name="gameTableau" Background="#FF0000C0" Margin="0,0,-790,-115">
+            <GridView Name="dataGridGameBoard" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="79" Margin="190,500,0,0" VerticalAlignment="Top" Width="433" >
+                <!--<GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="13" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:Name="CardPosition" x:DataType="local:">
+                        <StackPanel Height="280" Width="180" Margin="12" >
+                            <Image Source="{x:Bind Bitmap}" Height="180" Width="180" Stretch="UniformToFill"/>
+                            <StackPanel Margin="0,12">
+                                <TextBlock Text="{x:Bind Title}"/>
+                                <TextBlock Text="{x:Bind Author}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>-->
+            </GridView>
+        </Grid>
 
     </Grid>
 </Page>

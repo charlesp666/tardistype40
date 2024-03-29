@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core; //For Cursor datatype...
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -34,32 +35,34 @@ namespace LeapfrogUWP
         // * 
         // * Creates and Displays the Splash Screen when Game is first started
         // */
-        public LeapFrogUWPSplash()
+        public LeapFrogUWPSplash(GameInformation gameInfo)
         {
             this.InitializeComponent();
 
-            //    Application.UseWaitCursor = true;                          //Set the Wait Cursor Display
+            //Application. .UseWaitCursor = true;                          //Set the Wait Cursor Display
 
             //    //Build the Game Information object
-            GameInformation myGameInfo = new GameInformation();
+            //GameInformation myGameInfo = new GameInformation();
 
             //GameInformation myGameInfo = new GameInformation(Application.ProductName
             //                                                , "A Game of Solitaire"
             //                                                );
 
             //    //Populate the Form components
-            //    lblGameTitle.Text = myGameInfo.getNameOfGame();                   //Name of appliication
-            //    textSubtitle.Text = myGameInfo.getGameSubTitle();                    //Subtitle for Game
-            //    lblCopyright.Text = myGameInfo.getCopyrightNotice();                  //Copyright Notice
-            //    textRights.Text = myGameInfo.getRightsNotice();                          //Rights Notice
+            lblGameTitle.Text = gameInfo.getNameOfGame();                       //Name of appliication
+            txtSubTitle.Text = gameInfo.getGameSubTitle();                         //Subtitle for Game
+            lblCopyright.Text = gameInfo.getCopyrightNotice();                      //Copyright Notice
+            txtRights.Text = gameInfo.getRightsNotice();                               //Rights Notice
 
             //    picGameImage.Image = myGameInfo.getGameImage();                     //Get the Game Image
 
-            //    pbGameIntro.Maximum = timeDelayInMS;                    //Set Maximum progress bar value
+            pbGameIntro.Maximum = timeDelayInMS;                    //Set Maximum progress bar value
+
+            Window.Current.Activate();
 
             //    this.Show();                                                          //Display the Form
 
-            //    delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
+            delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
 
             //    //Get or Initialize the Player Object
             //    Player myAvatar = new Player();
