@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-03-29T18:14:27.113</Modified>
+      <Modified>2024-04-01T17:34:53.136</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\LeapfrogUWP.exe">
       <PackagePath>entrypoint\LeapfrogUWP.exe</PackagePath>
-      <Modified>2024-03-29T18:14:26.371</Modified>
+      <Modified>2024-04-01T17:34:52.389</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -46,212 +46,212 @@
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2022-05-06T22:16:12.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\10c.gif">
-      <PackagePath>CardImages\10c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10c.gif">
+      <PackagePath>Assets\CardImages\10c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.838</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\10d.gif">
-      <PackagePath>CardImages\10d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10d.gif">
+      <PackagePath>Assets\CardImages\10d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\10h.gif">
-      <PackagePath>CardImages\10h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10h.gif">
+      <PackagePath>Assets\CardImages\10h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\10s.gif">
-      <PackagePath>CardImages\10s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10s.gif">
+      <PackagePath>Assets\CardImages\10s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\2c.gif">
-      <PackagePath>CardImages\2c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2c.gif">
+      <PackagePath>Assets\CardImages\2c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.840</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\2d.gif">
-      <PackagePath>CardImages\2d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2d.gif">
+      <PackagePath>Assets\CardImages\2d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.840</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\2h.gif">
-      <PackagePath>CardImages\2h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2h.gif">
+      <PackagePath>Assets\CardImages\2h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.841</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\2s.gif">
-      <PackagePath>CardImages\2s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2s.gif">
+      <PackagePath>Assets\CardImages\2s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.841</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\3c.gif">
-      <PackagePath>CardImages\3c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3c.gif">
+      <PackagePath>Assets\CardImages\3c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.842</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\3d.gif">
-      <PackagePath>CardImages\3d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3d.gif">
+      <PackagePath>Assets\CardImages\3d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.842</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\3h.gif">
-      <PackagePath>CardImages\3h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3h.gif">
+      <PackagePath>Assets\CardImages\3h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.842</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\3s.gif">
-      <PackagePath>CardImages\3s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3s.gif">
+      <PackagePath>Assets\CardImages\3s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.843</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\4c.gif">
-      <PackagePath>CardImages\4c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4c.gif">
+      <PackagePath>Assets\CardImages\4c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.843</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\4d.gif">
-      <PackagePath>CardImages\4d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4d.gif">
+      <PackagePath>Assets\CardImages\4d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\4h.gif">
-      <PackagePath>CardImages\4h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4h.gif">
+      <PackagePath>Assets\CardImages\4h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\4s.gif">
-      <PackagePath>CardImages\4s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4s.gif">
+      <PackagePath>Assets\CardImages\4s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\5c.gif">
-      <PackagePath>CardImages\5c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5c.gif">
+      <PackagePath>Assets\CardImages\5c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.845</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\5d.gif">
-      <PackagePath>CardImages\5d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5d.gif">
+      <PackagePath>Assets\CardImages\5d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.845</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\5h.gif">
-      <PackagePath>CardImages\5h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5h.gif">
+      <PackagePath>Assets\CardImages\5h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\5s.gif">
-      <PackagePath>CardImages\5s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5s.gif">
+      <PackagePath>Assets\CardImages\5s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\6c.gif">
-      <PackagePath>CardImages\6c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6c.gif">
+      <PackagePath>Assets\CardImages\6c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\6d.gif">
-      <PackagePath>CardImages\6d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6d.gif">
+      <PackagePath>Assets\CardImages\6d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.847</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\6h.gif">
-      <PackagePath>CardImages\6h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6h.gif">
+      <PackagePath>Assets\CardImages\6h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.847</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\6s.gif">
-      <PackagePath>CardImages\6s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6s.gif">
+      <PackagePath>Assets\CardImages\6s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.847</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\7c.gif">
-      <PackagePath>CardImages\7c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7c.gif">
+      <PackagePath>Assets\CardImages\7c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.849</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\7d.gif">
-      <PackagePath>CardImages\7d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7d.gif">
+      <PackagePath>Assets\CardImages\7d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.849</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\7h.gif">
-      <PackagePath>CardImages\7h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7h.gif">
+      <PackagePath>Assets\CardImages\7h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.849</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\7s.gif">
-      <PackagePath>CardImages\7s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7s.gif">
+      <PackagePath>Assets\CardImages\7s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.850</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\8c.gif">
-      <PackagePath>CardImages\8c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8c.gif">
+      <PackagePath>Assets\CardImages\8c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.850</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\8d.gif">
-      <PackagePath>CardImages\8d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8d.gif">
+      <PackagePath>Assets\CardImages\8d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.850</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\8h.gif">
-      <PackagePath>CardImages\8h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8h.gif">
+      <PackagePath>Assets\CardImages\8h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.851</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\8s.gif">
-      <PackagePath>CardImages\8s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8s.gif">
+      <PackagePath>Assets\CardImages\8s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.851</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\9c.gif">
-      <PackagePath>CardImages\9c.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9c.gif">
+      <PackagePath>Assets\CardImages\9c.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.852</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\9d.gif">
-      <PackagePath>CardImages\9d.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9d.gif">
+      <PackagePath>Assets\CardImages\9d.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.852</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\9h.gif">
-      <PackagePath>CardImages\9h.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9h.gif">
+      <PackagePath>Assets\CardImages\9h.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.852</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\9s.gif">
-      <PackagePath>CardImages\9s.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9s.gif">
+      <PackagePath>Assets\CardImages\9s.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.853</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Ac.gif">
-      <PackagePath>CardImages\Ac.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ac.gif">
+      <PackagePath>Assets\CardImages\Ac.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.853</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Ad.gif">
-      <PackagePath>CardImages\Ad.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ad.gif">
+      <PackagePath>Assets\CardImages\Ad.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.854</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Ah.gif">
-      <PackagePath>CardImages\Ah.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ah.gif">
+      <PackagePath>Assets\CardImages\Ah.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.854</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\As.gif">
-      <PackagePath>CardImages\As.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\As.gif">
+      <PackagePath>Assets\CardImages\As.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.854</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Jc.gif">
-      <PackagePath>CardImages\Jc.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Jc.gif">
+      <PackagePath>Assets\CardImages\Jc.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.855</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Jd.gif">
-      <PackagePath>CardImages\Jd.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Jd.gif">
+      <PackagePath>Assets\CardImages\Jd.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.855</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Jh.gif">
-      <PackagePath>CardImages\Jh.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Jh.gif">
+      <PackagePath>Assets\CardImages\Jh.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.856</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Js.gif">
-      <PackagePath>CardImages\Js.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Js.gif">
+      <PackagePath>Assets\CardImages\Js.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.856</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Kc.gif">
-      <PackagePath>CardImages\Kc.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Kc.gif">
+      <PackagePath>Assets\CardImages\Kc.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.857</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Kd.gif">
-      <PackagePath>CardImages\Kd.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Kd.gif">
+      <PackagePath>Assets\CardImages\Kd.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.857</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Kh.gif">
-      <PackagePath>CardImages\Kh.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Kh.gif">
+      <PackagePath>Assets\CardImages\Kh.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.857</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Ks.gif">
-      <PackagePath>CardImages\Ks.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ks.gif">
+      <PackagePath>Assets\CardImages\Ks.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.858</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Qc.gif">
-      <PackagePath>CardImages\Qc.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qc.gif">
+      <PackagePath>Assets\CardImages\Qc.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.858</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Qd.gif">
-      <PackagePath>CardImages\Qd.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qd.gif">
+      <PackagePath>Assets\CardImages\Qd.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.859</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Qh.gif">
-      <PackagePath>CardImages\Qh.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qh.gif">
+      <PackagePath>Assets\CardImages\Qh.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.859</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\CardImages\Qs.gif">
-      <PackagePath>CardImages\Qs.gif</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qs.gif">
+      <PackagePath>Assets\CardImages\Qs.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.859</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\defaultBack.gif">
@@ -266,8 +266,8 @@
       <PackagePath>Assets\GameImages\Playable.gif</PackagePath>
       <Modified>2019-04-06T15:03:54.866</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Data\GameInstructions.txt">
-      <PackagePath>Data\GameInstructions.txt</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\Data\GameInstructions.txt">
+      <PackagePath>Assets\Data\GameInstructions.txt</PackagePath>
       <Modified>2019-04-06T15:03:54.861</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\CardsIcon.png">
@@ -322,15 +322,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2024-03-29T18:14:26.250</Modified>
+      <Modified>2024-04-01T17:34:52.313</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\LeapFrogUWPSplash.xbf">
       <PackagePath>LeapFrogUWPSplash.xbf</PackagePath>
-      <Modified>2024-03-29T18:14:26.250</Modified>
+      <Modified>2024-04-01T17:34:52.314</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2024-03-29T18:14:26.250</Modified>
+      <Modified>2024-04-01T17:34:52.314</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -338,11 +338,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-03-29T18:03:21.980</Modified>
+      <Modified>2024-04-01T17:24:19.657</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Core\LeapfrogUWP.exe">
       <PackagePath>LeapfrogUWP.exe</PackagePath>
-      <Modified>2024-03-29T18:14:27.104</Modified>
+      <Modified>2024-04-01T17:34:53.129</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

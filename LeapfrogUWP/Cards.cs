@@ -32,14 +32,16 @@ class Cards
         private String cardRank;              //Contains the Rank (Ace through King) of the card
         private char cardSuit; //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of the Card
 
+        //Set Folder Locations for Card Images as static constants
+        private static String folderGameImages = "ms-appx:///Assets//GameImages//";
+        private static String folderCardFaces = "ms-appx:///Assets//CardImages//";
+
         //Set CardFace to Default "NotPlayable" Image
-        //static Uri uri = new System.Uri("ms-appx:///AssetsGameImages//NotPlayable.jpg");
-        //var storagefile = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uri);
+        //private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri("ms-appx:///Assets//GameImages//NotPlayable.jpg"));
+        private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri(folderGameImages + "NotPlayable.jpg"));
 
-        //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(".//Assets//GameImages//NotPlayable.jpg", UriKind.Relative));
-        private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri("ms-appx:///AssetsGameImages//NotPlayable.jpg"));
-
-        private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
+        //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
+        private BitmapImage cardFace = new BitmapImage(); // LeapFrog.Properties.Resources.NotPlayable;
 
 
         /* Define arrays storing to possible values for rank and suit; make public to be viewable by
@@ -56,12 +58,12 @@ class Cards
          */
         public Card()
         {
-            Image aFace = new Image();        //Create temporary storage to convert bitmap image
-            aFace.Source = bmpNotPlayable;           //Load Temporary Storage with bitmap object
+            //BitmapImage aFace = new BitmapImage();        //Create temporary storage to convert bitmap image
+            //aFace.Source = bmpNotPlayable;           //Load Temporary Storage with bitmap object
 
-            this.cardRank = "";                                 //initialize Card's Rank to null
-            this.cardSuit = ' ';                                //initialize Card's suit to null
-            this.setCardFace(aFace);                              //Initialize Card's Face Image
+            this.cardRank = "";                                     //initialize Card's Rank to null
+            this.cardSuit = ' ';                                    //initialize Card's suit to null
+            this.setCardFace(bmpNotPlayable);                         //Initialize Card's Face Image
         }
 
         /*******************************************************************************************
@@ -85,8 +87,12 @@ class Cards
                 //No Catch action necessary
             }
 
+            //Build Path to Card Face File
             iconFile += (newSuit.ToString()).ToLower();
-            Image cardFace = (Image)cardImage.GetObject(iconFile);
+            iconFile = folderCardFaces + iconFile;
+
+            //Image cardFace = (Image)cardImage.GetObject(iconFile);
+            cardFace = new BitmapImage(new System.Uri(iconFile));
 
             setCard(newRank, newSuit, cardFace);
         }
@@ -130,7 +136,7 @@ class Cards
          * Method: getCardFace
          * Returns the Image on the Face of the Current Card
          */
-        public Image getCardFace()
+        public BitmapImage getCardFace()
         {
             return (this.cardFace);
         }
@@ -181,7 +187,7 @@ class Cards
          * Method: setCard
          * Sets the Rank and Suit of the Card and attaches the image of the card face.
          */
-        public void setCard(String aRank, char aSuit, Image anImage)
+        public void setCard(String aRank, char aSuit, BitmapImage anImage)
         {
             setRank(aRank);
             setSuit(aSuit);
@@ -193,7 +199,7 @@ class Cards
          * Associates the image passed as a parameter as the face of the current
          * card object.
          */
-        private void setCardFace(Image anImage)
+        private void setCardFace(BitmapImage anImage)
         {
             this.cardFace = anImage;
         }
@@ -315,7 +321,7 @@ class Cards
          * Method: getCardFace
          * Returns the Image on the Face of the Current Card
          */
-        public Image getCardFace(int aCardPosition)
+        public BitmapImage getCardFace(int aCardPosition)
         {
             return (deckCards[aCardPosition].getCardFace());
         }
