@@ -41,7 +41,7 @@ class Cards
         private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri(folderGameImages + "NotPlayable.jpg"));
 
         //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
-        private BitmapImage cardFace = new BitmapImage(); // LeapFrog.Properties.Resources.NotPlayable;
+        private BitmapImage cardFace = new BitmapImage();
 
 
         /* Define arrays storing to possible values for rank and suit; make public to be viewable by
@@ -73,7 +73,7 @@ class Cards
          */
         public Card(String newRank, char newSuit)
         {
-            ResourceManager cardImage = new ResourceManager("LeapFrog.Properties.Resources", GetType().Assembly);
+            //ResourceManager cardImage = new ResourceManager("LeapFrog.Properties.Resources", GetType().Assembly);
             String iconFile = newRank;
 
             //Add an underscore to beginning of card name if the card rank is numeric
@@ -263,7 +263,7 @@ class Cards
 
         //private BitmapImage bmpCardBack = new BitmapImage(new Uri("./GameImages/defaultBack.jpg", UriKind.Absolute));
 
-        private Image cardBack = new Image();    //Card Back Image
+        private BitmapImage cardBack = new BitmapImage(new Uri("./Assets/GameImages/defaultBack.jpg", UriKind.Absolute));    //Card Back Image
 
         /*******************************************************************************************
          * Constructor: Deck
@@ -312,7 +312,7 @@ class Cards
          * Method: getCardBack
          * Returns the Image on the Back of the Current Card
          */
-        public Image getCardBack()
+        public BitmapImage getCardBack()
         {
             return (this.cardBack);
         }

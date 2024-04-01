@@ -36,8 +36,8 @@ public class GameInformation
     private String gamePublisher;                                        //Publisher of the Game
     private String gameVersion;                                           //Version for the Game
 
-    private BitmapImage gameImage = new BitmapImage(new Uri("./GameImages/LeapFrog.jpg", UriKind.Absolute)); //"Froggy" image
-    //private BitmapIcon mainWindowIcon = "./GameImages/CardsIcon.png";          //Icon to Use for Main Window
+    private BitmapImage gameImage = new BitmapImage(new Uri("./Assets/GameImages/LeapFrog.jpg", UriKind.Absolute)); //"Froggy" image
+    private BitmapImage mainWindowIcon = new BitmapImage(new Uri("./Assets/GameImages/CardsIcon.png", UriKind.Absolute)); //Cards Icon;          //Icon to Use for Main Window
 
     private SolidColorBrush colorBackground;   //Color to assign to the Background of game board
     private SolidColorBrush colorForeground;      //Color to assignt to Foreground of game board
@@ -76,7 +76,7 @@ public class GameInformation
         //using (var sr = new StreamReader("..\\Data\\GameInstructions.txt"))
         //{
         //helpText = sr.ReadToEndAsync();
-        helpText = (new StreamReader("..\\Data\\GameInstructions.txt")).ReadToEnd();
+        helpText = (new StreamReader("..\\Assets\\Data\\GameInstructions.txt")).ReadToEnd();
         //}
         //}
         //catch (FileNotFoundException ex)
@@ -86,11 +86,6 @@ public class GameInformation
 
         colorBackground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255)); //Game board background
         colorForeground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));   //Game board foreground
-
-        //Get the Window Icon Image and Convert to Icon
-        //BitmapImage tempImage = LeapFrog.Properties.Resources.CardsIcon;
-        //mainWindowIcon.(new Uri("./GameImages/CardsIcon.png");
-        //mainWindowIcon =Icon.FromHandle(tempImage.GetHicon());
     }
 
     /*******************************************************************************************
@@ -131,73 +126,73 @@ public class GameInformation
       * Returns the Game Sub-title.
       */
     public BitmapImage getGameImage()
-        {
-            return (gameImage);
-        }
+    {
+        return (gameImage);
+    }
 
-        /*******************************************************************************************
-          * Method: getGameSubTitle
-          * Returns the Game Sub-title.
-          */
-        public String getGameSubTitle()
-        {
-            return (subTitleOfGame);
-        }
+    /*******************************************************************************************
+      * Method: getGameSubTitle
+      * Returns the Game Sub-title.
+      */
+    public String getGameSubTitle()
+    {
+        return (subTitleOfGame);
+    }
 
-        /*******************************************************************************************
-          * Method: getHelpText
-          * Returns the Help Text for the game.
-          */
-        public String getHelpText()
-        {
-            return (helpText);
-        }
+    /*******************************************************************************************
+      * Method: getHelpText
+      * Returns the Help Text for the game.
+      */
+    public String getHelpText()
+    {
+        return (helpText);
+    }
 
-        /*******************************************************************************************
-          * Method: getCopyrightNotice
-          * Returns the Name of the Game.
-          */
-        public String getNameOfGame()
-        {
-            return (nameOfGame);
-        }
+    /*******************************************************************************************
+      * Method: getNameOfGame
+      * Returns the Name of the Game.
+      */
+    public String getNameOfGame()
+    {
+        return (nameOfGame);
+    }
 
-        /*******************************************************************************************
-          * Method: getRightsNotice
-          * Returns the Rights Notice.
-          */
-        public String getPublisher()
-        {
-            return (gamePublisher);
-        }
+    /*******************************************************************************************
+      * Method: getPublisher
+      * Returns the Rights Notice.
+      */
+    public String getPublisher()
+    {
+        return (gamePublisher);
+    }
 
-        /*******************************************************************************************
-          * Method: getRightsNotice
-          * Returns the Rights Notice.
-          */
-        public String getRightsNotice()
-        {
-            return (rightsNotice);
-        }
+    /*******************************************************************************************
+      * Method: getRightsNotice
+      * Returns the Rights Notice.
+      */
+    public String getRightsNotice()
+    {
+        return (rightsNotice);
+    }
 
-        /*******************************************************************************************
-          * Method: getRightsNotice
-          * Returns the Rights Notice.
-          */
-        public String getVersion()
-        {
-            return (gameVersion);
-        }
+    /*******************************************************************************************
+      * Method: getVersion
+      * Returns the Rights Notice.
+      */
+    public String getVersion()
+    {
+        return (gameVersion);
+    }
 
-        /*******************************************************************************************
-          * Method: getWindowIcon
-          * Returns the Icon for the Main Window.
-          */
-        //public Icon getWindowIcon()
-        //{
-        //    return (mainWindowIcon);
-        //}
+    /*******************************************************************************************
+      * Method: getWindowIcon
+      * Returns the Icon for the Main Window.
+      */
+    public BitmapImage getWindowIcon()
+    {
+        return (mainWindowIcon);
+    }
 
-        #endregion
+    #endregion
 
 }

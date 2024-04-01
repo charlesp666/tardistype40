@@ -220,7 +220,7 @@ namespace LeapfrogUWP
         private void buildInitialGameBoard()
         {
             //Configure the Game Playing Grid
-            //dataGridGameBoard.Background = new SolidColorBrush(myGameInfo.getBackgroundColor());//Set Background Color
+            dataGridGameBoard.Background = new SolidColorBrush(myGameInfo.getBackgroundColor());//Set Background Color
 
             //dataGridGameBoard. .ForeColor = myGameInfo.getForegroundColor();    //Set Foreground Color
 
@@ -233,7 +233,7 @@ namespace LeapfrogUWP
             //Build the Game Board and Insert Default Image into Grid Cells
             //Image defaultImage = gameDeck.getCardBack();                         //Get Default Image
 
-            dataGridGameBoard.ItemsSource = gameDeck;
+            //dataGridGameBoard.ItemsSource = gameDeck;
 
 
             //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
