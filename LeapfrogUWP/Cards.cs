@@ -58,9 +58,6 @@ class Cards
          */
         public Card()
         {
-            //BitmapImage aFace = new BitmapImage();        //Create temporary storage to convert bitmap image
-            //aFace.Source = bmpNotPlayable;           //Load Temporary Storage with bitmap object
-
             this.cardRank = "";                                     //initialize Card's Rank to null
             this.cardSuit = ' ';                                    //initialize Card's suit to null
             this.setCardFace(bmpNotPlayable);                         //Initialize Card's Face Image
@@ -261,9 +258,9 @@ class Cards
 
         private Card[] deckCards = new Card[52]; //Array of Card to contain a full deck of cards
 
-        //private BitmapImage bmpCardBack = new BitmapImage(new Uri("./GameImages/defaultBack.jpg", UriKind.Absolute));
-
-        private BitmapImage cardBack = new BitmapImage(new Uri("./Assets/GameImages/defaultBack.jpg", UriKind.Absolute));    //Card Back Image
+        //Load the Default Card Back Image
+        private static String pathDefaultBack = "ms-appx://Assets//GameImages//defaultBack.jpg";
+        private BitmapImage cardBack = new BitmapImage(new System.Uri(pathDefaultBack));
 
         /*******************************************************************************************
          * Constructor: Deck

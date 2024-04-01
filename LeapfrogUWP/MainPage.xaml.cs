@@ -220,7 +220,7 @@ namespace LeapfrogUWP
         private void buildInitialGameBoard()
         {
             //Configure the Game Playing Grid
-            dataGridGameBoard.Background = new SolidColorBrush(myGameInfo.getBackgroundColor());//Set Background Color
+            dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
 
             //dataGridGameBoard. .ForeColor = myGameInfo.getForegroundColor();    //Set Foreground Color
 
