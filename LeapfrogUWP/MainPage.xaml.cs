@@ -70,7 +70,6 @@ namespace LeapfrogUWP
         private DateTime gameStartTime;                                            //Game Start Time
         private DateTime gameEndTime;                                      //Game "Now" and end time
 
-
         public MainPage()
         {
             Frame rootFrame = Window.Current.Content as Frame;
@@ -89,7 +88,7 @@ namespace LeapfrogUWP
             //Get General Game Information
             GameInformation myGameInfo = new GameInformation();
 
-            buildInitialGameBoard();
+            buildInitialGameBoard(myGameInfo);
 
             //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash(myGameInfo);
 
@@ -217,7 +216,7 @@ namespace LeapfrogUWP
           * Initializes the Rows and Columns of the Game Grid and Configures Display and Other
           * Options.
           */
-        private void buildInitialGameBoard()
+        private void buildInitialGameBoard(GameInformation myGameInfo)
         {
             //Configure the Game Playing Grid
             dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color

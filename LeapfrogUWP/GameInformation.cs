@@ -15,7 +15,6 @@ using System;
 using System.IO;
 using System.Resources;                                     //To Pull Images from Assembly Resources
 using Windows.ApplicationModel;
-//using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 using Windows.UI.Xaml.Media;
@@ -29,10 +28,7 @@ public class GameInformation
     /*******************************************************************************************
      * Class Variables and Constants
      */
-    //private ResourceLoader appResources = new ResourceLoader("LeapFromUWP/Resources");//.GetForCurrentView();
-
     private static String folderGameData = ".//Assets//Data//";
-    //private static String folderGameData = "ms-appx:///Assets//Data//";
     private static String folderGameImages = "ms-appx:///Assets//GameImages//";
 
     private String helpText;                                      //Text for the display of Help
@@ -60,12 +56,14 @@ public class GameInformation
      */
     public GameInformation()
     {
+        //Get the Package Objects required to collect Game Information
         Package currentPackage = Package.Current;                          //Get Current Package
         PackageId currentPackageId = currentPackage.Id;                 //Package ID Information
         PackageVersion currentPackageVersion = currentPackageId.Version;
 
         nameOfGame = currentPackage.DisplayName;                              //Name of the Game
         subTitleOfGame = currentPackage.Description;                 //Short Description of Game
+        gamePublisher = currentPackageId.Publisher;                      //Set Name of Publisher
 
         //Compose the full Version number from the Package Version properties.
         String versionMajor = currentPackageVersion.Major.ToString();         //Get Major Number
@@ -74,8 +72,6 @@ public class GameInformation
         String versionRevision = currentPackageVersion.Revision.ToString();//Get Revision Number
 
         gameVersion = versionMajor + "." + versionMinor + "." + versionBuild + "." + versionRevision;
-
-        gamePublisher = currentPackageId.Publisher;                      //Set Name of Publisher
 
         helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
 
@@ -103,9 +99,9 @@ public class GameInformation
       * Returns the Copyright Notice Text.
       */
     public String getCopyrightNotice()
-        {
-            return (copyrightNotice);
-        }
+    {
+        return (copyrightNotice);
+    }
 
     /*******************************************************************************************
       * Method: getForegroundColor
@@ -187,7 +183,5 @@ public class GameInformation
     {
         return (mainWindowIcon);
     }
-
     #endregion
-
 }
