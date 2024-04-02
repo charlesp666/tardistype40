@@ -81,14 +81,10 @@ namespace LeapfrogUWP
 
             myAvatar.displayPlayerStats();
 
-            myAvatar.finishGameForPlayer(100, 99, TimeSpan.FromSeconds(90));
+            //Get General Game Information and Build the Initial Game Board
+            myGameInfo = new GameInformation();
 
-            myAvatar.displayPlayerStats(100, 99, TimeSpan.FromSeconds(90));
-
-            //Get General Game Information
-            GameInformation myGameInfo = new GameInformation();
-
-            buildInitialGameBoard(myGameInfo);
+            buildInitialGameBoard();
 
             //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash(myGameInfo);
 
@@ -202,7 +198,6 @@ namespace LeapfrogUWP
         //{
         //    undoMove();
         //}
-
         #endregion
 
         /*******************************************************************************************
@@ -216,9 +211,10 @@ namespace LeapfrogUWP
           * Initializes the Rows and Columns of the Game Grid and Configures Display and Other
           * Options.
           */
-        private void buildInitialGameBoard(GameInformation myGameInfo)
+        private void buildInitialGameBoard()
         {
             //Configure the Game Playing Grid
+            gameTableau.Background = myGameInfo.getBackgroundColor();
             dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
 
             //dataGridGameBoard. .ForeColor = myGameInfo.getForegroundColor();    //Set Foreground Color
