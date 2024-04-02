@@ -77,8 +77,6 @@ namespace LeapfrogUWP
 
             this.InitializeComponent();
 
-            buildInitialGameBoard();
-
             //Get or Initialize the Player Object
             Player myAvatar = new Player();
 
@@ -89,7 +87,9 @@ namespace LeapfrogUWP
             myAvatar.displayPlayerStats(100, 99, TimeSpan.FromSeconds(90));
 
             //Get General Game Information
-            //GameInformation myGameInfo = new GameInformation();
+            GameInformation myGameInfo = new GameInformation();
+
+            buildInitialGameBoard();
 
             //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash(myGameInfo);
 

@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-04-01T18:21:58.147</Modified>
+      <Modified>2024-04-02T17:00:46.649</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\LeapfrogUWP.exe">
       <PackagePath>entrypoint\LeapfrogUWP.exe</PackagePath>
-      <Modified>2024-04-01T18:21:57.454</Modified>
+      <Modified>2024-04-02T17:00:45.905</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -322,15 +322,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2024-04-01T18:21:57.370</Modified>
+      <Modified>2024-04-02T17:00:45.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\LeapFrogUWPSplash.xbf">
       <PackagePath>LeapFrogUWPSplash.xbf</PackagePath>
-      <Modified>2024-04-01T18:21:57.370</Modified>
+      <Modified>2024-04-02T17:00:45.763</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2024-04-01T18:21:57.371</Modified>
+      <Modified>2024-04-02T17:00:45.763</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -342,7 +342,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Core\LeapfrogUWP.exe">
       <PackagePath>LeapfrogUWP.exe</PackagePath>
-      <Modified>2024-04-01T18:21:58.139</Modified>
+      <Modified>2024-04-02T17:00:46.643</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

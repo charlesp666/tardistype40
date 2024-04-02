@@ -14,7 +14,8 @@
 using System;
 using System.IO;
 using System.Resources;                                     //To Pull Images from Assembly Resources
-using Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel;
+//using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 using Windows.UI.Xaml.Media;
@@ -28,7 +29,11 @@ public class GameInformation
     /*******************************************************************************************
      * Class Variables and Constants
      */
-    private ResourceLoader appResources = new ResourceLoader("LeapFromUWP/Resources");//.GetForCurrentView();
+    //private ResourceLoader appResources = new ResourceLoader("LeapFromUWP/Resources");//.GetForCurrentView();
+
+    private static String folderGameData = ".//Assets//Data//";
+    //private static String folderGameData = "ms-appx:///Assets//Data//";
+    private static String folderGameImages = "ms-appx:///Assets//GameImages//";
 
     private String helpText;                                      //Text for the display of Help
     private String nameOfGame;                         //Storage for the Name of the Game Object
@@ -36,8 +41,10 @@ public class GameInformation
     private String gamePublisher;                                        //Publisher of the Game
     private String gameVersion;                                           //Version for the Game
 
-    private BitmapImage gameImage = new BitmapImage(new Uri("./Assets/GameImages/LeapFrog.jpg", UriKind.Absolute)); //"Froggy" image
-    private BitmapImage mainWindowIcon = new BitmapImage(new Uri("./Assets/GameImages/CardsIcon.png", UriKind.Absolute)); //Cards Icon;          //Icon to Use for Main Window
+    private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri(folderGameImages + "NotPlayable.jpg"));
+
+    private BitmapImage gameImage = new BitmapImage(new System.Uri(folderGameImages + "LeapFrog.jpg")); //"Froggy" image
+    private BitmapImage mainWindowIcon = new BitmapImage(new System.Uri(folderGameImages + "CardsIcon.png")); //Cards Icon;
 
     private SolidColorBrush colorBackground;   //Color to assign to the Background of game board
     private SolidColorBrush colorForeground;      //Color to assignt to Foreground of game board
@@ -51,38 +58,26 @@ public class GameInformation
      * 
      * Pulls Game Information from the Manifest and stores in "Local" variables
      */
-    //public GameInformation(String aNameOfGame, String aSubTitle = null)
     public GameInformation()
     {
-        nameOfGame = appResources.GetString("DisplayName");     //Set value for the name of game
-        subTitleOfGame = appResources.GetString("Description");     //Set value for the Subtitle
+        Package currentPackage = Package.Current;                          //Get Current Package
+        PackageId currentPackageId = currentPackage.Id;                 //Package ID Information
+        PackageVersion currentPackageVersion = currentPackageId.Version;
 
-        //Pull the Major, Minor and Build Values from the Manifest...
-        var versionMajor = appResources.GetString("Major");        //Set value for Major Version
-        var versionMinor = appResources.GetString("Minor");        //Set value for Minor Version
-        var versionBuild = appResources.GetString("Build");        //Set value for Build Version
+        nameOfGame = currentPackage.DisplayName;                              //Name of the Game
+        subTitleOfGame = currentPackage.Description;                 //Short Description of Game
 
-        gameVersion = versionMajor.ToString() + "." + versionMinor.ToString() + "." + versionBuild.ToString();
+        //Compose the full Version number from the Package Version properties.
+        String versionMajor = currentPackageVersion.Major.ToString();         //Get Major Number
+        String versionMinor = currentPackageVersion.Minor.ToString();         //Get Minor Number
+        String versionBuild = currentPackageVersion.Build.ToString();         //Get Build Number
+        String versionRevision = currentPackageVersion.Revision.ToString();//Get Revision Number
 
-        gamePublisher = appResources.GetString("Publisher");           //Set value for Publisher
+        gameVersion = versionMajor + "." + versionMinor + "." + versionBuild + "." + versionRevision;
 
-        //nameOfGame = aNameOfGame;                       //Set the value for the name of the game
-        //subTitleOfGame = aSubTitle;                        //Set the value for the Game Subtitle
+        gamePublisher = currentPackageId.Publisher;                      //Set Name of Publisher
 
-        //helpText = LeapFrog.Properties.Resources.GameInstructions;     //Store Help Instructions
-        //gameImage = LeapFrog.Properties.Resources.LeapFrog;         //Get the Image for the game
-        //try
-        //{
-        //using (var sr = new StreamReader("..\\Data\\GameInstructions.txt"))
-        //{
-        //helpText = sr.ReadToEndAsync();
-        helpText = (new StreamReader("..\\Assets\\Data\\GameInstructions.txt")).ReadToEnd();
-        //}
-        //}
-        //catch (FileNotFoundException ex)
-        //{
-        //    ResultBlock.Text = ex.Message;
-        //}
+        helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
 
         colorBackground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255)); //Game board background
         colorForeground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));   //Game board foreground
