@@ -10,7 +10,7 @@
 
     <Grid Background="#FF0000C0">
         <Grid x:ConnectionId='2' Name="gameTableau" Background="#FF0000C0" Margin="0,0,-1000,-150">
-            <GridView x:ConnectionId='3' Name="dataGridGameBoard" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="79" Margin="190,500,0,0" VerticalAlignment="Top" Width="433" >
+            <GridView x:ConnectionId='3' Name="dataGridGameBoard" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="79" Margin="190,500,0,0" VerticalAlignment="Top">
                 <!--<GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid MaximumRowsOrColumns="13" Orientation="Horizontal"/>

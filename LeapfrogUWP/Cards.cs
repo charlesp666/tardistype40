@@ -37,7 +37,6 @@ class Cards
         private static String folderCardFaces = "ms-appx:///Assets//CardImages//";
 
         //Set CardFace to Default "NotPlayable" Image
-        //private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri("ms-appx:///Assets//GameImages//NotPlayable.jpg"));
         private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri(folderGameImages + "NotPlayable.jpg"));
 
         //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
@@ -256,7 +255,7 @@ class Cards
          */
         private static Random aRandom = new Random();   //Parameter for Random Number Generation
 
-        private Card[] deckCards = new Card[52]; //Array of Card to contain a full deck of cards
+        private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
 
         //Load the Default Card Back Image
         private static String pathDefaultBack = "ms-appx://Assets//GameImages//defaultBack.jpg";

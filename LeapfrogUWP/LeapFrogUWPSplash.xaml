@@ -24,6 +24,5 @@
         <TextBox x:Name="lblCopyright" TextWrapping="Wrap" Text="lblCopyright" Margin="380,320,480,130" Grid.ColumnSpan="2" Background="#FF0000C0" FontFamily="Arial Black" FontSize="12" Foreground="White" PlaceholderText="lblCopyright"/>
         <TextBox x:Name="txtRights" TextWrapping="Wrap" Text="txtRights" Margin="380,450,480,130" Grid.ColumnSpan="2" Background="#FF0000C0" FontFamily="Arial" FontSize="12" Foreground="White" PlaceholderText="txtRights"/>
         <ProgressBar x:Name="pbGameIntro" HorizontalAlignment="Left" Height="51" Margin="315,251,0,0" Grid.Row="1" VerticalAlignment="Top" Width="900"/>
-
     </Grid>
 </Page>

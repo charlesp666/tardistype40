@@ -16,91 +16,85 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace LeapfrogUWP
+public sealed partial class LeapFrogUWPSplash : Page
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class LeapFrogUWPSplash : Page
+    ///*******************************************************************************************
+    //* Class Variables and Constants
+    //*/
+
+    private DispatcherTimer processDelay = new DispatcherTimer();  //Timer for Progress Bar Status
+    private int timeDelayInMS = 5000;                     //Time to Display Screen in milliseconds
+
+    ///*******************************************************************************************
+    // * Constructor: LeapFrog (Default)
+    // * 
+    // * Creates and Displays the Splash Screen when Game is first started
+    // */
+    public LeapFrogUWPSplash(GameInformation gameInfo)
     {
-        ///*******************************************************************************************
-        //* Class Variables and Constants
-        //*/
+        //this.InitializeComponent();
 
-        private DispatcherTimer processDelay = new DispatcherTimer();  //Timer for Progress Bar Status
-        private int timeDelayInMS = 5000;                     //Time to Display Screen in milliseconds
+        //Application. .UseWaitCursor = true;                          //Set the Wait Cursor Display
 
-        ///*******************************************************************************************
-        // * Constructor: LeapFrog (Default)
-        // * 
-        // * Creates and Displays the Splash Screen when Game is first started
-        // */
-        public LeapFrogUWPSplash(GameInformation gameInfo)
-        {
-            this.InitializeComponent();
+        //    //Build the Game Information object
+        //GameInformation myGameInfo = new GameInformation();
 
-            //Application. .UseWaitCursor = true;                          //Set the Wait Cursor Display
+        //GameInformation myGameInfo = new GameInformation(Application.ProductName
+        //                                                , "A Game of Solitaire"
+        //                                                );
 
-            //    //Build the Game Information object
-            //GameInformation myGameInfo = new GameInformation();
+        //    //Populate the Form components
+        //lblGameTitle.Text = gameInfo.getNameOfGame();                       //Name of appliication
+        //txtSubTitle.Text = gameInfo.getGameSubTitle();                         //Subtitle for Game
+        //lblCopyright.Text = gameInfo.getCopyrightNotice();                      //Copyright Notice
+        //txtRights.Text = gameInfo.getRightsNotice();                               //Rights Notice
 
-            //GameInformation myGameInfo = new GameInformation(Application.ProductName
-            //                                                , "A Game of Solitaire"
-            //                                                );
+        //    picGameImage.Image = myGameInfo.getGameImage();                     //Get the Game Image
 
-            //    //Populate the Form components
-            lblGameTitle.Text = gameInfo.getNameOfGame();                       //Name of appliication
-            txtSubTitle.Text = gameInfo.getGameSubTitle();                         //Subtitle for Game
-            lblCopyright.Text = gameInfo.getCopyrightNotice();                      //Copyright Notice
-            txtRights.Text = gameInfo.getRightsNotice();                               //Rights Notice
+        //pbGameIntro.Maximum = timeDelayInMS;                    //Set Maximum progress bar value
 
-            //    picGameImage.Image = myGameInfo.getGameImage();                     //Get the Game Image
+        Window.Current.Activate();
 
-            pbGameIntro.Maximum = timeDelayInMS;                    //Set Maximum progress bar value
+        //    this.Show();                                                          //Display the Form
 
-            Window.Current.Activate();
+        delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
 
-            //    this.Show();                                                          //Display the Form
+        //    //Get or Initialize the Player Object
+        //    Player myAvatar = new Player();
 
-            delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
+        //    //Declare and Activate the Main Game Tableau
+        //    GameTableau myLeapFrog = new GameTableau(myAvatar, myGameInfo);
 
-            //    //Get or Initialize the Player Object
-            //    Player myAvatar = new Player();
+        //    Application.UseWaitCursor = false;                       //Unset the Wait Cursor Display
+        //    this.Close();                                               //Close the Splash Screen...
+        //    myLeapFrog.Show();                                      //And display the Tableau window
+    }
 
-            //    //Declare and Activate the Main Game Tableau
-            //    GameTableau myLeapFrog = new GameTableau(myAvatar, myGameInfo);
+    ///*******************************************************************************************
+    // * Method: delay
+    // * Pause Processing for specified number of milliseconds.
+    // */
+    private void delay(int milliSecondsToPauseFor)
+    {
+ //       Double deltaTime;
+        System.DateTime startInstant = System.DateTime.Now;
+        System.DateTime thisInstant = startInstant;
+        System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
+        System.DateTime finalInstant = thisInstant.Add(duration);
 
-            //    Application.UseWaitCursor = false;                       //Unset the Wait Cursor Display
-            //    this.Close();                                               //Close the Splash Screen...
-            //    myLeapFrog.Show();                                      //And display the Tableau window
-        }
-
-        ///*******************************************************************************************
-        // * Method: delay
-        // * Pause Processing for specified number of milliseconds.
-        // */
-        private void delay(int milliSecondsToPauseFor)
-        {
-            Double deltaTime;
-            System.DateTime startInstant = System.DateTime.Now;
-            System.DateTime thisInstant = startInstant;
-            System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
-            System.DateTime finalInstant = thisInstant.Add(duration);
-
-            while (finalInstant >= thisInstant)
-            {
-                //System.Windows.Forms.Application.DoEvents();
-                thisInstant = System.DateTime.Now;
-
-                //Update the Progress bar on the Window
-                deltaTime = (int)(thisInstant - startInstant).TotalMilliseconds;
-                if (deltaTime > pbGameIntro.Maximum)
-                {
-                    deltaTime = pbGameIntro.Maximum;
-                }
-                pbGameIntro.Value = deltaTime;
-            }
-            pbGameIntro.Value = milliSecondsToPauseFor;            //Update Progress bar completely
-        }
+//       while (finalInstant >= thisInstant)
+//       {
+//           //System.Windows.Forms.Application.DoEvents();
+//           thisInstant = System.DateTime.Now;
+//
+//           //Update the Progress bar on the Window
+//           deltaTime = (int)(thisInstant - startInstant).TotalMilliseconds;
+//           if (deltaTime > pbGameIntro.Maximum)
+//           {
+//               deltaTime = pbGameIntro.Maximum;
+//           }
+//           pbGameIntro.Value = deltaTime;
+//       }
+//       pbGameIntro.Value = milliSecondsToPauseFor;            //Update Progress bar completely
     }
 }

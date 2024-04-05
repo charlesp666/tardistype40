@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -26,14 +27,16 @@ namespace LeapfrogUWP
         * Class Variables and Constants
         */
 
+        private static String folderPlayableIcons = "ms-appx:///Assets//GameImages//";
+
         // Define variables/constants for play area (main window)
         private static int numberPlayRows = Cards.Card.possibleSuits.Length;        //Play Area Rows
         private static int numberPlayColumns = Cards.Card.possibleRanks.Length;  //Play Area Columns
 
         //Define Parameters for the various Icons used in game
 
-        //private Image playSpaceIcon = LeapFrog.Properties.Resources.Playable;  //Playable Space icon
-        //private Image noPlayIcon = LeapFrog.Properties.Resources.NotPlayable;    //Non-Playable icon
+        private BitmapImage playSpaceIcon = new BitmapImage(new System.Uri(folderPlayableIcons + "Playable.jpg"));  //Playable Space icon
+        private BitmapImage noPlayIcon = new BitmapImage(new System.Uri(folderPlayableIcons + "NotPlayable.jpg"));    //Non-Playable icon
 
         private static String playSpace = "";             //String or character to use on play spots
 
@@ -54,7 +57,8 @@ namespace LeapfrogUWP
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         //Declare and Initialize Game Playing Deck
-        private Cards.Deck gameDeck = new Cards.Deck();
+        private Cards.Deck gameDeck = new Cards.Deck();                   //Initialize Deck of Cards
+        private List<Cards.Card> cardList = new List<Cards.Card>();       //Declare List to store Deck of Cards for game play
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -214,7 +218,7 @@ namespace LeapfrogUWP
         private void buildInitialGameBoard()
         {
             //Configure the Game Playing Grid
-            gameTableau.Background = myGameInfo.getBackgroundColor();
+            gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
             dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
 
             //dataGridGameBoard. .ForeColor = myGameInfo.getForegroundColor();    //Set Foreground Color
@@ -226,25 +230,26 @@ namespace LeapfrogUWP
             //dataGridGameBoard.ReadOnly = true;                               //Set Grid to Read-Only
 
             //Build the Game Board and Insert Default Image into Grid Cells
-            //Image defaultImage = gameDeck.getCardBack();                         //Get Default Image
+            BitmapImage defaultImage = gameDeck.getCardBack();                   //Get Default Image
 
             //dataGridGameBoard.ItemsSource = gameDeck;
 
 
-            //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            //{
-            //    //dataGridGameBoard.Rows.Add();
-            //    DataGridViewRow gridRow = new DataGridViewRow();
+            for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
+            {
+                ////dataGridGameBoard.Rows.Add();
+                //DataGridViewRow gridRow = new DataGridViewRow();
 
-            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-            //    {
-            //        dataGridGameBoard[aRow][aColumn].Value = gameDeck;
-            //        //DataGridViewImageColumn imageCol = new DataGridViewImageColumn();
-            //        //imageCol.Image = defaultImage;
+                for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
+                {
+                    cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
+                    //dataGridGameBoard[aRow][aColumn].Value = gameDeck;
+                    //DataGridViewImageColumn imageCol = new DataGridViewImageColumn();
+                    //imageCol.Image = defaultImage;
 
-            //        //dataGridGameBoard.Columns.Add(imageCol);
-            //    }
-            //}
+                    //dataGridGameBoard.Columns.Add(imageCol);
+                }
+            }
 
             //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             //{
