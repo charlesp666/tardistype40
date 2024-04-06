@@ -234,26 +234,13 @@ namespace LeapfrogUWP
 
             for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             {
-                ////dataGridGameBoard.Rows.Add();
-                //DataGridViewRow gridRow = new DataGridViewRow();
-
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
                 {
                     cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
-                    //dataGridGameBoard[aRow][aColumn].Value = gameDeck;
-                    //DataGridViewImageColumn imageCol = new DataGridViewImageColumn();
-                    //imageCol.Image = defaultImage;
-
-                    //dataGridGameBoard.Columns.Add(imageCol);
                 }
             }
 
             dataGridGameBoard.ItemsSource = cardList;
-
-            //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            //{
-            //    dataGridGameBoard.Rows.Add();
-            //}
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
