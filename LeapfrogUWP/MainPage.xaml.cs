@@ -232,9 +232,6 @@ namespace LeapfrogUWP
             //Build the Game Board and Insert Default Image into Grid Cells
             BitmapImage defaultImage = gameDeck.getCardBack();                   //Get Default Image
 
-            //dataGridGameBoard.ItemsSource = gameDeck;
-
-
             for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             {
                 ////dataGridGameBoard.Rows.Add();
@@ -250,6 +247,8 @@ namespace LeapfrogUWP
                     //dataGridGameBoard.Columns.Add(imageCol);
                 }
             }
+
+            dataGridGameBoard.ItemsSource = cardList;
 
             //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             //{

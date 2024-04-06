@@ -11,18 +11,18 @@
     <Grid Background="#FF0000C0">
         <Grid Name="gameTableau" Background="#FF0000C0" Margin="0,0,-1000,-150">
             <GridView Name="dataGridGameBoard" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="79" Margin="190,500,0,0" VerticalAlignment="Top">
-                <!--<GridView.ItemsPanel>
+                <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid MaximumRowsOrColumns="13" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
-                <GridView.ItemTemplate>
-                    <DataTemplate x:Name="CardPosition" x:DataType="local:">
+                <!--<GridView.ItemTemplate>
+                    <DataTemplate x:Name="CardPosition">
                         <StackPanel Height="280" Width="180" Margin="12" >
-                            <Image Source="{x:Bind Bitmap}" Height="180" Width="180" Stretch="UniformToFill"/>
+                            <Image Source="{x:Bind cardList.}" Height="180" Width="180" Stretch="UniformToFill"/>
                             <StackPanel Margin="0,12">
-                                <TextBlock Text="{x:Bind Title}"/>
-                                <TextBlock Text="{x:Bind Author}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                <TextBlock Text="{x:Bind cardRank}"/>
+                                <TextBlock Text="{x:Bind cardSuit}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
