@@ -58,7 +58,7 @@ namespace LeapfrogUWP
 
         //Declare and Initialize Game Playing Deck
         private Cards.Deck gameDeck = new Cards.Deck();                   //Initialize Deck of Cards
-        private List<Cards.Card> cardList = new List<Cards.Card>();       //Declare List to store Deck of Cards for game play
+        //private List<Cards.Card> cardList = new List<Cards.Card>();       //Declare List to store Deck of Cards for game play
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -232,15 +232,15 @@ namespace LeapfrogUWP
             //Build the Game Board and Insert Default Image into Grid Cells
             BitmapImage defaultImage = gameDeck.getCardBack();                   //Get Default Image
 
-            for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            {
-                for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-                {
-                    cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
-                }
-            }
+            //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
+            //{
+            //for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
+            //{
+            //cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
+            //}
+            //}
 
-            dataGridGameBoard.ItemsSource = cardList;
+            dataGridGameBoard.ItemsSource = gameDeck; // cardList;
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];

@@ -16,19 +16,21 @@
                         <ItemsWrapGrid MaximumRowsOrColumns="13" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
-                <!--<GridView.ItemTemplate>
-                    <DataTemplate x:Name="CardPosition">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:Name="CardPosition" x:DataType="Card">
                         <StackPanel Height="280" Width="180" Margin="12" >
-                            <Image Source="{x:Bind cardList.}" Height="180" Width="180" Stretch="UniformToFill"/>
+                            <Image Name="CardFace"
+                                Source="{x:Bind cardFace}"
+                                Height="180" Width="180" Stretch="UniformToFill"
+                            />
                             <StackPanel Margin="0,12">
                                 <TextBlock Text="{x:Bind cardRank}"/>
                                 <TextBlock Text="{x:Bind cardSuit}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
-                </GridView.ItemTemplate>-->
+                </GridView.ItemTemplate>
             </GridView>
         </Grid>
-
     </Grid>
 </Page>

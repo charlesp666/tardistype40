@@ -12,6 +12,7 @@
  * System Class/Library Declarations
  */
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Resources;                                     //To Pull Images from Assembly Resources
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
@@ -255,7 +256,8 @@ class Cards
          */
         private static Random aRandom = new Random();   //Parameter for Random Number Generation
 
-        private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
+        private List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
+        //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
 
         //Load the Default Card Back Image
         private static String pathDefaultBack = "ms-appx://Assets//GameImages//defaultBack.jpg";
@@ -278,7 +280,7 @@ class Cards
         public void cutDeck()
         {
             Card aTemp = new Card();
-            int numberOfCards = this.deckCards.Length;     //Difference between number and array
+            int numberOfCards = this.deckCards.Count;     //Difference between number and array
             int cardToCutAt = 0;
 
             cardToCutAt = (int)aRandom.Next(0,numberOfCards);
@@ -404,14 +406,15 @@ class Cards
          */
         public void initializeDeck()
         {
-            int aValue = 0;
+            //int aValue = 0;
 
             for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
             {
                 for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
                 {
-                    aValue = (aSuit * Card.possibleRanks.Length) + aRank;
-                    deckCards[aValue] = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]);
+                    //aValue = (aSuit * Card.possibleRanks.Length) + aRank;
+                    //deckCards[aValue] = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]);
+                    deckCards.Add(new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]));
                 }
             }
         }
@@ -441,7 +444,7 @@ class Cards
         public void shuffleDeck()
         {
             Card aTemp = new Card();
-            int numberOfCards = this.deckCards.Length;
+            int numberOfCards = this.deckCards.Count;
             int firstCard = 0;
             int secondCard = 0;
 
