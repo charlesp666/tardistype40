@@ -10,22 +10,29 @@
 
     <Grid Background="#FF0000C0">
         <Grid Name="gameTableau" Background="#FF0000C0" Margin="0,0,-1000,-150">
-            <GridView Name="dataGridGameBoard" SelectionMode="None" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="79" Margin="190,500,0,0" VerticalAlignment="Top">
+            <GridView x:Name="dataGridGameBoard"
+                      ItemsSource="{Binding Source=gameDeck}"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                      HorizontalAlignment="Left"
+                      Height="79"
+                      Margin="190,500,0,0"
+                      VerticalAlignment="Top"
+                      >
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid MaximumRowsOrColumns="13" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplate>
-                    <DataTemplate x:Name="CardPosition" x:DataType="Card">
+                    <DataTemplate x:Name="CardPosition" x:DataType="{x:Bind Path=Card}">
                         <StackPanel Height="280" Width="180" Margin="12" >
                             <Image Name="CardFace"
-                                Source="{x:Bind cardFace}"
                                 Height="180" Width="180" Stretch="UniformToFill"
                             />
                             <StackPanel Margin="0,12">
-                                <TextBlock Text="{x:Bind cardRank}"/>
-                                <TextBlock Text="{x:Bind cardSuit}"/>
+                                <TextBlock Name="CardRank"/>
+                                <TextBlock Name="CardSuit"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

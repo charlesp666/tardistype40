@@ -12,7 +12,7 @@
  * System Class/Library Declarations
  */
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Resources;                                     //To Pull Images from Assembly Resources
 using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
@@ -256,7 +256,8 @@ class Cards
          */
         private static Random aRandom = new Random();   //Parameter for Random Number Generation
 
-        private List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
+        private ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
+        //private List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
         //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
 
         //Load the Default Card Back Image

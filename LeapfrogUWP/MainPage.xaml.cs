@@ -77,6 +77,7 @@ namespace LeapfrogUWP
         public MainPage()
         {
             Frame rootFrame = Window.Current.Content as Frame;
+            DataContext = this;
 
             this.InitializeComponent();
 
@@ -240,7 +241,7 @@ namespace LeapfrogUWP
             //}
             //}
 
-            dataGridGameBoard.ItemsSource = gameDeck; // cardList;
+            //dataGridGameBoard.ItemsSource = gameDeck; // cardList;
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
