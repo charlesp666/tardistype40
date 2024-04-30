@@ -235,13 +235,14 @@ namespace LeapfrogUWP
 
             //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             //{
-            //for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-            //{
-            //cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
-            //}
+            //  for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
+            //  {
+            //      cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
+            //  }
             //}
 
-            //dataGridGameBoard.ItemsSource = gameDeck; // cardList;
+            dataGridGameBoard.ItemsSource = gameDeck; // cardList;
+            dataGridGameBoard.SelectedIndex = 0;                           //Set Index to first item
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];

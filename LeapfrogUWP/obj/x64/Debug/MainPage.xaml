@@ -9,8 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="#FF0000C0">
-        <Grid Name="gameTableau" Background="#FF0000C0" Margin="0,0,-1000,-150">
-            <GridView x:Name="dataGridGameBoard"
+        <Grid x:ConnectionId='2' Name="gameTableau" Background="#FF0000C0" Margin="0,0,-1000,-150">
+            <GridView x:ConnectionId='3' x:Name="dataGridGameBoard"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
                       HorizontalAlignment="Left"
@@ -45,3 +45,4 @@
         </Grid>
     </Grid>
 </Page>
+
