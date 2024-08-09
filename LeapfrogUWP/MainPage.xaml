@@ -13,10 +13,12 @@
             <GridView x:Name="dataGridGameBoard"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
+                      ItemClick="dataGridGameBoard_CellClick"
                       HorizontalAlignment="Left"
                       Height="79"
                       Margin="190,500,0,0"
                       VerticalAlignment="Top"
+                      ItemsSource="{x:Bind cardList}"
                       >
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -28,16 +30,14 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="CardPosition">
                         <StackPanel Height="280" Width="180" Margin="12" >
-                            <Image Name="CardFace"
-                                Height="180"
-                                Width="180"
-                                Stretch="UniformToFill"
-                                Source="gameDeck.cardFace"
+                            <TextBox x:Name="cardRank" Text="{x:Bind cardRank}"/>
+                            <TextBox x:Name="cardSuit" Text="{x:Bind cardSuit}"/>
+                            <Image x:Name="CardFace"
+                                   Height="180"
+                                   Width="180"
+                                   Stretch="UniformToFill"
+                                   Source="{x:Bind CardFace.Source}"
                             />
-                            <StackPanel Margin="0,12">
-                                <TextBlock Name="CardRank"/>
-                                <TextBlock Name="CardSuit"/>
-                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>

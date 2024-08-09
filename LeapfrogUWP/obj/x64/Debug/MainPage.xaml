@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page x:ConnectionId='1'
     x:Class="LeapfrogUWP.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,10 +13,12 @@
             <GridView x:ConnectionId='3' x:Name="dataGridGameBoard"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
+                                                             
                       HorizontalAlignment="Left"
                       Height="79"
                       Margin="190,500,0,0"
                       VerticalAlignment="Top"
+                                                     
                       >
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -27,17 +29,15 @@
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="CardPosition">
-                        <StackPanel Height="280" Width="180" Margin="12" >
-                            <Image Name="CardFace"
-                                Height="180"
-                                Width="180"
-                                Stretch="UniformToFill"
-                                Source="gameDeck.cardFace"
+                        <StackPanel x:ConnectionId='5' Height="280" Width="180" Margin="12" >
+                            <TextBox x:ConnectionId='6' x:Name="cardRank"                         />
+                            <TextBox x:ConnectionId='7' x:Name="cardSuit"                         />
+                            <Image x:ConnectionId='8' x:Name="CardFace"
+                                   Height="180"
+                                   Width="180"
+                                   Stretch="UniformToFill"
+                                                                    
                             />
-                            <StackPanel Margin="0,12">
-                                <TextBlock Name="CardRank"/>
-                                <TextBlock Name="CardSuit"/>
-                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>

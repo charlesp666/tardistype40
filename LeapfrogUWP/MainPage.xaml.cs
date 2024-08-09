@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+//using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices.WindowsRuntime;
+//using Windows.Foundation;
+//using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
+//using Windows.UI.Xaml.Controls.Primitives;
+//using Windows.UI.Xaml.Data;
+//using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+//using Windows.UI.Xaml.Media;
+//using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -27,7 +27,7 @@ namespace LeapfrogUWP
         * Class Variables and Constants
         */
 
-        private static String folderPlayableIcons = "ms-appx:///Assets//GameImages//";
+        private static String folderPlayableIcons = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
 
         // Define variables/constants for play area (main window)
         private static int numberPlayRows = Cards.Card.possibleSuits.Length;        //Play Area Rows
@@ -35,8 +35,10 @@ namespace LeapfrogUWP
 
         //Define Parameters for the various Icons used in game
 
-        private BitmapImage playSpaceIcon = new BitmapImage(new System.Uri(folderPlayableIcons + "Playable.jpg"));  //Playable Space icon
-        private BitmapImage noPlayIcon = new BitmapImage(new System.Uri(folderPlayableIcons + "NotPlayable.jpg"));    //Non-Playable icon
+        //private BitmapSource playSpaceIcon = new BitmapImage(new Uri(folderPlayableIcons + "Playable.jpg", UriKind.Absolute));  //Playable Space icon
+        //private BitmapSource noPlayIcon = new BitmapImage(new Uri(folderPlayableIcons + "NotPlayable.jpg", UriKind.Absolute));    //Non-Playable icon
+        private BitmapSource playSpaceIcon = new BitmapImage();  //Playable Space icon
+        private BitmapSource noPlayIcon = new BitmapImage();    //Non-Playable icon
 
         private static String playSpace = "";             //String or character to use on play spots
 
@@ -110,10 +112,10 @@ namespace LeapfrogUWP
          * Event Handler: GameBoard_CellClicked
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        //private void dataGridGameBoard_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    playSpaceClicked(dataGridGameBoard.CurrentCell.ColumnIndex, dataGridGameBoard.CurrentCell.RowIndex);
-        //}
+        private void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e ) //DataGridViewCellEventArgs e)
+        {
+            //playSpaceClicked(dataGridGameBoard.CurrentCell.ColumnIndex, dataGridGameBoard.CurrentCell.RowIndex);
+        }
 
         /*******************************************************************************************
          * Event Handler: GameTableau_FormClosed
@@ -230,30 +232,21 @@ namespace LeapfrogUWP
             //dataGridGameBoard.ReadOnly = true;                               //Set Grid to Read-Only
 
             //Build the Game Board and Insert Default Image into Grid Cells
-            BitmapImage defaultImage = gameDeck.getCardBack();                   //Get Default Image
+            playSpaceIcon = gameDeck.getCardFacePlayable();                      //Playable Space icon
+            noPlayIcon = gameDeck.getCardFaceNotPlayable();                        //Non-Playable icon
 
-            for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            {
-                ////dataGridGameBoard.Rows.Add();
-                //DataGridViewRow gridRow = new DataGridViewRow();
+            BitmapImage cardBack = gameDeck.getCardBack();                         //Get Default Image
 
-                for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-                {
-                    cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
-                    //dataGridGameBoard[aRow][aColumn].Value = gameDeck;
-                    //DataGridViewImageColumn imageCol = new DataGridViewImageColumn();
-                    //imageCol.Image = defaultImage;
-
-                    //dataGridGameBoard.Columns.Add(imageCol);
-                }
-            }
-
-            dataGridGameBoard.ItemsSource = cardList;
-
+            //Build Play Deck and Prepare to Play Game
             //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             //{
-            //    dataGridGameBoard.Rows.Add();
+            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
+            //    {
+            //        cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
+            //    }
             //}
+
+            gameTableau.DataContext = cardList;
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
