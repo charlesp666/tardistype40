@@ -78,30 +78,23 @@ namespace LeapfrogUWP
 
         public MainPage()
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
             this.InitializeComponent();
 
             //Get or Initialize the Player Object
             Player myAvatar = new Player();
 
-            myAvatar.displayPlayerStats();
-
-            //Get General Game Information and Build the Initial Game Board
+            //Get General Game Information
             myGameInfo = new GameInformation();
 
+            //Build the Initial Game Board and se=t Data Context
             buildInitialGameBoard();
+            DataContext = this;
 
             //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash(myGameInfo);
 
-            //if (rootFrame.Content == null)
-            //{
-            //    rootFrame.Navigate(typeof(LeapFrogUWPSplash));
-            //}
-
-            // Ensure the current window is active
-            Window.Current.Activate();
+            myAvatar.displayPlayerStats();
         }
+
         /*******************************************************************************************
          *******************************************************************************************
          ***********                         EVENT HANDLERS                              ***********
