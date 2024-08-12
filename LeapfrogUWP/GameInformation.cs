@@ -13,10 +13,10 @@
  */
 using System;
 using System.IO;
-using System.Resources;                                     //To Pull Images from Assembly Resources
+//using System.Resources;                                     //To Pull Images from Assembly Resources
 using Windows.ApplicationModel;
 using Windows.UI;
-using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
+//using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 
@@ -64,8 +64,9 @@ namespace LeapfrogUWP
             PackageVersion currentPackageVersion = currentPackageId.Version;
 
             nameOfGame = currentPackage.DisplayName;                              //Name of the Game
-            subTitleOfGame = currentPackage.Description;                 //Short Description of Game
-            gamePublisher = currentPackageId.Publisher;                      //Set Name of Publisher
+            //subTitleOfGame = currentPackage.Description;                 //Short Description of Game
+            subTitleOfGame = "A Game of Solitaire";                    //Short Description of Game
+            gamePublisher = currentPackage.PublisherDisplayName;           //Set Name of Publisher
 
             //Compose the full Version number from the Package Version properties.
             String versionMajor = currentPackageVersion.Major.ToString();         //Get Major Number

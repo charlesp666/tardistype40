@@ -10,7 +10,7 @@
   <Identity Name="596dae36-391a-48aa-accd-b24ec9366db5" Publisher="CN=charl" Version="1.0.0.0" ProcessorArchitecture="x64" />
   <mp:PhoneIdentity PhoneProductId="596dae36-391a-48aa-accd-b24ec9366db5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>LeapfrogUWP</DisplayName>
+    <DisplayName>LeapFrog</DisplayName>
     <PublisherDisplayName>CatsPaw Software</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -25,7 +25,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="LeapfrogUWP.exe" EntryPoint="LeapfrogUWP.App">
-      <uap:VisualElements DisplayName="Leapfrog" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Game of Solitaire" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Leapfrog" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="A Game of Solitaire" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
         <uap:InitialRotationPreference>

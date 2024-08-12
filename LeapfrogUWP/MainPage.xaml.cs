@@ -63,8 +63,8 @@ namespace LeapfrogUWP
 
             delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
 
-            //    //Get or Initialize the Player Object
-            //    Player myAvatar = new Player();
+            //Get or Initialize the Player Object
+            Player myAvatar = new Player();
 
             //    //Declare and Activate the Main Game Tableau
             //    GameTableau myLeapFrog = new GameTableau(myAvatar, myGameInfo);
@@ -80,26 +80,26 @@ namespace LeapfrogUWP
         // */
         private void delay(int milliSecondsToPauseFor)
         {
-            //       Double deltaTime;
+            Double deltaTime;
             System.DateTime startInstant = System.DateTime.Now;
             System.DateTime thisInstant = startInstant;
             System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
             System.DateTime finalInstant = thisInstant.Add(duration);
 
-            //       while (finalInstant >= thisInstant)
-            //       {
-            //           //System.Windows.Forms.Application.DoEvents();
-            //           thisInstant = System.DateTime.Now;
-            //
-            //           //Update the Progress bar on the Window
-            //           deltaTime = (int)(thisInstant - startInstant).TotalMilliseconds;
-            //           if (deltaTime > pbGameIntro.Maximum)
-            //           {
-            //               deltaTime = pbGameIntro.Maximum;
-            //           }
-            //           pbGameIntro.Value = deltaTime;
-            //       }
-            //       pbGameIntro.Value = milliSecondsToPauseFor;            //Update Progress bar completely
+            while (finalInstant >= thisInstant)
+            {
+                //System.Windows.Forms.Application.DoEvents();
+                thisInstant = System.DateTime.Now;
+
+                //Update the Progress bar on the Window
+                deltaTime = (int)(thisInstant - startInstant).TotalMilliseconds;
+                if (deltaTime > pbGameIntro.Maximum)
+                {
+                    deltaTime = pbGameIntro.Maximum;
+                }
+                pbGameIntro.Value = deltaTime;
+            }
+            pbGameIntro.Value = milliSecondsToPauseFor;            //Update Progress bar completely
         }
     }
 }
