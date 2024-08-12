@@ -53,13 +53,6 @@
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="TextWrapping" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="IsReadOnly" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.BindExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
