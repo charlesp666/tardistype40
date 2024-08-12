@@ -7,90 +7,24 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-      Height="auto"
-      Width="auto"
     >
-    <Grid x:ConnectionId='2' Name="gameTableau"
-          Background="Blue"
-          Margin="-2841,-1045,-2984,0"
-          Height="4000"
-          BorderThickness="10"
-          >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
+
+    <Grid Margin="10,10,10,10" Background="#FF0000C0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="500"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="500"/>
+            <RowDefinition Height="407*"/>
+            <RowDefinition Height="653*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1177*"/>
+            <ColumnDefinition Width="663*"/>
+        </Grid.ColumnDefinitions>
 
-        <!--Game Tableau Header -->
-        <GridView x:ConnectionId='3' Name="hdrTableau"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  BorderThickness="10"
-                  BorderBrush="White"
-                  Margin="10,10,-10,250"
-        >
-            <TextBox x:ConnectionId='12' x:Name="GameHeader"
-                     Text="LeapFrog UWP"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     FontSize="120pi"
-                     Width="5000"
-                     Height="200"
-            />
-        </GridView>
-
-        <!--Game Tableu Playing Area -->
-        <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
-                  SelectionMode="None"
-                  IsItemClickEnabled="True"
-                                                         
-                  Margin="107,260,46,-2455"
-                                                 
-                  Width="6951"
-                  BorderThickness="10"
-                  BorderBrush="White" Grid.RowSpan="3"
-                  >
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid MaximumRowsOrColumns="13"
-                                   Orientation="Horizontal"
-                    />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-            <GridView.ItemTemplate>
-                <DataTemplate x:Name="CardPosition">
-                    <StackPanel x:ConnectionId='8' Height="280" Width="180" Margin="12" >
-                        <TextBox x:ConnectionId='9' x:Name="cardRank"                         />
-                        <TextBox x:ConnectionId='10' x:Name="cardSuit"                         />
-                        <Image x:ConnectionId='11' x:Name="CardFace"
-                               Height="auto"
-                               Width="auto"
-                               Stretch="UniformToFill"
-                                                                
-                        />
-                    </StackPanel>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-
-        <!--Game Tableu Footer -->
-        <Grid x:ConnectionId='5' Name="ftrTableau"
-              BorderThickness="10"
-              BorderBrush="White"
-              Margin="121,3053,46,-2767"
-              Grid.Row="2"
-        >
-            <TextBox x:ConnectionId='6' x:Name="GameFooter"
-                     Text="Menus and whatnot"
-                     FontSize="120pi"
-                     Width="5000"
-                     Height="200"
-            />
-        </Grid>
+        <Image x:ConnectionId='2' x:Name="picGameImage" HorizontalAlignment="Left" Height="429" Margin="10,22,0,0" VerticalAlignment="Top" Width="358" Source="/GameImages/LeapFrog.jpg" FocusVisualPrimaryBrush="#FF0000C0" Grid.RowSpan="2"/>
+        <TextBox x:ConnectionId='3' x:Name="lblGameTitle" HorizontalAlignment="Left" Margin="380,26,0,0" TextWrapping="Wrap" Text="lblGameTitle" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="138" Width="1040" Background="#FF0000C0" FontWeight="ExtraBold" FontFamily="Arial Black" FontSize="36" Foreground="White"/>
+        <TextBox x:ConnectionId='4' x:Name="txtSubTitle" TextWrapping="Wrap" Text="txtSubTitle" Margin="380,197,480,130" Grid.ColumnSpan="2" Background="#FF0000C0" FontFamily="Arial" FontSize="14" Foreground="White" PlaceholderText="txtSubTitle"/>
+        <TextBox x:ConnectionId='5' x:Name="lblCopyright" TextWrapping="Wrap" Text="lblCopyright" Margin="380,320,480,130" Grid.ColumnSpan="2" Background="#FF0000C0" FontFamily="Arial Black" FontSize="12" Foreground="White" PlaceholderText="lblCopyright"/>
+        <TextBox x:ConnectionId='6' x:Name="txtRights" TextWrapping="Wrap" Text="txtRights" Margin="380,450,480,130" Grid.ColumnSpan="2" Background="#FF0000C0" FontFamily="Arial" FontSize="12" Foreground="White" PlaceholderText="txtRights"/>
+        <ProgressBar x:ConnectionId='7' x:Name="pbGameIntro" HorizontalAlignment="Left" Height="51" Margin="315,251,0,0" Grid.Row="1" VerticalAlignment="Top" Width="900"/>
     </Grid>
 </Page>
 

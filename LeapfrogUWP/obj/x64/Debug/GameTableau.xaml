@@ -1,0 +1,95 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="LeapfrogUWP.GameTableau"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeapfrogUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:ConnectionId='2' Name="gameTableau"
+              Background="Blue"
+              Margin="-2841,-1045,-2984,0"
+              Height="4000"
+              BorderThickness="10"
+              >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="500"/>
+        </Grid.RowDefinitions>
+
+        <!--Game Tableau Header -->
+        <GridView x:ConnectionId='3' Name="hdrTableau"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      BorderThickness="10"
+                      BorderBrush="White"
+                      Margin="10,10,-10,250"
+            >
+            <TextBox x:ConnectionId='12' x:Name="GameHeader"
+                         Text="LeapFrog UWP"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         FontSize="120pi"
+                         Width="5000"
+                         Height="200"
+                />
+        </GridView>
+
+        <!--Game Tableu Playing Area -->
+        <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                                                             
+                      Margin="107,260,46,-2455"
+                                                     
+                      Width="6951"
+                      BorderThickness="10"
+                      BorderBrush="White"
+					  Grid.RowSpan="4"
+                      >
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="13"
+                                       Orientation="Horizontal"
+                        />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemTemplate>
+                <DataTemplate x:Name="CardPosition">
+                    <StackPanel x:ConnectionId='8' Height="280" Width="180" Margin="12" >
+                        <TextBox x:ConnectionId='9' x:Name="cardRank"                         />
+                        <TextBox x:ConnectionId='10' x:Name="cardSuit"                         />
+                        <Image x:ConnectionId='11' x:Name="CardFace"
+                                   Height="auto"
+                                   Width="auto"
+                                   Stretch="UniformToFill"
+                                                                    
+                            />
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <!--Game Tableu Footer -->
+        <Grid x:ConnectionId='5' Name="ftrTableau"
+                  BorderThickness="10"
+                  BorderBrush="White"
+                  Margin="121,3053,46,-2767"
+                  Grid.Row="2"
+            >
+            <TextBox x:ConnectionId='6' x:Name="GameFooter"
+                         Text="Menus and whatnot"
+                         FontSize="120pi"
+                         Width="5000"
+                         Height="200"
+                />
+        </Grid>
+    </Grid>
+</Page>
+

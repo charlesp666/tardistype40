@@ -121,8 +121,8 @@
     </Compile>
     <Compile Include="Cards.cs" />
     <Compile Include="GameInformation.cs" />
-    <Compile Include="LeapFrogUWPSplash.xaml.cs">
-      <DependentUpon>LeapFrogUWPSplash.xaml</DependentUpon>
+    <Compile Include="GameTableau.xaml.cs">
+      <DependentUpon>GameTableau.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -208,7 +208,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LeapFrogUWPSplash.xaml">
+    <Page Include="GameTableau.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
