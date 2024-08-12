@@ -50,20 +50,18 @@ namespace LeapfrogUWP
             //                                                );
 
             //    //Populate the Form components
-            lblGameTitle.Text = myGameInfo.getNameOfGame();                       //Name of appliication
-            txtSubTitle.Text = myGameInfo.getGameSubTitle();                         //Subtitle for Game
-            lblCopyright.Text = myGameInfo.getCopyrightNotice();                      //Copyright Notice
-            txtRights.Text = myGameInfo.getRightsNotice();                               //Rights Notice
+            lblGameTitle.Text = myGameInfo.getNameOfGame();                     //Name of appliication
+            txtSubTitle.Text = myGameInfo.getGameSubTitle();                       //Subtitle for Game
+            lblCopyright.Text = myGameInfo.getCopyrightNotice();                    //Copyright Notice
+            txtRights.Text = myGameInfo.getRightsNotice();                             //Rights Notice
 
-            picGameImage.Source = myGameInfo.getGameImage();                     //Get the Game Image
+            picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
 
-            //pbGameIntro.Maximum = timeDelayInMS;                    //Set Maximum progress bar value
+            pbGameIntro.Maximum = timeDelayInMS;                      //Set Maximum progress bar value
 
             Window.Current.Activate();
 
-            //    this.Show();                                                          //Display the Form
-
-            //delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
+            delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
 
             //    //Get or Initialize the Player Object
             //    Player myAvatar = new Player();
