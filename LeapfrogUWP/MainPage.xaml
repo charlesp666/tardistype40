@@ -21,44 +21,47 @@
 
         <!--"Froggy" Game Image -->
         <Image x:Name="picGameImage"
-               HorizontalAlignment="Left"
-               Height="430"
-               Margin="10,10,0,0"
-               VerticalAlignment="Top"
-               Width="360"
                Source="/GameImages/LeapFrog.jpg"
+               Height="430"
+               Width="360"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="10,10"
                FocusVisualPrimaryBrush="#FF0000C0"
                Grid.RowSpan="2"
          />
 
         <!--Game Title -->
-        <TextBox x:Name="lblGameTitle"
-                 HorizontalAlignment="Left"
-                 Margin="380,26,0,0"
-                 TextWrapping="Wrap"
+        <TextBlock x:Name="lblGameTitle"
                  Text="lblGameTitle"
-                 VerticalAlignment="Top"
-                 Grid.ColumnSpan="2"
                  Height="auto"
                  Width="auto"
-                 Background="#FF0000C0"
-                 FontWeight="ExtraBold"
-                 FontFamily="Arial Black"
-                 FontSize="36"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="380,10"
+                 Grid.ColumnSpan="2"
                  Foreground="White"
+                 FontFamily="Arial Black"
+                 FontWeight="ExtraBold"
+                 FontSize="36"
          />
 
         <!--Game SubTitle -->
         <TextBox x:Name="txtSubTitle"
-                 TextWrapping="Wrap"
                  Text="txtSubTitle"
-                 Margin="380,197,480,130"
+                 PlaceholderText="txtSubTitle"
+                 Height="auto"
+                 Width="auto"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 TextWrapping="Wrap"
+                 Margin="380,200"
                  Grid.ColumnSpan="2"
                  Background="#FF0000C0"
+                 Foreground="White"
                  FontFamily="Arial"
                  FontSize="14"
-                 Foreground="White"
-                 PlaceholderText="txtSubTitle"
+                 IsReadOnly="True"
         />
 
         <!--Copyright Notice -->
@@ -71,7 +74,7 @@
                  FontFamily="Arial Black"
                  FontSize="12"
                  Foreground="White"
-                 PlaceholderText="lblCopyright"
+                 IsReadOnly="True"
         />
 
         <!--Rights Reserved -->
@@ -84,7 +87,7 @@
                  FontFamily="Arial"
                  FontSize="12"
                  Foreground="White"
-                 PlaceholderText="txtRights"
+                 IsReadOnly="True"
         />
 
         <!--Rights Reserved -->

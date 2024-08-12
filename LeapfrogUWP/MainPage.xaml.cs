@@ -40,14 +40,8 @@ namespace LeapfrogUWP
 
             this.InitializeComponent();
 
-            //Application. .UseWaitCursor = true;                          //Set the Wait Cursor Display
-
             //    //Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
-
-            //GameInformation myGameInfo = new GameInformation(Application.ProductName
-            //                                                , "A Game of Solitaire"
-            //                                                );
 
             //    //Populate the Form components
             lblGameTitle.Text = myGameInfo.getNameOfGame();                     //Name of appliication
@@ -59,6 +53,7 @@ namespace LeapfrogUWP
 
             pbGameIntro.Maximum = timeDelayInMS;                      //Set Maximum progress bar value
 
+            //Activate "Splash" Page and delay game load...
             Window.Current.Activate();
 
             delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
@@ -69,7 +64,6 @@ namespace LeapfrogUWP
             //    //Declare and Activate the Main Game Tableau
             //    GameTableau myLeapFrog = new GameTableau(myAvatar, myGameInfo);
 
-            //    Application.UseWaitCursor = false;                       //Unset the Wait Cursor Display
             //    this.Close();                                               //Close the Splash Screen...
             //    myLeapFrog.Show();                                      //And display the Tableau window
         }
