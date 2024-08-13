@@ -120,9 +120,10 @@
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Background="AliceBlue"
+                     Foreground="CadetBlue"
                      BorderBrush="AntiqueWhite"
                      BorderThickness="1"
-                     Margin="390,400"
+                     Margin="390,390"
         />
     </Grid>
 </Page>

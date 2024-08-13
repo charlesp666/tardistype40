@@ -68,6 +68,9 @@ namespace LeapfrogUWP
         // */
         private void delay(int milliSecondsToPauseFor)
         {
+            pbGameIntro.Minimum = 0;
+            pbGameIntro.Maximum = milliSecondsToPauseFor;
+
             Double deltaTime;
             System.DateTime startInstant = System.DateTime.Now;
             System.DateTime thisInstant = startInstant;
@@ -85,8 +88,10 @@ namespace LeapfrogUWP
                 {
                     deltaTime = pbGameIntro.Maximum;
                 }
+
                 pbGameIntro.Value = deltaTime;
             }
+
             pbGameIntro.Value = milliSecondsToPauseFor;            //Update Progress bar completely
         }
     }
