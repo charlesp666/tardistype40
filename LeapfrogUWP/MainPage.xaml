@@ -11,8 +11,8 @@
       Width="1610"
     >
 
-    <Grid Height="900"
-          Width="1570"
+    <Grid Height="800"
+          Width="1500"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="#FF0000C0"
@@ -30,7 +30,7 @@
                Width="360"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Margin="10,10,0,0"
+               Margin="5,5,0,0"
                FocusVisualPrimaryBrush="#FF0000C0"
          />
 
@@ -41,7 +41,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,10,0,0"
+                   Margin="390,50,0,0"
                    Foreground="White"
                    FontFamily="Arial Black"
                    FontWeight="ExtraBold"
@@ -55,7 +55,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,60,0,0"
+                   Margin="390,100,0,0"
                    FontFamily="Arial"
                    FontSize="24"
                    Foreground="White"
@@ -68,7 +68,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,120,0,0"
+                   Margin="390,240,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -81,7 +81,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,140,0,0"
+                   Margin="390,270,0,0"
                    FontFamily="Arial"
                    FontSize="16"
                    Foreground="White"
@@ -93,7 +93,10 @@
                      Width="600"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Margin="390,420"
+                     Background="AliceBlue"
+                     BorderBrush="AntiqueWhite"
+                     BorderThickness="1"
+                     Margin="390,400"
         />
     </Grid>
 </Page>
