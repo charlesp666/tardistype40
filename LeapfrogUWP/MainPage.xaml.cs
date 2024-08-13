@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+using System;
+//using System.Collections.Generic;
 //using System.IO;
 //using System.Linq;
 //using System.Runtime.InteropServices.WindowsRuntime;
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
 //using Windows.UI;
+//using Windows.UI.Core; //For Cursor datatype...
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using Windows.UI.Xaml.Controls.Primitives;
 //using Windows.UI.Xaml.Data;
 //using Windows.UI.Xaml.Input;
 //using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
+//using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 //using Windows.UI.Xaml.Navigation;
-
-using Windows.UI.Core; //For Cursor datatype...
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace LeapfrogUWP
 {
@@ -37,13 +36,12 @@ namespace LeapfrogUWP
         // */
         public MainPage()
         {
-
             this.InitializeComponent();
 
-            //    //Build the Game Information object
+            // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
 
-            //    //Populate the Form components
+            // Populate the Splash page components
             lblGameTitle.Text = myGameInfo.getNameOfGame();                     //Name of appliication
             txtSubTitle.Text = myGameInfo.getGameSubTitle();                       //Subtitle for Game
             lblCopyright.Text = myGameInfo.getCopyrightNotice();                    //Copyright Notice
@@ -53,11 +51,10 @@ namespace LeapfrogUWP
 
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
 
-            pbGameIntro.Maximum = timeDelayInMS;                      //Set Maximum progress bar value
-
-            //Activate "Splash" Page and delay game load...
+            //Activate "Splash" Page and delay game load to give user time to read it...
             Window.Current.Activate();
 
+            pbGameIntro.Maximum = timeDelayInMS;                      //Set Maximum progress bar value
             delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
 
             //Get or Initialize the Player Object
