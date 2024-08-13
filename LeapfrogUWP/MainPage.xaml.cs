@@ -48,6 +48,7 @@ namespace LeapfrogUWP
             txtSubTitle.Text = myGameInfo.getGameSubTitle();                       //Subtitle for Game
             lblCopyright.Text = myGameInfo.getCopyrightNotice();                    //Copyright Notice
             txtRights.Text = myGameInfo.getRightsNotice();                             //Rights Notice
+            txtPublisher.Text = "Pubished by: " + myGameInfo.getPublisher();       //Name of Publisher
 
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
 

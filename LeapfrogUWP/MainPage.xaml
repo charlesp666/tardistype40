@@ -61,6 +61,19 @@
                    Foreground="White"
         />
 
+        <!--Game Publisher -->
+        <TextBlock x:Name="txtPublisher"
+                   Text="txtPublisher"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="390,140,0,0"
+                   FontFamily="Arial"
+                   FontSize="18"
+                   Foreground="White"
+        />
+
         <!--Copyright Notice -->
         <TextBlock x:Name="lblCopyright"
                    Text="lblCopyright"
