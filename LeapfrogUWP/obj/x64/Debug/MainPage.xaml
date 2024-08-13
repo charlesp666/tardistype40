@@ -115,13 +115,13 @@
 
         <!--Rights Reserved -->
         <ProgressBar x:ConnectionId='9' x:Name="pbGameIntro"
-                     Height="20"
-                     Width="600"
+                     Height="40"
+                     Width="400"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Background="AliceBlue"
+                     Background="Blue"
                      Foreground="CadetBlue"
-                     BorderBrush="AntiqueWhite"
+                     BorderBrush="White"
                      BorderThickness="1"
                      Margin="390,390"
         />
