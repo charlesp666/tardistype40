@@ -11,7 +11,7 @@
       Width="1610"
     >
 
-    <Grid Height="800"
+    <Grid Height="618"
           Width="1155"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
@@ -94,7 +94,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,320,0,0"
+                   Margin="390,240,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -107,7 +107,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,350,0,0"
+                   Margin="390,265,0,0"
                    FontFamily="Arial"
                    FontSize="16"
                    Foreground="White"
@@ -115,15 +115,15 @@
 
         <!--Rights Reserved -->
         <ProgressBar x:Name="pbGameIntro"
-                     Height="40"
+                     Height="10"
                      Width="400"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Background="Blue"
+                     Background="White"
                      Foreground="CadetBlue"
                      BorderBrush="White"
                      BorderThickness="1"
-                     Margin="390,390"
+                     Margin="390,300"
         />
     </Grid>
 </Page>
