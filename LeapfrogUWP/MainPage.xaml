@@ -12,7 +12,7 @@
     >
 
     <Grid Height="800"
-          Width="1500"
+          Width="1155"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="#FF0000C0"
@@ -20,7 +20,7 @@
           BorderThickness="5"
     >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1560"/>
+            <ColumnDefinition Width="1490"/>
         </Grid.ColumnDefinitions>
 
         <!--"Froggy" Game Image -->
