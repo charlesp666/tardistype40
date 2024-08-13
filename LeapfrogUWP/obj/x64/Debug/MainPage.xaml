@@ -55,27 +55,40 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,100,0,0"
+                   Margin="390,90,0,0"
                    FontFamily="Arial"
                    FontSize="24"
                    Foreground="White"
         />
 
+        <!--Game Version -->
+        <TextBlock x:ConnectionId='5' x:Name="txtVersion"
+                   Text="txtVersion"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="390,120,0,0"
+                   FontFamily="Arial"
+                   FontSize="18"
+                   Foreground="White"
+        />
+
         <!--Game Publisher -->
-        <TextBlock x:ConnectionId='5' x:Name="txtPublisher"
+        <TextBlock x:ConnectionId='6' x:Name="txtPublisher"
                    Text="txtPublisher"
                    Height="auto"
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,140,0,0"
+                   Margin="390,150,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
         />
 
         <!--Copyright Notice -->
-        <TextBlock x:ConnectionId='6' x:Name="lblCopyright"
+        <TextBlock x:ConnectionId='7' x:Name="lblCopyright"
                    Text="lblCopyright"
                    Height="auto"
                    Width="auto"
@@ -88,7 +101,7 @@
         />
 
         <!--Rights Reserved -->
-        <TextBlock x:ConnectionId='7' x:Name="txtRights"
+        <TextBlock x:ConnectionId='8' x:Name="txtRights"
                    Text="txtRights"
                    Height="auto"
                    Width="auto"
@@ -101,7 +114,7 @@
         />
 
         <!--Rights Reserved -->
-        <ProgressBar x:ConnectionId='8' x:Name="pbGameIntro"
+        <ProgressBar x:ConnectionId='9' x:Name="pbGameIntro"
                      Height="20"
                      Width="600"
                      HorizontalAlignment="Left"

@@ -49,6 +49,7 @@ namespace LeapfrogUWP
             lblCopyright.Text = myGameInfo.getCopyrightNotice();                    //Copyright Notice
             txtRights.Text = myGameInfo.getRightsNotice();                             //Rights Notice
             txtPublisher.Text = "Pubished by: " + myGameInfo.getPublisher();       //Name of Publisher
+            txtVersion.Text = "Version: " + myGameInfo.getVersion();             //Game Version Number
 
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
 
