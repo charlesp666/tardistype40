@@ -19,6 +19,9 @@
           BorderBrush="Black"
           BorderThickness="5"
     >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="440*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1490"/>
         </Grid.ColumnDefinitions>
@@ -30,7 +33,7 @@
                Width="360"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Margin="5,5,0,0"
+               Margin="10,10,0,0"
                FocusVisualPrimaryBrush="#FF0000C0"
          />
 
@@ -41,7 +44,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,50,0,0"
+                   Margin="395,55,0,0"
                    Foreground="White"
                    FontFamily="Arial Black"
                    FontWeight="ExtraBold"
@@ -55,7 +58,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,90,0,0"
+                   Margin="395,95,0,0"
                    FontFamily="Arial"
                    FontSize="24"
                    Foreground="White"
@@ -68,7 +71,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,120,0,0"
+                   Margin="395,125,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -80,8 +83,8 @@
                    Height="auto"
                    Width="auto"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Margin="390,150,0,0"
+                   VerticalAlignment="Center"
+                   Margin="395,0,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -94,7 +97,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,200,0,0"
+                   Margin="395,205,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -107,7 +110,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,225,0,0"
+                   Margin="395,230,0,0"
                    FontFamily="Arial"
                    FontSize="16"
                    Foreground="White"
@@ -117,9 +120,8 @@
         <Button x:ConnectionId='9' x:Name="LaunchGame"
                 Content="Launch Game"
                 Height="50"
-                Width="300"
-                Margin="390,260"
-                HorizontalAlignment="Left"
+                Width="150"
+                Margin="395,380,0,0"
                 VerticalAlignment="Top"
                 FontFamily="Arial"
                 FontSize="16"
@@ -129,7 +131,7 @@
                 Background="Blue"
                 BorderBrush="White"
                 BorderThickness="2"
-                                           
+                                            Grid.RowSpan="2"
         />
     </Grid>
 </Page>
