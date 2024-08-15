@@ -36,7 +36,7 @@
                Margin="10,10,0,0"
                FocusVisualPrimaryBrush="#FF0000C0"
          />
-
+        
         <!--Game Title -->
         <TextBlock x:Name="lblGameTitle"
                    Text="lblGameTitle"

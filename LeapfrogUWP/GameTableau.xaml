@@ -6,12 +6,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="2899" Width="6971"
 >
 
     <Grid Name="gameTableau"
               Background="Blue"
-              Margin="-2841,-1045,-2984,0"
+              Margin="2,2"
               Height="4000"
               BorderThickness="10"
               >
