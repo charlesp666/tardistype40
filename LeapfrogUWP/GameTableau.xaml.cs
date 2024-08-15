@@ -78,12 +78,14 @@ namespace LeapfrogUWP
         {
             this.InitializeComponent();
 
-            //Build the Initial Game Board and se=t Data Context
+            //Get or Initialize the Player Object
+            Player myAvatar = new Player();
+
+            //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
-            //LeapFrogUWPSplash introScreen = new LeapFrogUWPSplash(myGameInfo);
-
-            //myAvatar.displayPlayerStats();
+            //Display Player Statistics--Remove when game tableau is working                   *****
+            myAvatar.displayPlayerStats();
         }
 
         /*******************************************************************************************

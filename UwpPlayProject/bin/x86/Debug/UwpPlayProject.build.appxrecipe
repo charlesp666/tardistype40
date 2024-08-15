@@ -73,6 +73,9 @@
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\NewPage.xbf">
+      <PackagePath>NewPage.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>

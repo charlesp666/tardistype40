@@ -114,7 +114,7 @@
         />
 
         <!--Rights Reserved -->
-        <ProgressBar x:ConnectionId='9' x:Name="pbGameIntro"
+        <!--<ProgressBar x:Name="pbGameIntro"
                      Height="10"
                      Width="400"
                      HorizontalAlignment="Left"
@@ -124,6 +124,21 @@
                      BorderBrush="White"
                      BorderThickness="1"
                      Margin="390,300"
+        />-->
+
+        <Button x:ConnectionId='9' x:Name="LaunchGame"
+                Content="Launch"
+                Height="50"
+                Width="100"
+                Margin="390,300"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Arial"
+                FontSize="16"
+                FontWeight="Bold"
+                FontStyle="Italic"
+                Foreground="White"
+                                           
         />
     </Grid>
 </Page>

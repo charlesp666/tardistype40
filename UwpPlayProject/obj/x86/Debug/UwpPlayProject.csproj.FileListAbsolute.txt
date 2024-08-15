@@ -43,3 +43,8 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debu
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\ProjectArchitectures.txt
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_637874721720000000.json
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\NewPage.xbf
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.g.i.cs
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.g.cs
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.xaml
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.xbf
