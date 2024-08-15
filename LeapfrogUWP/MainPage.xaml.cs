@@ -18,13 +18,6 @@ namespace LeapfrogUWP
     public sealed partial class MainPage : Page
     {
         ///*******************************************************************************************
-        //* Class Variables and Constants
-        //*/
-
-        private DispatcherTimer processDelay = new DispatcherTimer();  //Timer for Progress Bar Status
-        private int timeDelayInMS = 5000;                     //Time to Display Screen in milliseconds
-
-        ///*******************************************************************************************
         // * Constructor: LeapFrog (Default)
         // * 
         // * Creates and Displays the Splash Screen when Game is first started
@@ -48,54 +41,13 @@ namespace LeapfrogUWP
 
             //Activate "Splash" Page and delay game load to give user time to read it...
             Window.Current.Activate();
-
-            //pbGameIntro.Maximum = timeDelayInMS;                      //Set Maximum progress bar value
-            //delay(timeDelayInMS);                 //Pause a few seconds to display the Splash Screen
-
-            //Declare and Activate the Main Game Tableau
-            //GameTableau myLeapFrog = new GameTableau();
-
-            //Window.Current;
-
-            //this.Close();                                               //Close the Splash Screen...
-            //myLeapFrog.Show();                                      //And display the Tableau window
-           // Frame.Navigate(typeof(myLeapFrog));
         }
 
         ///*******************************************************************************************
-        // * Method: delay
-        // * Pause Processing for specified number of milliseconds.
+        // * Method: btnLaunchGame_Click
+        // * 
+        // * Navigates to the GameTableau (Playing area) when the "Launch Game" button is clicked.
         // */
-        //private void delay(int milliSecondsToPauseFor)
-        //{
-        //    pbGameIntro.Minimum = 0;
-        //    pbGameIntro.Maximum = milliSecondsToPauseFor;
-
-        //    Double deltaTime;
-
-        //    System.DateTime startInstant = System.DateTime.Now;
-        //    System.DateTime thisInstant = startInstant;
-        //    System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
-        //    System.DateTime finalInstant = thisInstant.Add(duration);
-
-            //    while (finalInstant >= thisInstant)
-            //    {
-            //        //System.Windows.Forms.Application.DoEvents();
-            //        thisInstant = System.DateTime.Now;
-
-            //        //Update the Progress bar on the Window
-            //        deltaTime = (int)(thisInstant - startInstant).TotalMilliseconds;
-            //        if (deltaTime > pbGameIntro.Maximum)
-            //        {
-            //            deltaTime = pbGameIntro.Maximum;
-            //        }
-
-            //        pbGameIntro.Value = deltaTime;
-            //    }
-
-            //    pbGameIntro.Value = milliSecondsToPauseFor;            //Update Progress bar completely
-        //}
-
         private void btnLaunchGame_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(GameTableau));

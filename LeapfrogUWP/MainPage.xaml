@@ -94,7 +94,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,240,0,0"
+                   Margin="390,200,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -107,30 +107,18 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="390,265,0,0"
+                   Margin="390,225,0,0"
                    FontFamily="Arial"
                    FontSize="16"
                    Foreground="White"
         />
 
         <!--Rights Reserved -->
-        <!--<ProgressBar x:Name="pbGameIntro"
-                     Height="10"
-                     Width="400"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Background="White"
-                     Foreground="CadetBlue"
-                     BorderBrush="White"
-                     BorderThickness="1"
-                     Margin="390,300"
-        />-->
-
         <Button x:Name="LaunchGame"
-                Content="Launch"
+                Content="Launch Game"
                 Height="50"
-                Width="100"
-                Margin="390,300"
+                Width="300"
+                Margin="390,260"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="Arial"
@@ -138,6 +126,9 @@
                 FontWeight="Bold"
                 FontStyle="Italic"
                 Foreground="White"
+                Background="Blue"
+                BorderBrush="White"
+                BorderThickness="2"
                 Click="btnLaunchGame_Click"
         />
     </Grid>
