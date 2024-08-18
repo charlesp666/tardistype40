@@ -26,8 +26,8 @@ namespace LeapfrogUWP
         /*******************************************************************************************
         * Class Variables and Constants
         */
-        private float appWidth = 1700;
-        private float appHeight = 910;
+        private float appWidth = 1700;                       //Width of the App Window for this page
+        private float appHeight = 910;                      //Height of the App Window for this page
 
         private static String folderPlayableIcons = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
 

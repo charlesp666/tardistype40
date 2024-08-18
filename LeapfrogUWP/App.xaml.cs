@@ -30,8 +30,8 @@ namespace LeapfrogUWP
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
 
-        private float appWidth = 820;
-        private float appHeight = 510;
+        private float appWidth = 820;                                //Initial Width of the App Window
+        private float appHeight = 510;                              //Initial Height of the App Window
 
         public App()
         {
@@ -76,12 +76,10 @@ namespace LeapfrogUWP
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
 
-                // Ensure the current window is active
+                // Ensure the current window is active and try to resize the App Window
                 float DPI = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().LogicalDpi;
                 ApplicationView.PreferredLaunchWindowingMode = Windows.UI.ViewManagement.ApplicationViewWindowingMode.PreferredLaunchViewSize;
-
                 var desiredSize = new Size((appWidth * 96.0f / DPI), (appHeight * 96.0f / DPI));
-
                 ApplicationView.PreferredLaunchViewSize = desiredSize;
 
                 Window.Current.Activate();
