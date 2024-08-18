@@ -22,7 +22,6 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\A
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\MainPage.xbf
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\XamlSaveStateFile.xml
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\LeapFrogUWP.csproj.CoreCompileInputs.cache
-C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\LeapFrogUWP.csproj.CopyComplete
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\LeapfrogUWP.exe
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\LeapfrogUWP.pdb
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\ResourceHandlingTask.state
@@ -48,3 +47,5 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\G
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\GameTableau.xaml
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\GameTableau.xbf
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\GameTableau.xbf
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\LeapFrog.5A7C63A4.Up2Date
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_638441707520000000.json

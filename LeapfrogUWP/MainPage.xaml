@@ -7,23 +7,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-      Height="910"
-      Width="1610"
+      Height="510"
+      Width="820"
     >
 
-    <Grid Height="618"
-          Width="1155"
+    <Grid Height="505"
+          Width="810"
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="#FF0000C0"
           BorderBrush="Black"
-          BorderThickness="5"
+          BorderThickness="2"
     >
         <Grid.RowDefinitions>
             <RowDefinition Height="440*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1490"/>
+            <ColumnDefinition Width="1200"/>
         </Grid.ColumnDefinitions>
 
         <!--"Froggy" Game Image -->
@@ -33,10 +33,10 @@
                Width="360"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Margin="10,10,0,0"
+               Margin="5,5,0,0"
                FocusVisualPrimaryBrush="#FF0000C0"
          />
-        
+
         <!--Game Title -->
         <TextBlock x:Name="lblGameTitle"
                    Text="lblGameTitle"
@@ -71,7 +71,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="395,125,0,0"
+                   Margin="395,145,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"
@@ -84,7 +84,7 @@
                    Width="auto"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
-                   Margin="395,0,0,0"
+                   Margin="395,165,0,0"
                    FontFamily="Arial"
                    FontSize="18"
                    Foreground="White"

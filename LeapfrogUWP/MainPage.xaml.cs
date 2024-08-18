@@ -12,6 +12,8 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
+using Windows.UI.ViewManagement; //For View Management
+
 namespace LeapfrogUWP
 {
     public sealed partial class MainPage : Page
@@ -23,7 +25,14 @@ namespace LeapfrogUWP
         // */
         public MainPage()
         {
+            //Initialize Component and ensure not in fullscreen mode.
             this.InitializeComponent();
+
+            var view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+            {
+                view.ExitFullScreenMode();
+            }
 
             // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();

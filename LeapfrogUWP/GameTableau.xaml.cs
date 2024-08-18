@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+//using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices.WindowsRuntime;
+//using Windows.Foundation;
+//using Windows.Foundation.Collections;
+//using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+//using Windows.UI.Xaml.Controls.Primitives;
+//using Windows.UI.Xaml.Data;
+//using Windows.UI.Xaml.Input;
+//using Windows.UI.Xaml.Media;
+//using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
+using Windows.UI.ViewManagement;  //For ApplicationView Object
+using Windows.Foundation;  //For "Size" used by ApplicationView
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +26,8 @@ namespace LeapfrogUWP
         /*******************************************************************************************
         * Class Variables and Constants
         */
+        private float appWidth = 1700;
+        private float appHeight = 910;
 
         private static String folderPlayableIcons = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
 
@@ -68,7 +72,7 @@ namespace LeapfrogUWP
         //private Stack<UndoItem> myUndoItems = new Stack<UndoItem>();
 
         //private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
-        private static int displayDelayMS = 150;      //Action display delay so user can see changes
+        //private static int displayDelayMS = 150;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DateTime gameStartTime;                                            //Game Start Time
@@ -77,6 +81,16 @@ namespace LeapfrogUWP
         public GameTableau()
         {
             this.InitializeComponent();
+
+            //Try to resize the App Window 
+            float DPI = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().LogicalDpi;
+            ApplicationView.PreferredLaunchWindowingMode = Windows.UI.ViewManagement.ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+            var desiredSize = new Size((appWidth * 96.0f / DPI), (appHeight * 96.0f / DPI));
+
+            ApplicationView.PreferredLaunchViewSize = desiredSize;
+
+            bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
 
             //Get or Initialize the Player Object
             Player myAvatar = new Player();

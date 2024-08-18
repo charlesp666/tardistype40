@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+//using Windows.Foundation;
+//using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+//using Windows.UI.Xaml.Controls.Primitives;
+//using Windows.UI.Xaml.Data;
+//using Windows.UI.Xaml.Input;
+//using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
+using Windows.UI.ViewManagement;  //For ApplicationView Object
+using Windows.Foundation;  //For "Size" used by ApplicationView
 
 namespace LeapfrogUWP
 {
@@ -26,6 +29,10 @@ namespace LeapfrogUWP
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
+        private float appWidth = 820;
+        private float appHeight = 510;
+
         public App()
         {
             this.InitializeComponent();
@@ -68,8 +75,18 @@ namespace LeapfrogUWP
                     // parameter
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+
                 // Ensure the current window is active
+                float DPI = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().LogicalDpi;
+                ApplicationView.PreferredLaunchWindowingMode = Windows.UI.ViewManagement.ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+                var desiredSize = new Size((appWidth * 96.0f / DPI), (appHeight * 96.0f / DPI));
+
+                ApplicationView.PreferredLaunchViewSize = desiredSize;
+
                 Window.Current.Activate();
+
+                bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
             }
         }
 
