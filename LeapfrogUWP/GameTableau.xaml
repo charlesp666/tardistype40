@@ -92,7 +92,7 @@
         <!--Game Tableu Footer -->
         <Border Name="brdMenus"
                 Grid.Row="2"
-                Margin="2,720"
+                Margin="2,2"
                 Height="50"
                 Width="1480"
                 Background="Aquamarine"
