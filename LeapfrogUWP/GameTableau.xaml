@@ -21,36 +21,41 @@
             <ColumnDefinition Width="1490"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="600"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="600*"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
         <!--Game Tableu Header -->
-        <Grid Name="tblHeader"
-              Margin="2,2"
-              Background="Blue"
-              BorderThickness="2"
-              BorderBrush="Black"
+        <Border Name="bdrHeader"
+                Margin="2,2"
+                Width="1480"
+                Height="50"
+                Background="Blue"
+                BorderThickness="2"
+                BorderBrush="Black"
         >
-            <TextBlock x:Name="GameHeader"
-                       Text="Header Stuff"
-                       Width="1480"
-                       Height="50"
-                       FontSize="24pi"
-            />
-        </Grid>
 
+            <TextBlock x:Name="tblHeader"
+                       Text="Header Stuff"
+                       Margin="1,1,1,1"
+                       Width="1478"
+                       Height="48"
+                       FontSize="24pi"
+                       Foreground="White"
+       />
+        </Border>
+        
         <!--Game Tableu Playing Area -->
         <Grid x:Name="tblPlayArea"
-              Width="1480"
+              Margin="2,60"
               Height="590"
-              Margin="2,65"
+              Width="1480"
               Background="AliceBlue"
               BorderThickness="2"
               BorderBrush="Black"
         >
-            <GridView x:Name="dataGridGameBoard"
+            <!--<GridView x:Name="dataGridGameBoard"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
                       ItemClick="dataGridGameBoard_CellClick"
@@ -71,30 +76,30 @@
                         >
                             <TextBox x:Name="cardRank" Text="{x:Bind cardRank}"/>
                             <TextBox x:Name="cardSuit" Text="{x:Bind cardSuit}"/>
-                            <!--<Image x:Name="CardFace"
+                            --><!--<Image x:Name="CardFace"
                                        Height="auto"
                                        Width="auto"
                                        Stretch="UniformToFill"
                                        Source="{x:Bind CardFace.Source}"
-                            />-->
+                            />--><!--
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
-            </GridView>
+            </GridView>-->
         </Grid>
  
         <!--Game Tableu Footer -->
         <Grid Name="ftrTableau"
-              Margin="5,700"
+              Margin="2,660"
+              Height="100"
+              Width="1490"
               Background="Aquamarine"
               BorderThickness="2"
               BorderBrush="Black"
         >
-            <TextBox x:Name="GameFooter"
-                     Text="Menus and whatnot"
-                     FontSize="120pi"
-                     Width="1490"
-                     Height="100"
+            <TextBlock x:Name="GameFooter"
+                       Text="Menus and whatnot"
+                       FontSize="120pi"
             />
         </Grid>
     </Grid>

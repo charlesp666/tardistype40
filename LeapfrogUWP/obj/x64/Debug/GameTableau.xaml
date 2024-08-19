@@ -21,40 +21,45 @@
             <ColumnDefinition Width="1490"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="600"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="600*"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
         <!--Game Tableu Header -->
-        <Grid x:ConnectionId='3' Name="tblHeader"
-              Margin="2,2"
-              Background="Blue"
-              BorderThickness="2"
-              BorderBrush="Black"
+        <Border x:ConnectionId='3' Name="bdrHeader"
+                Margin="2,2"
+                Width="1480"
+                Height="50"
+                Background="Blue"
+                BorderThickness="2"
+                BorderBrush="Black"
         >
-            <TextBlock x:ConnectionId='12' x:Name="GameHeader"
-                       Text="Header Stuff"
-                       Width="1480"
-                       Height="50"
-                       FontSize="24pi"
-            />
-        </Grid>
 
+            <TextBlock x:ConnectionId='7' x:Name="tblHeader"
+                       Text="Header Stuff"
+                       Margin="1,1,1,1"
+                       Width="1478"
+                       Height="48"
+                       FontSize="24pi"
+                       Foreground="White"
+       />
+        </Border>
+        
         <!--Game Tableu Playing Area -->
         <Grid x:ConnectionId='4' x:Name="tblPlayArea"
-              Width="1480"
+              Margin="2,60"
               Height="590"
-              Margin="2,65"
+              Width="1480"
               Background="AliceBlue"
               BorderThickness="2"
               BorderBrush="Black"
         >
-            <GridView x:ConnectionId='7' x:Name="dataGridGameBoard"
+            <!--<GridView x:Name="dataGridGameBoard"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
-                                                             
-                                                     
+                      ItemClick="dataGridGameBoard_CellClick"
+                      ItemsSource="{x:Bind cardList}"
             >
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -65,36 +70,36 @@
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="CardPosition">
-                        <StackPanel x:ConnectionId='9' Height="70"
+                        <StackPanel Height="70"
                                     Width="35"
                                     Margin="2"
                         >
-                            <TextBox x:ConnectionId='10' x:Name="cardRank"                         />
-                            <TextBox x:ConnectionId='11' x:Name="cardSuit"                         />
-                            <!--<Image x:Name="CardFace"
+                            <TextBox x:Name="cardRank" Text="{x:Bind cardRank}"/>
+                            <TextBox x:Name="cardSuit" Text="{x:Bind cardSuit}"/>
+                            --><!--<Image x:Name="CardFace"
                                        Height="auto"
                                        Width="auto"
                                        Stretch="UniformToFill"
                                        Source="{x:Bind CardFace.Source}"
-                            />-->
+                            />--><!--
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
-            </GridView>
+            </GridView>-->
         </Grid>
  
         <!--Game Tableu Footer -->
         <Grid x:ConnectionId='5' Name="ftrTableau"
-              Margin="5,700"
+              Margin="2,660"
+              Height="100"
+              Width="1490"
               Background="Aquamarine"
               BorderThickness="2"
               BorderBrush="Black"
         >
-            <TextBox x:ConnectionId='6' x:Name="GameFooter"
-                     Text="Menus and whatnot"
-                     FontSize="120pi"
-                     Width="1490"
-                     Height="100"
+            <TextBlock x:ConnectionId='6' x:Name="GameFooter"
+                       Text="Menus and whatnot"
+                       FontSize="120pi"
             />
         </Grid>
     </Grid>
