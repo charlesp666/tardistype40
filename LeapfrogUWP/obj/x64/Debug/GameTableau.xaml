@@ -21,13 +21,14 @@
             <ColumnDefinition Width="1490"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="600*"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
         <!--Game Tableu Header -->
         <Border x:ConnectionId='3' Name="bdrHeader"
+                Grid.Row="0"
                 Margin="2,2"
                 Width="1480"
                 Height="50"
@@ -36,72 +37,76 @@
                 BorderBrush="Black"
         >
 
-            <TextBlock x:ConnectionId='7' x:Name="tblHeader"
+            <TextBlock x:ConnectionId='12' x:Name="tblHeader"
                        Text="Header Stuff"
                        Margin="1,1,1,1"
                        Width="1478"
                        Height="48"
                        FontSize="24pi"
                        Foreground="White"
-       />
+            />
         </Border>
         
         <!--Game Tableu Playing Area -->
-        <Grid x:ConnectionId='4' x:Name="tblPlayArea"
-              Margin="2,60"
-              Height="590"
-              Width="1480"
-              Background="AliceBlue"
-              BorderThickness="2"
-              BorderBrush="Black"
+        <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
+                  Grid.Row="1"
+                                                 
+                  Margin="2,60"
+                  Height="590"
+                  Width="1480"
+                  Background="AliceBlue"
+                  BorderThickness="2"
+                  BorderBrush="Black"
+                  SelectionMode="None"
+                  IsItemClickEnabled="True"
+                                                         
         >
-            <!--<GridView x:Name="dataGridGameBoard"
-                      SelectionMode="None"
-                      IsItemClickEnabled="True"
-                      ItemClick="dataGridGameBoard_CellClick"
-                      ItemsSource="{x:Bind cardList}"
-            >
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid MaximumRowsOrColumns="13"
-                                       Orientation="Horizontal"
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="13"
+                                   Orientation="Horizontal"
+                    />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:Name="CardPosition">
+                    <StackPanel x:ConnectionId='8' Margin="2"
+                                Height="70"
+                                Width="35"
+                                
+                    >
+                        <TextBlock x:ConnectionId='9' x:Name="cardRank"                         />
+                        <TextBlock x:ConnectionId='10' x:Name="cardSuit"                         />
+                        <Image x:ConnectionId='11' x:Name="CardFace"
+                                   Height="auto"
+                                   Width="auto"
+                                   Stretch="UniformToFill"
+                                                                    
                         />
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-                <GridView.ItemTemplate>
-                    <DataTemplate x:Name="CardPosition">
-                        <StackPanel Height="70"
-                                    Width="35"
-                                    Margin="2"
-                        >
-                            <TextBox x:Name="cardRank" Text="{x:Bind cardRank}"/>
-                            <TextBox x:Name="cardSuit" Text="{x:Bind cardSuit}"/>
-                            --><!--<Image x:Name="CardFace"
-                                       Height="auto"
-                                       Width="auto"
-                                       Stretch="UniformToFill"
-                                       Source="{x:Bind CardFace.Source}"
-                            />--><!--
-                        </StackPanel>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>-->
-        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
  
         <!--Game Tableu Footer -->
-        <Grid x:ConnectionId='5' Name="ftrTableau"
-              Margin="2,660"
-              Height="100"
-              Width="1490"
-              Background="Aquamarine"
-              BorderThickness="2"
-              BorderBrush="Black"
+        <Border x:ConnectionId='5' Name="brdMenus"
+                Grid.Row="2"
+                Margin="2,720"
+                Height="50"
+                Width="1480"
+                Background="Aquamarine"
+                BorderThickness="2"
+                BorderBrush="Black"
         >
             <TextBlock x:ConnectionId='6' x:Name="GameFooter"
                        Text="Menus and whatnot"
-                       FontSize="120pi"
+                       Margin="2,2,2,2"
+                       Height="48"
+                       Width="1478"
+                       FontSize="24pi"
             />
-        </Grid>
+        </Border>
     </Grid>
 </Page>
 
