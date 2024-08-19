@@ -7,88 +7,95 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-      Height="910"
-      Width="1700"
+      Height="800"
+      Width="1500"
 >
 
     <Grid Name="gameTableau"
-          Background="Blue"
           Margin="2,5"
+          Background="Blue"
           BorderThickness="5"
+          BorderBrush="Black"
     >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1500"/>
+            <ColumnDefinition Width="1490"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="700"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="600"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <!--Game Tableu Header -->
-        <Grid Name="ftrHearder"
-                  BorderThickness="10"
-                  BorderBrush="White"
-                  Margin="5,5"
-            >
-            <TextBox x:Name="GameHeader"
-                         Text="Header Stuff"
-                         FontSize="24pi"
-                         Width="1600"
-                         Height="100"
-                />
-        </Grid>
-        <!--Game Tableu Playing Area -->
-        <GridView x:Name="dataGridGameBoard"
-                  SelectionMode="None"
-                  IsItemClickEnabled="True"
-                  ItemClick="dataGridGameBoard_CellClick"
-                  ItemsSource="{x:Bind cardList}"
-                  Height="800"
-                  Width="1600"
-                  Margin="5,5,0,0"
-                  BorderThickness="10"
-                  BorderBrush="White"
+        <Grid Name="tblHeader"
+              Margin="2,2"
+              Background="Blue"
+              BorderThickness="2"
+              BorderBrush="Black"
         >
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid MaximumRowsOrColumns="13"
+            <TextBlock x:Name="GameHeader"
+                       Text="Header Stuff"
+                       Width="1480"
+                       Height="50"
+                       FontSize="24pi"
+            />
+        </Grid>
+
+        <!--Game Tableu Playing Area -->
+        <Grid x:Name="tblPlayArea"
+              Width="1480"
+              Height="590"
+              Margin="2,65"
+              Background="AliceBlue"
+              BorderThickness="2"
+              BorderBrush="Black"
+        >
+            <GridView x:Name="dataGridGameBoard"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                      ItemClick="dataGridGameBoard_CellClick"
+                      ItemsSource="{x:Bind cardList}"
+            >
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="13"
                                        Orientation="Horizontal"
                         />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-            <GridView.ItemTemplate>
-                <DataTemplate x:Name="CardPosition">
-                    <StackPanel Height="150"
-                                Width="100"
-                                Margin="2"
-                    >
-                        <TextBox x:Name="cardRank" Text="{x:Bind cardRank}"/>
-                        <TextBox x:Name="cardSuit" Text="{x:Bind cardSuit}"/>
-                        <Image x:Name="CardFace"
-                                   Height="auto"
-                                   Width="auto"
-                                   Stretch="UniformToFill"
-                                   Source="{x:Bind CardFace.Source}"
-                        />
-                    </StackPanel>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:Name="CardPosition">
+                        <StackPanel Height="70"
+                                    Width="35"
+                                    Margin="2"
+                        >
+                            <TextBox x:Name="cardRank" Text="{x:Bind cardRank}"/>
+                            <TextBox x:Name="cardSuit" Text="{x:Bind cardSuit}"/>
+                            <!--<Image x:Name="CardFace"
+                                       Height="auto"
+                                       Width="auto"
+                                       Stretch="UniformToFill"
+                                       Source="{x:Bind CardFace.Source}"
+                            />-->
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+ 
         <!--Game Tableu Footer -->
         <Grid Name="ftrTableau"
-                  BorderThickness="10"
-                  BorderBrush="White"
-                  Margin="5,800"
-                  Grid.Row="2"
-            >
+              Margin="5,700"
+              Background="Aquamarine"
+              BorderThickness="2"
+              BorderBrush="Black"
+        >
             <TextBox x:Name="GameFooter"
-                         Text="Menus and whatnot"
-                         FontSize="120pi"
-                         Width="5000"
-                         Height="200"
-                />
+                     Text="Menus and whatnot"
+                     FontSize="120pi"
+                     Width="1490"
+                     Height="100"
+            />
         </Grid>
     </Grid>
 </Page>

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 //using System.IO;
 //using System.Linq;
 //using System.Runtime.InteropServices.WindowsRuntime;
-//using Windows.Foundation;
 //using Windows.Foundation.Collections;
-//using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 //using Windows.UI.Xaml.Controls.Primitives;
 //using Windows.UI.Xaml.Data;
@@ -14,8 +12,10 @@ using Windows.UI.Xaml.Controls;
 //using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
-using Windows.UI.ViewManagement;  //For ApplicationView Object
-using Windows.Foundation;  //For "Size" used by ApplicationView
+using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
+using Windows.Foundation;
+//using Windows.UI.Xaml;                                          //For "Size" used by ApplicationView
+using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,8 +26,8 @@ namespace LeapfrogUWP
         /*******************************************************************************************
         * Class Variables and Constants
         */
-        private float appWidth = 1700;                       //Width of the App Window for this page
-        private float appHeight = 910;                      //Height of the App Window for this page
+        private float thisAppWidth = 1700;                       //Width of the App Window for this page
+        private float thisAppHeight = 1000;                     //Height of the App Window for this page
 
         private static String folderPlayableIcons = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
 
@@ -83,14 +83,15 @@ namespace LeapfrogUWP
             this.InitializeComponent();
 
             //Try to resize the App Window 
-            float DPI = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().LogicalDpi;
-            ApplicationView.PreferredLaunchWindowingMode = Windows.UI.ViewManagement.ApplicationViewWindowingMode.PreferredLaunchViewSize;
-
-            var desiredSize = new Size((appWidth * 96.0f / DPI), (appHeight * 96.0f / DPI));
-
+            float DPI = DisplayInformation.GetForCurrentView().LogicalDpi;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            var desiredSize = new Size((thisAppWidth * 96.0f / DPI), (thisAppHeight * 96.0f / DPI));
             ApplicationView.PreferredLaunchViewSize = desiredSize;
 
+            //Window.Current.Activate();
+
             bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
+
 
             //Get or Initialize the Player Object
             Player myAvatar = new Player();
