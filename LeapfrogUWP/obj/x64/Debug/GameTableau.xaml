@@ -90,23 +90,20 @@
         </GridView>
  
         <!--Game Tableu Footer -->
-        <Border x:ConnectionId='5' Name="brdMenus"
-                Grid.Row="2"
-                Margin="2,2"
-                Height="50"
-                Width="1480"
-                Background="Aquamarine"
-                BorderThickness="2"
-                BorderBrush="Black"
+        <Grid x:ConnectionId='5' Name="grdActions"
+              Grid.Row="2"
+              Margin="2,2"
+              Height="48"
+              Width="1478"
+              Background="Blue"
+              BorderThickness="2"
+              BorderBrush="Black"
         >
             <TextBlock x:ConnectionId='6' x:Name="GameFooter"
                        Text="Menus and whatnot"
-                       Margin="2,2,2,2"
-                       Height="48"
-                       Width="1478"
                        FontSize="24pi"
             />
-        </Border>
-    </Grid>
+        </Grid>
+   </Grid>
 </Page>
 
