@@ -99,7 +99,25 @@
               BorderThickness="2"
               BorderBrush="Black"
         >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="46"></RowDefinition>
+            </Grid.RowDefinitions>
+ 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+            </Grid.ColumnDefinitions>
+
             <TextBlock x:Name="GameFooter"
+                       Grid.Column="4"
                        Text="Menus and whatnot"
                        FontSize="24pi"
             />
