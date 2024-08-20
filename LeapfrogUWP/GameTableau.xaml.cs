@@ -17,6 +17,10 @@ using Windows.Foundation;
 //using Windows.UI.Xaml;                                          //For "Size" used by ApplicationView
 using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
+using Windows.Storage;                                    //To load Help Instructions from Text File
+using System.IO;
+using Windows.Devices.Enumeration;
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace LeapfrogUWP
@@ -30,6 +34,9 @@ namespace LeapfrogUWP
         private float thisAppHeight = 1000;                     //Height of the App Window for this page
 
         private static String folderPlayableIcons = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
+        private static String folderGameData = "ms-appx:///Assets//Data//";
+
+        private String helpText = null;
 
         // Define variables/constants for play area (main window)
         private static int numberPlayRows = Cards.Card.possibleSuits.Length;        //Play Area Rows
@@ -88,10 +95,10 @@ namespace LeapfrogUWP
             var desiredSize = new Size((thisAppWidth * 96.0f / DPI), (thisAppHeight * 96.0f / DPI));
             ApplicationView.PreferredLaunchViewSize = desiredSize;
 
-            //Window.Current.Activate();
-
             bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
 
+            //Get Text for Game Instructions
+            loadHelpText();
 
             //Get or Initialize the Player Object
             Player myAvatar = new Player();
@@ -154,11 +161,20 @@ namespace LeapfrogUWP
          * Menu: Help/About
          * Displays the Help/About dialog
          */
-        //private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    frmGameAbout HelpAbout = new frmGameAbout(myGameInfo);
-        //    HelpAbout.Show();
-        //}
+        private async void btnHelp_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ContentDialog dlgGameInstructions = new ContentDialog
+            {
+                Title = "How to Play Leapfrog",
+                Content = helpText,
+                CloseButtonText = "OK"
+            };
+
+            //set the XamlRoot property
+            dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
+
+            ContentDialogResult result = await dlgGameInstructions.ShowAsync();
+        }
 
         /*******************************************************************************************
          * Menu: Game/Exit
@@ -206,6 +222,19 @@ namespace LeapfrogUWP
         //    undoMove();
         //}
         #endregion
+
+        /*******************************************************************************************
+        * Method: loadHelpText
+        * Moves the Card from the Source Position to the Destination Position, then checks if the
+        * move ended the game.
+        */
+        private async void loadHelpText()
+        {
+            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(folderGameData + "GameInstructions.txt"));
+
+            string helpText = await FileIO.ReadTextAsync(HelpFile);
+        }
+
 
         /*******************************************************************************************
          *******************************************************************************************

@@ -46,7 +46,7 @@
                        Foreground="White"
             />
         </Border>
-        
+
         <!--Game Tableu Playing Area -->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
@@ -88,7 +88,7 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
- 
+
         <!--Game Tableu Footer -->
         <Grid Name="grdActions"
               Grid.Row="2"
@@ -102,7 +102,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="46"></RowDefinition>
             </Grid.RowDefinitions>
- 
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="140"/>
@@ -116,11 +116,20 @@
                 <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
 
+            <Button x:Name="btnHelp"
+                    Grid.Column="8"
+                    Content="Help"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="2,2,2,2"
+                    Click="btnHelp_Click"
+            />
+
             <TextBlock x:Name="GameFooter"
                        Grid.Column="4"
                        Text="Menus and whatnot"
                        FontSize="24pi"
             />
         </Grid>
-   </Grid>
+    </Grid>
 </Page>

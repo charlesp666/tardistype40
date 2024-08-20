@@ -37,7 +37,7 @@
                 BorderBrush="Black"
         >
 
-            <TextBlock x:ConnectionId='12' x:Name="tblHeader"
+            <TextBlock x:ConnectionId='13' x:Name="tblHeader"
                        Text="Header Stuff"
                        Margin="1,1,1,1"
                        Width="1478"
@@ -46,7 +46,7 @@
                        Foreground="White"
             />
         </Border>
-        
+
         <!--Game Tableu Playing Area -->
         <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
                   Grid.Row="1"
@@ -71,14 +71,14 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition">
-                    <StackPanel x:ConnectionId='8' Margin="2"
+                    <StackPanel x:ConnectionId='9' Margin="2"
                                 Height="70"
                                 Width="35"
                                 
                     >
-                        <TextBlock x:ConnectionId='9' x:Name="cardRank"                         />
-                        <TextBlock x:ConnectionId='10' x:Name="cardSuit"                         />
-                        <Image x:ConnectionId='11' x:Name="CardFace"
+                        <TextBlock x:ConnectionId='10' x:Name="cardRank"                         />
+                        <TextBlock x:ConnectionId='11' x:Name="cardSuit"                         />
+                        <Image x:ConnectionId='12' x:Name="CardFace"
                                    Height="auto"
                                    Width="auto"
                                    Stretch="UniformToFill"
@@ -88,7 +88,7 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
- 
+
         <!--Game Tableu Footer -->
         <Grid x:ConnectionId='5' Name="grdActions"
               Grid.Row="2"
@@ -102,7 +102,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="46"></RowDefinition>
             </Grid.RowDefinitions>
- 
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="140"/>
@@ -116,12 +116,21 @@
                 <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:ConnectionId='6' x:Name="GameFooter"
+            <Button x:ConnectionId='6' x:Name="btnHelp"
+                    Grid.Column="8"
+                    Content="Help"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="2,2,2,2"
+                                         
+            />
+
+            <TextBlock x:ConnectionId='7' x:Name="GameFooter"
                        Grid.Column="4"
                        Text="Menus and whatnot"
                        FontSize="24pi"
             />
         </Grid>
-   </Grid>
+    </Grid>
 </Page>
 
