@@ -18,8 +18,8 @@ using Windows.Foundation;
 using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
 using Windows.Storage;                                    //To load Help Instructions from Text File
-using System.IO;
-using Windows.Devices.Enumeration;
+//using System.IO;
+//using Windows.Devices.Enumeration;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,7 +33,7 @@ namespace LeapfrogUWP
         private float thisAppWidth = 1700;                       //Width of the App Window for this page
         private float thisAppHeight = 1000;                     //Height of the App Window for this page
 
-        private static String folderPlayableIcons = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
+        private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
         private static String folderGameData = "ms-appx:///Assets//Data//";
 
         private String helpText = null;
@@ -230,9 +230,10 @@ namespace LeapfrogUWP
         */
         private async void loadHelpText()
         {
-            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(folderGameData + "GameInstructions.txt"));
+            string fileInstructions = folderGameData + "GameInstructions.txt";
+            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
-            string helpText = await FileIO.ReadTextAsync(HelpFile);
+            helpText = await FileIO.ReadTextAsync(HelpFile);
         }
 
 
