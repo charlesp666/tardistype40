@@ -18,8 +18,6 @@ using Windows.Foundation;
 using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
 using Windows.Storage;                                    //To load Help Instructions from Text File
-//using System.IO;
-//using Windows.Devices.Enumeration;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -100,14 +98,14 @@ namespace LeapfrogUWP
             //Get Text for Game Instructions
             loadHelpText();
 
-            //Get or Initialize the Player Object
+            //Initialize the Player Object
             Player myAvatar = new Player();
 
             //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
             //Display Player Statistics--Remove when game tableau is working                   *****
-            myAvatar.displayPlayerStats();
+            //myAvatar.displayPlayerStats();
         }
 
         /*******************************************************************************************
@@ -120,9 +118,13 @@ namespace LeapfrogUWP
          * Event Handler: GameBoard_CellClicked
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        private void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e) //DataGridViewCellEventArgs e)
+        private async void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e) //DataGridViewCellEventArgs e)
         {
-            //playSpaceClicked(dataGridGameBoard.CurrentCell.ColumnIndex, dataGridGameBoard.CurrentCell.RowIndex);
+            MediaElement mediaElement = new MediaElement();
+            var synth = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
+            Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync("Clickety Click!");
+            mediaElement.SetSource(stream, stream.ContentType);
+            mediaElement.Play();
         }
 
         /*******************************************************************************************
@@ -158,6 +160,15 @@ namespace LeapfrogUWP
          ******************************************************************************************/
         #region
         /*******************************************************************************************
+         * Menu: Game/Exit
+         * Handles the Closing of the Game Tableau Windows Form.
+         */
+        //private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    exitGame();
+        //}
+
+        /*******************************************************************************************
          * Menu: Help/About
          * Displays the Help/About dialog
          */
@@ -175,25 +186,6 @@ namespace LeapfrogUWP
 
             ContentDialogResult result = await dlgGameInstructions.ShowAsync();
         }
-
-        /*******************************************************************************************
-         * Menu: Game/Exit
-         * Handles the Closing of the Game Tableau Windows Form.
-         */
-        //private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    exitGame();
-        //}
-
-        /*******************************************************************************************
-         * Menu: Game/New Game
-         * Handles the Closing of the Game Tableau Windows Form.
-         */
-        //private void gameHelpToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    frmGameHelp HelpInstructions = new frmGameHelp(myGameInfo);
-        //    HelpInstructions.Show();
-        //}
 
         /*******************************************************************************************
          * Menu: Game/New Game
@@ -222,20 +214,6 @@ namespace LeapfrogUWP
         //    undoMove();
         //}
         #endregion
-
-        /*******************************************************************************************
-        * Method: loadHelpText
-        * Moves the Card from the Source Position to the Destination Position, then checks if the
-        * move ended the game.
-        */
-        private async void loadHelpText()
-        {
-            string fileInstructions = folderGameData + "GameInstructions.txt";
-            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
-
-            helpText = await FileIO.ReadTextAsync(HelpFile);
-        }
-
 
         /*******************************************************************************************
          *******************************************************************************************
@@ -558,6 +536,18 @@ namespace LeapfrogUWP
 
         //    return true;
         //}
+
+        /*******************************************************************************************
+        * Method: loadHelpText
+        * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
+        */
+        private async void loadHelpText()
+        {
+            string fileInstructions = folderGameData + "GameInstructions.txt";
+            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
+
+            helpText = await FileIO.ReadTextAsync(HelpFile);
+        }
 
         /*******************************************************************************************
          * Method: moveCard
