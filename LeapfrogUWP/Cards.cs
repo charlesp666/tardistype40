@@ -54,8 +54,8 @@ namespace LeapfrogUWP
             public static char[] possibleSuits = { 'S', 'H', 'C', 'D' };     //Possible Values for Suits
 
             //Set CardFace to Default "NotPlayable" Image
-            private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
-            private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
+            //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
+            //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
 
             /*******************************************************************************************
              * Constructor: Card (Default)
@@ -163,24 +163,6 @@ namespace LeapfrogUWP
                 int rankLength = cardLength - 1;          //Determine Length of String for Card Rank
 
                 return (aCardValue.Substring(0, rankLength));                   //Return Card's Rank
-            }
-
-            /*******************************************************************************************
-             * Method: getNonPlayableImage
-             * Returns the Image for a Non-Playable position.
-             */
-            public BitmapImage getNonPlayableImage()
-            {
-                return bmpNotPlayable;                                       //Return Non_Playable Image
-            }
-
-            /*******************************************************************************************
-             * Method: getNonPlayableImage
-             * Returns the Image for a Non-Playable position.
-             */
-            public BitmapImage getPlayableImage()
-            {
-                return bmpPlayable;                                              //Return Playable Image
             }
 
             /*******************************************************************************************
