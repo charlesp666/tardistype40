@@ -70,15 +70,15 @@
                                 BorderBrush="White"
                                 BorderThickness="2"
                     >
-                        <TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="White"/>
-                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="White"/>
+                        <!--<TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="White"/>
+                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="White"/>-->
  
-                        <!--<Image x:Name="CardFace"
+                        <Image x:Name="CardFace"
                                Height="40"
                                Width="30"
                                Stretch="UniformToFill"
-                               Source="{Binding CardFace.Source}"
-                        />-->
+                               Source="{Binding CardFace}"
+                        />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

@@ -40,23 +40,22 @@ namespace LeapfrogUWP
            */
         public partial class Card
         {
-            private String cardRank;              //Contains the Rank (Ace through King) of the card
-            private char cardSuit; //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of the Card
-
-            ////Set Folder Locations for Card Images as static constants
-            //private static String folderGameImages = "ms-appx:///Assets//GameImages//";
-            //private static String folderCardFaces = "ms-appx:///Assets//CardImages//";
+            private string cardRank;                      //Contains the Rank (Ace through King) of card
+            private string cardSuit;       //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
 
             //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
             private BitmapImage cardFace = new BitmapImage();
-
 
             /* Define arrays storing to possible values for rank and suit; make public to be viewable by
              * anyone wanting to build a card or deck of cards.
              ***** Q: how to handle (should?) jokers?
              */
             public static String[] possibleRanks = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
-            public static char[] possibleSuits = { 'S', 'H', 'C', 'D' }; //Possible Values for Suits
+            public static char[] possibleSuits = { 'S', 'H', 'C', 'D' };     //Possible Values for Suits
+
+            //Set CardFace to Default "NotPlayable" Image
+            private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
+            private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
 
             /*******************************************************************************************
              * Constructor: Card (Default)
@@ -65,9 +64,8 @@ namespace LeapfrogUWP
              */
             public Card()
             {
-                this.cardRank = "";                                     //initialize Card's Rank to null
-                this.cardSuit = ' ';                                    //initialize Card's suit to null
-                                                                        //            this.setCardFace(bmpNotPlayable);                         //Initialize Card's Face Image
+                this.cardRank = null;                                    //initialize Card's Rank to null
+                this.cardSuit = null;                                    //initialize Card's suit to null
             }
 
             /*******************************************************************************************
@@ -75,10 +73,10 @@ namespace LeapfrogUWP
              * Creates a new Card object and assigns the Rank and Suit passed as parameters. Pulls
              * the Card Face from the local Assembly resources based on rank and suit.
              */
-            public Card(String newRank, char newSuit)
+            public Card(string newRank, string newSuit)
             {
                 //ResourceManager cardImage = new ResourceManager("LeapFrog.Properties.Resources", GetType().Assembly);
-                String iconFile = newRank;
+                String iconFile = newRank.ToString();
 
                 //Add an underscore to beginning of card name if the card rank is numeric
                 try
@@ -149,7 +147,7 @@ namespace LeapfrogUWP
               * Method: getRank
               * Returns the rank of the current card object
               */
-            public String getRank()
+            public string getRank()
             {
                 return (this.cardRank);
             }
@@ -168,10 +166,28 @@ namespace LeapfrogUWP
             }
 
             /*******************************************************************************************
+             * Method: getNonPlayableImage
+             * Returns the Image for a Non-Playable position.
+             */
+            public BitmapImage getNonPlayableImage()
+            {
+                return bmpNotPlayable;                                       //Return Non_Playable Image
+            }
+
+            /*******************************************************************************************
+             * Method: getNonPlayableImage
+             * Returns the Image for a Non-Playable position.
+             */
+            public BitmapImage getPlayableImage()
+            {
+                return bmpPlayable;                                              //Return Playable Image
+            }
+
+            /*******************************************************************************************
              * Method: getSuit
              * Returns the suit of the current card object
              */
-            public char getSuit()
+            public string getSuit()
             {
                 return (this.cardSuit);
             }
@@ -191,7 +207,7 @@ namespace LeapfrogUWP
              * Method: setCard
              * Sets the Rank and Suit of the Card and attaches the image of the card face.
              */
-            public void setCard(String aRank, char aSuit, BitmapImage anImage)
+            public void setCard(string aRank, string aSuit, BitmapImage anImage)
             {
                 setRank(aRank);
                 setSuit(aSuit);
@@ -213,9 +229,9 @@ namespace LeapfrogUWP
              * Verifies the Rank passed as parameter is one of the accepted values, then
              * sets the Rank of the current Card object.
              */
-            private void setRank(String newRank)
+            private void setRank(string newRank)
             {
-                String aRank = "";
+                string aRank = null;
 
                 for (int i = 0; i < possibleRanks.Length; i++)
                 {
@@ -225,7 +241,7 @@ namespace LeapfrogUWP
                     }
                 } //Verify newRank is of possible values
 
-                if (!aRank.Equals(""))                           //If newRank is an acceptable value
+                if (!aRank.Equals(null))                           //If newRank is an acceptable value
                 {
                     this.cardRank = aRank;                                   //Set the object's rank
                 }
@@ -236,18 +252,17 @@ namespace LeapfrogUWP
              * Verifies the Suit passed as parameter is one of the accepted values, then
              * sets the Suit of the current Card object.
              */
-            private void setSuit(char newSuit)
+            private void setSuit(string newSuit)
             {
-                char aSuit = ' ';
+                string aSuit = null;
 
-
-                for (int i = 0; i < possibleSuits.Length; i++)//Verify newSuit is of possible values
+                for (int i = 0; i < possibleSuits.Length; i++)    //Verify newSuit is of possible values
                 {
-                    if (newSuit == possibleSuits[i])
+                    if (newSuit == possibleSuits[i].ToString())
                         aSuit = newSuit;
                 }
 
-                if (aSuit != ' ')                                //If newSuit is acceptable value...
+                if (aSuit != null)                                //If newSuit is acceptable value...
                     this.cardSuit = aSuit;                                   //Set the object's suit
             }
         }
@@ -440,7 +455,7 @@ namespace LeapfrogUWP
                 {
                     for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
                     {
-                        deckCards.Add(new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]));
+                        deckCards.Add(new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString()));
                     }
                 }
             }

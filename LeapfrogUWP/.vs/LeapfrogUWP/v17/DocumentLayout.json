@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|c:\\users\\charl\\source\\repos\\charlesp666\\tardistype40\\leapfroguwp\\assets\\data\\gameinstructions.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|solutionrelative:assets\\data\\gameinstructions.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|c:\\users\\charl\\source\\repos\\charlesp666\\tardistype40\\leapfroguwp\\cards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|solutionrelative:cards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|c:\\users\\charl\\source\\repos\\charlesp666\\tardistype40\\leapfroguwp\\gametableau.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -35,14 +35,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GameInstructions.txt",
-              "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\Assets\\Data\\GameInstructions.txt",
-              "RelativeDocumentMoniker": "Assets\\Data\\GameInstructions.txt",
-              "ToolTip": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\Assets\\Data\\GameInstructions.txt",
-              "RelativeToolTip": "Assets\\Data\\GameInstructions.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-08-22T20:21:07.838Z",
+              "Title": "Cards.cs",
+              "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\Cards.cs",
+              "RelativeDocumentMoniker": "Cards.cs",
+              "ToolTip": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\Cards.cs",
+              "RelativeToolTip": "Cards.cs",
+              "ViewState": "AQIAALoBAAAAAAAAAAAAAMkBAABxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T20:26:21.033Z",
               "EditorCaption": ""
             },
             {
