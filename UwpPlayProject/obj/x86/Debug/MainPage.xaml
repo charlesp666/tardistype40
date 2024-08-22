@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:ConnectionId='2' x:Name="btnHelloWorld" Content="Hello World" Margin="475,280,0,0" VerticalAlignment="Top" Height="52" Width="132" FontWeight="Bold" FontStyle="Italic"                            />
+        <Button x:ConnectionId='2' x:Name="btnHelloWorld" Content="Speak" Margin="475,280,0,0" VerticalAlignment="Top" Height="52" Width="132" FontWeight="Bold" FontStyle="Italic"                            />
 
     </Grid>
 </Page>

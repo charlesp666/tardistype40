@@ -47,9 +47,10 @@
         </Border>
 
         <!--Game Tableu Playing Area -->
+        <!--ItemsSource="{Binding Source=cardList}"-->
         <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
                   Grid.Row="1"
-                  ItemsSource="{Binding Source=cardList}"
+                  ItemsSource="{Binding Source=gameDeck}"
                   Margin="2,60"
                   Height="590"
                   Width="1480"
@@ -64,18 +65,19 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition">
                     <StackPanel Margin="2"
-                                Height="40"
+                                Height="45"
                                 Width="33"
-                                BorderBrush="Black"
+                                BorderBrush="White"
                                 BorderThickness="2"
                     >
-                        <TextBlock x:Name="cardRank" Text="{Binding cardRank}"/>
-                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}"/>
+                        <TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="White"/>
+                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="White"/>
+ 
                         <!--<Image x:Name="CardFace"
                                Height="40"
                                Width="30"
                                Stretch="UniformToFill"
-                               Source="{x:Bind CardFace.Source}"
+                               Source="{Binding CardFace.Source}"
                         />-->
                     </StackPanel>
                 </DataTemplate>

@@ -22,7 +22,6 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debu
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\MainPage.xbf
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\XamlSaveStateFile.xml
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\UwpPlayProject.csproj.CoreCompileInputs.cache
-C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\UwpPlayProject.csproj.CopyComplete
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\UwpPlayProject.exe
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\UwpPlayProject.pdb
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\ResourceHandlingTask.state
@@ -48,3 +47,5 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debu
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.g.cs
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.xaml
 C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\NewPage.xbf
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\UwpPlayP.F63B11A3.Up2Date
+C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_638441707520000000.json

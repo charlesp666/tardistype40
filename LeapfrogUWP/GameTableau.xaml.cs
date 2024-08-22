@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 //using System.IO;
-//using System.Linq;
+using System.Linq;
 //using System.Runtime.InteropServices.WindowsRuntime;
 //using Windows.Foundation.Collections;
 using Windows.UI.Xaml.Controls;
@@ -18,6 +18,9 @@ using Windows.Foundation;
 using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
 using Windows.Storage;                                    //To load Help Instructions from Text File
+
+using Windows.Media.SpeechSynthesis;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -105,7 +108,7 @@ namespace LeapfrogUWP
             buildInitialGameBoard();
 
             //Display Player Statistics--Remove when game tableau is working                   *****
-            //myAvatar.displayPlayerStats();
+            myAvatar.displayPlayerStats();
         }
 
         /*******************************************************************************************
@@ -118,13 +121,11 @@ namespace LeapfrogUWP
          * Event Handler: GameBoard_CellClicked
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        private async void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e) //DataGridViewCellEventArgs e)
+        private void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e)
         {
-            MediaElement mediaElement = new MediaElement();
-            var synth = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
-            Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync("Clickety Click!");
-            mediaElement.SetSource(stream, stream.ContentType);
-            mediaElement.Play();
+            string speakingText = "Clickety Click!";
+
+            speakText(speakingText);
         }
 
         /*******************************************************************************************
@@ -247,13 +248,13 @@ namespace LeapfrogUWP
             BitmapImage cardBack = gameDeck.getCardBack();                         //Get Default Image
 
             //Build Play Deck and Prepare to Play Game
-            //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            //{
-            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-            //    {
-            //        cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
-            //    }
-            //}
+            for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
+            {
+                for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
+                {
+                    cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
+                }
+            }
 
             //gameTableau.DataContext = cardList;
 
@@ -765,10 +766,37 @@ namespace LeapfrogUWP
         //}
 
         /*******************************************************************************************
-         * Method: swapPlayCards
-         * Copies the Card Value and Card Face from the Source Play Position to the Destination
-         * Play Position, then sets the Card Face and Value of the Source to "Playable".
-         */
+          * Method: speakText
+          * Using Windows Media speech synthesizer, speaks the text passed as parameter.
+          */
+        private async void speakText(string speechText)
+        {
+            MediaElement mediaElement = new MediaElement();
+            var synth = new SpeechSynthesizer();
+            SpeechSynthesisStream stream = null;
+
+            using (synth)
+            {
+                VoiceInformation voiceInfo =
+                    (
+                        from voice in SpeechSynthesizer.AllVoices
+                        where voice.Gender == VoiceGender.Female
+                        select voice
+                    ).FirstOrDefault() ?? SpeechSynthesizer.DefaultVoice;
+
+                synth.Voice = voiceInfo;
+                stream = await synth.SynthesizeTextToStreamAsync(speechText);
+            }
+
+            mediaElement.SetSource(stream, stream.ContentType);
+            mediaElement.Play();
+        }
+
+        /*******************************************************************************************
+              * Method: swapPlayCards
+              * Copies the Card Value and Card Face from the Source Play Position to the Destination
+              * Play Position, then sets the Card Face and Value of the Source to "Playable".
+              */
         //private void swapPlayCards(PlayPosition sourceCard, PlayPosition destinationCard)
         //{
         //    //Copy Source Card to Destination
