@@ -100,6 +100,17 @@ namespace LeapfrogUWP
             }
 
             /*******************************************************************************************
+             * Constructor: Card
+             * Creates a new Card object and assigns the Rank, Suit and Face Image passed as parameters.
+             * the Card Face from the local Assembly resources based on rank and suit.
+             * Used to Produce the Card object to mark the Playable and Non-Playable spaces.
+             */
+            public Card(string newRank, string newSuit, BitmapImage cardImage)
+            {
+                setCard(newRank, newSuit, cardImage);
+            }
+
+            /*******************************************************************************************
              * Method (override) equals
              * Compares the card passed as parameter to the card that invoked the method.
              * Returns true if the cards have the same suit and rank; otherwise, returns
@@ -223,7 +234,7 @@ namespace LeapfrogUWP
                     }
                 } //Verify newRank is of possible values
 
-                if (!aRank.Equals(null))                           //If newRank is an acceptable value
+                if (!(aRank is null))                           //If newRank is an acceptable value
                 {
                     this.cardRank = aRank;                                   //Set the object's rank
                 }

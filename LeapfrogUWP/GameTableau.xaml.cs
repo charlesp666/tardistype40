@@ -20,6 +20,7 @@ using Windows.Graphics.Display;                                      //For Adjus
 using Windows.Storage;                                    //To load Help Instructions from Text File
 
 using Windows.Media.SpeechSynthesis;
+using Windows.UI.Popups;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -65,12 +66,12 @@ namespace LeapfrogUWP
         private int incrementPosition = 5;             //Points to add for cards in correct position
         private int incrementCompleteSuit = 10;                  //Points to add for a complete suit
 
-        private int gameBuyIn = 100;                  //Deduction to player's score to buy into game
+        private int gameWinningBonus = 100;                      //Bonus Amount for a completed Suit
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         //Declare and Initialize Game Playing Deck
         private Cards.Deck gameDeck = new Cards.Deck();                   //Initialize Deck of Cards
-        private List<Cards.Card> cardList = new List<Cards.Card>();       //Declare List to store Deck of Cards for game play
+        public List<PlayingCard> cardList = new List<PlayingCard>();   //List of Cards for game play
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -242,21 +243,28 @@ namespace LeapfrogUWP
             //dataGridGameBoard.ReadOnly = true;                               //Set Grid to Read-Only
 
             //Build the Game Board and Insert Default Image into Grid Cells
-            playSpaceIcon = gameDeck.getCardFacePlayable();                      //Playable Space icon
-            noPlayIcon = gameDeck.getCardFaceNotPlayable();                        //Non-Playable icon
+            //playSpaceIcon = gameDeck.getCardFacePlayable();                      //Playable Space icon
+            //noPlayIcon = gameDeck.getCardFaceNotPlayable();                        //Non-Playable icon
+
+            Cards.Card cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
+            Cards.Card cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             BitmapImage cardBack = gameDeck.getCardBack();                         //Get Default Image
 
             //Build Play Deck and Prepare to Play Game
+
             for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
             {
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
                 {
-                    cardList.Add(gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol));
+                    Cards.Card xferCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
+                    PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), xferCard.getCardFace(), cardBack);
+
+                    cardList.Add(thisCard);
                 }
             }
 
-            //gameTableau.DataContext = cardList;
+            gameTableau.DataContext = cardList;
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
@@ -733,10 +741,7 @@ namespace LeapfrogUWP
         //    }
 
         //    if (suitsCompleted == 4)                           //If All four suits are completed...
-        //        scoreThisGame += (suitsCompleted * gameBuyIn); //Add Game winning bonus!!
-
-        //    //Adjust current game score for buy-in and record to Player's stats
-        //    scoreThisGame -= gameBuyIn;                             // Deduct the Game Buy-In Amount
+        //        scoreThisGame += (suitsCompleted * gameWinningBonus); //Add Game winning bonus!!
 
         //    //Update Player Statistics then Display Results
         //    myPlayer.finishGameForPlayer(scoreThisGame, moveCount, computeTimePlayed());
@@ -793,10 +798,10 @@ namespace LeapfrogUWP
         }
 
         /*******************************************************************************************
-              * Method: swapPlayCards
-              * Copies the Card Value and Card Face from the Source Play Position to the Destination
-              * Play Position, then sets the Card Face and Value of the Source to "Playable".
-              */
+        * Method: swapPlayCards
+        * Copies the Card Value and Card Face from the Source Play Position to the Destination
+        * Play Position, then sets the Card Face and Value of the Source to "Playable".
+        */
         //private void swapPlayCards(PlayPosition sourceCard, PlayPosition destinationCard)
         //{
         //    //Copy Source Card to Destination
@@ -824,6 +829,45 @@ namespace LeapfrogUWP
         //}
 
         #endregion
+
+        /***********************************************************************************************
+         * Class: PlayingCard
+         * Defines an simple object that stores Rank, Suit and Imaage of a Playing Card.
+         **********************************************************************************************/
+        public partial class PlayingCard
+        {
+            /*******************************************************************************************
+             * Class Variables and Constants
+             */
+            public string cardRank;
+            public string cardSuit;
+            public BitmapImage cardFace;
+            public BitmapImage cardBack;
+
+            /*******************************************************************************************
+             * Constructor: PlayingCard (Default)
+             * Default constructor for a PlayingCard.
+             */
+            public PlayingCard()
+            {
+                cardRank = null;
+                cardSuit = null;
+                cardFace = null;
+                cardBack = null;
+            }
+
+            /*******************************************************************************************
+             * Constructor: PlayingCard 
+             * Constructor for a PlayingCard where values for all properties are passed.
+             */
+            public PlayingCard(string aRank, string aSuit, BitmapImage anImage, BitmapImage backImage)
+            {
+                cardRank = aRank;
+                cardSuit = aSuit;
+                cardFace = anImage;
+                cardBack = backImage;
+            }
+        }
 
         /***********************************************************************************************
          * Class: Play Position
@@ -986,18 +1030,18 @@ namespace LeapfrogUWP
 
         #endregion
 
-        /***********************************************************************************************
-         * Class: Undo Buffer
-         * Defines an object that stores the from and to card locations for a move.
-         **********************************************************************************************/
-        #region
-        //public partial class UndoBuffer
-        //{
-        /*******************************************************************************************
-        * Sub-Class UndoItem
-        * Defines the structure of a single Undo Item.
-        */
-        public partial class UndoItem
+            /***********************************************************************************************
+             * Class: Undo Buffer
+             * Defines an object that stores the from and to card locations for a move.
+             **********************************************************************************************/
+            #region
+            //public partial class UndoBuffer
+            //{
+            /*******************************************************************************************
+            * Sub-Class UndoItem
+            * Defines the structure of a single Undo Item.
+            */
+            public partial class UndoItem
         {
             private PlayPosition fromPosition;                    //Card Position that move was from
             private PlayPosition toPosition;                        //Card Position that move was to

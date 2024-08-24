@@ -11,8 +11,6 @@
  * System Class/Library Declarations
  */
 using System;
-using System.Collections.Generic;
-using Windows.System;
 using Windows.UI.Popups;
 
 /***********************************************************************************************
@@ -24,9 +22,8 @@ public class Player
     private int gamesPlayed = 0;                             //Cumulative Number of Games Played
     private int gameWinnings = 0;                                          //Cumulative Winnings
     private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
-    private String defaultPlayerName = "jdoe@somewhere.net";//Default Identity of Current Player
 
-    private String namePlayer = "jdoe@somewhere.net";            //Set Current Player to Default
+    //private String namePlayer = "jdoe@somewhere.net";            //Set Current Player to Default
     private TimeSpan timePlayed = new TimeSpan(0,0,0);         //Total Time for All Games Played
 
     //Parameters to track User Statistics
@@ -37,8 +34,6 @@ public class Player
      */
     public Player()
     {
-        //initializePlayerName();
-
         loadPlayerStats();                            //Load Player Stats from Application Data
     }
 
@@ -108,7 +103,7 @@ public class Player
      */
     public async void displayPlayerStats()
     {
-        String messageBoxTitle = "Player Statistics for " + getPlayerName() + ":";
+        String messageBoxTitle = "Player Statistics:";
 
         String reportScore = "\n\nGames Played : " + getGamesPlayed();
         reportScore += "\n\nScore for All Games: " + getGameWinnings();
@@ -136,7 +131,7 @@ public class Player
     {
         String messageBoxTitle = "Player Score";
 
-        String reportScore = "For " + getPlayerName() + "\n\nGames Played : " + getGamesPlayed();
+        String reportScore = "\nGames Played : " + getGamesPlayed();
         reportScore += "\n\nScore for Current Game: " + currentScore.ToString();
         reportScore += "\nMoves in Current Game: " + currentMoves.ToString();
         reportScore += "\n\nScore for All Games: " + getGameWinnings();
@@ -231,30 +226,11 @@ public class Player
     }
 
     /*******************************************************************************************
-     * Method: initializePlayerName
-     * Initializes the Player Name to tbe Current User.
-     */
-    private async void initializePlayerName()
-    {
-        var domainUser = "";
-
-        IReadOnlyList<User> users = await User.FindAllAsync();
-       // var currentUser = users[0];
-
-        // Get the AccountName for the Current User grabbed above
-        var accountName = await users[0].GetPropertyAsync(KnownUserProperties.AccountName);
-        domainUser = (string)accountName;
-
-        this.namePlayer = domainUser;
-    }
-
-    /*******************************************************************************************
      * Method: loadPlayerStats
      * Loads the Player Stats from the Registry for the Current User.
      */
     private void loadPlayerStats()
     {
-        setPlayerName((string)PlayerStats.Values["PlayerName"]);
         setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
         setGameWinnings((int)PlayerStats.Values["Winnings"]);
         setCountMoves((int)PlayerStats.Values["Moves"]);
@@ -292,15 +268,6 @@ public class Player
     }
     
     /*******************************************************************************************
-     * Method: setPlayerName
-     * Sets the Name of the Player of the Object that Invoked the Method.
-     */
-    public void setPlayerName(String aName)
-    {
-        this.namePlayer = aName;
-    }
-
-    /*******************************************************************************************
      * Method: setTimePlayed
      * Sets the Total Time Played.
      */
@@ -315,7 +282,6 @@ public class Player
      */
     private void writePlayerStats()
     {
-        PlayerStats.Values["PlayerName"] = this.namePlayer;
         PlayerStats.Values["GamesPlayed"] = this.gamesPlayed;
         PlayerStats.Values["Winnings"] = this.gameWinnings;
         PlayerStats.Values["Moves"] = this.countMoves;
