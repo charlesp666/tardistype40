@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>TARDIS-TYPE40</Machine>
+    <WindowsUser>charl</WindowsUser>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetOsVersion>10.0</TargetOsVersion>
+    <TargetOsDescription>Windows 10.0</TargetOsDescription>
+    <SolutionConfiguration>Debug|x64</SolutionConfiguration>
+    <PackageArchitecture>x64</PackageArchitecture>
+    <PackageIdentityName>596dae36-391a-48aa-accd-b24ec9366db5</PackageIdentityName>
+    <PackageIdentityPublisher>CN=charl</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\</IntermediateOutputPath>
+    <RemoteDeploymentType>
+    </RemoteDeploymentType>
+    <PackageRegistrationPath>
+    </PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+    <DeployOptionalPackages>false</DeployOptionalPackages>
+    <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
+    <LayoutDir>C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\AppX</LayoutDir>
+    <RegisteredManifestChecksum>5444F7D254CCE9F36B56BE1F8967B901BE4D4BC83BC712A72BE46E8A0A2C1C20</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>596dae36-391a-48aa-accd-b24ec9366db5_1.0.0.0_x64__4h31kwvp0rte4</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>596dae36-391a-48aa-accd-b24ec9366db5_4h31kwvp0rte4!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>596dae36-391a-48aa-accd-b24ec9366db5</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=charl</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Core\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-26T22:57:36.979</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\LeapfrogUWP.exe">
+      <PackagePath>entrypoint\LeapfrogUWP.exe</PackagePath>
+      <Modified>2024-08-26T22:57:35.972</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
+      <PackagePath>System.Runtime.dll</PackagePath>
+      <Modified>2022-06-10T22:23:28.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.22621.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
+      <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
+      <Modified>2024-02-22T03:52:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10c.gif">
+      <PackagePath>Assets\CardImages\10c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.838</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10d.gif">
+      <PackagePath>Assets\CardImages\10d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.839</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10h.gif">
+      <PackagePath>Assets\CardImages\10h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.839</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\10s.gif">
+      <PackagePath>Assets\CardImages\10s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.839</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2c.gif">
+      <PackagePath>Assets\CardImages\2c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.840</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2d.gif">
+      <PackagePath>Assets\CardImages\2d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.840</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2h.gif">
+      <PackagePath>Assets\CardImages\2h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.841</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\2s.gif">
+      <PackagePath>Assets\CardImages\2s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.841</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3c.gif">
+      <PackagePath>Assets\CardImages\3c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.842</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3d.gif">
+      <PackagePath>Assets\CardImages\3d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.842</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3h.gif">
+      <PackagePath>Assets\CardImages\3h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.842</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\3s.gif">
+      <PackagePath>Assets\CardImages\3s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.843</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4c.gif">
+      <PackagePath>Assets\CardImages\4c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.843</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4d.gif">
+      <PackagePath>Assets\CardImages\4d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.844</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4h.gif">
+      <PackagePath>Assets\CardImages\4h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.844</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\4s.gif">
+      <PackagePath>Assets\CardImages\4s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.844</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5c.gif">
+      <PackagePath>Assets\CardImages\5c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.845</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5d.gif">
+      <PackagePath>Assets\CardImages\5d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.845</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5h.gif">
+      <PackagePath>Assets\CardImages\5h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.846</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\5s.gif">
+      <PackagePath>Assets\CardImages\5s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.846</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6c.gif">
+      <PackagePath>Assets\CardImages\6c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.846</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6d.gif">
+      <PackagePath>Assets\CardImages\6d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.847</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6h.gif">
+      <PackagePath>Assets\CardImages\6h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.847</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\6s.gif">
+      <PackagePath>Assets\CardImages\6s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.847</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7c.gif">
+      <PackagePath>Assets\CardImages\7c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.849</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7d.gif">
+      <PackagePath>Assets\CardImages\7d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.849</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7h.gif">
+      <PackagePath>Assets\CardImages\7h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.849</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\7s.gif">
+      <PackagePath>Assets\CardImages\7s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.850</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8c.gif">
+      <PackagePath>Assets\CardImages\8c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.850</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8d.gif">
+      <PackagePath>Assets\CardImages\8d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.850</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8h.gif">
+      <PackagePath>Assets\CardImages\8h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.851</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\8s.gif">
+      <PackagePath>Assets\CardImages\8s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.851</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9c.gif">
+      <PackagePath>Assets\CardImages\9c.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.852</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9d.gif">
+      <PackagePath>Assets\CardImages\9d.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.852</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9h.gif">
+      <PackagePath>Assets\CardImages\9h.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.852</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\9s.gif">
+      <PackagePath>Assets\CardImages\9s.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.853</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ac.gif">
+      <PackagePath>Assets\CardImages\Ac.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.853</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ad.gif">
+      <PackagePath>Assets\CardImages\Ad.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.854</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ah.gif">
+      <PackagePath>Assets\CardImages\Ah.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.854</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\As.gif">
+      <PackagePath>Assets\CardImages\As.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.854</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Jc.gif">
+      <PackagePath>Assets\CardImages\Jc.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.855</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Jd.gif">
+      <PackagePath>Assets\CardImages\Jd.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.855</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Jh.gif">
+      <PackagePath>Assets\CardImages\Jh.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.856</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Js.gif">
+      <PackagePath>Assets\CardImages\Js.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.856</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Kc.gif">
+      <PackagePath>Assets\CardImages\Kc.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.857</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Kd.gif">
+      <PackagePath>Assets\CardImages\Kd.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.857</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Kh.gif">
+      <PackagePath>Assets\CardImages\Kh.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.857</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Ks.gif">
+      <PackagePath>Assets\CardImages\Ks.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.858</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qc.gif">
+      <PackagePath>Assets\CardImages\Qc.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.858</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qd.gif">
+      <PackagePath>Assets\CardImages\Qd.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.859</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qh.gif">
+      <PackagePath>Assets\CardImages\Qh.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.859</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\CardImages\Qs.gif">
+      <PackagePath>Assets\CardImages\Qs.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.859</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\defaultBack.gif">
+      <PackagePath>Assets\GameImages\defaultBack.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.867</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\NotPlayable.gif">
+      <PackagePath>Assets\GameImages\NotPlayable.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\Playable.gif">
+      <PackagePath>Assets\GameImages\Playable.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\Data\GameInstructions.txt">
+      <PackagePath>Assets\Data\GameInstructions.txt</PackagePath>
+      <Modified>2019-04-06T15:03:54.861</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\CardsIcon.png">
+      <PackagePath>Assets\GameImages\CardsIcon.png</PackagePath>
+      <Modified>2019-04-06T15:03:54.864</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\LockScreenLogo.scale-200.png">
+      <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\SplashScreen.scale-200.png">
+      <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\Square150x150Logo.scale-200.png">
+      <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\Square44x44Logo.scale-200.png">
+      <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\StoreLogo.png">
+      <PackagePath>Assets\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\Wide310x150Logo.scale-200.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2024-08-17T16:21:32.184</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Assets\GameImages\LeapFrog.jpg">
+      <PackagePath>Assets\GameImages\LeapFrog.jpg</PackagePath>
+      <Modified>2019-04-06T15:03:54.865</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
+      <Modified>2024-02-23T19:15:02.505</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\LeapfrogUWP.xr.xml">
+      <PackagePath>LeapfrogUWP.xr.xml</PackagePath>
+      <Modified>2024-08-26T22:44:32.940</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2024-08-26T22:57:35.758</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\GameTableau.xbf">
+      <PackagePath>GameTableau.xbf</PackagePath>
+      <Modified>2024-08-26T22:57:35.758</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2024-08-26T22:57:35.758</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
+      <PackagePath>WinMetadata\Windows.winmd</PackagePath>
+      <Modified>2024-02-22T06:46:02.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2024-08-26T22:57:17.851</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Core\LeapfrogUWP.exe">
+      <PackagePath>LeapfrogUWP.exe</PackagePath>
+      <Modified>2024-08-26T22:57:36.960</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Users\charl\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+      <Name>Microsoft.NET.CoreRuntime.2.2</Name>
+      <Version>2.2.31331.1</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.31331.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\charl\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+      <Name>Microsoft.NET.CoreRuntime.2.2</Name>
+      <Version>2.2.31331.1</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.31331.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\charl\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+      <Name>Microsoft.NET.CoreRuntime.2.2</Name>
+      <Version>2.2.31331.1</Version>
+      <Architecture>arm</Architecture>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.31331.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\charl\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\charl\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+      <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
+      <Version>2.2.31327.1</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.31327.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\charl\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+      <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
+      <Version>2.2.31327.1</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.31327.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\charl\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\charl\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+      <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
+      <Version>2.2.31327.1</Version>
+      <Architecture>arm</Architecture>
+      <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.31327.1, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\charl\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.14\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>ARM</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>ARM64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM64\Microsoft.VCLibs.ARM64.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>

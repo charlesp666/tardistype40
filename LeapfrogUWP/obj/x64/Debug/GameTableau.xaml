@@ -1,0 +1,171 @@
+﻿<Page x:ConnectionId='1' x:Name="pgGameTableau"
+      x:Class="LeapfrogUWP.GameTableau"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:LeapfrogUWP"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      Height="950"
+      Width="1510"
+>
+
+    <Grid x:ConnectionId='2' Name="gameTableau"
+          Margin="2,5"
+          Background="Blue"
+          BorderThickness="5"
+          BorderBrush="Black"
+    >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1500"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="800*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <!--Game Tableu Header -->
+        <Grid x:ConnectionId='3' Name="bdrHeader"
+                Grid.Row="0"
+                Margin="2,2"
+                Width="1498"
+                Height="50"
+                Background="Blue"
+                BorderThickness="2"
+                BorderBrush="Black"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <Border x:ConnectionId='11' Name="someImage"
+                    Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+            >
+
+                <Image x:ConnectionId='13' x:Name="someJunk"
+                       Grid.Column="0"
+                       Margin="3,3,0,0"
+                       Height="48"
+                       Width="50"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Source="/Assets/GameImages/CardsIcon.png"
+                       FocusVisualPrimaryBrush="White"
+                />
+            </Border>
+            
+            <TextBlock x:ConnectionId='12' x:Name="tblHeader"
+                       Grid.Column="2"
+                       Text="Header Stuff"
+                       Margin="1,1,1,1"
+                       Width="auto"
+                       Height="48"
+                       FontSize="24pi"
+                       Foreground="White"
+            />
+        </Grid>
+
+        <!--Game Tableu Playing Area -->
+        <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
+                  Grid.Row="1"
+                                                 
+                  Margin="2,60"
+                  Height="600"
+                  Width="1498"
+                  Background="Blue"
+                  BorderThickness="2"
+                  BorderBrush="Black"
+                  SelectionMode="None"
+                  IsItemClickEnabled="True"
+                                                         
+        >
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:Name="CardPosition"
+                >
+                    <StackPanel Name="PlayingLayout"
+                                Margin="2"
+                                Height="140"
+                                Width="100"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                    >
+
+                        <Image x:Name="CardFace"
+                               Height="135"
+                               Width="85"
+                               Stretch="UniformToFill"
+                               Source="{Binding cardFace}"
+                        />
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="13"
+                                   Orientation="Horizontal"
+                    />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
+
+        <!--Game Tableu Footer -->
+        <Grid x:ConnectionId='5' Name="grdActions"
+              Grid.Row="2"
+              Margin="2,2"
+              Height="48"
+              Width="1478"
+              Background="Blue"
+              BorderThickness="2"
+              BorderBrush="Black"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="46"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:ConnectionId='6' x:Name="GameFooter"
+                       Grid.Column="4"
+                       Text="Menus, etc."
+                       FontSize="24pi"
+                       Foreground="White"
+            />
+
+            <Button x:ConnectionId='7' x:Name="btnHelp"
+                    Content="Help"
+                    Grid.Column="8"
+                    Margin="2,2,2,2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="24pi"
+                    Foreground="White"
+                                         
+            />
+        </Grid>
+    </Grid>
+</Page>
+
