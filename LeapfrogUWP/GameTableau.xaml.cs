@@ -251,9 +251,8 @@ namespace LeapfrogUWP
 
             Cards.Card cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
             Cards.Card cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
-            string test = gameDeck.getCardFaceNotPlayable().UriSource.ToString();
 
-            BitmapImage cardBack = gameDeck.getCardBack();                         //Get Default Image
+            string cardBack = gameDeck.getCardBack();                         //Get Default Image
 
             //Build Play Deck and Prepare to Play Game
 
@@ -262,7 +261,9 @@ namespace LeapfrogUWP
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
                 {
                     Cards.Card xferCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
-                    PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), xferCard.getCardFace().UriSource.ToString(), cardBack.UriSource.ToString());
+                    string cardFace = xferCard.getCardFace();
+
+                    PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), cardFace, cardBack);
 
                     cardList.Add(thisCard);
                 }

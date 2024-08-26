@@ -47,13 +47,13 @@
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
-            <Border x:ConnectionId='12' Name="someImage"
+            <Border x:ConnectionId='11' Name="someImage"
                     Background="White"
                     BorderBrush="Black"
                     BorderThickness="1"
             >
 
-                <Image x:ConnectionId='14' x:Name="someJunk"
+                <Image x:ConnectionId='13' x:Name="someJunk"
                        Grid.Column="0"
                        Margin="3,3,0,0"
                        Height="48"
@@ -65,7 +65,7 @@
                 />
             </Border>
             
-            <TextBlock x:ConnectionId='13' x:Name="tblHeader"
+            <TextBlock x:ConnectionId='12' x:Name="tblHeader"
                        Grid.Column="2"
                        Text="Header Stuff"
                        Margin="1,1,1,1"
@@ -101,16 +101,15 @@
                                 BorderBrush="White"
                                 BorderThickness="1"
                     >
-                        <TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="Black"/>
-                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="Black"/>
+                        <!--<TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="Black"/>
+                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="Black"/>-->
 
-                        <!--Source="{Binding cardFace}"-->
-                        <!--<Image x:Name="CardFace"
+                        <Image x:Name="CardFace"
                                Height="40"
                                Width="30"
                                Stretch="UniformToFill"
-                               Source="/Assets/CardImages/As.gif"
-                        />-->
+                               Source="{Binding cardFace}"
+                        />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

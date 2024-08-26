@@ -31,8 +31,11 @@ namespace LeapfrogUWP
     internal class Cards
     {
         //Set Folder Locations for Card Images as static constants
-        private static String folderGameImages = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
-        private static String folderCardFaces = "ms-appx:///LeapFrogUWP/Assets//CardImages//";
+        //private static String folderGameImages = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
+        //private static String folderCardFaces = "ms-appx:///LeapFrogUWP/Assets//CardImages//";
+
+        private static String folderGameImages = "/Assets/GameImages/";
+        private static String folderCardFaces = "/Assets/CardImages/";
 
         /***********************************************************************************************
            * Partial Class Card:
@@ -44,7 +47,7 @@ namespace LeapfrogUWP
             private string cardSuit;       //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
 
             //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
-            private BitmapImage cardFace = new BitmapImage();
+            private string cardFace;
 
             /* Define arrays storing to possible values for rank and suit; make public to be viewable by
              * anyone wanting to build a card or deck of cards.
@@ -78,11 +81,11 @@ namespace LeapfrogUWP
                 //ResourceManager cardImage = new ResourceManager("LeapFrog.Properties.Resources", GetType().Assembly);
                 String iconFile = newRank.ToString();
 
-                //Add an underscore to beginning of card name if the card rank is numeric
+                //Get Card Rank and add underscore to beginning if the rank is numeric
                 try
                 {
                     int aResult = int.Parse(iconFile);
-                    iconFile = "_" + iconFile;
+                    //iconFile = "_" + iconFile;
                 }
                 catch
                 {
@@ -90,13 +93,12 @@ namespace LeapfrogUWP
                 }
 
                 //Build Path to Card Face File
-                iconFile += (newSuit.ToString()).ToLower();
-                iconFile = folderCardFaces + iconFile + ".gif";
+                iconFile += (newSuit.ToString()).ToLower();                       //Add Suit to Filename
+                iconFile += ".gif";                                          //Add extension to Filename
 
-                BitmapImage aCardFace = new BitmapImage(new Uri(folderCardFaces + iconFile, UriKind.Absolute));
-                cardFace.UriSource = aCardFace.UriSource;
+                string aCardFace = folderCardFaces + iconFile;           //Add folder file is located in
 
-                setCard(newRank, newSuit, cardFace);
+                setCard(newRank, newSuit, aCardFace);
             }
 
             /*******************************************************************************************
@@ -105,7 +107,7 @@ namespace LeapfrogUWP
              * the Card Face from the local Assembly resources based on rank and suit.
              * Used to Produce the Card object to mark the Playable and Non-Playable spaces.
              */
-            public Card(string newRank, string newSuit, BitmapImage cardImage)
+            public Card(string newRank, string newSuit, string cardImage)
             {
                 setCard(newRank, newSuit, cardImage);
             }
@@ -149,7 +151,7 @@ namespace LeapfrogUWP
              * Method: getCardFace
              * Returns the Image on the Face of the Current Card
              */
-            public BitmapImage getCardFace()
+            public string getCardFace()
             {
                 return (this.cardFace);
             }
@@ -200,7 +202,7 @@ namespace LeapfrogUWP
              * Method: setCard
              * Sets the Rank and Suit of the Card and attaches the image of the card face.
              */
-            public void setCard(string aRank, string aSuit, BitmapImage anImage)
+            public void setCard(string aRank, string aSuit, string anImage)
             {
                 setRank(aRank);
                 setSuit(aSuit);
@@ -212,7 +214,7 @@ namespace LeapfrogUWP
              * Associates the image passed as a parameter as the face of the current
              * card object.
              */
-            private void setCardFace(BitmapImage anImage)
+            private void setCardFace(string anImage)
             {
                 this.cardFace = anImage;
             }
@@ -276,12 +278,14 @@ namespace LeapfrogUWP
                                                                    //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
 
             //Load the Default Card Back Image
-            private static String pathDefaultBack = "ms-appx:///LeapFrogUWP/Assets//GameImages//defaultBack.jpg";
-            private BitmapImage cardBack = new BitmapImage(new Uri(pathDefaultBack, UriKind.Absolute));
+            private string cardBack = "/Assets/GameImages/defaultBack.jpg";
+            //private BitmapImage cardBack = new BitmapImage(new Uri(pathDefaultBack, UriKind.Absolute));
 
             //Set CardFace to Default "NotPlayable" Image
-            private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
-            private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
+            //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
+            //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
+            private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
+            private string bmpPlayable =folderGameImages + "Playable.jpg";
 
             /*******************************************************************************************
              * Constructor: Deck
@@ -330,7 +334,7 @@ namespace LeapfrogUWP
              * Method: getCardBack
              * Returns the Image on the Back of the Current Card
              */
-            public BitmapImage getCardBack()
+            public string getCardBack()
             {
                 return this.cardBack;
             }
@@ -339,7 +343,7 @@ namespace LeapfrogUWP
              * Method: getCardFace
              * Returns the Image on the Face of the Current Card
              */
-            public BitmapSource getCardFace(int aCardPosition)
+            public string getCardFace(int aCardPosition)
             {
                 return deckCards[aCardPosition].getCardFace();
             }
@@ -348,7 +352,7 @@ namespace LeapfrogUWP
              * Method: getCardFaceNotPlayable
              * Returns the Image on the Face of a Non-Playable Card
              */
-            public BitmapImage getCardFaceNotPlayable()
+            public string getCardFaceNotPlayable()
             {
                 return bmpNotPlayable;
             }
@@ -357,7 +361,7 @@ namespace LeapfrogUWP
              * Method: getCardFacePlayable
              * Returns the Image on the Face of a Non-Playable Card
              */
-            public BitmapImage getCardFacePlayable()
+            public string getCardFacePlayable()
             {
                 return bmpPlayable;
             }

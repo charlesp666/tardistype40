@@ -101,16 +101,15 @@
                                 BorderBrush="White"
                                 BorderThickness="1"
                     >
-                        <TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="Black"/>
-                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="Black"/>
+                        <!--<TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="Black"/>
+                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="Black"/>-->
 
-                        <!--Source="{Binding cardFace}"-->
-                        <!--<Image x:Name="CardFace"
+                        <Image x:Name="CardFace"
                                Height="40"
                                Width="30"
                                Stretch="UniformToFill"
-                               Source="/Assets/CardImages/As.gif"
-                        />-->
+                               Source="{Binding cardFace}"
+                        />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
