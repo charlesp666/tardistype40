@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-08-22T19:56:01.661</Modified>
+      <Modified>2024-08-25T18:16:14.632</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\UwpPlayProject.exe">
       <PackagePath>entrypoint\UwpPlayProject.exe</PackagePath>
-      <Modified>2024-08-22T19:56:00.801</Modified>
+      <Modified>2024-08-25T18:16:08.771</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\.nuget\packages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.13\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -46,9 +46,9 @@
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2024-02-22T03:52:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2024-08-11T17:07:49.040</Modified>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\CardsIcon.png">
+      <PackagePath>Assets\GameImages\CardsIcon.png</PackagePath>
+      <Modified>2019-04-06T15:03:54.864</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -84,21 +84,41 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2022-07-25T17:47:56.124</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\defaultBack.gif">
+      <PackagePath>Assets\GameImages\defaultBack.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.867</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\NotPlayable.gif">
+      <PackagePath>Assets\GameImages\NotPlayable.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\Playable.gif">
+      <PackagePath>Assets\GameImages\Playable.gif</PackagePath>
+      <Modified>2019-04-06T15:03:54.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\LeapFrog.jpg">
+      <PackagePath>Assets\GameImages\LeapFrog.jpg</PackagePath>
+      <Modified>2019-04-06T15:03:54.865</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
+      <Modified>2024-08-11T17:07:49.040</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\UwpPlayProject.xr.xml">
       <PackagePath>UwpPlayProject.xr.xml</PackagePath>
-      <Modified>2024-08-15T17:48:09.630</Modified>
+      <Modified>2024-08-25T18:16:08.681</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2024-08-22T19:56:00.708</Modified>
+      <Modified>2024-08-25T18:16:08.689</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2024-08-22T19:56:00.723</Modified>
+      <Modified>2024-08-25T18:16:08.689</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\NewPage.xbf">
       <PackagePath>NewPage.xbf</PackagePath>
-      <Modified>2024-08-22T19:56:00.723</Modified>
+      <Modified>2024-08-25T18:16:08.689</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -106,11 +126,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-08-22T19:32:18.113</Modified>
+      <Modified>2024-08-25T18:03:11.223</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\Core\UwpPlayProject.exe">
       <PackagePath>UwpPlayProject.exe</PackagePath>
-      <Modified>2024-08-22T19:56:01.645</Modified>
+      <Modified>2024-08-25T18:16:14.627</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

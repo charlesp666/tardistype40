@@ -3,7 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|c:\\users\\charl\\source\\repos\\charlesp666\\tardistype40\\uwpplayproject\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|c:\\users\\charl\\source\\repos\\charlesp666\\tardistype40\\uwpplayproject\\newpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|solutionrelative:newpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\newpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|solutionrelative:newpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{20485390-C15C-44DB-ACE4-AA5F9AF6F463}|UwpPlayProject.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,20 +38,44 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NewPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\NewPage.xaml.cs",
+              "RelativeDocumentMoniker": "NewPage.xaml.cs",
+              "ToolTip": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\NewPage.xaml.cs",
+              "RelativeToolTip": "NewPage.xaml.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABsAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T17:21:02.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NewPage.xaml",
+              "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\NewPage.xaml",
+              "RelativeDocumentMoniker": "NewPage.xaml",
+              "ToolTip": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\NewPage.xaml",
+              "RelativeToolTip": "NewPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-08-25T17:21:00.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "MainPage.xaml.cs",
               "ToolTip": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\MainPage.xaml.cs",
               "RelativeToolTip": "MainPage.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAAQAAAA",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAACgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T17:18:10.854Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-11T17:18:10.854Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\UwpPlayProject\\MainPage.xaml",
               "RelativeDocumentMoniker": "MainPage.xaml",

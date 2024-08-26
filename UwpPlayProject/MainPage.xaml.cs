@@ -42,6 +42,11 @@ namespace UwpPlayProject
             //Frame.Navigate(typeof(NewPage));
         }
 
+        private void btnNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NewPage));
+        }
+
         private async void speakText(string speechText)
         {
             MediaElement mediaElement = new MediaElement();

@@ -34,8 +34,8 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.22621.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\CardsIcon.png">
+      <PackagePath>Assets\GameImages\CardsIcon.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -63,6 +63,21 @@
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\defaultBack.gif">
+      <PackagePath>Assets\GameImages\defaultBack.gif</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\NotPlayable.gif">
+      <PackagePath>Assets\GameImages\NotPlayable.gif</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\Playable.gif">
+      <PackagePath>Assets\GameImages\Playable.gif</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Assets\GameImages\LeapFrog.jpg">
+      <PackagePath>Assets\GameImages\LeapFrog.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\charl\source\repos\charlesp666\tardistype40\UwpPlayProject\bin\x86\Debug\UwpPlayProject.xr.xml">
       <PackagePath>UwpPlayProject.xr.xml</PackagePath>

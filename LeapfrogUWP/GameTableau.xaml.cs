@@ -109,7 +109,10 @@ namespace LeapfrogUWP
             buildInitialGameBoard();
 
             //Display Player Statistics--Remove when game tableau is working                   *****
-            myAvatar.displayPlayerStats();
+            //myAvatar.displayPlayerStats();
+
+            string aMsg = "This is the end...";
+            speakText(aMsg);
         }
 
         /*******************************************************************************************
@@ -248,6 +251,7 @@ namespace LeapfrogUWP
 
             Cards.Card cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
             Cards.Card cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
+            string test = gameDeck.getCardFaceNotPlayable().UriSource.ToString();
 
             BitmapImage cardBack = gameDeck.getCardBack();                         //Get Default Image
 
@@ -258,13 +262,13 @@ namespace LeapfrogUWP
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
                 {
                     Cards.Card xferCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
-                    PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), xferCard.getCardFace(), cardBack);
+                    PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), xferCard.getCardFace().UriSource.ToString(), cardBack.UriSource.ToString());
 
                     cardList.Add(thisCard);
                 }
             }
 
-            gameTableau.DataContext = cardList;
+            //gameTableau.DataContext = cardList;
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
@@ -839,10 +843,30 @@ namespace LeapfrogUWP
             /*******************************************************************************************
              * Class Variables and Constants
              */
-            public string cardRank;
-            public string cardSuit;
-            public BitmapImage cardFace;
-            public BitmapImage cardBack;
+            public string cardRank
+            {
+                get;
+                set;
+            }
+
+            public string cardSuit
+            {
+                get;
+                set;
+            }
+            //public BitmapImage cardFace;
+            //public BitmapImage cardBack;
+            public string cardFace
+            {
+                get;
+                set;
+            }
+
+            public string cardBack
+            {
+                get;
+                set;
+            }
 
             /*******************************************************************************************
              * Constructor: PlayingCard (Default)
@@ -860,7 +884,7 @@ namespace LeapfrogUWP
              * Constructor: PlayingCard 
              * Constructor for a PlayingCard where values for all properties are passed.
              */
-            public PlayingCard(string aRank, string aSuit, BitmapImage anImage, BitmapImage backImage)
+            public PlayingCard(string aRank, string aSuit, string anImage, string backImage)
             {
                 cardRank = aRank;
                 cardSuit = aSuit;

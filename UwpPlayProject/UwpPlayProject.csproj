@@ -133,6 +133,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\GameImages\CardsIcon.png" />
+    <Content Include="Assets\GameImages\defaultBack.gif" />
+    <Content Include="Assets\GameImages\LeapFrog.jpg" />
+    <Content Include="Assets\GameImages\NotPlayable.gif" />
+    <Content Include="Assets\GameImages\Playable.gif" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <!--Game Tableu Header -->
-        <Border Name="bdrHeader"
+        <Grid Name="bdrHeader"
                 Grid.Row="0"
                 Margin="2,2"
                 Width="1480"
@@ -36,21 +36,50 @@
                 BorderThickness="2"
                 BorderBrush="Black"
         >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Name="someImage"
+                    Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+            >
+
+                <Image x:Name="someJunk"
+                       Grid.Column="0"
+                       Margin="3,3,0,0"
+                       Height="48"
+                       Width="50"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Source="/Assets/GameImages/CardsIcon.png"
+                       FocusVisualPrimaryBrush="White"
+                />
+            </Border>
+            
             <TextBlock x:Name="tblHeader"
+                       Grid.Column="2"
                        Text="Header Stuff"
                        Margin="1,1,1,1"
-                       Width="1478"
+                       Width="auto"
                        Height="48"
                        FontSize="24pi"
                        Foreground="White"
             />
-        </Border>
+        </Grid>
 
         <!--Game Tableu Playing Area -->
-        <!--ItemsSource="{Binding Source=cardList}"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
-                  ItemsSource="{Binding Source=cardList}"
+                  ItemsSource="{x:Bind cardList}"
                   Margin="2,60"
                   Height="590"
                   Width="1480"
@@ -61,9 +90,10 @@
                   IsItemClickEnabled="True"
                   ItemClick="dataGridGameBoard_CellClick"
         >
- 
+
             <GridView.ItemTemplate>
-                <DataTemplate x:Name="CardPosition">
+                <DataTemplate x:Name="CardPosition"
+                >
                     <StackPanel Name="PlayingLayout"
                                 Margin="2"
                                 Height="45"
@@ -71,19 +101,20 @@
                                 BorderBrush="White"
                                 BorderThickness="1"
                     >
-                        <!--<TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="White"/>
-                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="White"/>-->
- 
-                        <Image x:Name="CardFace"
+                        <TextBlock x:Name="cardRank" Text="{Binding cardRank}" Foreground="Black"/>
+                        <TextBlock x:Name="cardSuit" Text="{Binding cardSuit}" Foreground="Black"/>
+
+                        <!--Source="{Binding cardFace}"-->
+                        <!--<Image x:Name="CardFace"
                                Height="40"
                                Width="30"
                                Stretch="UniformToFill"
-                               Source="{Binding cardFace}"
-                        />
+                               Source="/Assets/CardImages/As.gif"
+                        />-->
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            
+
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsWrapGrid MaximumRowsOrColumns="13"
