@@ -95,17 +95,18 @@
                 <DataTemplate x:Name="CardPosition"
                 >
                     <StackPanel Name="PlayingLayout"
-                                Margin="2"
-                                Height="140"
-                                Width="100"
+                                Height="138"
+                                Width="110"
                                 BorderBrush="Black"
                                 BorderThickness="1"
+                                CornerRadius="5"
                     >
 
                         <Image x:Name="CardFace"
-                               Height="135"
-                               Width="85"
-                               Stretch="UniformToFill"
+                               Height="138"
+                               Width="110"
+                               Margin="1,1,1,1"
+                               Stretch="Uniform"
                                Source="{Binding cardFace}"
                         />
                     </StackPanel>
