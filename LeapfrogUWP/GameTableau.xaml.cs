@@ -20,7 +20,7 @@ using Windows.Graphics.Display;                                      //For Adjus
 using Windows.Storage;                                    //To load Help Instructions from Text File
 
 using Windows.Media.SpeechSynthesis;
-using Windows.UI.Popups;
+//using Windows.UI.Popups;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -35,7 +35,11 @@ namespace LeapfrogUWP
         private float thisAppWidth = 1700;                       //Width of the App Window for this page
         private float thisAppHeight = 1000;                     //Height of the App Window for this page
 
-        private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
+        //Create Player and GameInformation Objects
+        private Player myAvatar = new Player();                  //Storage for Current Player Object
+        private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
+
+        //private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
         private static String folderGameData = "ms-appx:///Assets//Data//";
 
         private String helpText = null;
@@ -45,9 +49,6 @@ namespace LeapfrogUWP
         private static int numberPlayColumns = Cards.Card.possibleRanks.Length;  //Play Area Columns
 
         //Define Parameters for the various Icons used in game
-
-        //private BitmapSource playSpaceIcon = new BitmapImage(new Uri(folderPlayableIcons + "Playable.jpg", UriKind.Absolute));  //Playable Space icon
-        //private BitmapSource noPlayIcon = new BitmapImage(new Uri(folderPlayableIcons + "NotPlayable.jpg", UriKind.Absolute));    //Non-Playable icon
         private BitmapSource playSpaceIcon = new BitmapImage();  //Playable Space icon
         private BitmapSource noPlayIcon = new BitmapImage();    //Non-Playable icon
 
@@ -57,9 +58,6 @@ namespace LeapfrogUWP
 
         private static bool isGameSet = false;                  // Flag indicates play area is ready
         public bool flgGameOver = true;                               //Flag identifies game is over
-
-        private Player myPlayer;                                 //Storage for Current Player Object
-        private GameInformation myGameInfo;              //Storage for Local Game Information Object
 
         // Define parameters for Scoring Games (Determining Player's Winnings)
         private int incrementSequence = 2;             //Points to add for cards in correct sequence
@@ -72,7 +70,7 @@ namespace LeapfrogUWP
         //Declare and Initialize Game Playing Deck
         public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
 
-        public List<Cards.Card> cardList = new List<Cards.Card>();     //List of Cards for game play
+        //public List<Cards.Card> cardList = new List<Cards.Card>();     //List of Cards for game play
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -103,15 +101,13 @@ namespace LeapfrogUWP
             //Get Text for Game Instructions
             loadHelpText();
 
-            //Initialize the Player Object
-            Player myAvatar = new Player();
-
             //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
             //Display Player Statistics--Remove when game tableau is working                   *****
             //myAvatar.displayPlayerStats();
 
+            //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end...";
             speakText(aMsg);
         }
@@ -250,23 +246,23 @@ namespace LeapfrogUWP
             //playSpaceIcon = gameDeck.;                      //Playable Space icon
             //noPlayIcon = gameDeck.getCardFaceNotPlayable();                        //Non-Playable icon
 
+            gameTableau.DataContext = gameDeck;
+
             Cards.Card cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
 
             Cards.Card cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
             //Build Play Deck and Prepare to Play Game
 
-            for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            {
-                for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-                {
-                    Cards.Card thisCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
+            //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
+            //{
+            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
+            //    {
+            //        Cards.Card thisCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
 
-                    cardList.Add(thisCard);
-                }
-            }
-
-            //gameTableau.DataContext = cardList;
+            //        cardList.Add(thisCard);
+            //    }
+            //}
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             dataGridGameBoard.SelectedIndex = 0;

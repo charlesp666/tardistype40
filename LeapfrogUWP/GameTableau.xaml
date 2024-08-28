@@ -77,9 +77,10 @@
         </Grid>
 
         <!--Game Tableu Playing Area -->
+        <!--ItemsSource="{x:Bind cardList}"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
-                  ItemsSource="{x:Bind cardList}"
+                  ItemsSource="{x:Bind gameDeck.deckCards}"
                   Margin="2,60"
                   Height="600"
                   Width="1498"
