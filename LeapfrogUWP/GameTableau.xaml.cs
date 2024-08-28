@@ -72,8 +72,7 @@ namespace LeapfrogUWP
         //Declare and Initialize Game Playing Deck
         public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
 
-        //public List<PlayingCard> cardList = new List<PlayingCard>();   //List of Cards for game play
-        public List<Cards.Card> cardList = new List<Cards.Card>();   //List of Cards for game play
+        public List<Cards.Card> cardList = new List<Cards.Card>();     //List of Cards for game play
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -261,11 +260,6 @@ namespace LeapfrogUWP
             {
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
                 {
-                    //Cards.Card xferCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
-                    //string cardFace = xferCard.getCardFace();
-
-                    //PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), cardFace, cardBack);
-
                     Cards.Card thisCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
 
                     cardList.Add(thisCard);
@@ -837,65 +831,6 @@ namespace LeapfrogUWP
         //}
 
         #endregion
-
-        /***********************************************************************************************
-         * Class: PlayingCard
-         * Defines an simple object that stores Rank, Suit and Imaage of a Playing Card.
-         **********************************************************************************************/
-        public partial class PlayingCard
-        {
-            /*******************************************************************************************
-             * Class Variables and Constants
-             */
-            public string cardRank
-            {
-                get;
-                set;
-            }
-
-            public string cardSuit
-            {
-                get;
-                set;
-            }
-            //public BitmapImage cardFace;
-            //public BitmapImage cardBack;
-            public string cardFace
-            {
-                get;
-                set;
-            }
-
-            public string cardBack
-            {
-                get;
-                set;
-            }
-
-            /*******************************************************************************************
-             * Constructor: PlayingCard (Default)
-             * Default constructor for a PlayingCard.
-             */
-            public PlayingCard()
-            {
-                cardRank = null;
-                cardSuit = null;
-                cardFace = null;
-                cardBack = null;
-            }
-
-            /*******************************************************************************************
-             * Constructor: PlayingCard 
-             * Constructor for a PlayingCard where values for all properties are passed.
-             */
-            public PlayingCard(string aRank, string aSuit, string anImage, string backImage)
-            {
-                cardRank = aRank;
-                cardSuit = aSuit;
-                cardFace = anImage;
-                cardBack = backImage;
-            }
-        }
 
         /***********************************************************************************************
          * Class: Play Position
