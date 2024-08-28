@@ -13,13 +13,7 @@
  */
 using System;
 using System.Collections.Generic;
-//using System.Collections.ObjectModel;
 using System.Linq;
-//using System.Resources;                                     //To Pull Images from Assembly Resources
-using System.Text;
-using System.Threading.Tasks;
-//using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
-using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 
 /***************************************************************************************************
  * Cards Class Definition
