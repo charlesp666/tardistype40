@@ -47,13 +47,13 @@
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
-            <Border x:ConnectionId='11' Name="someImage"
+            <Border x:ConnectionId='12' Name="someImage"
                     Background="White"
                     BorderBrush="Black"
                     BorderThickness="1"
             >
 
-                <Image x:ConnectionId='13' x:Name="someJunk"
+                <Image x:ConnectionId='14' x:Name="someJunk"
                        Grid.Column="0"
                        Margin="3,3,0,0"
                        Height="48"
@@ -65,7 +65,7 @@
                 />
             </Border>
             
-            <TextBlock x:ConnectionId='12' x:Name="tblHeader"
+            <TextBlock x:ConnectionId='13' x:Name="tblHeader"
                        Grid.Column="2"
                        Text="Header Stuff"
                        Margin="1,1,1,1"
@@ -159,9 +159,20 @@
                        Foreground="White"
             />
 
-            <Button x:ConnectionId='7' x:Name="btnHelp"
+            <Button x:ConnectionId='7' x:Name="btnNewGame"
+                    Content="New Game"
+                    Grid.Column="2"
+                    Margin="2,2,2,2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="24pi"
+                    Foreground="White"
+                                            
+            />
+
+            <Button x:ConnectionId='8' x:Name="btnHelp"
                     Content="Help"
-                    Grid.Column="8"
+                    Grid.Column="9"
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"

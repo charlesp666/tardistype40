@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 using Windows.Foundation;
-//using Windows.UI.Xaml;                                          //For "Size" used by ApplicationView
+using Windows.UI.Xaml;                                          //For "Size" used by ApplicationView
 using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
 using Windows.Storage;                                    //To load Help Instructions from Text File
@@ -70,8 +70,6 @@ namespace LeapfrogUWP
         //Declare and Initialize Game Playing Deck
         public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
 
-        //public List<Cards.Card> cardList = new List<Cards.Card>();     //List of Cards for game play
-
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
         /*******************************************************************************************
@@ -125,7 +123,6 @@ namespace LeapfrogUWP
         private void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e)
         {
             string speakingText = "Clickety Click!";
-
             speakText(speakingText);
         }
 
@@ -174,7 +171,7 @@ namespace LeapfrogUWP
          * Menu: Help/About
          * Displays the Help/About dialog
          */
-        private async void btnHelp_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             ContentDialog dlgGameInstructions = new ContentDialog
             {
@@ -190,13 +187,13 @@ namespace LeapfrogUWP
         }
 
         /*******************************************************************************************
-         * Menu: Game/New Game
+         * Menu: New Game
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        //private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    setUpNewGame(gameDeck);
-        //}
+        private void btnNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            setUpNewGame(gameDeck);
+        }
 
         /*******************************************************************************************
          * Menu: Game/Player Statistics
@@ -252,18 +249,6 @@ namespace LeapfrogUWP
 
             Cards.Card cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
-            //Build Play Deck and Prepare to Play Game
-
-            //for (int aRow = 0; aRow < numberPlayRows; aRow++)                //Add Game Rows to Grid
-            //{
-            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
-            //    {
-            //        Cards.Card thisCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
-
-            //        cardList.Add(thisCard);
-            //    }
-            //}
-
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             dataGridGameBoard.SelectedIndex = 0;
         }
@@ -307,28 +292,28 @@ namespace LeapfrogUWP
          * 
          * aDeck - Deck Object containing cards to be dealt.
          */
-        //private void dealCards(Cards.Deck aDeck)
-        //{
-        //    Cards.Card aCard = new Cards.Card();                         //Storage for Current Card
+        private void dealCards(Cards aDeck)
+        {
+            Cards.Card aCard = new Cards.Card();                         //Storage for Current Card
 
-        //    for (int aRow = 0; aRow < numberPlayRows; aRow++)
-        //    {
-        //        for (int aCol = 0; aCol < numberPlayColumns; aCol++)
-        //        {
-        //            //Compute Card Element from Deck Array to Deal
-        //            int arrayElement = (aRow * Cards.Card.possibleRanks.Length) + aCol;
+            for (int aRow = 0; aRow < numberPlayRows; aRow++)
+            {
+                for (int aCol = 0; aCol < numberPlayColumns; aCol++)
+                {
+                    //Compute Card Element from Deck Array to Deal
+                    int arrayElement = (aRow * Cards.Card.possibleRanks.Length) + aCol;
 
-        //            aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
+                    aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
 
-        //            //Assign the Various Fields in the Cell
-        //            dataGridGameBoard[aCol, aRow].ToolTipText = aCard.getRank() + aCard.getSuit();
-        //            dataGridGameBoard[aCol, aRow].Tag = aCard.getRank() + aCard.getSuit();
-        //            dataGridGameBoard[aCol, aRow].Value = aCard.getCardFace();
+                    //Assign the Various Fields in the Cell
+                    //dataGridGameBoard[aCol, aRow].ToolTipText = aCard.getRank() + aCard.getSuit();
+                    //dataGridGameBoard[aCol, aRow].Tag = aCard.getRank() + aCard.getSuit();
+                    //dataGridGameBoard[aCol, aRow].Value = aCard.getCardFace();
 
-        //            delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
-        //        }
-        //    }
-        //}
+                    //delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
+                }
+            }
+        }
 
         /*******************************************************************************************
          * Method: delay
@@ -751,22 +736,25 @@ namespace LeapfrogUWP
          * Prepares the playing board, shuffles the deck of cards and initializes the tableau for
          * playing the game
          */
-        //private void setUpNewGame(Cards.Deck aDeck)
-        //{
-        //    aDeck.shuffleDeck();                                         //Shuffle the Deck of Cards
-        //    aDeck.cutDeck();                                                          //Cut the Deck
+        private void setUpNewGame(Cards aDeck)
+        {
+            aDeck.shuffleDeck();                                         //Shuffle the Deck of Cards
+            aDeck.cutDeck();                                                          //Cut the Deck
 
-        //    dealCards(aDeck);                                        //Deal the Cards to the Tableau
-        //    removeAces();                                    //Remove Aces to Initialize Play Spaces
+            dealCards(aDeck);                                        //Deal the Cards to the Tableau
+            //removeAces();                                    //Remove Aces to Initialize Play Spaces
 
-        //    myUndoItems.Clear();                                             //Clear the Undo Buffer
+            //myUndoItems.Clear();                                             //Clear the Undo Buffer
 
-        //    moveCount = 0;                              //Initialize the Move Counter for a New Game
-        //    txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
+            //moveCount = 0;                              //Initialize the Move Counter for a New Game
+            //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
 
-        //    gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
-        //    gameTime.Start();                                                  //And start the clock
-        //}
+            //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
+            //gameTime.Start();                                                  //And start the clock
+
+            string speakingText = "New Game Setup Complete!";
+            speakText(speakingText);
+        }
 
         /*******************************************************************************************
           * Method: speakText

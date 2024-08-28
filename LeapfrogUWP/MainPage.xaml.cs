@@ -9,10 +9,10 @@
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
+using Windows.UI.ViewManagement; //For View Management
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-using Windows.UI.ViewManagement; //For View Management
+using Windows.UI.Xaml.Media.Animation; //For Special Effects in Navigation
 
 namespace LeapfrogUWP
 {
@@ -58,7 +58,7 @@ namespace LeapfrogUWP
         // */
         private void btnLaunchGame_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GameTableau));
+            Frame.Navigate(typeof(GameTableau), null, new EntranceNavigationTransitionInfo());
         }
     }
 }

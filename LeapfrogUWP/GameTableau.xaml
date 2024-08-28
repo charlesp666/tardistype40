@@ -159,9 +159,20 @@
                        Foreground="White"
             />
 
+            <Button x:Name="btnNewGame"
+                    Content="New Game"
+                    Grid.Column="2"
+                    Margin="2,2,2,2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="24pi"
+                    Foreground="White"
+                    Click="btnNewGame_Click"
+            />
+
             <Button x:Name="btnHelp"
                     Content="Help"
-                    Grid.Column="8"
+                    Grid.Column="9"
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
