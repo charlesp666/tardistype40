@@ -31,9 +31,6 @@ namespace LeapfrogUWP
     public class Cards
     {
         //Set Folder Locations for Card Images as static constants
-        //private static String folderGameImages = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
-        //private static String folderCardFaces = "ms-appx:///LeapFrogUWP/Assets//CardImages//";
-
         private static String folderGameImages = "/Assets/GameImages/";
         private static String folderCardFaces = "/Assets/CardImages/";
 
@@ -57,22 +54,25 @@ namespace LeapfrogUWP
 
             private string defaultCardBack = folderGameImages + "defaultBack.gif";
 
+            //Declare Card Public Attributes to be used for displaying Cards in Game
             public string cardRank                       //Contains the Rank (Ace through King) of card
             {
                 get;
                 set;
             }
+
             public string cardSuit        //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
             {
                 get;
                 set;
             }
-            //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
+
             public string cardFace                //Contains "Local" (Solution) Path to Card Face Image
             {
                 get;
                 set;
             }
+
             public string cardBack                 //Contains "Local" (Solution) Path to Card Back Image
             { 
               get;
@@ -95,12 +95,11 @@ namespace LeapfrogUWP
             /*******************************************************************************************
              * Constructor: Card
              * Creates a new Card object and assigns the Rank and Suit passed as parameters. Pulls
-             * the Card Face from the local Assembly resources based on rank and suit.
+             * the Card Face from the local resources based on rank and suit.
              */
             public Card(string newRank, string newSuit)
             {
-                //ResourceManager cardImage = new ResourceManager("LeapFrog.Properties.Resources", GetType().Assembly);
-                String iconFile = newRank.ToString();
+                String iconFile = newRank.ToString();                //Initialize the Filename with Rank
 
                 //Get Card Rank for first character of filename
                 try
@@ -220,20 +219,19 @@ namespace LeapfrogUWP
 
             /*******************************************************************************************
              * Method: setCard
-             * Sets the Rank and Suit of the Card and attaches the image of the card face.
+             * Sets the Rank, Suit, Face and Back images of the Card.
              */
             public void setCard(string aRank, string aSuit, string aCardFace)
             {
-                this.cardRank = aRank; // setRank(aRank);
-                this.cardSuit = aSuit; // setSuit(aSuit);
-                this.cardFace = aCardFace; // setCardFace(anImage);
+                this.cardRank = aRank;
+                this.cardSuit = aSuit;
+                this.cardFace = aCardFace;
                 this.cardBack = defaultCardBack;
             }
 
             /*******************************************************************************************
              * Method: setCardFace
-             * Associates the image passed as a parameter as the face of the current
-             * card object.
+             * Associates the image passed as a parameter as the face of the current card object.
              */
             private void setCardFace(string anImage)
             {
@@ -287,240 +285,237 @@ namespace LeapfrogUWP
          * Partial Class Deck:
          * Defines the Attributes and Methods of a Single Playing Card.
          */
-        //public partial class Deck
-        //{
-            /*******************************************************************************************
-             * Class Variables and Constants
-             */
-            private static Random aRandom = new Random();   //Parameter for Random Number Generation
-
-            //private ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
-            public List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
-                                                                   //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
-
-            //Load the Default Card Back Image
-            private string cardBack = "/Assets/GameImages/defaultBack.jpg";
-            //private BitmapImage cardBack = new BitmapImage(new Uri(pathDefaultBack, UriKind.Absolute));
-
-            //Set CardFace to Default "NotPlayable" Image
-            //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
-            //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
-            private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
-            private string bmpPlayable = folderGameImages + "Playable.jpg";
-
-            /*******************************************************************************************
-             * Constructor: Deck
-             * Builds a deck of cards by creating an array of Card objects
-             */
-            public Cards() //Deck()
+        /*******************************************************************************************
+         * Class Variables and Constants
+         */
+        private static Random aRandom = new Random();   //Parameter for Random Number Generation
+ 
+        //private ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
+        public List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
+                                                               //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
+ 
+        //Load the Default Card Back Image
+        private string cardBack = "/Assets/GameImages/defaultBack.jpg";
+        //private BitmapImage cardBack = new BitmapImage(new Uri(pathDefaultBack, UriKind.Absolute));
+ 
+        //Set CardFace to Default "NotPlayable" Image
+        //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
+        //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
+        private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
+        private string bmpPlayable = folderGameImages + "Playable.jpg";
+ 
+        /*******************************************************************************************
+         * Constructor: Deck
+         * Builds a deck of cards by creating an array of Card objects
+         */
+        public Cards() //Deck()
+        {
+            initializeDeck();
+        }
+ 
+        /*******************************************************************************************
+         * Method: cutDeck
+         * Process randomly selects a card in the Deck, then rotates the cards from bottom
+         * to top until that card is reached thereby effective a "cut" of the deck of cards.
+         */
+        public void cutDeck()
+        {
+            Card aTemp = new Card();
+            int numberOfCards = this.deckCards.Count;     //Difference between number and array
+            int cardToCutAt = 0;
+ 
+            cardToCutAt = (int)aRandom.Next(0, numberOfCards);
+ 
+            for (int aCard = 0; aCard < cardToCutAt; aCard++)
             {
-                initializeDeck();
-            }
-
-            /*******************************************************************************************
-             * Method: cutDeck
-             * Process randomly selects a card in the Deck, then rotates the cards from bottom
-             * to top until that card is reached thereby effective a "cut" of the deck of cards.
-             */
-            public void cutDeck()
-            {
-                Card aTemp = new Card();
-                int numberOfCards = this.deckCards.Count;     //Difference between number and array
-                int cardToCutAt = 0;
-
-                cardToCutAt = (int)aRandom.Next(0, numberOfCards);
-
-                for (int aCard = 0; aCard < cardToCutAt; aCard++)
+                aTemp.setCard(this.deckCards[numberOfCards - 1].getRank(), this.deckCards[numberOfCards - 1].getSuit(), this.deckCards[numberOfCards - 1].getCardFace());
+ 
+                for (int aCut = numberOfCards - 1; aCut > 0; aCut--)
                 {
-                    aTemp.setCard(this.deckCards[numberOfCards - 1].getRank(), this.deckCards[numberOfCards - 1].getSuit(), this.deckCards[numberOfCards - 1].getCardFace());
-
-                    for (int aCut = numberOfCards - 1; aCut > 0; aCut--)
-                    {
-                        this.deckCards[aCut].setCard(this.deckCards[aCut - 1].getRank(), this.deckCards[aCut - 1].getSuit(), this.deckCards[aCut - 1].getCardFace());
-                    }
-                    this.deckCards[0].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
+                    this.deckCards[aCut].setCard(this.deckCards[aCut - 1].getRank(), this.deckCards[aCut - 1].getSuit(), this.deckCards[aCut - 1].getCardFace());
+                }
+                this.deckCards[0].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
+            }
+        }
+ 
+        /*******************************************************************************************
+         * Method: getCard
+         * Returns the Card object found at the specified position in the Deck.
+         */
+        public Card getCard(int aCardPosition)
+        {
+            return deckCards[aCardPosition];
+        }
+ 
+        /*******************************************************************************************
+         * Method: getCardBack
+         * Returns the Image on the Back of the Current Card
+         */
+        public string getCardBack()
+        {
+            return this.cardBack;
+        }
+ 
+        /*******************************************************************************************
+         * Method: getCardFace
+         * Returns the Image on the Face of the Current Card
+         */
+        public string getCardFace(int aCardPosition)
+        {
+            return deckCards[aCardPosition].getCardFace();
+        }
+ 
+        /*******************************************************************************************
+         * Method: getCardFaceNotPlayable
+         * Returns the Image on the Face of a Non-Playable Card
+         */
+        public string getCardFaceNotPlayable()
+        {
+            return bmpNotPlayable;
+        }
+ 
+        /*******************************************************************************************
+         * Method: getCardFacePlayable
+         * Returns the Image on the Face of a Non-Playable Card
+         */
+        public string getCardFacePlayable()
+        {
+            return bmpPlayable;
+        }
+ 
+        /*******************************************************************************************
+         * Method: getNextCardAscending
+         * Returns the Card Value of the Next Ascending Card
+         */
+        public String getNextCardAscending(String aCardFace)
+        {
+            Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
+ 
+            String cardRank = getRank(aCardFace);                 //Get the Rank of Current Card
+            String cardSuit = getSuit(aCardFace);                 //Get the Suit of Current Card
+ 
+            int nextPosition = aCard.findRank(cardRank);    //Get Array position of Current Rank
+            nextPosition++;                           //Increment Position to Next Rank in Array
+            if (nextPosition < Card.possibleRanks.Length - 1)
+            {
+                cardRank = Card.possibleRanks.ElementAt(nextPosition);
+            }
+            else
+            {
+                cardRank = null;
+                cardSuit = null;
+            }
+ 
+            return (cardRank + cardSuit);
+        }
+ 
+        /*******************************************************************************************
+         * Method: getNextCardDescending
+         * Returns the Card Value of the Next Descending Card
+         */
+        public String getNextCardDescending(String aCardFace)
+        {
+            Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
+ 
+            String cardRank = getRank(aCardFace);                 //Get the Rank of Current Card
+            String cardSuit = getSuit(aCardFace);                 //Get the Suit of Current Card
+ 
+            int nextPosition = aCard.findRank(cardRank);    //Get Array position of Current Rank
+            nextPosition--;                           //Increment Position to Next Rank in Array
+            if (nextPosition >= 0)
+            {
+                cardRank = Card.possibleRanks.ElementAt(nextPosition);
+            }
+            else //
+            {
+                cardRank = null;
+                cardSuit = null;
+            }
+ 
+            return (cardRank + cardSuit);
+        }
+ 
+        /*******************************************************************************************
+         * Method: getRank
+         * Parses the Rank from the CardValue passed.
+         */
+        public String getRank(String aCardValue)
+        {
+            int cardLength = aCardValue.Length;                     //Store Length of Card Value
+            int rankLength = cardLength - 1;          //Determine Length of String for Card Rank
+ 
+            return (aCardValue.Substring(0, rankLength));                   //Return Card's Rank
+        }
+ 
+        /*******************************************************************************************
+         * Method: getSuit
+         * Parses the Rank from the Card Value passed.
+         */
+        public String getSuit(String aCardValue)
+        {
+            int suitPosition = aCardValue.Length - 1;     //Determine Position in String of Suit
+ 
+            return (aCardValue.Substring(suitPosition, 1));             //Return the Card's Suit
+        }
+ 
+        /*******************************************************************************************
+         * Method: initializeDeck
+         * Creates (or recreates) an original deck of cards in sorted order: A - K and
+         * Spades - Diamonds.
+         */
+        public void initializeDeck()
+        {
+            for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
+            {
+                for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
+                {
+                    deckCards.Add(new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString()));
                 }
             }
-
-            /*******************************************************************************************
-             * Method: getCard
-             * Returns the Card object found at the specified position in the Deck.
-             */
-            public Card getCard(int aCardPosition)
+        }
+ 
+        /*******************************************************************************************
+         * Method: sameRank
+         * Returns "True" if the two cards passed as parameters have the Same Rank.
+         */
+        public bool sameRank(Card thisCard, Card testCard)
+        {
+            return (thisCard.getRank() == testCard.getRank());
+        }
+ 
+        /*******************************************************************************************
+         * Method: sameSuit
+         * Returns "True" if the two cards passed as parameters are in the same Suit.
+         */
+        public bool sameSuit(Card thisCard, Card testCard)
+        {
+            return (thisCard.getSuit() == testCard.getSuit());
+        }
+ 
+        /*******************************************************************************************
+         * Method: shuffleDeck
+         * Shuffles deck by randomly moving cards between entries in the deck array.
+         */
+        public void shuffleDeck()
+        {
+            Card aTemp = new Card();
+            int numberOfCards = this.deckCards.Count;
+            int firstCard = 0;
+            int secondCard = 0;
+ 
+            //Find the two cards to swap
+            for (int aCount = 0; aCount <= 5000; aCount++)
             {
-                return deckCards[aCardPosition];
-            }
-
-            /*******************************************************************************************
-             * Method: getCardBack
-             * Returns the Image on the Back of the Current Card
-             */
-            public string getCardBack()
-            {
-                return this.cardBack;
-            }
-
-            /*******************************************************************************************
-             * Method: getCardFace
-             * Returns the Image on the Face of the Current Card
-             */
-            public string getCardFace(int aCardPosition)
-            {
-                return deckCards[aCardPosition].getCardFace();
-            }
-
-            /*******************************************************************************************
-             * Method: getCardFaceNotPlayable
-             * Returns the Image on the Face of a Non-Playable Card
-             */
-            public string getCardFaceNotPlayable()
-            {
-                return bmpNotPlayable;
-            }
-
-            /*******************************************************************************************
-             * Method: getCardFacePlayable
-             * Returns the Image on the Face of a Non-Playable Card
-             */
-            public string getCardFacePlayable()
-            {
-                return bmpPlayable;
-            }
-
-            /*******************************************************************************************
-             * Method: getNextCardAscending
-             * Returns the Card Value of the Next Ascending Card
-             */
-            public String getNextCardAscending(String aCardFace)
-            {
-                Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
-
-                String cardRank = getRank(aCardFace);                 //Get the Rank of Current Card
-                String cardSuit = getSuit(aCardFace);                 //Get the Suit of Current Card
-
-                int nextPosition = aCard.findRank(cardRank);    //Get Array position of Current Rank
-                nextPosition++;                           //Increment Position to Next Rank in Array
-                if (nextPosition < Card.possibleRanks.Length - 1)
+                firstCard = (int)aRandom.Next(0, numberOfCards);
+                do
                 {
-                    cardRank = Card.possibleRanks.ElementAt(nextPosition);
-                }
-                else
-                {
-                    cardRank = null;
-                    cardSuit = null;
-                }
-
-                return (cardRank + cardSuit);
+                    secondCard = (int)aRandom.Next(0, numberOfCards);
+                } while (firstCard == secondCard);
+ 
+                aTemp.setCard(this.deckCards[firstCard].getRank(), this.deckCards[firstCard].getSuit(), this.deckCards[firstCard].getCardFace());
+                this.deckCards[firstCard].setCard(this.deckCards[secondCard].getRank(), this.deckCards[secondCard].getSuit(), this.deckCards[secondCard].getCardFace());
+                this.deckCards[secondCard].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
             }
-
-            /*******************************************************************************************
-             * Method: getNextCardDescending
-             * Returns the Card Value of the Next Descending Card
-             */
-            public String getNextCardDescending(String aCardFace)
-            {
-                Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
-
-                String cardRank = getRank(aCardFace);                 //Get the Rank of Current Card
-                String cardSuit = getSuit(aCardFace);                 //Get the Suit of Current Card
-
-                int nextPosition = aCard.findRank(cardRank);    //Get Array position of Current Rank
-                nextPosition--;                           //Increment Position to Next Rank in Array
-                if (nextPosition >= 0)
-                {
-                    cardRank = Card.possibleRanks.ElementAt(nextPosition);
-                }
-                else //
-                {
-                    cardRank = null;
-                    cardSuit = null;
-                }
-
-                return (cardRank + cardSuit);
-            }
-
-            /*******************************************************************************************
-             * Method: getRank
-             * Parses the Rank from the CardValue passed.
-             */
-            public String getRank(String aCardValue)
-            {
-                int cardLength = aCardValue.Length;                     //Store Length of Card Value
-                int rankLength = cardLength - 1;          //Determine Length of String for Card Rank
-
-                return (aCardValue.Substring(0, rankLength));                   //Return Card's Rank
-            }
-
-            /*******************************************************************************************
-             * Method: getSuit
-             * Parses the Rank from the Card Value passed.
-             */
-            public String getSuit(String aCardValue)
-            {
-                int suitPosition = aCardValue.Length - 1;     //Determine Position in String of Suit
-
-                return (aCardValue.Substring(suitPosition, 1));             //Return the Card's Suit
-            }
-
-            /*******************************************************************************************
-             * Method: initializeDeck
-             * Creates (or recreates) an original deck of cards in sorted order: A - K and
-             * Spades - Diamonds.
-             */
-            public void initializeDeck()
-            {
-                for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
-                {
-                    for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
-                    {
-                        deckCards.Add(new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString()));
-                    }
-                }
-            }
-
-            /*******************************************************************************************
-             * Method: sameRank
-             * Returns "True" if the two cards passed as parameters have the Same Rank.
-             */
-            public bool sameRank(Card thisCard, Card testCard)
-            {
-                return (thisCard.getRank() == testCard.getRank());
-            }
-
-            /*******************************************************************************************
-             * Method: sameSuit
-             * Returns "True" if the two cards passed as parameters are in the same Suit.
-             */
-            public bool sameSuit(Card thisCard, Card testCard)
-            {
-                return (thisCard.getSuit() == testCard.getSuit());
-            }
-
-            /*******************************************************************************************
-             * Method: shuffleDeck
-             * Shuffles deck by randomly moving cards between entries in the deck array.
-             */
-            public void shuffleDeck()
-            {
-                Card aTemp = new Card();
-                int numberOfCards = this.deckCards.Count;
-                int firstCard = 0;
-                int secondCard = 0;
-
-                //Find the two cards to swap
-                for (int aCount = 0; aCount <= 5000; aCount++)
-                {
-                    firstCard = (int)aRandom.Next(0, numberOfCards);
-                    do
-                    {
-                        secondCard = (int)aRandom.Next(0, numberOfCards);
-                    } while (firstCard == secondCard);
-
-                    aTemp.setCard(this.deckCards[firstCard].getRank(), this.deckCards[firstCard].getSuit(), this.deckCards[firstCard].getCardFace());
-                    this.deckCards[firstCard].setCard(this.deckCards[secondCard].getRank(), this.deckCards[secondCard].getSuit(), this.deckCards[secondCard].getCardFace());
-                    this.deckCards[secondCard].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
-                }
-            }
-        //}
+        }
     }
 }
