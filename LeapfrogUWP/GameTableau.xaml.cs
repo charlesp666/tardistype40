@@ -70,8 +70,10 @@ namespace LeapfrogUWP
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         //Declare and Initialize Game Playing Deck
-        private Cards.Deck gameDeck = new Cards.Deck();                   //Initialize Deck of Cards
-        public List<PlayingCard> cardList = new List<PlayingCard>();   //List of Cards for game play
+        public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
+
+        //public List<PlayingCard> cardList = new List<PlayingCard>();   //List of Cards for game play
+        public List<Cards.Card> cardList = new List<Cards.Card>();   //List of Cards for game play
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -246,13 +248,12 @@ namespace LeapfrogUWP
             //dataGridGameBoard.ReadOnly = true;                               //Set Grid to Read-Only
 
             //Build the Game Board and Insert Default Image into Grid Cells
-            //playSpaceIcon = gameDeck.getCardFacePlayable();                      //Playable Space icon
+            //playSpaceIcon = gameDeck.;                      //Playable Space icon
             //noPlayIcon = gameDeck.getCardFaceNotPlayable();                        //Non-Playable icon
 
-            Cards.Card cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
-            Cards.Card cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
+            Cards.Card cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
 
-            string cardBack = gameDeck.getCardBack();                         //Get Default Image
+            Cards.Card cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
             //Build Play Deck and Prepare to Play Game
 
@@ -260,10 +261,12 @@ namespace LeapfrogUWP
             {
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)         //Add Image Columns to Grid
                 {
-                    Cards.Card xferCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
-                    string cardFace = xferCard.getCardFace();
+                    //Cards.Card xferCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
+                    //string cardFace = xferCard.getCardFace();
 
-                    PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), cardFace, cardBack);
+                    //PlayingCard thisCard = new PlayingCard(xferCard.getRank(), xferCard.getSuit(), cardFace, cardBack);
+
+                    Cards.Card thisCard = gameDeck.getCard((aRow * Cards.Card.possibleRanks.Length) + aCol);
 
                     cardList.Add(thisCard);
                 }
@@ -272,7 +275,7 @@ namespace LeapfrogUWP
             //gameTableau.DataContext = cardList;
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
-            //dataGridGameBoard.Foc //.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
+            dataGridGameBoard.SelectedIndex = 0;
         }
 
         /*******************************************************************************************

@@ -101,6 +101,8 @@
                                 BorderThickness="1"
                                 CornerRadius="5"
                     >
+                        <!--<TextBlock Name="CardSuit" Text="{Binding cardSuit}"/>
+                        <TextBlock Name="CardRank" Text="{Binding cardRank}"/>-->
 
                         <Image x:Name="CardFace"
                                Height="138"

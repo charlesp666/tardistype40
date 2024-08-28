@@ -28,7 +28,7 @@ using Windows.UI.Xaml.Media.Imaging;                                      //For 
 
 namespace LeapfrogUWP
 {
-    internal class Cards
+    public class Cards
     {
         //Set Folder Locations for Card Images as static constants
         //private static String folderGameImages = "ms-appx:///LeapFrogUWP/Assets//GameImages//";
@@ -43,11 +43,6 @@ namespace LeapfrogUWP
            */
         public partial class Card
         {
-            private string cardRank;                      //Contains the Rank (Ace through King) of card
-            private string cardSuit;       //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
-
-            //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
-            private string cardFace;
 
             /* Define arrays storing to possible values for rank and suit; make public to be viewable by
              * anyone wanting to build a card or deck of cards.
@@ -60,6 +55,30 @@ namespace LeapfrogUWP
             //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
             //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
 
+            private string defaultCardBack = folderGameImages + "defaultBack.gif";
+
+            public string cardRank                       //Contains the Rank (Ace through King) of card
+            {
+                get;
+                set;
+            }
+            public string cardSuit        //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
+            {
+                get;
+                set;
+            }
+            //private Image cardFace = new Image(); // LeapFrog.Properties.Resources.NotPlayable;
+            public string cardFace                //Contains "Local" (Solution) Path to Card Face Image
+            {
+                get;
+                set;
+            }
+            public string cardBack                 //Contains "Local" (Solution) Path to Card Back Image
+            { 
+              get;
+              set;
+            }
+
             /*******************************************************************************************
              * Constructor: Card (Default)
              * Creates a new Card object and assigns the Rank and Suit passed as parameters,
@@ -69,6 +88,8 @@ namespace LeapfrogUWP
             {
                 this.cardRank = null;                                    //initialize Card's Rank to null
                 this.cardSuit = null;                                    //initialize Card's suit to null
+                this.cardFace = null;                           //Initialize Card Face Image path to null
+                this.cardBack = null;                           //Initialize Card Back Image path to null
             }
 
             /*******************************************************************************************
@@ -81,7 +102,7 @@ namespace LeapfrogUWP
                 //ResourceManager cardImage = new ResourceManager("LeapFrog.Properties.Resources", GetType().Assembly);
                 String iconFile = newRank.ToString();
 
-                //Get Card Rank and add underscore to beginning if the rank is numeric
+                //Get Card Rank for first character of filename
                 try
                 {
                     int aResult = int.Parse(iconFile);
@@ -201,11 +222,12 @@ namespace LeapfrogUWP
              * Method: setCard
              * Sets the Rank and Suit of the Card and attaches the image of the card face.
              */
-            public void setCard(string aRank, string aSuit, string anImage)
+            public void setCard(string aRank, string aSuit, string aCardFace)
             {
-                setRank(aRank);
-                setSuit(aSuit);
-                setCardFace(anImage);
+                this.cardRank = aRank; // setRank(aRank);
+                this.cardSuit = aSuit; // setSuit(aSuit);
+                this.cardFace = aCardFace; // setCardFace(anImage);
+                this.cardBack = defaultCardBack;
             }
 
             /*******************************************************************************************
@@ -265,15 +287,15 @@ namespace LeapfrogUWP
          * Partial Class Deck:
          * Defines the Attributes and Methods of a Single Playing Card.
          */
-        public partial class Deck
-        {
+        //public partial class Deck
+        //{
             /*******************************************************************************************
              * Class Variables and Constants
              */
             private static Random aRandom = new Random();   //Parameter for Random Number Generation
 
             //private ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
-            private List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
+            public List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
                                                                    //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
 
             //Load the Default Card Back Image
@@ -284,13 +306,13 @@ namespace LeapfrogUWP
             //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
             //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
             private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
-            private string bmpPlayable =folderGameImages + "Playable.jpg";
+            private string bmpPlayable = folderGameImages + "Playable.jpg";
 
             /*******************************************************************************************
              * Constructor: Deck
              * Builds a deck of cards by creating an array of Card objects
              */
-            public Deck()
+            public Cards() //Deck()
             {
                 initializeDeck();
             }
@@ -499,6 +521,6 @@ namespace LeapfrogUWP
                     this.deckCards[secondCard].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
                 }
             }
-        }
+        //}
     }
 }
