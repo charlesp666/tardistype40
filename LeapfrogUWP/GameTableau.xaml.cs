@@ -306,6 +306,8 @@ namespace LeapfrogUWP
                     aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
 
                     //Assign the Various Fields in the Cell
+                    aDeck.deckCards[arrayElement] = aCard;
+
                     //dataGridGameBoard[aCol, aRow].ToolTipText = aCard.getRank() + aCard.getSuit();
                     //dataGridGameBoard[aCol, aRow].Tag = aCard.getRank() + aCard.getSuit();
                     //dataGridGameBoard[aCol, aRow].Value = aCard.getCardFace();

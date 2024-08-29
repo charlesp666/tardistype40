@@ -7,7 +7,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-      Height="950"
+      Height="800"
       Width="1510"
 >
 
@@ -21,8 +21,8 @@
             <ColumnDefinition Width="1500"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="800*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="576"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
@@ -77,12 +77,11 @@
         </Grid>
 
         <!--Game Tableu Playing Area -->
-        <!--ItemsSource="{x:Bind cardList}"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
                   ItemsSource="{x:Bind gameDeck.deckCards}"
-                  Margin="2,60"
-                  Height="600"
+                  Margin="2"
+                  Height="575"
                   Width="1498"
                   Background="Blue"
                   BorderThickness="2"
@@ -95,15 +94,13 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition"
                 >
-                    <StackPanel Name="PlayingLayout"
+                    <StackPanel Name="PlayingCard"
                                 Height="138"
                                 Width="110"
                                 BorderBrush="Black"
                                 BorderThickness="1"
                                 CornerRadius="5"
                     >
-                        <!--<TextBlock Name="CardSuit" Text="{Binding cardSuit}"/>
-                        <TextBlock Name="CardRank" Text="{Binding cardRank}"/>-->
 
                         <Image x:Name="CardFace"
                                Height="138"
@@ -128,7 +125,7 @@
         <!--Game Tableu Footer -->
         <Grid Name="grdActions"
               Grid.Row="2"
-              Margin="2,2"
+              Margin="2"
               Height="48"
               Width="1478"
               Background="Blue"

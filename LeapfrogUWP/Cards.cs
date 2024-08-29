@@ -28,6 +28,7 @@ namespace LeapfrogUWP
         private static String folderGameImages = "/Assets/GameImages/";
         private static String folderCardFaces = "/Assets/CardImages/";
 
+        #region
         /***********************************************************************************************
            * Partial Class Card:
            * Defines the Attributes and Methods of a Single Playing Card.
@@ -274,9 +275,10 @@ namespace LeapfrogUWP
                     this.cardSuit = aSuit;                                   //Set the object's suit
             }
         }
+        #endregion
 
         /***********************************************************************************************
-         * Partial Class Deck:
+         * Class Cards:
          * Defines the Attributes and Methods of a Single Playing Card.
          */
         /*******************************************************************************************
@@ -284,17 +286,12 @@ namespace LeapfrogUWP
          */
         private static Random aRandom = new Random();   //Parameter for Random Number Generation
  
-        //private ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
         public List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
-                                                               //private Card[] deckCards = new Card[(Card.possibleRanks.Length * Card.possibleSuits.Length)]; //Array of Card to contain a full deck of cards
  
         //Load the Default Card Back Image
         private string cardBack = "/Assets/GameImages/defaultBack.jpg";
-        //private BitmapImage cardBack = new BitmapImage(new Uri(pathDefaultBack, UriKind.Absolute));
  
         //Set CardFace to Default "NotPlayable" Image
-        //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
-        //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
         private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
         private string bmpPlayable = folderGameImages + "Playable.jpg";
  
