@@ -20,6 +20,8 @@ using Windows.Graphics.Display;                                      //For Adjus
 using Windows.Storage;                                    //To load Help Instructions from Text File
 
 using Windows.Media.SpeechSynthesis;
+using System.Collections.Immutable;
+using static LeapfrogUWP.Cards;
 //using Windows.UI.Popups;
 
 
@@ -78,7 +80,7 @@ namespace LeapfrogUWP
         //private Stack<UndoItem> myUndoItems = new Stack<UndoItem>();
 
         //private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
-        //private static int displayDelayMS = 150;      //Action display delay so user can see changes
+        private static int displayDelayMS = 150;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DateTime gameStartTime;                                            //Game Start Time
@@ -124,6 +126,32 @@ namespace LeapfrogUWP
         {
             string speakingText = "Clickety Click!";
             speakText(speakingText);
+
+            int indexClickedCell = dataGridGameBoard.SelectedIndex;
+
+            Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
+            SelectedCard(selectedCard);
+        }
+
+        /*******************************************************************************************
+         * Menu: Help/About
+         * Displays the Help/About dialog
+         */
+        private async void SelectedCard(Cards.Card aCard)
+        {
+            string theCard = aCard.cardRank + aCard.cardSuit;
+
+            ContentDialog dlgSelectedCard = new ContentDialog
+            {
+                Title = "Selected Card is:",
+                Content = theCard,
+                CloseButtonText = "OK"
+            };
+
+            //set the XamlRoot property
+            dlgSelectedCard.XamlRoot = btnHelp.XamlRoot;
+
+            ContentDialogResult result = await dlgSelectedCard.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -296,23 +324,31 @@ namespace LeapfrogUWP
         {
             Cards.Card aCard = new Cards.Card();                         //Storage for Current Card
 
+            this.dataGridGameBoard.ItemsSource = null;
+            this.dataGridGameBoard.ItemsSource = aDeck.deckCards;
+
             for (int aRow = 0; aRow < numberPlayRows; aRow++)
             {
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)
                 {
                     //Compute Card Element from Deck Array to Deal
                     int arrayElement = (aRow * Cards.Card.possibleRanks.Length) + aCol;
+                    dataGridGameBoard.SelectedIndex = arrayElement;
 
                     aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
 
-                    //Assign the Various Fields in the Cell
-                    aDeck.deckCards[arrayElement] = aCard;
+                    //SelectedCard(aCard);
 
-                    //dataGridGameBoard[aCol, aRow].ToolTipText = aCard.getRank() + aCard.getSuit();
-                    //dataGridGameBoard[aCol, aRow].Tag = aCard.getRank() + aCard.getSuit();
-                    //dataGridGameBoard[aCol, aRow].Value = aCard.getCardFace();
+                    ////Assign the Various Fields in the Cell
+                    //aDeck.deckCards[arrayElement] = aCard;
 
-                    //delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
+                    //dataGridGameBoard.DataContext = aCard;
+
+                    ////dataGridGameBoard[aCol, aRow].ToolTipText = aCard.getRank() + aCard.getSuit();
+                    ////dataGridGameBoard[aCol, aRow].Tag = aCard.getRank() + aCard.getSuit();
+                    ////dataGridGameBoard[aCol, aRow].Value = aCard.getCardFace();
+
+                    delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                 }
             }
         }
@@ -321,19 +357,18 @@ namespace LeapfrogUWP
          * Method: delay
          * Pause Processing for specified number of milliseconds.
          */
-        //private void delay(int milliSecondsToPauseFor)
-        //{
-        //    System.DateTime startInstant = System.DateTime.Now;
-        //    System.DateTime thisInstant = startInstant;
-        //    System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
-        //    System.DateTime finalInstant = thisInstant.Add(duration);
+        private void delay(int milliSecondsToPauseFor)
+        {
+            System.DateTime startInstant = System.DateTime.Now;
+            System.DateTime thisInstant = startInstant;
+            System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
+            System.DateTime finalInstant = thisInstant.Add(duration);
 
-        //    while (finalInstant >= thisInstant)
-        //    {
-        //        System.Windows.Forms.Application.DoEvents();
-        //        thisInstant = System.DateTime.Now;
-        //    }
-        //}
+            while (finalInstant >= thisInstant)
+            {
+                thisInstant = System.DateTime.Now;
+            }
+        }
 
         /*******************************************************************************************
          * Method: displayMessage

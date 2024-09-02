@@ -86,7 +86,7 @@
                   Background="Blue"
                   BorderThickness="2"
                   BorderBrush="Black"
-                  SelectionMode="None"
+                  SelectionMode="Single"
                   IsItemClickEnabled="True"
                   ItemClick="dataGridGameBoard_CellClick"
         >
@@ -94,6 +94,7 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition"
                 >
+                  
                     <StackPanel Name="PlayingCard"
                                 Height="138"
                                 Width="110"
