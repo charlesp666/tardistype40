@@ -20,8 +20,8 @@ using Windows.Graphics.Display;                                      //For Adjus
 using Windows.Storage;                                    //To load Help Instructions from Text File
 
 using Windows.Media.SpeechSynthesis;
-using System.Collections.Immutable;
-using static LeapfrogUWP.Cards;
+//using System.Collections.Immutable;
+//using static LeapfrogUWP.Cards;
 //using Windows.UI.Popups;
 
 
@@ -71,6 +71,9 @@ namespace LeapfrogUWP
 
         //Declare and Initialize Game Playing Deck
         public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
+
+        public Cards.Card cardPlayable = new Cards.Card();
+        public Cards.Card cardNotPlayable = new Cards.Card();
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -273,9 +276,9 @@ namespace LeapfrogUWP
 
             gameTableau.DataContext = gameDeck;
 
-            Cards.Card cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
+            cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
 
-            Cards.Card cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
+            cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
             dataGridGameBoard.SelectedIndex = 0;
@@ -344,7 +347,7 @@ namespace LeapfrogUWP
                     int arrayElement = calcArrayPosition(aRow, aCol); // (aRow * Cards.Card.possibleRanks.Length) + aCol;
                     dataGridGameBoard.SelectedIndex = arrayElement;
 
-                    aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
+                    //aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
 
                     //SelectedCard(aCard);
 
@@ -664,20 +667,25 @@ namespace LeapfrogUWP
          */
         public void removeAces()
         {
-            Cards.Card thisCard = new Cards.Card();
+            int arrayPosition = 0;
 
             for (int aRow = 0; aRow < numberPlayRows; aRow++)
             {
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)
                 {
-
-                    //if (dataGridGameBoard[aCol, aRow].Tag.ToString().Substring(0, 1).Equals(Cards.Card.possibleRanks[0]))
-                    //{
-                    //    dataGridGameBoard[aCol, aRow].Value = playSpaceIcon;
-                    //    dataGridGameBoard[aCol, aRow].Tag = playSpace;
-
-                    //    delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
-                    //}
+                    arrayPosition = calcArrayPosition(aRow, aCol);
+                    if (gameDeck.deckCards[arrayPosition].cardRank.ToLower() == "a")
+                    {
+                        if (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
+                        {
+                            gameDeck.deckCards[arrayPosition] = cardNotPlayable;
+                        }
+                        else
+                        {
+                            gameDeck.deckCards[arrayPosition] = cardPlayable;
+                        }
+                    }
+                    delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                 }
             }
 

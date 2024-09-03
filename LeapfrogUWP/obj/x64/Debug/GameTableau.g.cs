@@ -147,7 +147,7 @@ namespace LeapfrogUWP
                     }
                 }
             }
-            private void Update_gameDeck_deckCards(global::System.Collections.Generic.List<global::LeapfrogUWP.Cards.Card> obj, int phase)
+            private void Update_gameDeck_deckCards(global::System.ComponentModel.BindingList<global::LeapfrogUWP.Cards.Card> obj, int phase)
             {
                 if ((phase & ((1 << 0) | NOT_PHASED )) != 0)
                 {

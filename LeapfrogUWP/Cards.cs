@@ -15,6 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using System.ComponentModel;
+
 /***************************************************************************************************
  * Cards Class Definition
  * Consists of two partial classes "Card" and "Deck"
@@ -286,7 +288,7 @@ namespace LeapfrogUWP
          */
         private static Random aRandom = new Random();   //Parameter for Random Number Generation
  
-        public List<Card> deckCards = new List<Card>();       //Declare List to store Deck of Cards for game play
+        public BindingList<Card> deckCards = new BindingList<Card>();       //Declare List to store Deck of Cards for game play
  
         //Load the Default Card Back Image
         private string cardBack = "/Assets/GameImages/defaultBack.jpg";
