@@ -282,6 +282,15 @@ namespace LeapfrogUWP
         }
 
         /*******************************************************************************************
+         * Method: calcArrayPosition
+         * Computes the Time Played for Last Game
+         */
+        private int calcArrayPosition(int aRow, int aCol)
+        {
+            return (aRow * Cards.Card.possibleRanks.Length) + aCol;
+        }
+
+        /*******************************************************************************************
          * Method: clearBoard
          * Clears the Playing board (tableau) for a new game.
          * 
@@ -332,7 +341,7 @@ namespace LeapfrogUWP
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)
                 {
                     //Compute Card Element from Deck Array to Deal
-                    int arrayElement = (aRow * Cards.Card.possibleRanks.Length) + aCol;
+                    int arrayElement = calcArrayPosition(aRow, aCol); // (aRow * Cards.Card.possibleRanks.Length) + aCol;
                     dataGridGameBoard.SelectedIndex = arrayElement;
 
                     aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
@@ -653,26 +662,29 @@ namespace LeapfrogUWP
          * Method: removeAces
          * Removes the Aces from the playing area in order to initialize the play spots.
          */
-        //public void removeAces()
-        //{
-        //    for (int aRow = 0; aRow < numberPlayRows; aRow++)
-        //    {
-        //        for (int aCol = 0; aCol < numberPlayColumns; aCol++)
-        //        {
-        //            if (dataGridGameBoard[aCol, aRow].Tag.ToString().Substring(0, 1).Equals(Cards.Card.possibleRanks[0]))
-        //            {
-        //                dataGridGameBoard[aCol, aRow].Value = playSpaceIcon;
-        //                dataGridGameBoard[aCol, aRow].Tag = playSpace;
+        public void removeAces()
+        {
+            Cards.Card thisCard = new Cards.Card();
 
-        //                delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
-        //            }
-        //        }
-        //    }
+            for (int aRow = 0; aRow < numberPlayRows; aRow++)
+            {
+                for (int aCol = 0; aCol < numberPlayColumns; aCol++)
+                {
 
-        //    isGameSet = true;                                     //Set the game is set flag to true
-        //    isGameOver();                                      // Initialize the icons for game play
-        //    flgGameOver = false;                                 //Set the "Game Over" flag to false
-        //}
+                    //if (dataGridGameBoard[aCol, aRow].Tag.ToString().Substring(0, 1).Equals(Cards.Card.possibleRanks[0]))
+                    //{
+                    //    dataGridGameBoard[aCol, aRow].Value = playSpaceIcon;
+                    //    dataGridGameBoard[aCol, aRow].Tag = playSpace;
+
+                    //    delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
+                    //}
+                }
+            }
+
+            isGameSet = true;                                     //Set the game is set flag to true
+            //isGameOver();                                      // Initialize the icons for game play
+            flgGameOver = false;                                 //Set the "Game Over" flag to false
+        }
 
         /*******************************************************************************************
          * Method: scoreGame
@@ -779,7 +791,7 @@ namespace LeapfrogUWP
             aDeck.cutDeck();                                                          //Cut the Deck
 
             dealCards(aDeck);                                        //Deal the Cards to the Tableau
-            //removeAces();                                    //Remove Aces to Initialize Play Spaces
+            removeAces();                                    //Remove Aces to Initialize Play Spaces
 
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
 
