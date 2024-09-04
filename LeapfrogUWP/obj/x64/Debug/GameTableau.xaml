@@ -176,14 +176,7 @@
                 <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:ConnectionId='6' x:Name="GameFooter"
-                       Grid.Column="4"
-                       Text="Menus, etc."
-                       FontSize="24pi"
-                       Foreground="White"
-            />
-
-            <Button x:ConnectionId='7' x:Name="btnNewGame"
+            <Button x:ConnectionId='6' x:Name="btnNewGame"
                     Content="New Game"
                     Grid.Column="2"
                     Margin="2,2,2,2"
@@ -192,6 +185,17 @@
                     FontSize="24pi"
                     Foreground="White"
                                             
+            />
+
+            <Button x:ConnectionId='7' x:Name="btnStats"
+                    Content="Statistics"
+                    Grid.Column="7"
+                    Margin="2,2,2,2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="24pi"
+                    Foreground="White"
+                                          
             />
 
             <Button x:ConnectionId='8' x:Name="btnHelp"

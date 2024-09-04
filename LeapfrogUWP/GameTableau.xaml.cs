@@ -122,9 +122,6 @@ namespace LeapfrogUWP
             //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
-            //Display Player Statistics--Remove when game tableau is working                   *****
-            //myAvatar.displayPlayerStats();
-
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end...";
             speakText(aMsg);
@@ -181,7 +178,15 @@ namespace LeapfrogUWP
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             exitGame(sender, e);
-            //CoreApplication.Exit();
+        }
+
+        /*******************************************************************************************
+         * Event Handler: btnExit_Click
+         * Handles the Closing of the Game Tableau Windows Form.
+         */
+        private void btnStats_Click(object sender, RoutedEventArgs e)
+        {
+            myAvatar.displayPlayerStats();
         }
 
         /*******************************************************************************************
