@@ -19,7 +19,11 @@ using Windows.Graphics.Display;                                      //For Adjus
 
 using Windows.Storage;                                    //To load Help Instructions from Text File
 
+using System.ComponentModel;
+//using System.Runtime.CompilerServices;
+
 using Windows.Media.SpeechSynthesis;
+using Windows.ApplicationModel.Core;
 //using System.Collections.Immutable;
 //using static LeapfrogUWP.Cards;
 //using Windows.UI.Popups;
@@ -93,13 +97,24 @@ namespace LeapfrogUWP
         {
             this.InitializeComponent();
 
-            //Try to resize the App Window 
-            float DPI = DisplayInformation.GetForCurrentView().LogicalDpi;
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            var desiredSize = new Size((thisAppWidth * 96.0f / DPI), (thisAppHeight * 96.0f / DPI));
-            ApplicationView.PreferredLaunchViewSize = desiredSize;
+            currentActivity.Text = "Initializing Application...";
 
-            bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
+            //Try to resize the App Window 
+            //float DPI = DisplayInformation.GetForCurrentView().LogicalDpi;
+            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            //var desiredSize = new Size((thisAppWidth * 96.0f / DPI), (thisAppHeight * 96.0f / DPI));
+            //ApplicationView.PreferredLaunchViewSize = desiredSize;
+
+            //bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
+            var view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+            {
+                view.ExitFullScreenMode();
+            }
+            else
+            {
+                view.TryEnterFullScreenMode(); // Returns false in an AppWindow
+            }
 
             //Get Text for Game Instructions
             loadHelpText();
@@ -113,6 +128,8 @@ namespace LeapfrogUWP
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end...";
             speakText(aMsg);
+
+            currentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -158,13 +175,14 @@ namespace LeapfrogUWP
         }
 
         /*******************************************************************************************
-         * Event Handler: GameTableau_FormClosed
+         * Event Handler: btnExit_Click
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        //private void GameTableau_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    exitGame();
-        //}
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            exitGame(sender, e);
+            //CoreApplication.Exit();
+        }
 
         /*******************************************************************************************
         * Event Handler: gameTimerTick
@@ -258,6 +276,8 @@ namespace LeapfrogUWP
           */
         private void buildInitialGameBoard()
         {
+            currentActivity.Text = "Building Initial Game Board...";
+
             //Configure the Game Playing Grid
             //gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
             //dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
@@ -277,11 +297,12 @@ namespace LeapfrogUWP
             gameTableau.DataContext = gameDeck;
 
             cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
-
             cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
-            dataGridGameBoard.SelectedIndex = 0;
+            dataGridGameBoard.SelectedIndex = -1;
+
+            currentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -334,7 +355,7 @@ namespace LeapfrogUWP
          */
         private void dealCards(Cards aDeck)
         {
-            Cards.Card aCard = new Cards.Card();                         //Storage for Current Card
+            currentActivity.Text = "Dealing Cards...";
 
             this.dataGridGameBoard.ItemsSource = null;
             this.dataGridGameBoard.ItemsSource = aDeck.deckCards;
@@ -344,25 +365,17 @@ namespace LeapfrogUWP
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)
                 {
                     //Compute Card Element from Deck Array to Deal
-                    int arrayElement = calcArrayPosition(aRow, aCol); // (aRow * Cards.Card.possibleRanks.Length) + aCol;
+                    int arrayElement = calcArrayPosition(aRow, aCol);
+
                     dataGridGameBoard.SelectedIndex = arrayElement;
-
-                    //aCard = aDeck.getCard(arrayElement);       //Select the card from the card array
-
-                    //SelectedCard(aCard);
-
-                    ////Assign the Various Fields in the Cell
-                    //aDeck.deckCards[arrayElement] = aCard;
-
-                    //dataGridGameBoard.DataContext = aCard;
-
-                    ////dataGridGameBoard[aCol, aRow].ToolTipText = aCard.getRank() + aCard.getSuit();
-                    ////dataGridGameBoard[aCol, aRow].Tag = aCard.getRank() + aCard.getSuit();
-                    ////dataGridGameBoard[aCol, aRow].Value = aCard.getCardFace();
+                    dataGridGameBoard.SelectedItem = null;
+                    dataGridGameBoard.SelectedItem = aDeck.deckCards[arrayElement];
 
                     delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                 }
             }
+
+            currentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -404,10 +417,10 @@ namespace LeapfrogUWP
          * Method: exitGame
          * Closes Out all processing and Exits or Closes the Application.
          */
-        //private void exitGame()
-        //{
-        //    Application.Exit();
-        //}
+        private async void exitGame(object sender, RoutedEventArgs e)
+        {
+            await ApplicationView.GetForCurrentView().TryConsolidateAsync();
+        }
 
         /*******************************************************************************************
          * Method: endGame
@@ -584,10 +597,13 @@ namespace LeapfrogUWP
         */
         private async void loadHelpText()
         {
+            currentActivity.Text = "Loading Help Text...";
             string fileInstructions = folderGameData + "GameInstructions.txt";
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
             helpText = await FileIO.ReadTextAsync(HelpFile);
+
+            currentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -667,6 +683,8 @@ namespace LeapfrogUWP
          */
         public void removeAces()
         {
+            currentActivity.Text = "Removing Aces...";
+
             int arrayPosition = 0;
 
             for (int aRow = 0; aRow < numberPlayRows; aRow++)
@@ -676,22 +694,33 @@ namespace LeapfrogUWP
                     arrayPosition = calcArrayPosition(aRow, aCol);
                     if (gameDeck.deckCards[arrayPosition].cardRank.ToLower() == "a")
                     {
-                        if (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
-                        {
-                            gameDeck.deckCards[arrayPosition] = cardNotPlayable;
-                        }
-                        else
-                        {
-                            gameDeck.deckCards[arrayPosition] = cardPlayable;
-                        }
+                        int arrayElement = calcArrayPosition(aRow, aCol);
+
+                        dataGridGameBoard.SelectedIndex = arrayElement;
+                        dataGridGameBoard.SelectedItem = null;
+
+                        gameDeck.deckCards[arrayPosition] = cardPlayable;
+                        dataGridGameBoard.SelectedItem = gameDeck.deckCards[arrayElement];
+
+                        //if (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
+                        //{
+                        //    gameDeck.deckCards[arrayPosition] = cardNotPlayable;
+                        //}
+                        //else
+                        //{
+                        //    gameDeck.deckCards[arrayPosition] = cardPlayable;
+                        //}
+
+                        delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                     }
-                    delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                 }
             }
 
             isGameSet = true;                                     //Set the game is set flag to true
             //isGameOver();                                      // Initialize the icons for game play
             flgGameOver = false;                                 //Set the "Game Over" flag to false
+
+            currentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -799,6 +828,7 @@ namespace LeapfrogUWP
             aDeck.cutDeck();                                                          //Cut the Deck
 
             dealCards(aDeck);                                        //Deal the Cards to the Tableau
+
             removeAces();                                    //Remove Aces to Initialize Play Spaces
 
             //myUndoItems.Clear();                                             //Clear the Undo Buffer

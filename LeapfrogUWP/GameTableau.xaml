@@ -63,17 +63,43 @@
                        Source="/Assets/GameImages/CardsIcon.png"
                        FocusVisualPrimaryBrush="White"
                 />
+
             </Border>
             
-            <TextBlock x:Name="tblHeader"
-                       Grid.Column="2"
-                       Text="Header Stuff"
-                       Margin="1,1,1,1"
-                       Width="auto"
+            <Image x:Name="PlayableImage"
+                       Grid.Column="1"
+                       Margin="3,3,0,0"
                        Height="48"
-                       FontSize="24pi"
-                       Foreground="White"
-            />
+                       Width="50"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Source="/Assets/GameImages/Playable.gif"
+                       FocusVisualPrimaryBrush="White"
+                />
+
+            <Image x:Name="NotPlayableImage"
+                       Grid.Column="2"
+                       Margin="3,3,0,0"
+                       Height="48"
+                       Width="50"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Source="/Assets/GameImages/NotPlayable.gif"
+                       FocusVisualPrimaryBrush="White"
+                />
+
+                <TextBox x:Name="currentActivity"
+                           Text="Waiting..."
+                           Grid.Column="3"
+                           Margin="1,1,1,1"
+                           Width="auto"
+                           Height="48"
+                           FontSize="24pi"
+                           Foreground="White"
+                           Background="Blue"
+                           BorderBrush="White"
+                           BorderThickness="1"
+                />
         </Grid>
 
         <!--Game Tableu Playing Area -->
@@ -98,9 +124,9 @@
                     <StackPanel Name="PlayingCard"
                                 Height="138"
                                 Width="110"
-                                BorderBrush="Black"
+                                BorderBrush="White"
                                 BorderThickness="1"
-                                CornerRadius="5"
+                                CornerRadius="10"
                     >
 
                         <Image x:Name="CardFace"
@@ -170,13 +196,24 @@
 
             <Button x:Name="btnHelp"
                     Content="Help"
-                    Grid.Column="9"
+                    Grid.Column="8"
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     FontSize="24pi"
                     Foreground="White"
                     Click="btnHelp_Click"
+            />
+
+            <Button x:Name="btnExit"
+                    Content="Exit"
+                    Grid.Column="9"
+                    Margin="2,2,2,2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="24pi"
+                    Foreground="White"
+                    Click="btnExit_Click"
             />
         </Grid>
     </Grid>

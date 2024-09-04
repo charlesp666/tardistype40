@@ -26,11 +26,28 @@ namespace LeapfrogUWP
 {
     public class Cards
     {
+       /*******************************************************************************************
+       * Setup Property Change Notification for Xaml Binding
+       */
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void SetProperty<T>(ref T field, T value, string name)
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, value))
+            {
+                field = value;
+                var handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(name));
+                }
+            }
+        }
+
         //Set Folder Locations for Card Images as static constants
         private static String folderGameImages = "/Assets/GameImages/";
         private static String folderCardFaces = "/Assets/CardImages/";
 
-        #region
         /***********************************************************************************************
            * Partial Class Card:
            * Defines the Attributes and Methods of a Single Playing Card.
@@ -277,12 +294,12 @@ namespace LeapfrogUWP
                     this.cardSuit = aSuit;                                   //Set the object's suit
             }
         }
-        #endregion
 
         /***********************************************************************************************
          * Class Cards:
          * Defines the Attributes and Methods of a Single Playing Card.
          */
+        
         /*******************************************************************************************
          * Class Variables and Constants
          */
@@ -296,12 +313,23 @@ namespace LeapfrogUWP
         //Set CardFace to Default "NotPlayable" Image
         private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
         private string bmpPlayable = folderGameImages + "Playable.jpg";
+
+        private Card playingCard;
+        public Card PlayingCard
+        {
+            get {return playingCard;}
+
+            set
+            {
+                SetProperty(ref playingCard, value, "PlayingCard");
+            }
+        }
  
         /*******************************************************************************************
-         * Constructor: Deck
+         * Constructor: Cards()
          * Builds a deck of cards by creating an array of Card objects
          */
-        public Cards() //Deck()
+        public Cards()
         {
             initializeDeck();
         }
@@ -462,7 +490,8 @@ namespace LeapfrogUWP
             {
                 for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
                 {
-                    deckCards.Add(new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString()));
+                    playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
+                    deckCards.Add(playingCard);
                 }
             }
         }
