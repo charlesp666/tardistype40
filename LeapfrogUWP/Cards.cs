@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 /***************************************************************************************************
  * Cards Class Definition
@@ -24,24 +25,13 @@ using System.ComponentModel;
 
 namespace LeapfrogUWP
 {
-    public class Cards
+    public class Cards : INotifyPropertyChanged
     {
-       /*******************************************************************************************
-       * Setup Property Change Notification for Xaml Binding
-       */
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void SetProperty<T>(ref T field, T value, string name)
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            if (!EqualityComparer<T>.Default.Equals(field, value))
-            {
-                field = value;
-                var handler = PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(name));
-                }
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         //Set Folder Locations for Card Images as static constants
@@ -52,8 +42,14 @@ namespace LeapfrogUWP
            * Partial Class Card:
            * Defines the Attributes and Methods of a Single Playing Card.
            */
-        public partial class Card
+        public partial class Card : INotifyPropertyChanged
         {
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
 
             /* Define arrays storing to possible values for rank and suit; make public to be viewable by
              * anyone wanting to build a card or deck of cards.
@@ -62,11 +58,9 @@ namespace LeapfrogUWP
             public static String[] possibleRanks = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
             public static char[] possibleSuits = { 'S', 'H', 'C', 'D' };     //Possible Values for Suits
 
-            //Set CardFace to Default "NotPlayable" Image
-            //private BitmapImage bmpNotPlayable = new BitmapImage(new Uri(folderGameImages + "NotPlayable.jpg", UriKind.Absolute));
-            //private BitmapImage bmpPlayable = new BitmapImage(new Uri(folderGameImages + "Playable.jpg", UriKind.Absolute));
-
             private string defaultCardBack = folderGameImages + "defaultBack.gif";
+
+            private string strCardFace;
 
             //Declare Card Public Attributes to be used for displaying Cards in Game
             public string cardRank                       //Contains the Rank (Ace through King) of card
@@ -83,8 +77,18 @@ namespace LeapfrogUWP
 
             public string cardFace                //Contains "Local" (Solution) Path to Card Face Image
             {
-                get;
-                set;
+                get
+                {
+                    return strCardFace;
+                }
+                set
+                {
+                    if (value != this.strCardFace)
+                    {
+                        this.strCardFace = value;
+                        NotifyPropertyChanged("cardFace");
+                    }
+                }
             }
 
             public string cardBack                 //Contains "Local" (Solution) Path to Card Back Image
@@ -303,7 +307,7 @@ namespace LeapfrogUWP
         /*******************************************************************************************
          * Class Variables and Constants
          */
-        private static Random aRandom = new Random();   //Parameter for Random Number Generation
+        private static Random aRandom = new Random();       //Parameter for Random Number Generation
  
         public BindingList<Card> deckCards = new BindingList<Card>();       //Declare List to store Deck of Cards for game play
  
@@ -314,26 +318,45 @@ namespace LeapfrogUWP
         private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
         private string bmpPlayable = folderGameImages + "Playable.jpg";
 
-        private Card playingCard;
-        public Card PlayingCard
-        {
-            get {return playingCard;}
+        private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
 
+        private Card PlayingCard;
+
+        public Card playingCard
+        {  
+            get { return PlayingCard; }
             set
             {
-                SetProperty(ref playingCard, value, "PlayingCard");
+                if (value != this.PlayingCard)
+                {
+                    this.PlayingCard = value;
+                    NotifyPropertyChanged("playingCard");
+                }
             }
         }
- 
+
         /*******************************************************************************************
          * Constructor: Cards()
          * Builds a deck of cards by creating an array of Card objects
          */
         public Cards()
         {
+            //Configure the Binding list
+            deckCards.AllowNew = true;
+            deckCards.AllowEdit = true;
+
             initializeDeck();
         }
- 
+
+        /*******************************************************************************************
+         * Method: calcArrayPosition
+         * Computes the array position based on the Rank (Column) and Suit (row).
+         */
+        public int calcArrayPosition(int aRow, int aCol)
+        {
+            return (aRow * Cards.Card.possibleRanks.Length) + aCol;
+        }
+
         /*******************************************************************************************
          * Method: cutDeck
          * Process randomly selects a card in the Deck, then rotates the cards from bottom
@@ -486,12 +509,15 @@ namespace LeapfrogUWP
          */
         public void initializeDeck()
         {
+            //Card playingCard;                   //Local working storage to make coding more readable
+
             for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
             {
                 for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
                 {
                     playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
                     deckCards.Add(playingCard);
+                    deckCards.ResetItem(calcArrayPosition(aRank, aSuit));
                 }
             }
         }
@@ -526,17 +552,20 @@ namespace LeapfrogUWP
             int secondCard = 0;
  
             //Find the two cards to swap
-            for (int aCount = 0; aCount <= 5000; aCount++)
+            for (int aCount = 0; aCount <= countShuffle; aCount++)
             {
                 firstCard = (int)aRandom.Next(0, numberOfCards);
                 do
                 {
                     secondCard = (int)aRandom.Next(0, numberOfCards);
                 } while (firstCard == secondCard);
- 
-                aTemp.setCard(this.deckCards[firstCard].getRank(), this.deckCards[firstCard].getSuit(), this.deckCards[firstCard].getCardFace());
-                this.deckCards[firstCard].setCard(this.deckCards[secondCard].getRank(), this.deckCards[secondCard].getSuit(), this.deckCards[secondCard].getCardFace());
-                this.deckCards[secondCard].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
+
+                aTemp = deckCards[firstCard];
+                deckCards[firstCard] = deckCards[secondCard];
+                deckCards[secondCard] = aTemp;
+
+                deckCards.ResetItem(firstCard);
+                deckCards.ResetItem(secondCard);
             }
         }
     }

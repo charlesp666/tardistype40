@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 //using System.IO;
 using System.Linq;
 //using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,37 +13,49 @@ using Windows.UI.Xaml.Controls;
 
 using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
-using Windows.Foundation;
+//using Windows.Foundation;
 using Windows.UI.Xaml;                                          //For "Size" used by ApplicationView
-using Windows.Graphics.Display;                                      //For Adjusting App Window size
+//using Windows.Graphics.Display;                                      //For Adjusting App Window size
 
 using Windows.Storage;                                    //To load Help Instructions from Text File
 
-using System.ComponentModel;
+//using System.ComponentModel;
 //using System.Runtime.CompilerServices;
-
+using Microsoft.UI.Xaml.Controls;
 using Windows.Media.SpeechSynthesis;
-using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml.Data;
+//using Windows.ApplicationModel.Core;
 //using System.Collections.Immutable;
 //using static LeapfrogUWP.Cards;
 //using Windows.UI.Popups;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace LeapfrogUWP
 {
-    public sealed partial class GameTableau : Page
+    public sealed partial class GameTableau : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public string txtCurrentActivity = "";
+
         /*******************************************************************************************
         * Class Variables and Constants
         */
-        private float thisAppWidth = 1700;                       //Width of the App Window for this page
-        private float thisAppHeight = 1000;                     //Height of the App Window for this page
-
         //Create Player and GameInformation Objects
         private Player myAvatar = new Player();                  //Storage for Current Player Object
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
+
+        //Declare and Initialize Game Playing Deck(s)
+        public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
+        public Cards standardDeck = new Cards();                            //Standard Deck of Cards
 
         //private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
         private static String folderGameData = "ms-appx:///Assets//Data//";
@@ -55,8 +67,8 @@ namespace LeapfrogUWP
         private static int numberPlayColumns = Cards.Card.possibleRanks.Length;  //Play Area Columns
 
         //Define Parameters for the various Icons used in game
-        private BitmapSource playSpaceIcon = new BitmapImage();  //Playable Space icon
-        private BitmapSource noPlayIcon = new BitmapImage();    //Non-Playable icon
+        //private BitmapSource playSpaceIcon = new BitmapImage();  //Playable Space icon
+        //private BitmapSource noPlayIcon = new BitmapImage();    //Non-Playable icon
 
         private static String playSpace = "";             //String or character to use on play spots
 
@@ -73,11 +85,16 @@ namespace LeapfrogUWP
         private int gameWinningBonus = 100;                      //Bonus Amount for a completed Suit
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
-        //Declare and Initialize Game Playing Deck
-        public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
-
-        public Cards.Card cardPlayable = new Cards.Card();
-        public Cards.Card cardNotPlayable = new Cards.Card();
+        public Cards.Card cardPlayable
+        {
+            get;
+            set;
+        }
+        public Cards.Card cardNotPlayable
+        {
+            get;
+            set;
+        }
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -97,13 +114,11 @@ namespace LeapfrogUWP
         {
             this.InitializeComponent();
 
+            // itemNameTextBox is an instance of a TextBox
             currentActivity.Text = "Initializing Application...";
 
-            //Try to resize the App Window 
-            //float DPI = DisplayInformation.GetForCurrentView().LogicalDpi;
-            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            //var desiredSize = new Size((thisAppWidth * 96.0f / DPI), (thisAppHeight * 96.0f / DPI));
-            //ApplicationView.PreferredLaunchViewSize = desiredSize;
+            //Clear the Game Deck to initialize the Game Board, and prepare for new game
+            clearDeck();
 
             //bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
             var view = ApplicationView.GetForCurrentView();
@@ -116,17 +131,20 @@ namespace LeapfrogUWP
                 view.TryEnterFullScreenMode(); // Returns false in an AppWindow
             }
 
+            cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
+            cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
+
             //Get Text for Game Instructions
             loadHelpText();
 
             //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
+            currentActivity.Text = "Waiting...";
+
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end...";
             speakText(aMsg);
-
-            currentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -141,13 +159,13 @@ namespace LeapfrogUWP
          */
         private void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e)
         {
-            string speakingText = "Clickety Click!";
-            speakText(speakingText);
-
             int indexClickedCell = dataGridGameBoard.SelectedIndex;
 
-            Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
-            SelectedCard(selectedCard);
+            string speakingText = "Clickety Click on Index " + indexClickedCell.ToString();
+            speakText(speakingText);
+
+            //Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
+            //SelectedCard(selectedCard);
         }
 
         /*******************************************************************************************
@@ -181,7 +199,37 @@ namespace LeapfrogUWP
         }
 
         /*******************************************************************************************
-         * Event Handler: btnExit_Click
+         * Event Handler: Help
+         * Displays the Help/About dialog
+         */
+        private async void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dlgGameInstructions = new ContentDialog
+            {
+                Title = "How to Play Leapfrog",
+                Content = helpText,
+                CloseButtonText = "OK"
+            };
+
+            //set the XamlRoot property
+            dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
+
+            ContentDialogResult result = await dlgGameInstructions.ShowAsync();
+        }
+
+        /*******************************************************************************************
+         * Event Handler: New Game
+         * Handles the Closing of the Game Tableau Windows Form.
+         */
+        private void btnNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            loadDeck();                                  //Load the Game Deck from the Standard Deck
+
+            setUpNewGame(gameDeck);                            //Shuffle and Deal Cards for new game
+        }
+
+        /*******************************************************************************************
+         * Event Handler: Player Statistics
          * Handles the Closing of the Game Tableau Windows Form.
          */
         private void btnStats_Click(object sender, RoutedEventArgs e)
@@ -222,34 +270,6 @@ namespace LeapfrogUWP
         //}
 
         /*******************************************************************************************
-         * Menu: Help/About
-         * Displays the Help/About dialog
-         */
-        private async void btnHelp_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog dlgGameInstructions = new ContentDialog
-            {
-                Title = "How to Play Leapfrog",
-                Content = helpText,
-                CloseButtonText = "OK"
-            };
-
-            //set the XamlRoot property
-            dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
-
-            ContentDialogResult result = await dlgGameInstructions.ShowAsync();
-        }
-
-        /*******************************************************************************************
-         * Menu: New Game
-         * Handles the Closing of the Game Tableau Windows Form.
-         */
-        private void btnNewGame_Click(object sender, RoutedEventArgs e)
-        {
-            setUpNewGame(gameDeck);
-        }
-
-        /*******************************************************************************************
          * Menu: Game/Player Statistics
          * Displays the Current Player Statistics Message Box.
          */
@@ -284,39 +304,29 @@ namespace LeapfrogUWP
             currentActivity.Text = "Building Initial Game Board...";
 
             //Configure the Game Playing Grid
-            //gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
-            //dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
+            gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
 
-            //dataGridGameBoard. .ForeColor = myGameInfo.getForegroundColor();    //Set Foreground Color
+            dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
+            dataGridGameBoard.AllowFocusOnInteraction = true;
+            dataGridGameBoard.IsEnabled = true;
 
-            //dataGridGameBoard.GridColor = myGameInfo.getBackgroundColor();//Set Grid Background Color
-
-            //dataGridGameBoard.AllowUserToAddRows = false;            //Disallow New Rows to be Added
-            //dataGridGameBoard.AllowUserToDeleteRows = false;           //Disallow Rows to be Deleted
-            //dataGridGameBoard.ReadOnly = true;                               //Set Grid to Read-Only
-
-            //Build the Game Board and Insert Default Image into Grid Cells
-            //playSpaceIcon = gameDeck.;                      //Playable Space icon
-            //noPlayIcon = gameDeck.getCardFaceNotPlayable();                        //Non-Playable icon
-
-            gameTableau.DataContext = gameDeck;
-
-            cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
-            cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
-
-            //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
+            //Set SelectedIndex to No item
             dataGridGameBoard.SelectedIndex = -1;
+            dataGridGameBoard.SelectedItem = null;
 
             currentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
-         * Method: calcArrayPosition
-         * Computes the Time Played for Last Game
+         * Method: clearDeck
+         * Clears the Game Deck of Cards for Initiating Display and new Game
          */
-        private int calcArrayPosition(int aRow, int aCol)
+        private void clearDeck()
         {
-            return (aRow * Cards.Card.possibleRanks.Length) + aCol;
+            foreach(Cards.Card aCard in gameDeck.deckCards)
+            {
+                aCard.cardFace = "";
+            }
         }
 
         /*******************************************************************************************
@@ -370,11 +380,13 @@ namespace LeapfrogUWP
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)
                 {
                     //Compute Card Element from Deck Array to Deal
-                    int arrayElement = calcArrayPosition(aRow, aCol);
+                    int arrayElement = aDeck.calcArrayPosition(aRow, aCol);
 
                     dataGridGameBoard.SelectedIndex = arrayElement;
                     dataGridGameBoard.SelectedItem = null;
                     dataGridGameBoard.SelectedItem = aDeck.deckCards[arrayElement];
+
+                    NotifyPropertyChanged();
 
                     delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                 }
@@ -597,6 +609,20 @@ namespace LeapfrogUWP
         //}
 
         /*******************************************************************************************
+         * Method: loadDeck
+         * Loads the Game Deck from Standard Deck of Cards; prepares Game Deck to play game.
+         */
+        private void loadDeck()
+        {
+            int countCards = gameDeck.deckCards.Count;
+
+            for(int aCard = 0; aCard < countCards; aCard++)
+            {
+                gameDeck.deckCards[aCard] = standardDeck.deckCards[aCard];
+            }
+        }
+
+        /*******************************************************************************************
         * Method: loadHelpText
         * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
         */
@@ -696,10 +722,10 @@ namespace LeapfrogUWP
             {
                 for (int aCol = 0; aCol < numberPlayColumns; aCol++)
                 {
-                    arrayPosition = calcArrayPosition(aRow, aCol);
+                    arrayPosition = gameDeck.calcArrayPosition(aRow, aCol);
                     if (gameDeck.deckCards[arrayPosition].cardRank.ToLower() == "a")
                     {
-                        int arrayElement = calcArrayPosition(aRow, aCol);
+                        int arrayElement = gameDeck.calcArrayPosition(aRow, aCol);
 
                         dataGridGameBoard.SelectedIndex = arrayElement;
                         dataGridGameBoard.SelectedItem = null;

@@ -154,3 +154,16 @@ C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.
 C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.Cache
 C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
 C:\Users\Charles\Source\Repos\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe.config
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.exe
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\bin\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.AssemblyReference.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameAbout.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.frmGameHelp.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.GameTableau.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.LeapFrogSplashScreen.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.Properties.Resources.resources
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.GenerateResource.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.CoreCompileInputs.cache
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb

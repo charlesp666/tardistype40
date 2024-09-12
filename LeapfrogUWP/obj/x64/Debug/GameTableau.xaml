@@ -5,6 +5,7 @@
       xmlns:local="using:LeapfrogUWP"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Height="800"
@@ -22,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="576"/>
+            <RowDefinition Height="580"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
@@ -63,43 +64,43 @@
                        Source="/Assets/GameImages/CardsIcon.png"
                        FocusVisualPrimaryBrush="White"
                 />
-
             </Border>
-            
-            <Image x:ConnectionId='14' x:Name="PlayableImage"
+
+                <Image x:ConnectionId='14' x:Name="PlayableImage"
                        Grid.Column="1"
                        Margin="3,3,0,0"
                        Height="48"
                        Width="50"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Source="/Assets/GameImages/Playable.gif"
+                                                              
                        FocusVisualPrimaryBrush="White"
-                />
-
-            <Image x:ConnectionId='15' x:Name="NotPlayableImage"
+                    />
+               
+                <Image x:ConnectionId='15' x:Name="NotPlayableImage"
                        Grid.Column="2"
                        Margin="3,3,0,0"
                        Height="48"
                        Width="50"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Source="/Assets/GameImages/NotPlayable.gif"
+                                                                 
                        FocusVisualPrimaryBrush="White"
-                />
+                    />
 
-                <TextBox x:ConnectionId='16' x:Name="currentActivity"
-                           Text="Waiting..."
-                           Grid.Column="3"
-                           Margin="1,1,1,1"
-                           Width="auto"
-                           Height="48"
-                           FontSize="24pi"
-                           Foreground="White"
-                           Background="Blue"
-                           BorderBrush="White"
-                           BorderThickness="1"
-                />
+            <!--Foreground="White"
+                     Background="Blue"
+                     BorderBrush="White"
+                     BorderThickness="1"
+                     IsReadOnly="True"-->
+            <TextBlock x:ConnectionId='16' x:Name="currentActivity"
+                     Grid.Column="3"
+                     Margin="1,1,1,1"
+                     Width="auto"
+                     Height="48"
+                     FontSize="24pi"
+                     Text="Waiting..."
+            />
         </Grid>
 
         <!--Game Tableu Playing Area -->

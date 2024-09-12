@@ -48,3 +48,8 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\q
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\ProjectArchitectures.txt
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_638441707520000000.json
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\WebView2Loader.dll
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\bin\x64\Debug\Microsoft.Web.WebView2.Core.winmd
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\Microsoft.UI.Xaml.pri.xml
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrogUWP\obj\x64\Debug\.winmd_cache\$Microsoft.Web.WebView2.Core.winmd_637920505780000000.json
