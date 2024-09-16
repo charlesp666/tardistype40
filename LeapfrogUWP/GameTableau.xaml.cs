@@ -37,14 +37,15 @@ namespace LeapfrogUWP
 {
     public sealed partial class GameTableau : Page, INotifyPropertyChanged
     {
+        /*******************************************************************************************
+        * Objects for Property Change Notification
+        */
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public string txtCurrentActivity = "";
 
         /*******************************************************************************************
         * Class Variables and Constants
@@ -66,10 +67,6 @@ namespace LeapfrogUWP
         private static int numberPlayRows = Cards.Card.possibleSuits.Length;        //Play Area Rows
         private static int numberPlayColumns = Cards.Card.possibleRanks.Length;  //Play Area Columns
 
-        //Define Parameters for the various Icons used in game
-        //private BitmapSource playSpaceIcon = new BitmapImage();  //Playable Space icon
-        //private BitmapSource noPlayIcon = new BitmapImage();    //Non-Playable icon
-
         private static String playSpace = "";             //String or character to use on play spots
 
         private bool playKingPosition = false;          //Flag Indicating the Position is for a King
@@ -85,18 +82,40 @@ namespace LeapfrogUWP
         private int gameWinningBonus = 100;                      //Bonus Amount for a completed Suit
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
+        //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
+
+        //"Public" Xaml access for Playable and Non-Playable Cards
         public Cards.Card cardPlayable
         {
             get;
             set;
         }
+
         public Cards.Card cardNotPlayable
         {
             get;
             set;
         }
 
-        //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
+        /*******************************************************************************************
+        * Objects for INotify refresh of window
+        */
+        //Card Object to flag INotify when card changes
+        //String to Refresh "Current Activity" message
+        private string CurrentActivity;
+
+        public string currentActivity
+        {
+            get { return this.CurrentActivity; }
+            set
+            {
+                if (value != this.CurrentActivity)
+                {
+                    this.CurrentActivity = value;
+                    NotifyPropertyChanged("CurrentActivity");
+                }
+            }
+        }
 
         /*******************************************************************************************
         * Class Variables and Constants
@@ -114,13 +133,7 @@ namespace LeapfrogUWP
         {
             this.InitializeComponent();
 
-            // itemNameTextBox is an instance of a TextBox
-            currentActivity.Text = "Initializing Application...";
-
-            //Clear the Game Deck to initialize the Game Board, and prepare for new game
-            clearDeck();
-
-            //bool result = ApplicationView.GetForCurrentView().TryResizeView(desiredSize);
+            //Try to Open window up to full-screen
             var view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode)
             {
@@ -131,6 +144,9 @@ namespace LeapfrogUWP
                 view.TryEnterFullScreenMode(); // Returns false in an AppWindow
             }
 
+            //Clear the Game Deck to initialize the Game Board, and prepare for new game
+            clearDeck();
+
             cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
             cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
@@ -140,7 +156,7 @@ namespace LeapfrogUWP
             //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
-            currentActivity.Text = "Waiting...";
+            currentActivity = "Waiting for User Input...";
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end...";
@@ -204,6 +220,7 @@ namespace LeapfrogUWP
          */
         private async void btnHelp_Click(object sender, RoutedEventArgs e)
         {
+            currentActivity = "Displaying How to Play...";
             ContentDialog dlgGameInstructions = new ContentDialog
             {
                 Title = "How to Play Leapfrog",
@@ -215,6 +232,7 @@ namespace LeapfrogUWP
             dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
 
             ContentDialogResult result = await dlgGameInstructions.ShowAsync();
+            currentActivity = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -301,7 +319,7 @@ namespace LeapfrogUWP
           */
         private void buildInitialGameBoard()
         {
-            currentActivity.Text = "Building Initial Game Board...";
+            currentActivity = "Building Initial Game Board...";
 
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
@@ -314,7 +332,7 @@ namespace LeapfrogUWP
             dataGridGameBoard.SelectedIndex = -1;
             dataGridGameBoard.SelectedItem = null;
 
-            currentActivity.Text = "Waiting...";
+            currentActivity = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -370,29 +388,37 @@ namespace LeapfrogUWP
          */
         private void dealCards(Cards aDeck)
         {
-            currentActivity.Text = "Dealing Cards...";
+            currentActivity = "Dealing Cards...";
 
-            this.dataGridGameBoard.ItemsSource = null;
-            this.dataGridGameBoard.ItemsSource = aDeck.deckCards;
+            int countCards = aDeck.deckCards.Count;
 
-            for (int aRow = 0; aRow < numberPlayRows; aRow++)
+            for(int aCard = 0; aCard < countCards; aCard++)
             {
-                for (int aCol = 0; aCol < numberPlayColumns; aCol++)
-                {
-                    //Compute Card Element from Deck Array to Deal
-                    int arrayElement = aDeck.calcArrayPosition(aRow, aCol);
-
-                    dataGridGameBoard.SelectedIndex = arrayElement;
-                    dataGridGameBoard.SelectedItem = null;
-                    dataGridGameBoard.SelectedItem = aDeck.deckCards[arrayElement];
-
-                    NotifyPropertyChanged();
-
-                    delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
-                }
+                aDeck.deckCards.ResetItem(aCard);
+                NotifyPropertyChanged("aDeck.deckCards[aCard]");
+                delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
             }
+            //this.dataGridGameBoard.ItemsSource = null;
+            //this.dataGridGameBoard.ItemsSource = aDeck.deckCards;
 
-            currentActivity.Text = "";
+            //for (int aRow = 0; aRow < numberPlayRows; aRow++)
+            //{
+            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)
+            //    {
+            //        //Compute Card Element from Deck Array to Deal
+            //        int arrayElement = aDeck.calcArrayPosition(aRow, aCol);
+
+            //        dataGridGameBoard.SelectedIndex = arrayElement;
+            //        dataGridGameBoard.SelectedItem = null;
+            //        dataGridGameBoard.SelectedItem = aDeck.deckCards[arrayElement];
+
+            //        NotifyPropertyChanged();
+
+            //        delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
+            //    }
+            //}
+
+            currentActivity = "";
         }
 
         /*******************************************************************************************
@@ -628,13 +654,13 @@ namespace LeapfrogUWP
         */
         private async void loadHelpText()
         {
-            currentActivity.Text = "Loading Help Text...";
+            currentActivity = "Loading Help Text...";
             string fileInstructions = folderGameData + "GameInstructions.txt";
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
             helpText = await FileIO.ReadTextAsync(HelpFile);
 
-            currentActivity.Text = "";
+            currentActivity = "";
         }
 
         /*******************************************************************************************
@@ -714,7 +740,7 @@ namespace LeapfrogUWP
          */
         public void removeAces()
         {
-            currentActivity.Text = "Removing Aces...";
+            currentActivity = "Removing Aces...";
 
             int arrayPosition = 0;
 
@@ -751,7 +777,7 @@ namespace LeapfrogUWP
             //isGameOver();                                      // Initialize the icons for game play
             flgGameOver = false;                                 //Set the "Game Over" flag to false
 
-            currentActivity.Text = "";
+            currentActivity = "";
         }
 
         /*******************************************************************************************

@@ -42,10 +42,10 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="800"/>
             </Grid.ColumnDefinitions>
 
             <Border x:ConnectionId='13' Name="someImage"
@@ -54,7 +54,7 @@
                     BorderThickness="1"
             >
 
-                <Image x:ConnectionId='17' x:Name="someJunk"
+                <Image x:ConnectionId='18' x:Name="someJunk"
                        Grid.Column="0"
                        Margin="3,3,0,0"
                        Height="48"
@@ -88,32 +88,38 @@
                        FocusVisualPrimaryBrush="White"
                     />
 
-            <!--Foreground="White"
-                     Background="Blue"
-                     BorderBrush="White"
-                     BorderThickness="1"
-                     IsReadOnly="True"-->
-            <TextBlock x:ConnectionId='16' x:Name="currentActivity"
-                     Grid.Column="3"
-                     Margin="1,1,1,1"
-                     Width="auto"
-                     Height="48"
-                     FontSize="24pi"
-                     Text="Waiting..."
-            />
+            <Border x:ConnectionId='16' Name="brdCurrentActivity"
+                    Grid.Column="3"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    CornerRadius="10"
+            >
+                <TextBlock x:ConnectionId='17' x:Name="txtCurrentActivity"
+                                                                       
+                           Margin="1,1,1,1"
+                           Width="798"
+                           Height="48"
+                           HorizontalTextAlignment="Center"
+                           FontSize="24pi"
+                           FontFamily="Arial"
+                           FontWeight="Medium"
+                           FontStyle="Italic"
+                           Foreground="White"
+                />
+            </Border>
         </Grid>
 
         <!--Game Tableu Playing Area -->
         <GridView x:ConnectionId='4' x:Name="dataGridGameBoard"
                   Grid.Row="1"
-                                                           
+                                                                        
                   Margin="2"
                   Height="575"
                   Width="1498"
                   Background="Blue"
                   BorderThickness="2"
                   BorderBrush="Black"
-                  SelectionMode="Single"
+                  SelectionMode="None"
                   IsItemClickEnabled="True"
                                                          
         >
@@ -135,7 +141,7 @@
                                Width="110"
                                Margin="1,1,1,1"
                                Stretch="Uniform"
-                               Source="{Binding cardFace}"
+                               Source="{Binding cardFace, Mode=OneWay}"
                         />
                     </StackPanel>
                 </DataTemplate>

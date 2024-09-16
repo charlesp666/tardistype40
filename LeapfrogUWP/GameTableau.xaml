@@ -42,10 +42,10 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="800"/>
             </Grid.ColumnDefinitions>
 
             <Border Name="someImage"
@@ -88,32 +88,38 @@
                        FocusVisualPrimaryBrush="White"
                     />
 
-            <!--Foreground="White"
-                     Background="Blue"
-                     BorderBrush="White"
-                     BorderThickness="1"
-                     IsReadOnly="True"-->
-            <TextBlock x:Name="currentActivity"
-                     Grid.Column="3"
-                     Margin="1,1,1,1"
-                     Width="auto"
-                     Height="48"
-                     FontSize="24pi"
-                     Text="Waiting..."
-            />
+            <Border Name="brdCurrentActivity"
+                    Grid.Column="3"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    CornerRadius="10"
+            >
+                <TextBlock x:Name="txtCurrentActivity"
+                           Text="{x:Bind currentActivity, Mode=OneWay}"
+                           Margin="1,1,1,1"
+                           Width="798"
+                           Height="48"
+                           HorizontalTextAlignment="Center"
+                           FontSize="24pi"
+                           FontFamily="Arial"
+                           FontWeight="Medium"
+                           FontStyle="Italic"
+                           Foreground="White"
+                />
+            </Border>
         </Grid>
 
         <!--Game Tableu Playing Area -->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
-                  ItemsSource="{x:Bind gameDeck.deckCards}"
+                  ItemsSource="{x:Bind gameDeck.deckCards, Mode=OneWay}"
                   Margin="2"
                   Height="575"
                   Width="1498"
                   Background="Blue"
                   BorderThickness="2"
                   BorderBrush="Black"
-                  SelectionMode="Single"
+                  SelectionMode="None"
                   IsItemClickEnabled="True"
                   ItemClick="dataGridGameBoard_CellClick"
         >
@@ -135,7 +141,7 @@
                                Width="110"
                                Margin="1,1,1,1"
                                Stretch="Uniform"
-                               Source="{Binding cardFace}"
+                               Source="{Binding cardFace, Mode=OneWay}"
                         />
                     </StackPanel>
                 </DataTemplate>
