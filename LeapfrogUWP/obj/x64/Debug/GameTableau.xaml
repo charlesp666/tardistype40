@@ -22,8 +22,8 @@
             <ColumnDefinition Width="1500"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="580"/>
+            <RowDefinition Height="68"/>
+            <RowDefinition Height="590"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
@@ -38,7 +38,7 @@
                 BorderBrush="Black"
         >
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="64"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -57,19 +57,19 @@
                 <Image x:ConnectionId='18' x:Name="someJunk"
                        Grid.Column="0"
                        Margin="3,3,0,0"
-                       Height="48"
+                       Height="50"
                        Width="50"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Source="/Assets/GameImages/CardsIcon.png"
-                       FocusVisualPrimaryBrush="White"
+                       FocusVisualPrimaryBrush="Blue"
                 />
             </Border>
 
                 <Image x:ConnectionId='14' x:Name="PlayableImage"
                        Grid.Column="1"
                        Margin="3,3,0,0"
-                       Height="48"
+                       Height="50"
                        Width="50"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
@@ -80,7 +80,7 @@
                 <Image x:ConnectionId='15' x:Name="NotPlayableImage"
                        Grid.Column="2"
                        Margin="3,3,0,0"
-                       Height="48"
+                       Height="50"
                        Width="50"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
@@ -93,12 +93,15 @@
                     BorderBrush="White"
                     BorderThickness="1"
                     CornerRadius="10"
+                    Height="50"
+                    Width="798"
+                    VerticalAlignment="Center"
             >
-                <TextBlock x:ConnectionId='17' x:Name="txtCurrentActivity"
+                <TextBlock x:ConnectionId='17' x:Name="tbCurrentActivity"
                                                                        
                            Margin="1,1,1,1"
-                           Width="798"
-                           Height="48"
+                           Width="796"
+                           Height="46"
                            HorizontalTextAlignment="Center"
                            FontSize="24pi"
                            FontFamily="Arial"

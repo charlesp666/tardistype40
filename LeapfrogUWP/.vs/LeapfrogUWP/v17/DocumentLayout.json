@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\gametableau.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|solutionrelative:gametableau.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|c:\\users\\charl\\source\\repos\\charlesp666\\tardistype40\\leapfroguwp\\gametableau.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|solutionrelative:gametableau.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\gametableau.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|solutionrelative:gametableau.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F381C271-BA41-49E1-9F58-475EE214E2DA}|LeapFrogUWP.csproj|C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\cards.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,6 +29,10 @@
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Cards.cs",
@@ -43,20 +47,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "GameTableau.xaml.cs",
               "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\GameTableau.xaml.cs",
               "RelativeDocumentMoniker": "GameTableau.xaml.cs",
               "ToolTip": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\GameTableau.xaml.cs",
               "RelativeToolTip": "GameTableau.xaml.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAIwC4AAABWAAAAAAAAAA==",
+              "ViewState": "AgIAADkBAAAAAAAAAAAuwFkBAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-02T17:37:24.525Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "GameTableau.xaml",
               "DocumentMoniker": "C:\\Users\\charl\\source\\repos\\charlesp666\\tardistype40\\LeapfrogUWP\\GameTableau.xaml",
               "RelativeDocumentMoniker": "GameTableau.xaml",

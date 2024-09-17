@@ -112,7 +112,7 @@ namespace LeapfrogUWP
                 if (value != this.CurrentActivity)
                 {
                     this.CurrentActivity = value;
-                    NotifyPropertyChanged("CurrentActivity");
+                    NotifyPropertyChanged("currentActivity");
                 }
             }
         }
@@ -343,7 +343,7 @@ namespace LeapfrogUWP
         {
             foreach(Cards.Card aCard in gameDeck.deckCards)
             {
-                aCard.cardFace = "";
+                //aCard.cardFace = "";
             }
         }
 
