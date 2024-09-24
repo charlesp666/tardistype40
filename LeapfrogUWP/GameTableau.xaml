@@ -16,7 +16,8 @@
           Margin="2,5"
           Background="Blue"
           BorderThickness="5"
-          BorderBrush="Black"
+          BorderBrush="White"
+          CornerRadius="10"
     >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1500"/>
@@ -98,7 +99,7 @@
                     VerticalAlignment="Center"
             >
                 <TextBlock x:Name="tbCurrentActivity"
-                           Text="{x:Bind currentActivity, Mode=OneWay}"
+                           Text="{x:Bind currentActivity.currentActivity, Mode=OneWay}"
                            Margin="1,1,1,1"
                            Width="796"
                            Height="46"

@@ -16,8 +16,9 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="#FF0000C0"
-          BorderBrush="Black"
+          BorderBrush="White"
           BorderThickness="2"
+          CornerRadius="10"
     >
         <Grid.RowDefinitions>
             <RowDefinition Height="440*"/>

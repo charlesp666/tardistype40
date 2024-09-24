@@ -33,19 +33,56 @@ using System.Runtime.CompilerServices;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
+/*******************************************************************************************
+* Class to use for Notification
+*/
+public abstract class NotifyBase : INotifyPropertyChanged
+{
+    public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}
+
+/*******************************************************************************************
+* Class for Current Activity Refreshing
+*/
+public class CurrentActivity : NotifyBase
+{
+    private string txtCurrentActivity;
+
+    public string currentActivity
+    {
+        get { return this.txtCurrentActivity; }
+        set
+        {
+            if (value != this.txtCurrentActivity)
+            {
+                this.txtCurrentActivity = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+}
+
 namespace LeapfrogUWP
 {
-    public sealed partial class GameTableau : Page, INotifyPropertyChanged
+    public sealed partial class GameTableau : Page //, INotifyPropertyChanged
     {
         /*******************************************************************************************
         * Objects for Property Change Notification
         */
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //private void NotifyPropertyChanged([CallerMemberName] String propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
 
         /*******************************************************************************************
         * Class Variables and Constants
@@ -102,20 +139,22 @@ namespace LeapfrogUWP
         */
         //Card Object to flag INotify when card changes
         //String to Refresh "Current Activity" message
-        private string CurrentActivity;
+        CurrentActivity currentActivity = new CurrentActivity();
 
-        public string currentActivity
-        {
-            get { return this.CurrentActivity; }
-            set
-            {
-                if (value != this.CurrentActivity)
-                {
-                    this.CurrentActivity = value;
-                    NotifyPropertyChanged("currentActivity");
-                }
-            }
-        }
+        //private string CurrentActivity;
+
+        //public string currentActivity
+        //{
+        //    get { return this.CurrentActivity; }
+        //    set
+        //    {
+        //        if (value != this.CurrentActivity)
+        //        {
+        //            this.CurrentActivity = value;
+        //            NotifyPropertyChanged("currentActivity");
+        //        }
+        //    }
+        //}
 
         /*******************************************************************************************
         * Class Variables and Constants
@@ -133,6 +172,9 @@ namespace LeapfrogUWP
         {
             this.InitializeComponent();
 
+            //currentActivity = new CurrentActivity();
+            currentActivity.currentActivity = "Beginning...";
+
             //Try to Open window up to full-screen
             var view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode)
@@ -144,22 +186,22 @@ namespace LeapfrogUWP
                 view.TryEnterFullScreenMode(); // Returns false in an AppWindow
             }
 
-            //Clear the Game Deck to initialize the Game Board, and prepare for new game
-            clearDeck();
+            //Get Text for Game Instructions
+            loadHelpText();
 
+            //Clear the Game Deck to initialize the Game Board, and prepare for new game
             cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
             cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
-            //Get Text for Game Instructions
-            loadHelpText();
+            clearDeck();
 
             //Build the Initial Game Board and set Data Context
             buildInitialGameBoard();
 
-            currentActivity = "Waiting for User Input...";
+            currentActivity.currentActivity = "Waiting for User Input...";
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
-            string aMsg = "This is the end...";
+            string aMsg = "This is the end, my only friend, the end...";
             speakText(aMsg);
         }
 
@@ -220,7 +262,7 @@ namespace LeapfrogUWP
          */
         private async void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            currentActivity = "Displaying How to Play...";
+            currentActivity.currentActivity = "Displaying How to Play...";
             ContentDialog dlgGameInstructions = new ContentDialog
             {
                 Title = "How to Play Leapfrog",
@@ -232,7 +274,7 @@ namespace LeapfrogUWP
             dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
 
             ContentDialogResult result = await dlgGameInstructions.ShowAsync();
-            currentActivity = "Waiting...";
+            currentActivity.currentActivity = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -319,7 +361,7 @@ namespace LeapfrogUWP
           */
         private void buildInitialGameBoard()
         {
-            currentActivity = "Building Initial Game Board...";
+            currentActivity.currentActivity = "Building Initial Game Board...";
 
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
@@ -332,7 +374,7 @@ namespace LeapfrogUWP
             dataGridGameBoard.SelectedIndex = -1;
             dataGridGameBoard.SelectedItem = null;
 
-            currentActivity = "Waiting...";
+            currentActivity.currentActivity = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -388,14 +430,14 @@ namespace LeapfrogUWP
          */
         private void dealCards(Cards aDeck)
         {
-            currentActivity = "Dealing Cards...";
+            currentActivity.currentActivity = "Dealing Cards...";
 
             int countCards = aDeck.deckCards.Count;
 
             for(int aCard = 0; aCard < countCards; aCard++)
             {
                 aDeck.deckCards.ResetItem(aCard);
-                NotifyPropertyChanged("aDeck.deckCards[aCard]");
+                //NotifyPropertyChanged("aDeck.deckCards[aCard]");
                 delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
             }
             //this.dataGridGameBoard.ItemsSource = null;
@@ -418,7 +460,7 @@ namespace LeapfrogUWP
             //    }
             //}
 
-            currentActivity = "";
+            currentActivity.currentActivity = "";
         }
 
         /*******************************************************************************************
@@ -654,13 +696,13 @@ namespace LeapfrogUWP
         */
         private async void loadHelpText()
         {
-            currentActivity = "Loading Help Text...";
+            currentActivity.currentActivity = "Loading Help Text...";
             string fileInstructions = folderGameData + "GameInstructions.txt";
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
             helpText = await FileIO.ReadTextAsync(HelpFile);
 
-            currentActivity = "";
+            currentActivity.currentActivity = "";
         }
 
         /*******************************************************************************************
@@ -740,7 +782,7 @@ namespace LeapfrogUWP
          */
         public void removeAces()
         {
-            currentActivity = "Removing Aces...";
+            currentActivity.currentActivity = "Removing Aces...";
 
             int arrayPosition = 0;
 
@@ -777,7 +819,7 @@ namespace LeapfrogUWP
             //isGameOver();                                      // Initialize the icons for game play
             flgGameOver = false;                                 //Set the "Game Over" flag to false
 
-            currentActivity = "";
+            currentActivity.currentActivity = "";
         }
 
         /*******************************************************************************************
