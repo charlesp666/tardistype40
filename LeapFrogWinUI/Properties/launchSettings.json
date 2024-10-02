@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LeapFrogWinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LeapFrogWinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
