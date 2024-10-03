@@ -41,7 +41,6 @@
     <Folder Include="Assets\CardBacks\" />
     <Folder Include="Assets\CardImages\" />
     <Folder Include="Assets\Data\" />
-    <Folder Include="Assets\GameImages\" />
   </ItemGroup>
 
   <!--
@@ -55,5 +54,6 @@
   
   <PropertyGroup>
       <WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
+      <ApplicationIcon>Assets\GameImages\Icon1.ico</ApplicationIcon>
   </PropertyGroup>
 </Project>

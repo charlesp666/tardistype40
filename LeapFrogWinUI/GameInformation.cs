@@ -15,17 +15,19 @@ using System;
 using System.IO;
 //using System.Resources;                                     //To Pull Images from Assembly Resources
 //using Windows.ApplicationModel;
-//using Windows.UI;
+using Windows.UI;
 //using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 //using Windows.UI.Xaml.Media;
 //using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO.Packaging;
-using Microsoft.UI.Xaml.Media.Imaging;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.IO.Packaging;
+
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
+
 using Windows.ApplicationModel;
 
 namespace LeapFrogWinUI
@@ -35,7 +37,7 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
          * Class Variables and Constants
          */
-        private static String folderGameData = ".//Assets//Data//";
+        private static String folderGameData = "ms-appx:///Assets//Data//";
         private static String folderGameImages = "ms-appx:///Assets//GameImages//";
 
         private String helpText;                                      //Text for the display of Help
@@ -81,7 +83,7 @@ namespace LeapFrogWinUI
 
             gameVersion = versionMajor + "." + versionMinor + "." + versionBuild + "." + versionRevision;
 
-            helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
+            //helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
 
             colorBackground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255)); //Game board background
             colorForeground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));   //Game board foreground

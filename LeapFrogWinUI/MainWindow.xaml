@@ -8,7 +8,128 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid Height="505"
+          Width="810"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Background="#FF0000C0"
+          BorderBrush="White"
+          BorderThickness="2"
+          CornerRadius="10"
+    >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="440*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1200"/>
+        </Grid.ColumnDefinitions>
+
+        <!--"Froggy" Game Image -->
+        <Image x:Name="picGameImage"
+               Source="/Assets/GameImages/LeapFrog.jpg"
+               Height="430"
+               Width="360"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="5,5,0,0"
+               FocusVisualPrimaryBrush="#FF0000C0"
+         />
+
+        <!--Game Title -->
+        <TextBlock x:Name="lblGameTitle"
+                   Text="lblGameTitle"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="395,55,0,0"
+                   Foreground="White"
+                   FontFamily="Arial Black"
+                   FontWeight="ExtraBold"
+                   FontSize="36"
+         />
+
+        <!--Game SubTitle -->
+        <TextBlock x:Name="txtSubTitle"
+                   Text="txtSubTitle"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="395,95,0,0"
+                   FontFamily="Arial"
+                   FontSize="24"
+                   Foreground="White"
+        />
+
+        <!--Game Version -->
+        <TextBlock x:Name="txtVersion"
+                   Text="txtVersion"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="395,145,0,0"
+                   FontFamily="Arial"
+                   FontSize="18"
+                   Foreground="White"
+        />
+
+        <!--Game Publisher -->
+        <TextBlock x:Name="txtPublisher"
+                   Text="txtPublisher"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="395,165,0,0"
+                   FontFamily="Arial"
+                   FontSize="18"
+                   Foreground="White"
+        />
+
+        <!--Copyright Notice -->
+        <TextBlock x:Name="lblCopyright"
+                   Text="lblCopyright"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="395,205,0,0"
+                   FontFamily="Arial"
+                   FontSize="18"
+                   Foreground="White"
+        />
+
+        <!--Rights Reserved -->
+        <TextBlock x:Name="txtRights"
+                   Text="txtRights"
+                   Height="auto"
+                   Width="auto"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="395,230,0,0"
+                   FontFamily="Arial"
+                   FontSize="16"
+                   Foreground="White"
+        />
+
+        <!--Rights Reserved -->
+        <Button x:Name="LaunchGame"
+                Content="Launch Game"
+                Height="50"
+                Width="150"
+                Margin="395,380,0,0"
+                VerticalAlignment="Top"
+                FontFamily="Arial"
+                FontSize="16"
+                FontWeight="Bold"
+                FontStyle="Italic"
+                Foreground="White"
+                Background="Blue"
+                BorderBrush="White"
+                BorderThickness="2"
+                Click="btnLaunchGame_Click" Grid.RowSpan="2"
+        />
+    </Grid>
 </Window>
