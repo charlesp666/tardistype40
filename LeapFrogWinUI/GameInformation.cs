@@ -29,6 +29,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 using Windows.ApplicationModel;
+//using System.Reflection;
 
 namespace LeapFrogWinUI
 {
@@ -37,8 +38,10 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
          * Class Variables and Constants
          */
-        private static String folderGameData = "ms-appx:///Assets//Data//";
-        private static String folderGameImages = "ms-appx:///Assets//GameImages//";
+        private static string rootFolder = Package.Current.InstalledPath;
+
+        private static String folderGameData = rootFolder + "//Assets//Data//";
+        private static String folderGameImages = rootFolder + "//Assets//GameImages//";
 
         private String helpText;                                      //Text for the display of Help
         private String nameOfGame;                         //Storage for the Name of the Game Object
@@ -83,7 +86,7 @@ namespace LeapFrogWinUI
 
             gameVersion = versionMajor + "." + versionMinor + "." + versionBuild + "." + versionRevision;
 
-            //helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
+            helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
 
             colorBackground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255)); //Game board background
             colorForeground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));   //Game board foreground
@@ -95,6 +98,7 @@ namespace LeapFrogWinUI
          *******************************************************************************************
          ******************************************************************************************/
         #region
+
         /*******************************************************************************************
           * Method: getBackgroundColor
           * Returns Background color.
