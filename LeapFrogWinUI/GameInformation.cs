@@ -86,6 +86,7 @@ namespace LeapFrogWinUI
 
             gameVersion = versionMajor + "." + versionMinor + "." + versionBuild + "." + versionRevision;
 
+            //Load the GameInstructions Text from File
             helpText = (new StreamReader(folderGameData + "GameInstructions.txt")).ReadToEnd();
 
             colorBackground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255)); //Game board background
