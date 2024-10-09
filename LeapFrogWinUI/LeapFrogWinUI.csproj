@@ -12,6 +12,10 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="GameTableau.xaml" />
+    <None Remove="SplashPage.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -41,6 +45,16 @@
     <Folder Include="Assets\CardBacks\" />
     <Folder Include="Assets\CardImages\" />
     <Folder Include="Assets\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SplashPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="GameTableau.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--

@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace LeapFrogWinUI
 {
-    internal class Cards
+    public class Cards
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
