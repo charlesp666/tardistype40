@@ -6,26 +6,26 @@
  * @Copyright (c) 2024 Charles J. Pilgrim
  * All Rights Reserved.
  */
-using Windows.UI.ViewManagement; //For View Management
+//using Windows.UI.ViewManagement; //For View Management
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+//using Microsoft.UI.Xaml.Controls.Primitives;
+//using Microsoft.UI.Xaml.Data;
+//using Microsoft.UI.Xaml.Input;
+//using Microsoft.UI.Xaml.Media;
+//using Microsoft.UI.Xaml.Navigation;
+//using System;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices.WindowsRuntime;
+//using Windows.Foundation;
+//using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml.Media.Animation;
 
-using System.Reflection;
-using Windows.UI.WebUI; //To load text file instructions
+//using System.Reflection;
+//using Windows.UI.WebUI; //To load text file instructions
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -42,12 +42,6 @@ namespace LeapFrogWinUI
         {
             this.InitializeComponent();
 
-            //var view = ApplicationView.GetForCurrentView();
-            //if (view.IsFullScreenMode)
-            //{
-            //    view.ExitFullScreenMode();
-            //}
-
             // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
 
@@ -60,9 +54,6 @@ namespace LeapFrogWinUI
             txtVersion.Text = "Version: " + myGameInfo.getVersion();             //Game Version Number
 
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
-
-            //Activate "Splash" Page and delay game load to give user time to read it...
-            //Window.Current.Activate();
         }
 
         ///*******************************************************************************************
