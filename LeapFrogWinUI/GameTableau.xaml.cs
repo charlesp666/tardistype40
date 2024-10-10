@@ -98,7 +98,7 @@ namespace LeapFrogWinUI
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
 
         //Declare and Initialize Game Playing Deck(s)
-        public Cards gameDeck = new Cards();                              //Initialize Deck of Cards
+        public Cards gameDeck = new Cards(true);                              //Initialize Deck of Cards
         public Cards standardDeck = new Cards();                            //Standard Deck of Cards
 
         //private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";

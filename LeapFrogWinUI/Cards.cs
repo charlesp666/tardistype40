@@ -12,13 +12,13 @@
  * System Class/Library Declarations
  */
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.Linq;
 
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace LeapFrogWinUI
 {
@@ -298,7 +298,8 @@ namespace LeapFrogWinUI
 
         /***********************************************************************************************
          * Class Cards:
-         * Defines the Attributes and Methods of a Single Playing Card.
+         * Defines the Attributes and Methods of a Deck of Playing Cards; Assumes a 52 card deck. Jokers
+         * are not included in the deck.
          */
 
         /*******************************************************************************************
@@ -335,14 +336,18 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
          * Constructor: Cards()
          * Builds a deck of cards by creating an array of Card objects
+         * 
+         * Parameter "isKingHigh" defaults to false so that the Ace of each suite appears furthest
+         * left on a four row, 13 card layout; setting "isKingHigh" to "true" places the "King" of
+         * each suit furthest left with cards descending from that value.
          */
-        public Cards()
+        public Cards(bool isKingHigh = false)
         {
             //Configure the Binding list
             deckCards.AllowNew = true;
             deckCards.AllowEdit = true;
 
-            initializeDeck();
+            initializeDeck(isKingHigh);
         }
 
         /*******************************************************************************************
@@ -504,17 +509,29 @@ namespace LeapFrogWinUI
          * Creates (or recreates) an original deck of cards in sorted order: A - K and
          * Spades - Diamonds.
          */
-        public void initializeDeck()
+        public void initializeDeck(bool isKingHigh = false)
         {
             //Card playingCard;                   //Local working storage to make coding more readable
 
             for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
             {
-                for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
+                if(isKingHigh) //If the King is to be on left...
                 {
-                    playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
-                    deckCards.Add(playingCard);
-                    deckCards.ResetItem(calcArrayPosition(aRank, aSuit));
+                    for (int aRank = (Card.possibleRanks.Length - 1) ; aRank >= 0 ; aRank--)
+                    {
+                        playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
+                        deckCards.Add(playingCard);
+                        deckCards.ResetItem(calcArrayPosition(aRank, aSuit));
+                    }
+                }
+                else //King is to be on right
+                {
+                    for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
+                    {
+                        playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
+                        deckCards.Add(playingCard);
+                        deckCards.ResetItem(calcArrayPosition(aRank, aSuit));
+                    }
                 }
             }
         }
