@@ -12,24 +12,20 @@
  * System Class/Library Declarations
  */
 using System;
-using System.IO;
-//using System.Resources;                                     //To Pull Images from Assembly Resources
-//using Windows.ApplicationModel;
-using Windows.UI;
-//using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
-//using Windows.UI.Xaml.Media;
-//using Windows.UI.Xaml.Media.Imaging;                                      //For BitmapImage DataType
 //using System.Collections.Generic;
+using System.IO;
+//using System.IO.Packaging;
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
-//using System.IO.Packaging;
-
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
+//using System.Reflection;
+//using System.Resources;                                     //To Pull Images from Assembly Resources
 
 using Windows.ApplicationModel;
-//using System.Reflection;
+using Windows.UI;
+//using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace LeapFrogWinUI
 {
