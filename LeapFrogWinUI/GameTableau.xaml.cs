@@ -5,33 +5,27 @@ using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Input;
 //using Microsoft.UI.Xaml.Media;
 //using Microsoft.UI.Xaml.Navigation;
+
 using System;
+using System.ComponentModel;
 //using System.Collections.Generic;
+//using System.Collections.Immutable;
 //using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+//using System.Runtime.CompilerServices;
 //using System.Runtime.InteropServices.WindowsRuntime;
+//using System.Runtime.InteropServices.WindowsRuntime;
+
+//using Windows.ApplicationModel.Core;
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
-
-//using System.Runtime.InteropServices.WindowsRuntime;
-//using Windows.Foundation.Collections;
-
-using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 //using Windows.Graphics.Display;                                      //For Adjusting App Window size
-
-using Windows.Storage;                                    //To load Help Instructions from Text File
-
-//using System.ComponentModel;
-//using System.Runtime.CompilerServices;
-using Windows.Media.SpeechSynthesis;
-//using Windows.ApplicationModel.Core;
-//using System.Collections.Immutable;
-//using static LeapfrogUWP.Cards;
-//using Windows.UI.Popups;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Windows.Media.Core;
-using System.IO;
+using Windows.Media.SpeechSynthesis;
+using Windows.Storage;                                    //To load Help Instructions from Text File
+//using Windows.UI.Popups;
+using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -99,7 +93,6 @@ namespace LeapFrogWinUI
 
         //Declare and Initialize Game Playing Deck(s)
         public Cards gameDeck = new Cards(true);                              //Initialize Deck of Cards
-        public Cards standardDeck = new Cards();                            //Standard Deck of Cards
 
         //private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
         private static String folderGameData = "ms-appx:///Assets//Data//";
@@ -180,17 +173,6 @@ namespace LeapFrogWinUI
 
             //currentActivity = new CurrentActivity();
             currentActivity.currentActivity = "Beginning...";
-
-            //Try to Open window up to full-screen
-            //var view = ApplicationView.GetForCurrentView();
-            //if (view.IsFullScreenMode)
-            //{
-            //    view.ExitFullScreenMode();
-            //}
-            //else
-            //{
-            //    view.TryEnterFullScreenMode(); // Returns false in an AppWindow
-            //}
 
             //Get Text for Game Instructions
             loadHelpText();
@@ -688,6 +670,7 @@ namespace LeapFrogWinUI
          */
         private void loadDeck()
         {
+            Cards standardDeck = new Cards(true);       //Create temporary, unshuffled deck of Cards
             int countCards = gameDeck.deckCards.Count;
 
             for (int aCard = 0; aCard < countCards; aCard++)

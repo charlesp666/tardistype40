@@ -1,8 +1,8 @@
 ﻿/***************************************************************************************************
  * Class: Cards
  * 
- * Defines the Data and Methods for a Deck of Cards by defining the partial
- * or sub-class of "Card" then extends this to a deck of cards. 
+ * Defines the Data and Methods for a Deck of Cards by defining the partial or sub-class of "Card"
+ * then extends this to a deck of cards. 
  * 
  * @Copyright (c) 2024 Charles J. Pilgrim
  * All Rights Reserved.
@@ -12,13 +12,9 @@
  * System Class/Library Declarations
  */
 using System;
-//using System.Collections.Generic;
-using System.Linq;
-
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-//using System.Text;
-//using System.Threading.Tasks;
 
 namespace LeapFrogWinUI
 {
@@ -511,8 +507,6 @@ namespace LeapFrogWinUI
          */
         public void initializeDeck(bool isKingHigh = false)
         {
-            //Card playingCard;                   //Local working storage to make coding more readable
-
             for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
             {
                 if(isKingHigh) //If the King is to be on left...
