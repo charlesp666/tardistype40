@@ -19,14 +19,34 @@ using Windows.Foundation.Collections;
 namespace WinUiPlayApp
 {
     /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : Window
+    public sealed partial class SplashPage : Page
     {
-        public MainWindow()
+        public SplashPage()
         {
             this.InitializeComponent();
         }
 
+        // MainPage.xaml.cs
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Page2));
+        }
+
+        private void myButton_Click(object sender, RoutedEventArgs e)
+        {
+            var currentValue = myButton.Content;
+
+            if ((string)currentValue == "Clicked")
+            {
+                myButton.Content = "Click Me";
+            }
+            else
+            {
+                myButton.Content = "Clicked";
+            }
+        }
     }
 }

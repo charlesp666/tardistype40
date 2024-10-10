@@ -94,7 +94,7 @@ namespace LeapFrogWinUI
         * Class Variables and Constants
         */
         //Create Player and GameInformation Objects
-        private Player myAvatar = new Player();                  //Storage for Current Player Object
+        //private Player myAvatar = new Player();                  //Storage for Current Player Object
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
 
         //Declare and Initialize Game Playing Deck(s)
@@ -182,15 +182,15 @@ namespace LeapFrogWinUI
             currentActivity.currentActivity = "Beginning...";
 
             //Try to Open window up to full-screen
-            var view = ApplicationView.GetForCurrentView();
-            if (view.IsFullScreenMode)
-            {
-                view.ExitFullScreenMode();
-            }
-            else
-            {
-                view.TryEnterFullScreenMode(); // Returns false in an AppWindow
-            }
+            //var view = ApplicationView.GetForCurrentView();
+            //if (view.IsFullScreenMode)
+            //{
+            //    view.ExitFullScreenMode();
+            //}
+            //else
+            //{
+            //    view.TryEnterFullScreenMode(); // Returns false in an AppWindow
+            //}
 
             //Get Text for Game Instructions
             loadHelpText();
@@ -300,7 +300,7 @@ namespace LeapFrogWinUI
          */
         private void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            myAvatar.displayPlayerStats();
+            //myAvatar.displayPlayerStats();
         }
 
         /*******************************************************************************************

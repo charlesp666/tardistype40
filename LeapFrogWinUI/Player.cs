@@ -11,10 +11,11 @@
  * System Class/Library Declarations
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Windows.Storage;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 using Windows.UI.Popups;
 
@@ -30,7 +31,7 @@ namespace LeapFrogWinUI
         private TimeSpan timePlayed = new TimeSpan(0, 0, 0);         //Total Time for All Games Played
 
         //Parameters to track User Statistics
-        private Windows.Storage.ApplicationDataContainer PlayerStats = Windows.Storage.ApplicationData.Current.LocalSettings;
+        private ApplicationDataContainer PlayerStats = ApplicationData.Current.LocalSettings;
 
         /*******************************************************************************************
          * Constructor: Player (Default)
@@ -234,6 +235,17 @@ namespace LeapFrogWinUI
          */
         private void loadPlayerStats()
         {
+
+            if (PlayerStats is null)
+            {
+                setGamesPlayed(0);
+                setGameWinnings(0);
+                setCountMoves(0);
+                setTimePlayed(TimeSpan.Zero);
+
+                writePlayerStats();
+            }
+
             setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
             setGameWinnings((int)PlayerStats.Values["Winnings"]);
             setCountMoves((int)PlayerStats.Values["Moves"]);
