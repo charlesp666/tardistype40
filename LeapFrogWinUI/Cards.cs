@@ -18,7 +18,7 @@ using System.Runtime.CompilerServices;
 
 namespace LeapFrogWinUI
 {
-    public class Cards
+    public partial class Cards
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -71,5 +71,6 @@
       <ApplicationIcon>Assets\GameImages\Icon1.ico</ApplicationIcon>
       <Description>A Game of Solitaire</Description>
       <Title>LeapFrog</Title>
+      <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 </Project>
