@@ -37,9 +37,13 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
+        //private AppWindow myWindow = null;
+
         public SplashPage()
         {
             this.InitializeComponent();
+
+            //myWindow.Resize(myWindow.ClientSize);
 
             // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
@@ -55,11 +59,11 @@ namespace LeapFrogWinUI
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
         }
 
-        ///*******************************************************************************************
-        // * Method: btnLaunchGame_Click
-        // * 
-        // * Navigates to the GameTableau (Playing area) when the "Launch Game" button is clicked.
-        // */
+        /*******************************************************************************************
+        /* Method: btnLaunchGame_Click
+        /* 
+        /* Navigates to the GameTableau (Playing area) when the "Launch Game" button is clicked.
+        /*/
         private void btnLaunchGame_Click(object sender, RoutedEventArgs e)
         {
             GameTableau myGameTableau = new GameTableau();
