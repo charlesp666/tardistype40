@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml;
 //using Microsoft.UI.Xaml.Media;
 //using Microsoft.UI.Xaml.Navigation;
 
-//using System;
+using System;
 //using System.Collections.Generic;
 //using System.IO;
 //using System.Linq;
@@ -16,6 +16,7 @@ using Microsoft.UI.Xaml;
 
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
+using Windows.Graphics;
 using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -28,10 +29,13 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public AppWindow myWindow = null;
+        public AppWindow myWindow = null;                      //Create a Window Object to work with
+
+        private static String folderGameImages = "ms-appx://Assets//GameImages//";
+        private string fileGameIcon = folderGameImages + "Cards.ico";
 
         //TitleBar Parameters
-        private string myTitle = "LeapFrog";
+        private string myTitle = "LeapFrog";                      //Title for the Application/Window
 
         private Color ttlBackgroundColor = Colors.DarkSlateGray;
         private Color ttlForeGroundColor = Colors.White;
@@ -43,8 +47,16 @@ namespace LeapFrogWinUI
         {
             this.InitializeComponent();
 
+            //Set Parameters on the Window Object
             myWindow = this.AppWindow;
+
             myWindow.Title = myTitle;
+            myWindow.SetIcon(fileGameIcon);
+
+            SizeInt32 myClientSize = myWindow.ClientSize;
+            SizeInt32 myCurrentSize = myWindow.Size;
+
+            //myWindow.MoveAndResize(new RectInt32(500, 800, 100, 100));
 
             setTitleBar();
         }
@@ -65,6 +77,12 @@ namespace LeapFrogWinUI
 
                 myTitleBar.ButtonBackgroundColor = ttlButtonBackgroundColor;
                 myTitleBar.ButtonForegroundColor = ttlButtonForegroundColor;
+
+                myTitleBar.ButtonHoverBackgroundColor = Colors.LightBlue;
+                myTitleBar.ButtonHoverForegroundColor = Colors.WhiteSmoke;
+
+                myTitleBar.ButtonPressedBackgroundColor = Colors.AliceBlue;
+                myTitleBar.ButtonPressedForegroundColor = Colors.WhiteSmoke;
 
                 return true;
             }

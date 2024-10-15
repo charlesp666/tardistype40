@@ -1,11 +1,11 @@
 /***************************************************************************************************
- * Page Class: SplashPage
- * 
- * Main or "Splash" Page definition for launching of game.
- * 
- * @Copyright (c) 2024 Charles J. Pilgrim
- * All Rights Reserved.
- */
+* Page Class: SplashPage
+* 
+* Entry or "Splash" Page definition for launching of game.
+* 
+* @Copyright (c) 2024 Charles J. Pilgrim
+* All Rights Reserved.
+*/
 
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -37,12 +37,13 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
-        //private AppWindow myWindow = null;
+        private AppWindow myWindow = null;
 
         public SplashPage()
         {
             this.InitializeComponent();
 
+            //myWindow = this.AppWindow;
             //myWindow.Resize(myWindow.ClientSize);
 
             // Build the Game Information object

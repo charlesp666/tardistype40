@@ -490,9 +490,9 @@ namespace LeapFrogWinUI
          * Method: exitGame
          * Closes Out all processing and Exits or Closes the Application.
          */
-        private async void exitGame(object sender, RoutedEventArgs e)
+        private void exitGame(object sender, RoutedEventArgs e)
         {
-            await ApplicationView.GetForCurrentView().TryConsolidateAsync();
+            Environment.Exit(0);
         }
 
         /*******************************************************************************************

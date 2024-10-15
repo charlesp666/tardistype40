@@ -72,5 +72,9 @@
       <Description>A Game of Solitaire</Description>
       <Title>LeapFrog</Title>
       <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+      <PlatformTarget>x86</PlatformTarget>
+      <Company>CatsPaw Saftware</Company>
+      <Product>LeapFrog</Product>
+      <Authors>Charles J Pilgrim</Authors>
   </PropertyGroup>
 </Project>
