@@ -7,6 +7,7 @@
 * All Rights Reserved.
 */
 
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -15,6 +16,7 @@ using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Input;
 //using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+
 //using Microsoft.UI.Xaml.Navigation;
 
 //using System;
@@ -26,6 +28,9 @@ using Microsoft.UI.Xaml.Media.Animation;
 
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
+using Windows.Graphics;
+
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -37,11 +42,12 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
-        private AppWindow myWindow = null;
+        //private AppWindow myWindow = null;
 
         public SplashPage()
         {
             this.InitializeComponent();
+            ResizeAppWindow();
 
             //myWindow = this.AppWindow;
             //myWindow.Resize(myWindow.ClientSize);
@@ -69,6 +75,24 @@ namespace LeapFrogWinUI
         {
             GameTableau myGameTableau = new GameTableau();
             Frame.Navigate(typeof(GameTableau), null, new EntranceNavigationTransitionInfo());
+        }
+
+        /*******************************************************************************************
+        /* Method: ResizeAppWindow
+        /* 
+        /* Resizes the AppWindow to the size of the page.
+        /*/
+        private void ResizeAppWindow()
+        {
+            var myWindow = (Application.Current as App)?.m_window as MainWindow; 
+            var hwnd = WindowNative.GetWindowHandle(myWindow);
+            var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+            var appWindow = AppWindow.GetFromWindowId(myWindowId);
+
+            int pageWidth = (int)this.Width;
+            int pageHeight = (int)this.Height;
+            SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
+            appWindow.Resize(newSize);
         }
     }
 }

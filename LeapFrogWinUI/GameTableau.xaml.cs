@@ -1,3 +1,5 @@
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,6 +15,8 @@ using System.ComponentModel;
 //using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Windows.Graphics;
+
 //using System.Runtime.CompilerServices;
 //using System.Runtime.InteropServices.WindowsRuntime;
 //using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,7 +29,9 @@ using Windows.Media.Core;
 using Windows.Media.SpeechSynthesis;
 using Windows.Storage;                                    //To load Help Instructions from Text File
 //using Windows.UI.Popups;
-using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
+//using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
+
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -170,6 +176,7 @@ namespace LeapFrogWinUI
         public GameTableau()
         {
             this.InitializeComponent();
+            ResizeAppWindow();
 
             //currentActivity = new CurrentActivity();
             currentActivity.currentActivity = "Beginning...";
@@ -212,6 +219,24 @@ namespace LeapFrogWinUI
 
             //Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
             //SelectedCard(selectedCard);
+        }
+
+        /*******************************************************************************************
+        /* Method: ResizeAppWindow
+        /* 
+        /* Resizes the AppWindow to the size of the page.
+        /*/
+        private void ResizeAppWindow()
+        {
+            var myWindow = (Application.Current as App)?.m_window as MainWindow;
+            var hwnd = WindowNative.GetWindowHandle(myWindow);
+            var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+            var appWindow = AppWindow.GetFromWindowId(myWindowId);
+
+            int pageWidth = (int)this.Width;
+            int pageHeight = (int)this.Height;
+            SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
+            appWindow.Resize(newSize);
         }
 
         /*******************************************************************************************

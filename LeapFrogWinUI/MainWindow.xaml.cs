@@ -1,6 +1,8 @@
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+
 //using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
@@ -18,6 +20,8 @@ using System;
 //using Windows.Foundation.Collections;
 using Windows.Graphics;
 using Windows.UI;
+
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -53,11 +57,6 @@ namespace LeapFrogWinUI
             myWindow.Title = myTitle;
             myWindow.SetIcon(fileGameIcon);
 
-            SizeInt32 myClientSize = myWindow.ClientSize;
-            SizeInt32 myCurrentSize = myWindow.Size;
-
-            //myWindow.MoveAndResize(new RectInt32(500, 800, 100, 100));
-
             setTitleBar();
         }
 
@@ -89,6 +88,5 @@ namespace LeapFrogWinUI
 
             return false;
         }
-
     }
 }
