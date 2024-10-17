@@ -42,15 +42,12 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
-        //private AppWindow myWindow = null;
+        private static int linkDelayMS = 100;      //Action display delay so user can see changes
 
         public SplashPage()
         {
             this.InitializeComponent();
             ResizeAppWindow();
-
-            //myWindow = this.AppWindow;
-            //myWindow.Resize(myWindow.ClientSize);
 
             // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
@@ -64,6 +61,8 @@ namespace LeapFrogWinUI
             txtVersion.Text = "Version: " + myGameInfo.getVersion();             //Game Version Number
 
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
+
+            //UpdateProgressBarValue();
         }
 
         /*******************************************************************************************
@@ -76,6 +75,23 @@ namespace LeapFrogWinUI
             GameTableau myGameTableau = new GameTableau();
             Frame.Navigate(typeof(GameTableau), null, new EntranceNavigationTransitionInfo());
         }
+
+        /*******************************************************************************************
+         * Method: delay
+         * Pause Processing for specified number of milliseconds.
+         */
+        //private void delay(int milliSecondsToPauseFor)
+        //{
+        //    System.DateTime startInstant = System.DateTime.Now;
+        //    System.DateTime thisInstant = startInstant;
+        //    System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
+        //    System.DateTime finalInstant = thisInstant.Add(duration);
+
+        //    while (finalInstant >= thisInstant)
+        //    {
+        //        thisInstant = System.DateTime.Now;
+        //    }
+        //}
 
         /*******************************************************************************************
         /* Method: ResizeAppWindow
@@ -94,5 +110,15 @@ namespace LeapFrogWinUI
             SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
             appWindow.Resize(newSize);
         }
+
+        //private void UpdateProgressBarValue()
+        //{
+        //    for (int i = 0; i < 100; i++)
+        //    {
+        //        linkToGameTableau.Value = i;
+
+        //        delay(linkDelayMS);
+        //    }
+        //}
     }
 }

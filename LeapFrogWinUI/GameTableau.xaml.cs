@@ -32,6 +32,7 @@ using Windows.Storage;                                    //To load Help Instruc
 //using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 
 using WinRT.Interop;
+using static LeapFrogWinUI.Cards;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -98,7 +99,7 @@ namespace LeapFrogWinUI
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
 
         //Declare and Initialize Game Playing Deck(s)
-        public Cards gameDeck = new Cards(true);                              //Initialize Deck of Cards
+        public Cards gameDeck = new Cards(true);                          //Initialize Deck of Cards
 
         //private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
         private static String folderGameData = "ms-appx:///Assets//Data//";
@@ -127,17 +128,17 @@ namespace LeapFrogWinUI
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
         //"Public" Xaml access for Playable and Non-Playable Cards
-        public Cards.Card cardPlayable
-        {
-            get;
-            set;
-        }
+        public Cards.Card cardPlayable;
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public Cards.Card cardNotPlayable
-        {
-            get;
-            set;
-        }
+        public Cards.Card cardNotPlayable;
+        //{
+        //    get;
+        //    set;
+        //}
 
         /*******************************************************************************************
         * Objects for INotify refresh of window
@@ -188,9 +189,8 @@ namespace LeapFrogWinUI
             cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
             cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
 
-            clearDeck();
-
             //Build the Initial Game Board and set Data Context
+            clearDeck();
             buildInitialGameBoard();
 
             currentActivity.currentActivity = "Waiting for User Input...";
@@ -449,7 +449,7 @@ namespace LeapFrogWinUI
 
             for (int aCard = 0; aCard < countCards; aCard++)
             {
-                aDeck.deckCards.ResetItem(aCard);
+                //aDeck.deckCards.ResetItem(aCard);
                 //NotifyPropertyChanged("aDeck.deckCards[aCard]");
                 delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
             }
@@ -834,6 +834,18 @@ namespace LeapFrogWinUI
             flgGameOver = false;                                 //Set the "Game Over" flag to false
 
             currentActivity.currentActivity = "";
+        }
+
+        /*******************************************************************************************
+         * Method: ResetItem
+         * Parses the Rank from the Card Value passed.
+         */
+        private void ResetItem(int anIndex)
+        {
+            //if (anIndex >= 0 && anIndex < gameDeck.Count)
+            //{
+            //    gameDeck[anIndex] = new Card { cardRank = $"Reset Card {index}", cardSuit = "", cardFace = null };
+            //}
         }
 
         /*******************************************************************************************

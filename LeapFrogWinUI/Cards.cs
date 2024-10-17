@@ -12,9 +12,11 @@
  * System Class/Library Declarations
  */
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using WinRT;
 
 namespace LeapFrogWinUI
 {
@@ -70,18 +72,21 @@ namespace LeapFrogWinUI
 
             public string cardFace                //Contains "Local" (Solution) Path to Card Face Image
             {
-                get
-                {
-                    return strCardFace;
-                }
-                set
-                {
-                    if (value != this.strCardFace)
-                    {
-                        this.strCardFace = value;
-                        NotifyPropertyChanged("cardFace");
-                    }
-                }
+                get;
+                set;
+
+                //get
+                //{
+                //    return strCardFace;
+                //}
+                //set
+                //{
+                //    if (value != this.strCardFace)
+                //    {
+                //        this.strCardFace = value;
+                //        NotifyPropertyChanged("cardFace");
+                //    }
+                //}
             }
 
             public string cardBack                 //Contains "Local" (Solution) Path to Card Back Image
@@ -303,7 +308,7 @@ namespace LeapFrogWinUI
          */
         private static Random aRandom = new Random();       //Parameter for Random Number Generation
 
-        public BindingList<Card> deckCards = new BindingList<Card>();       //Declare List to store Deck of Cards for game play
+        public ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
 
         //Load the Default Card Back Image
         private string cardBack = "/Assets/GameImages/defaultBack.jpg";
@@ -314,20 +319,20 @@ namespace LeapFrogWinUI
 
         private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
 
-        private Card PlayingCard;
+        //private Card PlayingCard;
 
-        public Card playingCard
-        {
-            get { return PlayingCard; }
-            set
-            {
-                if (value != this.PlayingCard)
-                {
-                    this.PlayingCard = value;
-                    NotifyPropertyChanged("playingCard");
-                }
-            }
-        }
+        //public Card playingCard
+        //{
+        //    get { return PlayingCard; }
+        //    set
+        //    {
+        //        if (value != this.PlayingCard)
+        //        {
+        //            this.PlayingCard = value;
+        //            NotifyPropertyChanged("playingCard");
+        //        }
+        //    }
+        //}
 
         /*******************************************************************************************
          * Constructor: Cards()
@@ -339,10 +344,6 @@ namespace LeapFrogWinUI
          */
         public Cards(bool isKingHigh = false)
         {
-            //Configure the Binding list
-            deckCards.AllowNew = true;
-            deckCards.AllowEdit = true;
-
             initializeDeck(isKingHigh);
         }
 
@@ -507,6 +508,8 @@ namespace LeapFrogWinUI
          */
         public void initializeDeck(bool isKingHigh = false)
         {
+            Card playingCard;
+
             for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
             {
                 if(isKingHigh) //If the King is to be on left...
@@ -515,7 +518,6 @@ namespace LeapFrogWinUI
                     {
                         playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
                         deckCards.Add(playingCard);
-                        deckCards.ResetItem(calcArrayPosition(aRank, aSuit));
                     }
                 }
                 else //King is to be on right
@@ -524,7 +526,6 @@ namespace LeapFrogWinUI
                     {
                         playingCard = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit].ToString());
                         deckCards.Add(playingCard);
-                        deckCards.ResetItem(calcArrayPosition(aRank, aSuit));
                     }
                 }
             }
@@ -571,9 +572,6 @@ namespace LeapFrogWinUI
                 aTemp = deckCards[firstCard];
                 deckCards[firstCard] = deckCards[secondCard];
                 deckCards[secondCard] = aTemp;
-
-                deckCards.ResetItem(firstCard);
-                deckCards.ResetItem(secondCard);
             }
         }
     }
