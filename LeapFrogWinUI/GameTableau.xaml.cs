@@ -13,9 +13,9 @@ using System.ComponentModel;
 //using System.Collections.Generic;
 //using System.Collections.Immutable;
 //using System.IO;
-using System.Linq;
+//using System.Linq;
 using System.Runtime.CompilerServices;
-using Windows.Graphics;
+using System.Threading.Tasks;
 
 //using System.Runtime.CompilerServices;
 //using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,15 +24,19 @@ using Windows.Graphics;
 //using Windows.ApplicationModel.Core;
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
+using Windows.Graphics;
 //using Windows.Graphics.Display;                                      //For Adjusting App Window size
-using Windows.Media.Core;
+//using Windows.Media.Core;
 using Windows.Media.SpeechSynthesis;
+using Windows.Media.Playback;
 using Windows.Storage;                                    //To load Help Instructions from Text File
 //using Windows.UI.Popups;
 //using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
+//using Windows.UI.Xaml;
 
 using WinRT.Interop;
-using static LeapFrogWinUI.Cards;
+using Windows.Media.Core;
+//using static LeapFrogWinUI.Cards;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -972,27 +976,28 @@ namespace LeapFrogWinUI
           * Method: speakText
           * Using Windows Media speech synthesizer, speaks the text passed as parameter.
           */
-        private async void speakText(string speechText)
+        private async Task speakText(string speechText)
         {
-            //MediaElement mediaElement = new MediaElement();
-            MediaPlayerElement mediaElement = new MediaPlayerElement(); var synth = new SpeechSynthesizer();
-            SpeechSynthesisStream stream = null;
+            MediaPlayerElement mediaElement = new MediaPlayerElement();
+            var mediaPlayer = new MediaPlayer();
 
-            using (synth)
-            {
-                VoiceInformation voiceInfo =
-                    (
-                        from voice in SpeechSynthesizer.AllVoices
-                        where voice.Gender == VoiceGender.Female
-                        select voice
-                    ).FirstOrDefault() ?? SpeechSynthesizer.DefaultVoice;
+            var synth = new SpeechSynthesizer();
+            var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);
 
-                synth.Voice = voiceInfo;
-                stream = await synth.SynthesizeTextToStreamAsync(speechText);
-            }
+            //using (synth)
+            //{
+            //    VoiceInformation voiceInfo =
+            //        (
+            //            from voice in SpeechSynthesizer.AllVoices
+            //            where voice.Gender == VoiceGender.Female
+            //            select voice
+            //        ).FirstOrDefault() ?? SpeechSynthesizer.DefaultVoice;
 
-            mediaElement.AutoPlay = true;
-            mediaElement.Source = MediaSource.CreateFromStream(stream, stream.ContentType);
+            //    synth.Voice = voiceInfo;
+            //}
+
+            mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
+            mediaPlayer.Play();
         }
 
         /*******************************************************************************************
