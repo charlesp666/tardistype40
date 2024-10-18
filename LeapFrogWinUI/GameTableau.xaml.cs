@@ -36,6 +36,7 @@ using Windows.Storage;                                    //To load Help Instruc
 
 using WinRT.Interop;
 using Windows.Media.Core;
+using System.Linq;
 //using static LeapFrogWinUI.Cards;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -982,19 +983,12 @@ namespace LeapFrogWinUI
             var mediaPlayer = new MediaPlayer();
 
             var synth = new SpeechSynthesizer();
+            // Set the voice
+            var voices = SpeechSynthesizer.AllVoices;
+            var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains("en"));
+            synth.Voice = selectedVoice;
+
             var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);
-
-            //using (synth)
-            //{
-            //    VoiceInformation voiceInfo =
-            //        (
-            //            from voice in SpeechSynthesizer.AllVoices
-            //            where voice.Gender == VoiceGender.Female
-            //            select voice
-            //        ).FirstOrDefault() ?? SpeechSynthesizer.DefaultVoice;
-
-            //    synth.Voice = voiceInfo;
-            //}
 
             mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
             mediaPlayer.Play();
