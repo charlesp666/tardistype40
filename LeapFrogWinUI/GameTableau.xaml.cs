@@ -42,43 +42,6 @@ using System.Linq;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-/*******************************************************************************************
-* Class to use for Notification
-*/
-public abstract class NotifyBase : INotifyPropertyChanged
-{
-    public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        if (PropertyChanged != null)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-}
-
-/*******************************************************************************************
-* Class for Current Activity Refreshing
-*/
-public class CurrentActivity : NotifyBase
-{
-    private string txtCurrentActivity;
-
-    public string currentActivity
-    {
-        get { return this.txtCurrentActivity; }
-        set
-        {
-            if (value != this.txtCurrentActivity)
-            {
-                this.txtCurrentActivity = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-}
-
 namespace LeapFrogWinUI
 {
     /// <summary>
@@ -86,16 +49,6 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class GameTableau : Page
     {
-        /*******************************************************************************************
-        * Objects for Property Change Notification
-        */
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //private void NotifyPropertyChanged([CallerMemberName] String propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
-
         /*******************************************************************************************
         * Class Variables and Constants
         */
@@ -146,28 +99,6 @@ namespace LeapFrogWinUI
         //}
 
         /*******************************************************************************************
-        * Objects for INotify refresh of window
-        */
-        //Card Object to flag INotify when card changes
-        //String to Refresh "Current Activity" message
-        CurrentActivity currentActivity = new CurrentActivity();
-
-        //private string CurrentActivity;
-
-        //public string currentActivity
-        //{
-        //    get { return this.CurrentActivity; }
-        //    set
-        //    {
-        //        if (value != this.CurrentActivity)
-        //        {
-        //            this.CurrentActivity = value;
-        //            NotifyPropertyChanged("currentActivity");
-        //        }
-        //    }
-        //}
-
-        /*******************************************************************************************
         * Class Variables and Constants
         */
         //private Stack<UndoItem> myUndoItems = new Stack<UndoItem>();
@@ -184,8 +115,7 @@ namespace LeapFrogWinUI
             this.InitializeComponent();
             ResizeAppWindow();
 
-            //currentActivity = new CurrentActivity();
-            currentActivity.currentActivity = "Beginning...";
+            tbCurrentActivity.Text = "Beginning...";
 
             //Get Text for Game Instructions
             loadHelpText();
@@ -198,7 +128,7 @@ namespace LeapFrogWinUI
             clearDeck();
             buildInitialGameBoard();
 
-            currentActivity.currentActivity = "Waiting for User Input...";
+            tbCurrentActivity.Text = "Waiting for User Input...";
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end, my only friend, the end...";
@@ -280,7 +210,7 @@ namespace LeapFrogWinUI
          */
         private async void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            currentActivity.currentActivity = "Displaying How to Play...";
+            tbCurrentActivity.Text = "Displaying How to Play...";
             ContentDialog dlgGameInstructions = new ContentDialog
             {
                 Title = "How to Play Leapfrog",
@@ -292,7 +222,7 @@ namespace LeapFrogWinUI
             dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
 
             ContentDialogResult result = await dlgGameInstructions.ShowAsync();
-            currentActivity.currentActivity = "Waiting...";
+            tbCurrentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -379,7 +309,7 @@ namespace LeapFrogWinUI
           */
         private void buildInitialGameBoard()
         {
-            currentActivity.currentActivity = "Building Initial Game Board...";
+            tbCurrentActivity.Text = "Building Initial Game Board...";
 
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
@@ -392,7 +322,7 @@ namespace LeapFrogWinUI
             dataGridGameBoard.SelectedIndex = -1;
             dataGridGameBoard.SelectedItem = null;
 
-            currentActivity.currentActivity = "Waiting...";
+            tbCurrentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -448,7 +378,7 @@ namespace LeapFrogWinUI
          */
         private void dealCards(Cards aDeck)
         {
-            currentActivity.currentActivity = "Dealing Cards...";
+            tbCurrentActivity.Text = "Dealing Cards...";
 
             int countCards = aDeck.deckCards.Count;
 
@@ -478,7 +408,7 @@ namespace LeapFrogWinUI
             //    }
             //}
 
-            currentActivity.currentActivity = "";
+            tbCurrentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -715,13 +645,13 @@ namespace LeapFrogWinUI
         */
         private async void loadHelpText()
         {
-            currentActivity.currentActivity = "Loading Help Text...";
+            tbCurrentActivity.Text = "Loading Help Text...";
             string fileInstructions = folderGameData + "GameInstructions.txt";
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
             helpText = await FileIO.ReadTextAsync(HelpFile);
 
-            currentActivity.currentActivity = "";
+            tbCurrentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -801,7 +731,7 @@ namespace LeapFrogWinUI
          */
         public void removeAces()
         {
-            currentActivity.currentActivity = "Removing Aces...";
+            tbCurrentActivity.Text = "Removing Aces...";
 
             int arrayPosition = 0;
 
@@ -838,7 +768,7 @@ namespace LeapFrogWinUI
             //isGameOver();                                      // Initialize the icons for game play
             flgGameOver = false;                                 //Set the "Game Over" flag to false
 
-            currentActivity.currentActivity = "";
+            tbCurrentActivity.Text = "";
         }
 
         /*******************************************************************************************
