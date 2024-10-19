@@ -114,6 +114,7 @@
         </Grid>
 
         <!--Game Tableu Playing Area -->
+        <!--SelectionMode="None"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
                   ItemsSource="{x:Bind gameDeck.deckCards, Mode=TwoWay}"
@@ -123,15 +124,13 @@
                   Background="Blue"
                   BorderThickness="2"
                   BorderBrush="Black"
-                  SelectionMode="None"
                   IsItemClickEnabled="True"
-                  ItemClick="dataGridGameBoard_CellClick"
+                  ItemClick="dataGridGameBoard_ItemClick"
         >
 
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition"
                 >
-
                     <StackPanel Name="PlayingCard"
                                 Height="138"
                                 Width="110"

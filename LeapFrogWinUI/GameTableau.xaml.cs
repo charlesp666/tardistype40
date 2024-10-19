@@ -155,9 +155,12 @@ namespace LeapFrogWinUI
          * Event Handler: GameBoard_CellClicked
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        private void dataGridGameBoard_CellClick(object sender, ItemClickEventArgs e)
+        private void dataGridGameBoard_ItemClick(object sender, ItemClickEventArgs e)
         {
-            int indexClickedCell = dataGridGameBoard.SelectedIndex;
+            var clickedItem = e.ClickedItem as Cards.Card;
+            int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
+
+            //int indexClickedCell = dataGridGameBoard.SelectedIndex;
 
             string speakingText = "Clickety Click on Index " + indexClickedCell.ToString();
             speakText(speakingText);
