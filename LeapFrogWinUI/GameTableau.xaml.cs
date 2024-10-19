@@ -979,13 +979,15 @@ namespace LeapFrogWinUI
           */
         private async Task speakText(string speechText)
         {
+            string voiceLanguage = "en";
+
             MediaPlayerElement mediaElement = new MediaPlayerElement();
             var mediaPlayer = new MediaPlayer();
 
             var synth = new SpeechSynthesizer();
             // Set the voice
             var voices = SpeechSynthesizer.AllVoices;
-            var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains("en"));
+            var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains(voiceLanguage));
             synth.Voice = selectedVoice;
 
             var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);

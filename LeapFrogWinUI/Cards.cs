@@ -22,13 +22,6 @@ namespace LeapFrogWinUI
 {
     public partial class Cards
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         //Set Folder Locations for Card Images as static constants
         private static String folderGameImages = "/Assets/GameImages/";
         private static String folderCardFaces = "/Assets/CardImages/";
@@ -37,15 +30,8 @@ namespace LeapFrogWinUI
            * Partial Class Card:
            * Defines the Attributes and Methods of a Single Playing Card.
            */
-        public partial class Card : INotifyPropertyChanged
+        public partial class Card
         {
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-
             /* Define arrays storing to possible values for rank and suit; make public to be viewable by
              * anyone wanting to build a card or deck of cards.
              ***** Q: how to handle (should?) jokers?
@@ -58,13 +44,13 @@ namespace LeapFrogWinUI
             private string strCardFace;
 
             //Declare Card Public Attributes to be used for displaying Cards in Game
-            public string cardRank                       //Contains the Rank (Ace through King) of card
+            public string cardRank                      //Contains the Rank (Ace through King) of card
             {
                 get;
                 set;
             }
 
-            public string cardSuit        //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
+            public string cardSuit      //Contains the Suit (Spades, Hearts, Clubs, Diamonds) of Card
             {
                 get;
                 set;
@@ -74,19 +60,6 @@ namespace LeapFrogWinUI
             {
                 get;
                 set;
-
-                //get
-                //{
-                //    return strCardFace;
-                //}
-                //set
-                //{
-                //    if (value != this.strCardFace)
-                //    {
-                //        this.strCardFace = value;
-                //        NotifyPropertyChanged("cardFace");
-                //    }
-                //}
             }
 
             public string cardBack                 //Contains "Local" (Solution) Path to Card Back Image
@@ -318,21 +291,6 @@ namespace LeapFrogWinUI
         private string bmpPlayable = folderGameImages + "Playable.jpg";
 
         private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
-
-        //private Card PlayingCard;
-
-        //public Card playingCard
-        //{
-        //    get { return PlayingCard; }
-        //    set
-        //    {
-        //        if (value != this.PlayingCard)
-        //        {
-        //            this.PlayingCard = value;
-        //            NotifyPropertyChanged("playingCard");
-        //        }
-        //    }
-        //}
 
         /*******************************************************************************************
          * Constructor: Cards()
