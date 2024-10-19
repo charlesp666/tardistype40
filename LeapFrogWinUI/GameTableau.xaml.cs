@@ -52,6 +52,8 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
         * Class Variables and Constants
         */
+        private AppWindow myWindow = null;
+
         //Create Player and GameInformation Objects
         //private Player myAvatar = new Player();                  //Storage for Current Player Object
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
@@ -113,7 +115,13 @@ namespace LeapFrogWinUI
         public GameTableau()
         {
             this.InitializeComponent();
-            ResizeAppWindow();
+
+            myWindow = getMyAppWindow();
+            myWindow.Hide();
+            ResizeAppWindow(myWindow);
+
+            this.Visibility = Visibility.Collapsed;
+            this.Loaded += loadedGameTableau;
 
             tbCurrentActivity.Text = "Beginning...";
 
@@ -129,6 +137,8 @@ namespace LeapFrogWinUI
             buildInitialGameBoard();
 
             tbCurrentActivity.Text = "Waiting for User Input...";
+
+            myWindow.Show(true);
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end, my only friend, the end...";
@@ -161,12 +171,41 @@ namespace LeapFrogWinUI
         /* 
         /* Resizes the AppWindow to the size of the page.
         /*/
-        private void ResizeAppWindow()
+        private AppWindow getMyAppWindow()
         {
             var myWindow = (Application.Current as App)?.m_window as MainWindow;
             var hwnd = WindowNative.GetWindowHandle(myWindow);
             var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
             var appWindow = AppWindow.GetFromWindowId(myWindowId);
+
+            return appWindow;
+        }
+
+        /*******************************************************************************************
+        /* Method: loadedSplashPage
+        /* 
+        /* Reveals the SplashPage after the page is fully loaded.
+        /*/
+        private async void loadedGameTableau(object sender, RoutedEventArgs e)
+        {
+            // Simulate loading operations
+            await Task.Delay(2000); // Adjust as necessary
+
+            // Show the page content after loading is complete
+            this.Visibility = Visibility.Visible;
+        }
+
+        /*******************************************************************************************
+        /* Method: ResizeAppWindow
+        /* 
+        /* Resizes the AppWindow to the size of the page.
+        /*/
+        private void ResizeAppWindow(AppWindow appWindow)
+        {
+            //var myWindow = (Application.Current as App)?.m_window as MainWindow;
+            //var hwnd = WindowNative.GetWindowHandle(myWindow);
+            //var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+            //var appWindow = AppWindow.GetFromWindowId(myWindowId);
 
             int pageWidth = (int)this.Width;
             int pageHeight = (int)this.Height;
