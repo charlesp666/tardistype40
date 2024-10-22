@@ -800,15 +800,19 @@ namespace LeapFrogWinUI
                         gameDeck.deckCards[arrayPosition] = cardPlayable;
                         dataGridGameBoard.SelectedItem = gameDeck.deckCards[arrayElement];
 
-                        //if (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
-                        //{
-                        //    gameDeck.deckCards[arrayPosition] = cardNotPlayable;
-                        //}
-                        //else
-                        //{
-                        //    gameDeck.deckCards[arrayPosition] = cardPlayable;
-                        //}
-
+                        if (arrayPosition > 0)
+                        {
+                            if ((gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
+                              || (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "p")
+                               )
+                            {
+                                gameDeck.deckCards[arrayPosition] = cardNotPlayable;
+                            }
+                            else
+                            {
+                                gameDeck.deckCards[arrayPosition] = cardPlayable;
+                            }
+                        }
                         delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                     }
                 }
