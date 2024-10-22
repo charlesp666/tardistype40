@@ -13,7 +13,6 @@
 >
 
     <Grid Name="gameTableau"
-          Margin="2,5"
           Background="Blue"
           BorderThickness="5"
           BorderBrush="White"
@@ -39,7 +38,7 @@
                 BorderBrush="Black"
         >
             <Grid.RowDefinitions>
-                <RowDefinition Height="64"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -53,57 +52,56 @@
                     Background="White"
                     BorderBrush="Black"
                     BorderThickness="1"
+                    Height="50"
+                    Width="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
             >
-
                 <Image x:Name="someJunk"
                        Grid.Column="0"
-                       Margin="3,3,0,0"
-                       Height="50"
-                       Width="50"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
                        Source="/Assets/GameImages/CardsIcon.png"
                        FocusVisualPrimaryBrush="Blue"
                 />
             </Border>
 
             <Image x:Name="PlayableImage"
-                       Grid.Column="1"
-                       Margin="3,3,0,0"
-                       Height="50"
-                       Width="50"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Source="{x:Bind cardPlayable.cardFace}"
-                       FocusVisualPrimaryBrush="White"
-                    />
+                   Grid.Column="1"
+                   Margin="3,3,0,0"
+                   Height="50"
+                   Width="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Source="{Binding cardPlayable.cardFace}"
+                   FocusVisualPrimaryBrush="White"
+            />
 
             <Image x:Name="NotPlayableImage"
-                       Grid.Column="2"
-                       Margin="3,3,0,0"
-                       Height="50"
-                       Width="50"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Source="{x:Bind cardNotPlayable.cardFace}"
-                       FocusVisualPrimaryBrush="White"
-                    />
+                   Grid.Column="2"
+                   Margin="3,3,0,0"
+                   Height="50"
+                   Width="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Source="{Binding cardNotPlayable.cardFace}"
+                   FocusVisualPrimaryBrush="White"
+            />
 
             <Border Name="brdCurrentActivity"
                     Grid.Column="3"
                     BorderBrush="White"
                     BorderThickness="1"
                     CornerRadius="10"
-                    Height="50"
+                    Height="48"
                     Width="798"
                     VerticalAlignment="Center"
             >
                 <TextBlock x:Name="tbCurrentActivity"
-                           Text="Waiting..."
+                           Text="{x:Bind myCurrentActivity.CurrentActivityText}"
                            Margin="1,1,1,1"
                            Width="796"
                            Height="46"
                            HorizontalTextAlignment="Center"
+                           VerticalAlignment="Center"
                            FontSize="24pi"
                            FontFamily="Arial"
                            FontWeight="Medium"

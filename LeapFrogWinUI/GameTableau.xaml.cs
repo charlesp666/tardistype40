@@ -44,6 +44,31 @@ using System.Linq;
 
 namespace LeapFrogWinUI
 {
+    /// Class to reflect changes to current activity textblock as they
+    /// occur
+    public class CurrentActivity : INotifyPropertyChanged
+    {
+        private string currentActivity;
+        public string CurrentActivityText
+        {
+            get => currentActivity;
+            set
+            {
+                if (currentActivity != value)
+                {
+                    currentActivity = value;
+                    OnPropertyChanged(nameof(CurrentActivityText));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -53,6 +78,7 @@ namespace LeapFrogWinUI
         * Class Variables and Constants
         */
         private AppWindow myWindow = null;
+        public CurrentActivity myCurrentActivity { get; set; }
 
         //Create Player and GameInformation Objects
         //private Player myAvatar = new Player();                  //Storage for Current Player Object
@@ -116,6 +142,9 @@ namespace LeapFrogWinUI
         {
             this.InitializeComponent();
 
+            myCurrentActivity = new CurrentActivity();
+            this.DataContext = myCurrentActivity;
+
             myWindow = getMyAppWindow();
             myWindow.Hide();
             ResizeAppWindow(myWindow);
@@ -123,22 +152,22 @@ namespace LeapFrogWinUI
             this.Visibility = Visibility.Collapsed;
             this.Loaded += loadedGameTableau;
 
-            tbCurrentActivity.Text = "Beginning...";
+            myWindow.Show(true);
 
             //Get Text for Game Instructions
+            myCurrentActivity.CurrentActivityText = "Loading Help Text...";
             loadHelpText();
 
             //Clear the Game Deck to initialize the Game Board, and prepare for new game
-            cardPlayable = new Cards.Card("n", "p", gameDeck.getCardFacePlayable());
-            cardNotPlayable = new Cards.Card("p", "l", gameDeck.getCardFaceNotPlayable());
+            cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
+            cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             //Build the Initial Game Board and set Data Context
+            myCurrentActivity.CurrentActivityText = "Preparing Initial Game Board...";
             clearDeck();
             buildInitialGameBoard();
 
-            tbCurrentActivity.Text = "Waiting for User Input...";
-
-            myWindow.Show(true);
+            myCurrentActivity.CurrentActivityText = "Waiting for User Input...";
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end, my only friend, the end...";
@@ -160,13 +189,8 @@ namespace LeapFrogWinUI
             var clickedItem = e.ClickedItem as Cards.Card;
             int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
 
-            //int indexClickedCell = dataGridGameBoard.SelectedIndex;
-
-            string speakingText = "Clickety Click on Index " + indexClickedCell.ToString();
-            speakText(speakingText);
-
-            //Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
-            //SelectedCard(selectedCard);
+            Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
+            SelectedCard(selectedCard);
         }
 
         /*******************************************************************************************
@@ -192,10 +216,11 @@ namespace LeapFrogWinUI
         private async void loadedGameTableau(object sender, RoutedEventArgs e)
         {
             // Simulate loading operations
-            await Task.Delay(2000); // Adjust as necessary
+            while( this.IsLoaded != true);
 
             // Show the page content after loading is complete
             this.Visibility = Visibility.Visible;
+            await Task.Delay(2000); // Adjust as necessary
         }
 
         /*******************************************************************************************
@@ -205,11 +230,6 @@ namespace LeapFrogWinUI
         /*/
         private void ResizeAppWindow(AppWindow appWindow)
         {
-            //var myWindow = (Application.Current as App)?.m_window as MainWindow;
-            //var hwnd = WindowNative.GetWindowHandle(myWindow);
-            //var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
-            //var appWindow = AppWindow.GetFromWindowId(myWindowId);
-
             int pageWidth = (int)this.Width;
             int pageHeight = (int)this.Height;
             SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
@@ -234,6 +254,8 @@ namespace LeapFrogWinUI
             //set the XamlRoot property
             dlgSelectedCard.XamlRoot = btnHelp.XamlRoot;
 
+            string aMsg = "Selected Card is " + theCard;
+            speakText(aMsg);
             ContentDialogResult result = await dlgSelectedCard.ShowAsync();
         }
 
@@ -252,7 +274,6 @@ namespace LeapFrogWinUI
          */
         private async void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            tbCurrentActivity.Text = "Displaying How to Play...";
             ContentDialog dlgGameInstructions = new ContentDialog
             {
                 Title = "How to Play Leapfrog",
@@ -264,7 +285,6 @@ namespace LeapFrogWinUI
             dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
 
             ContentDialogResult result = await dlgGameInstructions.ShowAsync();
-            tbCurrentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -273,6 +293,7 @@ namespace LeapFrogWinUI
          */
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
+            myCurrentActivity.CurrentActivityText = "Loading Deck of Playing Cards...";
             loadDeck();                                  //Load the Game Deck from the Standard Deck
 
             setUpNewGame(gameDeck);                            //Shuffle and Deal Cards for new game
@@ -351,8 +372,6 @@ namespace LeapFrogWinUI
           */
         private void buildInitialGameBoard()
         {
-            tbCurrentActivity.Text = "Building Initial Game Board...";
-
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
 
@@ -363,8 +382,6 @@ namespace LeapFrogWinUI
             //Set SelectedIndex to No item
             dataGridGameBoard.SelectedIndex = -1;
             dataGridGameBoard.SelectedItem = null;
-
-            tbCurrentActivity.Text = "Waiting...";
         }
 
         /*******************************************************************************************
@@ -420,8 +437,6 @@ namespace LeapFrogWinUI
          */
         private void dealCards(Cards aDeck)
         {
-            tbCurrentActivity.Text = "Dealing Cards...";
-
             int countCards = aDeck.deckCards.Count;
 
             for (int aCard = 0; aCard < countCards; aCard++)
@@ -449,8 +464,6 @@ namespace LeapFrogWinUI
             //        delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
             //    }
             //}
-
-            tbCurrentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -687,13 +700,10 @@ namespace LeapFrogWinUI
         */
         private async void loadHelpText()
         {
-            tbCurrentActivity.Text = "Loading Help Text...";
             string fileInstructions = folderGameData + "GameInstructions.txt";
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
             helpText = await FileIO.ReadTextAsync(HelpFile);
-
-            tbCurrentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -773,8 +783,6 @@ namespace LeapFrogWinUI
          */
         public void removeAces()
         {
-            tbCurrentActivity.Text = "Removing Aces...";
-
             int arrayPosition = 0;
 
             for (int aRow = 0; aRow < numberPlayRows; aRow++)
@@ -809,8 +817,6 @@ namespace LeapFrogWinUI
             isGameSet = true;                                     //Set the game is set flag to true
             //isGameOver();                                      // Initialize the icons for game play
             flgGameOver = false;                                 //Set the "Game Over" flag to false
-
-            tbCurrentActivity.Text = "";
         }
 
         /*******************************************************************************************
@@ -926,11 +932,14 @@ namespace LeapFrogWinUI
          */
         private void setUpNewGame(Cards aDeck)
         {
+            myCurrentActivity.CurrentActivityText = "Shuffling and Cutting Cards...";
             aDeck.shuffleDeck();                                         //Shuffle the Deck of Cards
             aDeck.cutDeck();                                                          //Cut the Deck
 
+            myCurrentActivity.CurrentActivityText = "Dealing Cards...";
             dealCards(aDeck);                                        //Deal the Cards to the Tableau
 
+            myCurrentActivity.CurrentActivityText = "Removing Aces...";
             removeAces();                                    //Remove Aces to Initialize Play Spaces
 
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
@@ -943,6 +952,8 @@ namespace LeapFrogWinUI
 
             string speakingText = "New Game Setup Complete!";
             speakText(speakingText);
+
+            myCurrentActivity.CurrentActivityText = "Click on Space to Move Card...";
         }
 
         /*******************************************************************************************

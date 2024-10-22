@@ -10,10 +10,23 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock x:Name="pageTitle" Text="Page 2"
-               Margin="16" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock x:Name="pageTitle"
+                   Text="Page 2"
+                   Margin="16"
+                   Style="{StaticResource TitleTextBlockStyle}"
+        />
+
         <HyperlinkButton Content="Click to go to main page"
-                     Click="HyperlinkButton_Click"
-                     HorizontalAlignment="Center"/>
+                         Click="HyperlinkButton_Click"
+                         HorizontalAlignment="Center"
+        />
+
+        <StackPanel Name="pnlTextRefresh"
+                    Margin="100"
+        >
+            <TextBox Name="UpdatedText" Text="Unchanged"/>
+            <TextBlock Text="{Binding CurrentActivityText}" FontSize="20"/>
+            <Button Content="Update Text" Click="UpdateTextButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

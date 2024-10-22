@@ -287,8 +287,8 @@ namespace LeapFrogWinUI
         private string cardBack = "/Assets/GameImages/defaultBack.jpg";
 
         //Set CardFace to Default "NotPlayable" Image
-        private string bmpNotPlayable = folderGameImages + "NotPlayable.jpg";
-        private string bmpPlayable = folderGameImages + "Playable.jpg";
+        private string bmpNotPlayable = folderGameImages + "NotPlayable.gif";
+        private string bmpPlayable = folderGameImages + "Playable.gif";
 
         private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
 
