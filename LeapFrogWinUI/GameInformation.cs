@@ -47,7 +47,7 @@ namespace LeapFrogWinUI
 
         //private BitmapImage bmpNotPlayable = new BitmapImage(new System.Uri(folderGameImages + "NotPlayable.jpg"));
 
-        private BitmapImage gameImage = new BitmapImage(new System.Uri(folderGameImages + "LeapFrog.jpg")); //"Froggy" image
+        private BitmapImage gameImage = new BitmapImage(new System.Uri(folderGameImages + "Froggy.png")); //"Froggy" image
         private BitmapImage mainWindowIcon = new BitmapImage(new System.Uri(folderGameImages + "CardsIcon.png")); //Cards Icon;
 
         private SolidColorBrush colorBackground;   //Color to assign to the Background of game board

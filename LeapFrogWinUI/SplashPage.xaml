@@ -30,7 +30,7 @@
 
          <!--"Froggy" Game Image -->
          <Image x:Name="picGameImage"
-            Source="/Assets/GameImages/LeapFrog.jpg"
+            Source="/Assets/GameImages/Froggy.png"
             Height="430"
             Width="360"
             HorizontalAlignment="Left"

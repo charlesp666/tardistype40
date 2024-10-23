@@ -13,10 +13,11 @@
  */
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+//using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using WinRT;
+//using System.Runtime.CompilerServices;
+//using WinRT;
 
 namespace LeapFrogWinUI
 {
@@ -340,6 +341,83 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: findArrayIndex
+         * Finds the index of the value passed as "searchValue" in the Array passed as "anArray".
+         */
+        private int findArrayIndex(string[] anArray, string searchValue)
+        {
+            int arrayIndex = 0;
+
+            while (anArray[arrayIndex].ToLower() != searchValue.ToLower())
+            {
+                arrayIndex++;
+            }
+
+            return arrayIndex;
+        }
+
+        /*******************************************************************************************
+         * Method: findCardIndex
+         * Finds the index of the Card passed as "thePlayCard" this Objects "Deck of Cards." 
+         */
+        private int findCardIndex(Card thePlayCard)
+        {
+            int arrayIndex = 0;
+
+            while (!this.deckCards[arrayIndex].Equals(thePlayCard))
+            {
+                arrayIndex++;
+            }
+
+            return arrayIndex;
+        }
+
+        /*******************************************************************************************
+         * Method: findNextCardAscending
+         * Returns the Next Ascending Card
+         */
+        public Card findNextCardAscending(Card thePlayCard)
+        {
+            Card nextCard = null;                         //Dummy Card Object to Access Card Methods
+
+            String cardRank = thePlayCard.cardRank.ToLower();             //Get the Rank of PlayCard
+            String cardSuit = thePlayCard.cardSuit.ToLower();             //Get the Suit of PlayCard
+
+            if (cardRank != "k")
+            {
+                int nextCardRankPosition = findArrayIndex(Card.possibleRanks, cardRank) + 1;
+                string nextCardRank = Card.possibleRanks[nextCardRankPosition];
+
+                nextCard = new Card(nextCardRank, cardSuit);
+            }
+
+            return nextCard;
+        }
+
+        /*******************************************************************************************
+         * Method: getNextCardDescending
+         * Returns the Next Descending Card; returns null if the PlayCard passed as parameter is
+         * an Ace.
+         */
+        public Card findNextCardDescending(Card thePlayCard)
+        {
+            Card nextCard = null;                         //Dummy Card Object to Access Card Methods
+
+            String cardRank = thePlayCard.cardRank.ToLower();             //Get the Rank of PlayCard
+            String cardSuit = thePlayCard.cardSuit.ToLower();             //Get the Suit of PlayCard
+
+            if (cardRank != "a")
+            {
+                int nextCardRankPosition = findArrayIndex(Card.possibleRanks, cardRank) - 1;
+                string nextCardRank = Card.possibleRanks[nextCardRankPosition];
+
+                nextCard = new Card(nextCardRank, cardSuit);
+            }
+
+            return nextCard;
+        }
+
+        /*******************************************************************************************
          * Method: getCard
          * Returns the Card object found at the specified position in the Deck.
          */
@@ -382,58 +460,6 @@ namespace LeapFrogWinUI
         public string getCardFacePlayable()
         {
             return bmpPlayable;
-        }
-
-        /*******************************************************************************************
-         * Method: getNextCardAscending
-         * Returns the Card Value of the Next Ascending Card
-         */
-        public String getNextCardAscending(String aCardFace)
-        {
-            Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
-
-            String cardRank = getRank(aCardFace);                 //Get the Rank of Current Card
-            String cardSuit = getSuit(aCardFace);                 //Get the Suit of Current Card
-
-            int nextPosition = aCard.findRank(cardRank);    //Get Array position of Current Rank
-            nextPosition++;                           //Increment Position to Next Rank in Array
-            if (nextPosition < Card.possibleRanks.Length - 1)
-            {
-                cardRank = Card.possibleRanks.ElementAt(nextPosition);
-            }
-            else
-            {
-                cardRank = null;
-                cardSuit = null;
-            }
-
-            return (cardRank + cardSuit);
-        }
-
-        /*******************************************************************************************
-         * Method: getNextCardDescending
-         * Returns the Card Value of the Next Descending Card
-         */
-        public String getNextCardDescending(String aCardFace)
-        {
-            Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
-
-            String cardRank = getRank(aCardFace);                 //Get the Rank of Current Card
-            String cardSuit = getSuit(aCardFace);                 //Get the Suit of Current Card
-
-            int nextPosition = aCard.findRank(cardRank);    //Get Array position of Current Rank
-            nextPosition--;                           //Increment Position to Next Rank in Array
-            if (nextPosition >= 0)
-            {
-                cardRank = Card.possibleRanks.ElementAt(nextPosition);
-            }
-            else //
-            {
-                cardRank = null;
-                cardSuit = null;
-            }
-
-            return (cardRank + cardSuit);
         }
 
         /*******************************************************************************************

@@ -115,16 +115,7 @@ namespace LeapFrogWinUI
 
         //"Public" Xaml access for Playable and Non-Playable Cards
         public Cards.Card cardPlayable;
-        //{
-        //    get;
-        //    set;
-        //}
-
         public Cards.Card cardNotPlayable;
-        //{
-        //    get;
-        //    set;
-        //}
 
         /*******************************************************************************************
         * Class Variables and Constants
@@ -132,7 +123,7 @@ namespace LeapFrogWinUI
         //private Stack<UndoItem> myUndoItems = new Stack<UndoItem>();
 
         //private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
-        private static int displayDelayMS = 150;      //Action display delay so user can see changes
+        private static int displayDelayMS = 100;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DateTime gameStartTime;                                            //Game Start Time
@@ -189,8 +180,17 @@ namespace LeapFrogWinUI
             var clickedItem = e.ClickedItem as Cards.Card;
             int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
 
-            Cards.Card selectedCard = gameDeck.getCard(indexClickedCell);
-            SelectedCard(selectedCard);
+            SelectedCard(indexClickedCell);
+
+            if(isGameSet)
+            {
+                playSpaceClicked(indexClickedCell);
+            }
+        }
+
+        private void dataGridGameBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataGridGameBoard.SelectedIndex = -1;
         }
 
         /*******************************************************************************************
@@ -240,21 +240,20 @@ namespace LeapFrogWinUI
          * Menu: Help/About
          * Displays the Help/About dialog
          */
-        private async void SelectedCard(Cards.Card aCard)
+        private async void SelectedCard(int aCard)
         {
-            string theCard = aCard.cardRank + aCard.cardSuit;
 
             ContentDialog dlgSelectedCard = new ContentDialog
             {
                 Title = "Selected Card is:",
-                Content = theCard,
+                Content = aCard.ToString(),
                 CloseButtonText = "OK"
             };
 
             //set the XamlRoot property
             dlgSelectedCard.XamlRoot = btnHelp.XamlRoot;
 
-            string aMsg = "Selected Card is " + theCard;
+            string aMsg = "Selected Card is " + aCard.ToString();
             speakText(aMsg);
             ContentDialogResult result = await dlgSelectedCard.ShowAsync();
         }
@@ -392,7 +391,7 @@ namespace LeapFrogWinUI
         {
             foreach (Cards.Card aCard in gameDeck.deckCards)
             {
-                //aCard.cardFace = "";
+                aCard.cardFace = "";
             }
         }
 
@@ -594,7 +593,7 @@ namespace LeapFrogWinUI
          */
         private bool isKingPosition(int aCol)
         {
-            return (aCol == 0);
+            return ((aCol % 13) == 0);
         }
 
         /*******************************************************************************************
@@ -602,47 +601,25 @@ namespace LeapFrogWinUI
          * Using the row and column positions process determines if the selected position
          * is playable. Returns "true" if current position is playable; otherwise returns "false."
          */
-        //private bool isPlayable(int colPosition, int rowPosition)
-        //{
-        //    bool retVal = true;                                          // Set default return value
+        private bool isPlayable(int selectedPostion)
+        {
+            bool retVal = true;                                          // Set default return value
 
-        //    if (dataGridGameBoard[colPosition, rowPosition].Tag.ToString().Equals(playSpace))
-        //    {
-        //        if (colPosition > 0)                                  //If Not the Leftmost Column...
-        //        {
-        //            //Check if the Cell to Left is "Playable"
-        //            String cardToLeft = dataGridGameBoard[colPosition - 1, rowPosition].Tag.ToString();
-        //            if (cardToLeft.Equals(playSpace))                 //If the cell is "PlaySpace"...
-        //            {
-        //                retVal = false;                               //Set Return to "Not-Playable"
-        //            }
-        //            else if (cardToLeft.Substring(0, 1).Equals("2"))         //Or if it is a Deuce...
-        //            {
-        //                retVal = false;                               //Set Return to "Not-Playable"
-        //            }
-        //            else                                              //Otherwise, it is playable...
-        //            {
-        //                retVal = true;                                    //Set Return to "Playable"
-        //            }
-        //        }
-        //        else                                            //Else, It is the Leftmost Column...
-        //        {
-        //            retVal = true;                                        //Set Return to "Playable"
-        //        }
+            if(!isKingPosition(selectedPostion))                   //If King Position is playable...
+            {
+                Cards.Card cardToLeft = gameDeck.deckCards[selectedPostion - 1];
 
-        //        //Set the Icon for the Cell
-        //        if (retVal)                                            //If the Cell is Playable...
-        //            dataGridGameBoard[colPosition, rowPosition].Value = playSpaceIcon;
-        //        else
-        //            dataGridGameBoard[colPosition, rowPosition].Value = noPlayIcon;
-        //    }
-        //    else                                                          //The Cell is Not Playable
-        //    {
-        //        retVal = false;                                       //Set Return to "Not-Playable"
-        //    }
+                if(  (cardToLeft.cardRank.ToLower() == "2")
+                  || (cardToLeft.cardRank.ToLower() == "n")
+                  || (cardToLeft.cardRank.ToLower() == "p")
+                  )
+                { 
+                    retVal = false;
+                }
+            }
 
-        //    return retVal;
-        //}
+            return retVal;
+        }
 
         /*******************************************************************************************
          * Method: isSuitComplete
@@ -729,53 +706,61 @@ namespace LeapFrogWinUI
          * Actions to perform when mouse is Clicked. Process determines the Grid
          * Component that was clicked then initiates a card move.
          */
-        //public void playSpaceClicked(int playCol, int playRow)
-        //{
-        //    if (isGameSet)                                         //Playing Area is set for play...
-        //    {
-        //        if (isPlayable(playCol, playRow) || playKingPosition)    //Playable or King Space...
-        //        {
-        //            PlayPosition destinationPosition = new PlayPosition(dataGridGameBoard, playCol, playRow);
-        //            PlayPosition sourcePosition = destinationPosition;         //Set a "Dummy" Value
+        public void playSpaceClicked(int destinationIndex)
+        {
+            if (isPlayable(destinationIndex))    //Playable or King Space...
+            {
+                if (!isKingPosition(destinationIndex))
+                {
+                    Cards.Card sourceCard = gameDeck.deckCards[destinationIndex-1];
+                    Cards.Card cardToMove = gameDeck.findNextCardDescending(sourceCard);
 
-        //            if (isKingPosition(playCol))               //If Clicked Cell is Leftmost Cell...
-        //            {
-        //                tempStorage = destinationPosition;           //Store the Current Destination
+                    string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
+                    speakText(aMsg);
 
-        //                displayMessage("Select King to Move to this Position...");  //Prompt User...
-        //                playKingPosition = true;                         //Set King being Moved Flag
-        //            }
-        //            else if (!playKingPosition)                            //If not Moving a King...
-        //            {
-        //                sourcePosition = destinationPosition.findPlayCard(dataGridGameBoard);
-        //            }
-        //            else if (playKingPosition)                           //If King is being Moved...
-        //            {
-        //                if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
-        //                {
-        //                    displayWarning("King was not selected; cancelling move!");
-        //                    sourcePosition = destinationPosition;
-        //                }
-        //                else
-        //                {
-        //                    sourcePosition = destinationPosition;//Set Source to Current Destination
-        //                    destinationPosition = tempStorage;        //Restore Original Destination
-        //                }
+                    //if (isKingPosition(playCol))               //If Clicked Cell is Leftmost Cell...
+                    //{
+                    //    tempStorage = destinationPosition;           //Store the Current Destination
 
-        //                playKingPosition = false;                  //Unset the King being Moved Flag
-        //            }
+                    //    displayMessage("Select King to Move to this Position...");  //Prompt User...
+                    //    playKingPosition = true;                         //Set King being Moved Flag
+                    //}
+                    //else if (!playKingPosition)                            //If not Moving a King...
+                    //{
+                    //    sourcePosition = destinationPosition.findPlayCard(dataGridGameBoard);
+                    //}
+                    //else if (playKingPosition)                           //If King is being Moved...
+                    //{
+                    //    if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
+                    //    {
+                    //        displayWarning("King was not selected; cancelling move!");
+                    //        sourcePosition = destinationPosition;
+                    //    }
+                    //    else
+                    //    {
+                    //        sourcePosition = destinationPosition;//Set Source to Current Destination
+                    //        destinationPosition = tempStorage;        //Restore Original Destination
+                    //    }
 
-        //            //Destination and Source should be set, move the selected card
-        //            if (!playKingPosition)
-        //            {
-        //                moveCard(sourcePosition, destinationPosition);     //Move the Designated Card
+                    //    playKingPosition = false;                  //Unset the King being Moved Flag
+                    //}
 
-        //                moveCount++;                                         //Increment Move Counter
-        //                txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
-        //            }
-        //        }
-        //    }
-        //}
+                    ////Destination and Source should be set, move the selected card
+                    //if (!playKingPosition)
+                    //{
+                    //    moveCard(sourcePosition, destinationPosition);     //Move the Designated Card
+
+                    //    moveCount++;                                         //Increment Move Counter
+                    //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                    //}
+                }
+                else
+                {
+                    string aMsg = "Card to Move is a King.";
+                    speakText(aMsg);
+                }
+            }
+        }
 
         /*******************************************************************************************
          * Method: removeAces
@@ -800,7 +785,7 @@ namespace LeapFrogWinUI
                         gameDeck.deckCards[arrayPosition] = cardPlayable;
                         dataGridGameBoard.SelectedItem = gameDeck.deckCards[arrayElement];
 
-                        if (arrayPosition > 0)
+                        if ((arrayPosition > 0) && (!isKingPosition(arrayPosition)))
                         {
                             if ((gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
                               || (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "p")
@@ -1046,7 +1031,7 @@ namespace LeapFrogWinUI
             /*******************************************************************************************
              * Constructor: PlayPosition (Default)
              * 
-             * Sets up the Game Tableau and Prepares for game play.
+             * Creates an "empty" play position.
              */
             private PlayPosition()
             {

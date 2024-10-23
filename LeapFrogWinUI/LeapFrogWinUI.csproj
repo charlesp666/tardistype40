@@ -13,6 +13,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\GameImages\NotPlayable.gif" />
     <None Remove="GameTableau.xaml" />
     <None Remove="SplashPage.xaml" />
   </ItemGroup>
