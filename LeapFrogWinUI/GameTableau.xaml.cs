@@ -180,7 +180,7 @@ namespace LeapFrogWinUI
             var clickedItem = e.ClickedItem as Cards.Card;
             int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
 
-            SelectedCard(indexClickedCell);
+            //SelectedCard(indexClickedCell);
 
             if(isGameSet)
             {
@@ -688,18 +688,18 @@ namespace LeapFrogWinUI
          * Moves the Card from the Source Position to the Destination Position, then checks if the
          * move ended the game.
          */
-        //private void moveCard(PlayPosition sourcePosition, PlayPosition destinationPosition)
-        //{
-        //    if (sourcePosition != destinationPosition)   //If the Source and Destination not Equal...
-        //        swapPlayCards(sourcePosition, destinationPosition);         //Move the Selected Card
+        private void moveCard(int sourceIndex, int destinationIndex)
+        {
+            if (sourceIndex != destinationIndex)       //If the Source and Destination not Equal...
+                swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
 
-        //    playKingPosition = false;                                         //Ensure Flag is Unset
+            playKingPosition = false;                                         //Ensure Flag is Unset
 
-        //    if (isGameOver())                           //Check if game still has playable positions
-        //    {
-        //        endGame();                   //Close out the current game, and set appropriate flags
-        //    }
-        //}
+            //if (isGameOver())                           //Check if game still has playable positions
+            //{
+            //    endGame();                   //Close out the current game, and set appropriate flags
+            //}
+        }
 
         /*******************************************************************************************
          * playSpaceClicked
@@ -715,8 +715,12 @@ namespace LeapFrogWinUI
                     Cards.Card sourceCard = gameDeck.deckCards[destinationIndex-1];
                     Cards.Card cardToMove = gameDeck.findNextCardDescending(sourceCard);
 
+                    int sourceIndex = gameDeck.findCardIndex(cardToMove);
+
                     string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
                     speakText(aMsg);
+
+                    moveCard(sourceIndex, destinationIndex);
 
                     //if (isKingPosition(playCol))               //If Clicked Cell is Leftmost Cell...
                     //{
@@ -971,23 +975,26 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
         * Method: swapPlayCards
         * Copies the Card Value and Card Face from the Source Play Position to the Destination
-        * Play Position, then sets the Card Face and Value of the Source to "Playable".
+        * Play Position, then sets the Card Face and Value of the Source to "Playable" if the
+        * source position is playable or "NotPlayable" otherwise.
         */
-        //private void swapPlayCards(PlayPosition sourceCard, PlayPosition destinationCard)
-        //{
-        //    //Copy Source Card to Destination
-        //    dataGridGameBoard[destinationCard.getColumn(), destinationCard.getRow()].Tag =
-        //        dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Tag;
-        //    dataGridGameBoard[destinationCard.getColumn(), destinationCard.getRow()].Value =
-        //        dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Value;
+        private void swapPlayCards(int sourceIndex, int destinationIndex)
+        {
+            //Copy Source Card to Destination
+            gameDeck.deckCards[destinationIndex] = gameDeck.deckCards[sourceIndex];
 
-        //    //Set Source to "Playable"
-        //    dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Tag = playSpace;
-        //    dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Value = playSpaceIcon;
+            if(isPlayable(sourceIndex))
+            {
+                gameDeck.deckCards[sourceIndex] = cardPlayable;
+            }
+            else
+            {
+                gameDeck.deckCards[sourceIndex] = cardNotPlayable;
+            }
 
-        //    UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
-        //    myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
-        //}
+            //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
+            //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
+        }
 
         //private void undoMove()
         //{

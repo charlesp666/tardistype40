@@ -11,10 +11,15 @@
 /***************************************************************************************************
  * System Class/Library Declarations
  */
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;
 //using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
+using Windows.Media.Core;
+using Windows.Media.Playback;
+using Windows.Media.SpeechSynthesis;
 using WinRT;
 //using System.Runtime.CompilerServices;
 //using WinRT;
@@ -122,19 +127,24 @@ namespace LeapFrogWinUI
             }
 
             /*******************************************************************************************
-             * Method (override) equals
-             * Compares the card passed as parameter to the card that invoked the method.
-             * Returns true if the cards have the same suit and rank; otherwise, returns
-             * false.
+             * Method cardsMatch
+             * Compares the card passed as parameter to the card that invoked the method. Returns true
+             * if the cards have the same suit and rank; otherwise, returns false.
              */
-            public bool equals(Card someCard)
+            public bool cardsMatch(Card someCard)
             {
-                bool retVal = false;                      //Set Default return value to false
+                bool retVal = false;                                 //Set Default return value to false
 
-                if ((this.getRank().Equals(someCard.getRank())) && (this.getSuit() == someCard.getSuit()))
-                {                                                   // If suit and rank match
-                    retVal = true;                                 //Set return value to true
-                }
+                string rankToMatch = someCard.cardRank.ToLower();          //Store Rank of Card to Match
+                string suitToMatch = someCard.cardSuit.ToLower();          //Store Suit of Card to Match
+
+                string thisRank = this.cardRank.ToLower();                     //Store Rank of this card
+                string thisSuit = this.cardSuit.ToLower();                     //Store Suit of this card
+
+                if(thisSuit == suitToMatch)                                      //If the Suits match...
+                    if(thisRank == rankToMatch)                                 //and the Ranks match...
+                        retVal = true;                                        //Set return value to true
+
                 return retVal;
             }
 
@@ -360,11 +370,11 @@ namespace LeapFrogWinUI
          * Method: findCardIndex
          * Finds the index of the Card passed as "thePlayCard" this Objects "Deck of Cards." 
          */
-        private int findCardIndex(Card thePlayCard)
+        public int findCardIndex(Card thePlayCard)
         {
             int arrayIndex = 0;
 
-            while (!this.deckCards[arrayIndex].Equals(thePlayCard))
+            while (!this.deckCards[arrayIndex].cardsMatch(thePlayCard))
             {
                 arrayIndex++;
             }
