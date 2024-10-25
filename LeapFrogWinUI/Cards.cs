@@ -47,8 +47,6 @@ namespace LeapFrogWinUI
 
             private string defaultCardBack = folderGameImages + "defaultBack.gif";
 
-            private string strCardFace;
-
             //Declare Card Public Attributes to be used for displaying Cards in Game
             public string cardRank                      //Contains the Rank (Ace through King) of card
             {

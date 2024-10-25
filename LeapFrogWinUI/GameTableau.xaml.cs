@@ -155,7 +155,7 @@ namespace LeapFrogWinUI
 
             //Build the Initial Game Board and set Data Context
             myCurrentActivity.CurrentActivityText = "Preparing Initial Game Board...";
-            clearDeck();
+
             buildInitialGameBoard();
 
             myCurrentActivity.CurrentActivityText = "Waiting for User Input...";
@@ -185,13 +185,14 @@ namespace LeapFrogWinUI
             if(isGameSet)
             {
                 playSpaceClicked(indexClickedCell);
+                dataGridGameBoard.SelectedIndex = -1;
             }
         }
 
-        private void dataGridGameBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            dataGridGameBoard.SelectedIndex = -1;
-        }
+        //private void dataGridGameBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    dataGridGameBoard.SelectedIndex = -1;
+        //}
 
         /*******************************************************************************************
         /* Method: ResizeAppWindow
@@ -209,13 +210,13 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
-        /* Method: loadedSplashPage
+        /* Method: loadedGameTableau
         /* 
-        /* Reveals the SplashPage after the page is fully loaded.
+        /* Reveals the GameTableu after the page is fully loaded.
         /*/
         private async void loadedGameTableau(object sender, RoutedEventArgs e)
         {
-            // Simulate loading operations
+            // Wait for page loading to complete
             while( this.IsLoaded != true);
 
             // Show the page content after loading is complete
@@ -240,23 +241,23 @@ namespace LeapFrogWinUI
          * Menu: Help/About
          * Displays the Help/About dialog
          */
-        private async void SelectedCard(int aCard)
-        {
+        //private async void SelectedCard(int aCard)
+        //{
 
-            ContentDialog dlgSelectedCard = new ContentDialog
-            {
-                Title = "Selected Card is:",
-                Content = aCard.ToString(),
-                CloseButtonText = "OK"
-            };
+        //    ContentDialog dlgSelectedCard = new ContentDialog
+        //    {
+        //        Title = "Selected Card is:",
+        //        Content = aCard.ToString(),
+        //        CloseButtonText = "OK"
+        //    };
 
-            //set the XamlRoot property
-            dlgSelectedCard.XamlRoot = btnHelp.XamlRoot;
+        //    //set the XamlRoot property
+        //    dlgSelectedCard.XamlRoot = btnHelp.XamlRoot;
 
-            string aMsg = "Selected Card is " + aCard.ToString();
-            speakText(aMsg);
-            ContentDialogResult result = await dlgSelectedCard.ShowAsync();
-        }
+        //    string aMsg = "Selected Card is " + aCard.ToString();
+        //    speakText(aMsg);
+        //    ContentDialogResult result = await dlgSelectedCard.ShowAsync();
+        //}
 
         /*******************************************************************************************
          * Event Handler: btnExit_Click
@@ -292,10 +293,10 @@ namespace LeapFrogWinUI
          */
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
-            myCurrentActivity.CurrentActivityText = "Loading Deck of Playing Cards...";
-            loadDeck();                                  //Load the Game Deck from the Standard Deck
+            myCurrentActivity.CurrentActivityText = "Setting Up for New Game...";
+            //loadDeck();                                  //Load the Game Deck from the Standard Deck
 
-            setUpNewGame(gameDeck);                            //Shuffle and Deal Cards for new game
+            setUpNewGame();                                    //Shuffle and Deal Cards for new game
         }
 
         /*******************************************************************************************
@@ -389,31 +390,15 @@ namespace LeapFrogWinUI
          */
         private void clearDeck()
         {
-            foreach (Cards.Card aCard in gameDeck.deckCards)
+            Cards.Card blankCard = null;    //Create a blank card to load into each card in PlayDeck
+
+            //foreach (Cards.Card aCard in gameDeck.deckCards)
+            for (int i = 0; i < gameDeck.deckCards.Count(); i++)
             {
-                aCard.cardFace = "";
+                gameDeck.deckCards[i] = blankCard;
+                Task.Delay(displayDelayMS);
             }
         }
-
-        /*******************************************************************************************
-         * Method: clearBoard
-         * Clears the Playing board (tableau) for a new game.
-         * 
-         * aDeck - Deck Object containing cards to be dealt.
-         */
-        //private void clearBoard(Cards.Deck aDeck)
-        //{
-        //    for (int aRow = 0; aRow < numberPlayRows; aRow++)
-        //    {
-        //        for (int aCol = 0; aCol < numberPlayColumns; aCol++)
-        //        {
-        //            //Assign the Various Fields in the Cell
-        //            dataGridGameBoard[aCol, aRow].ToolTipText = String.Empty;
-        //            dataGridGameBoard[aCol, aRow].Tag = String.Empty;
-        //            dataGridGameBoard[aCol, aRow].Value = aDeck.getCardBack();
-        //        }
-        //    }
-        //}
 
         /*******************************************************************************************
          * Method: computeTimePlayed
@@ -436,33 +421,13 @@ namespace LeapFrogWinUI
          */
         private void dealCards(Cards aDeck)
         {
-            int countCards = aDeck.deckCards.Count;
+            int countCards = gameDeck.deckCards.Count;
 
             for (int aCard = 0; aCard < countCards; aCard++)
             {
-                //aDeck.deckCards.ResetItem(aCard);
-                //NotifyPropertyChanged("aDeck.deckCards[aCard]");
-                delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
+                gameDeck.deckCards[aCard] = aDeck.deckCards[aCard];
+                delay(displayDelayMS);                      //Pause Deal for user to see cards dealt
             }
-            //this.dataGridGameBoard.ItemsSource = null;
-            //this.dataGridGameBoard.ItemsSource = aDeck.deckCards;
-
-            //for (int aRow = 0; aRow < numberPlayRows; aRow++)
-            //{
-            //    for (int aCol = 0; aCol < numberPlayColumns; aCol++)
-            //    {
-            //        //Compute Card Element from Deck Array to Deal
-            //        int arrayElement = aDeck.calcArrayPosition(aRow, aCol);
-
-            //        dataGridGameBoard.SelectedIndex = arrayElement;
-            //        dataGridGameBoard.SelectedItem = null;
-            //        dataGridGameBoard.SelectedItem = aDeck.deckCards[arrayElement];
-
-            //        NotifyPropertyChanged();
-
-            //        delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
-            //    }
-            //}
         }
 
         /*******************************************************************************************
@@ -514,22 +479,25 @@ namespace LeapFrogWinUI
          * Process finishes all the tasks that are necessary when a game has ended; i.e.
          * accumulate the score for the game, set the public "Game Over" flag, etc.
          */
-        //private void endGame()
-        //{
-        //    gameTime.Stop();                                                   //Stop the Game Timer
+        private void endGame()
+        {
+            //gameTime.Stop();                                                   //Stop the Game Timer
 
-        //    displayMessage("Game Over!");
-        //    scoreGame();               //Compute Score for Current Game and Update Player Statistics
+            string aMsg = "Game Over!";
+            speakText(aMsg);
 
-        //    flgGameOver = true;                                               //Set "Game Over" flag
-        //    isGameSet = false;                                               //Set the game set flag
-        //    playKingPosition = false;                             //Ensure Moving King Flag is Unset
+            //displayMessage("Game Over!");
+            //scoreGame();               //Compute Score for Current Game and Update Player Statistics
 
-        //    clearBoard(gameDeck);                                                //Clear the tableau
-        //    lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
-        //    moveCount = -1;                                                 //Reset the move counter
-        //    txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
-        //}
+            flgGameOver = true;                                               //Set "Game Over" flag
+            isGameSet = false;                                               //Set the game set flag
+            playKingPosition = false;                             //Ensure Moving King Flag is Unset
+
+            //clearBoard(gameDeck);                                                //Clear the tableau
+            //lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
+            //moveCount = -1;                                                 //Reset the move counter
+            //txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
+        }
 
         /*******************************************************************************************
          * Function: isCorrectPosition
@@ -558,22 +526,21 @@ namespace LeapFrogWinUI
          * Process walks through the play area checking if all play positions are 
          * playable.Returns true if no more plays can be made; false if still playable.
          */
-        //private bool isGameOver()
-        //{
-        //    int countPlayPositions = 0;
-        //    for (int aRow = 0; aRow < dataGridGameBoard.Rows.Count; aRow++)
-        //    {
-        //        for (int aCol = 0; aCol < dataGridGameBoard.Columns.Count; aCol++)
-        //        {
-        //            if (isPlayable(aCol, aRow))                              //If Cell is Playable...
-        //            {
-        //                countPlayPositions++;                  //Increment Playable position counter
-        //            }
-        //        }
-        //    }
+        private bool isGameOver()
+        {
+            int countPlayPositions = 0;
 
-        //    return (countPlayPositions == 0);           //Return "True" if no positions are playable
-        //}
+            for (int i = 0; i < gameDeck.deckCards.Count; i++)
+            {
+                Cards.Card currentCard = gameDeck.deckCards[i];
+                if(currentCard.cardRank == "p")
+                {
+                    countPlayPositions++;                      //Increment Playable position counter
+                }
+            }
+
+            return (countPlayPositions == 0);           //Return "True" if no positions are playable
+        }
 
         /*******************************************************************************************
          * Function: isKing
@@ -598,8 +565,9 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * Function: isPlayable
-         * Using the row and column positions process determines if the selected position
-         * is playable. Returns "true" if current position is playable; otherwise returns "false."
+         * Using the Index of the card at the "selectedPosition," determines if the selected 
+         * position is playable. Returns "true" if current position is playable; otherwise returns
+         * "false."
          */
         private bool isPlayable(int selectedPostion)
         {
@@ -691,9 +659,12 @@ namespace LeapFrogWinUI
         private void moveCard(int sourceIndex, int destinationIndex)
         {
             if (sourceIndex != destinationIndex)       //If the Source and Destination not Equal...
+            {
                 swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
+                moveCount++;                                             //Increment the Move Count
 
-            playKingPosition = false;                                         //Ensure Flag is Unset
+                playKingPosition = false;                                         //Ensure Flag is Unset
+            }
 
             //if (isGameOver())                           //Check if game still has playable positions
             //{
@@ -708,7 +679,7 @@ namespace LeapFrogWinUI
          */
         public void playSpaceClicked(int destinationIndex)
         {
-            if (isPlayable(destinationIndex))    //Playable or King Space...
+            if (isPlayable(destinationIndex))                            //Playable or King Space...
             {
                 if (!isKingPosition(destinationIndex))
                 {
@@ -763,6 +734,11 @@ namespace LeapFrogWinUI
                     string aMsg = "Card to Move is a King.";
                     speakText(aMsg);
                 }
+
+                if (isGameOver())                           //Check if game still has playable positions
+                {
+                    endGame();                   //Close out the current game, and set appropriate flags
+                }
             }
         }
 
@@ -808,21 +784,21 @@ namespace LeapFrogWinUI
             }
 
             isGameSet = true;                                     //Set the game is set flag to true
-            //isGameOver();                                      // Initialize the icons for game play
-            flgGameOver = false;                                 //Set the "Game Over" flag to false
+            isGameOver();                                      // Initialize the icons for game play
+            //flgGameOver = false;                                 //Set the "Game Over" flag to false
         }
 
         /*******************************************************************************************
          * Method: ResetItem
          * Parses the Rank from the Card Value passed.
          */
-        private void ResetItem(int anIndex)
-        {
-            //if (anIndex >= 0 && anIndex < gameDeck.Count)
-            //{
-            //    gameDeck[anIndex] = new Card { cardRank = $"Reset Card {index}", cardSuit = "", cardFace = null };
-            //}
-        }
+        //private void ResetItem(int anIndex)
+        //{
+        //    //if (anIndex >= 0 && anIndex < gameDeck.Count)
+        //    //{
+        //    //    gameDeck[anIndex] = new Card { cardRank = $"Reset Card {index}", cardSuit = "", cardFace = null };
+        //    //}
+        //}
 
         /*******************************************************************************************
          * Method: scoreGame
@@ -923,21 +899,25 @@ namespace LeapFrogWinUI
          * Prepares the playing board, shuffles the deck of cards and initializes the tableau for
          * playing the game
          */
-        private void setUpNewGame(Cards aDeck)
+        private void setUpNewGame()
         {
+            Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
+
+            clearDeck();                                                  //Clear the Current Layout
+
             myCurrentActivity.CurrentActivityText = "Shuffling and Cutting Cards...";
-            aDeck.shuffleDeck();                                         //Shuffle the Deck of Cards
-            aDeck.cutDeck();                                                          //Cut the Deck
+            tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
+            tempDeck.cutDeck();                                                       //Cut the Deck
 
             myCurrentActivity.CurrentActivityText = "Dealing Cards...";
-            dealCards(aDeck);                                        //Deal the Cards to the Tableau
+            dealCards(tempDeck);                                     //Deal the Cards to the Tableau
 
             myCurrentActivity.CurrentActivityText = "Removing Aces...";
             removeAces();                                    //Remove Aces to Initialize Play Spaces
 
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
 
-            //moveCount = 0;                              //Initialize the Move Counter for a New Game
+            moveCount = 0;                              //Initialize the Move Counter for a New Game
             //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
 
             //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
