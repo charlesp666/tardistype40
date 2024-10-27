@@ -13,7 +13,6 @@ using System.ComponentModel;
 //using System.Collections.Generic;
 //using System.Collections.Immutable;
 //using System.IO;
-//using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -37,7 +36,6 @@ using Windows.Storage;                                    //To load Help Instruc
 using WinRT.Interop;
 using Windows.Media.Core;
 using System.Linq;
-//using static LeapFrogWinUI.Cards;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -294,7 +292,6 @@ namespace LeapFrogWinUI
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
             myCurrentActivity.CurrentActivityText = "Setting Up for New Game...";
-            //loadDeck();                                  //Load the Game Deck from the Standard Deck
 
             setUpNewGame();                                    //Shuffle and Deal Cards for new game
         }
@@ -533,9 +530,20 @@ namespace LeapFrogWinUI
             for (int i = 0; i < gameDeck.deckCards.Count; i++)
             {
                 Cards.Card currentCard = gameDeck.deckCards[i];
-                if(currentCard.cardRank == "p")
+                //Check if the Current Card is a "play position" (Is not a playing card)...
+                if ( (currentCard.cardRank.ToLower() == "n")
+                  || (currentCard.cardRank.ToLower() == "p")
+                  )
                 {
-                    countPlayPositions++;                      //Increment Playable position counter
+                    if (isPlayable(i))                    //If Current Index is actually playable...
+                    {
+                        gameDeck.deckCards[i] = cardPlayable;        //Set CardFace to "Playable"...
+                        countPlayPositions++;              //And increment Playable position counter
+                    }
+                    else
+                    {
+                        gameDeck.deckCards[i] = cardNotPlayable;  //Set CardFace to "NotPlayable"...
+                    }
                 }
             }
 
@@ -628,16 +636,16 @@ namespace LeapFrogWinUI
          * Method: loadDeck
          * Loads the Game Deck from Standard Deck of Cards; prepares Game Deck to play game.
          */
-        private void loadDeck()
-        {
-            Cards standardDeck = new Cards(true);       //Create temporary, unshuffled deck of Cards
-            int countCards = gameDeck.deckCards.Count;
+        //private void loadDeck()
+        //{
+        //    Cards standardDeck = new Cards(true);       //Create temporary, unshuffled deck of Cards
+        //    int countCards = gameDeck.deckCards.Count;
 
-            for (int aCard = 0; aCard < countCards; aCard++)
-            {
-                gameDeck.deckCards[aCard] = standardDeck.deckCards[aCard];
-            }
-        }
+        //    for (int aCard = 0; aCard < countCards; aCard++)
+        //    {
+        //        gameDeck.deckCards[aCard] = standardDeck.deckCards[aCard];
+        //    }
+        //}
 
         /*******************************************************************************************
         * Method: loadHelpText
@@ -665,11 +673,6 @@ namespace LeapFrogWinUI
 
                 playKingPosition = false;                                         //Ensure Flag is Unset
             }
-
-            //if (isGameOver())                           //Check if game still has playable positions
-            //{
-            //    endGame();                   //Close out the current game, and set appropriate flags
-            //}
         }
 
         /*******************************************************************************************
