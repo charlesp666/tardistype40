@@ -178,8 +178,6 @@ namespace LeapFrogWinUI
             var clickedItem = e.ClickedItem as Cards.Card;
             int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
 
-            //SelectedCard(indexClickedCell);
-
             if(isGameSet)
             {
                 playSpaceClicked(indexClickedCell);
@@ -598,56 +596,6 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
-         * Method: isSuitComplete
-         * Walks through a row on the Tableau to determine if the suit for that row
-         * is complete. For a suit to be complete, a King should be found in the leftmost
-         * column, and the rank of the same suit should decrease down to the deuce in the
-         * second column from the end. Strictly speaking, the rightmost column should be
-         * a "play space" character, but for the purposes of scoring, this is unimportant.
-         */
-        //private bool isSuitComplete(int currentRow)
-        //{
-        //    int currentCol = 0;
-
-        //    while (currentCol < Cards.Card.possibleRanks.Length - 2)        //If not at end of row...
-        //    {
-        //        PlayPosition thisCard = new PlayPosition(dataGridGameBoard, currentCol, currentRow);
-        //        String currentSuit = "";                  //Store the Current Suit from first Column
-
-        //        if (thisCard.getCard().Equals(playSpace))               //If Card is a Play Space...
-        //            return false;
-
-        //        if (currentCol == 0)                                         //If leftmost column...
-        //            currentSuit = thisCard.getSuit(thisCard.getCard());       //Get the Current Suit
-
-        //        if (!(thisCard.getSuit(thisCard.getCard()).Equals(currentSuit)))//If not Correct Suit
-        //            return false;
-
-        //        if (!isCorrectPosition(thisCard))                //If Card not in Correct Position...
-        //            return false;
-
-        //        currentCol++;                                                   //Move to Next Column
-        //    }
-
-        //    return true;
-        //}
-
-        /*******************************************************************************************
-         * Method: loadDeck
-         * Loads the Game Deck from Standard Deck of Cards; prepares Game Deck to play game.
-         */
-        //private void loadDeck()
-        //{
-        //    Cards standardDeck = new Cards(true);       //Create temporary, unshuffled deck of Cards
-        //    int countCards = gameDeck.deckCards.Count;
-
-        //    for (int aCard = 0; aCard < countCards; aCard++)
-        //    {
-        //        gameDeck.deckCards[aCard] = standardDeck.deckCards[aCard];
-        //    }
-        //}
-
-        /*******************************************************************************************
         * Method: loadHelpText
         * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
         */
@@ -696,18 +644,18 @@ namespace LeapFrogWinUI
 
                     moveCard(sourceIndex, destinationIndex);
 
-                    //if (isKingPosition(playCol))               //If Clicked Cell is Leftmost Cell...
-                    //{
-                    //    tempStorage = destinationPosition;           //Store the Current Destination
+                    //    moveCount++;                                         //Increment Move Counter
+                    //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                }
+                else
+                {
+                    string aMsg = "Card to Move is a King.";
+                    speakText(aMsg);
 
-                    //    displayMessage("Select King to Move to this Position...");  //Prompt User...
-                    //    playKingPosition = true;                         //Set King being Moved Flag
-                    //}
-                    //else if (!playKingPosition)                            //If not Moving a King...
-                    //{
-                    //    sourcePosition = destinationPosition.findPlayCard(dataGridGameBoard);
-                    //}
-                    //else if (playKingPosition)                           //If King is being Moved...
+                    playKingPosition = true;                               //Set King being Moved Flag
+
+                    int sourceIndex = selectKingToMove();
+                    //if (playKingPosition)                           //If King is being Moved...
                     //{
                     //    if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
                     //    {
@@ -723,19 +671,6 @@ namespace LeapFrogWinUI
                     //    playKingPosition = false;                  //Unset the King being Moved Flag
                     //}
 
-                    ////Destination and Source should be set, move the selected card
-                    //if (!playKingPosition)
-                    //{
-                    //    moveCard(sourcePosition, destinationPosition);     //Move the Designated Card
-
-                    //    moveCount++;                                         //Increment Move Counter
-                    //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
-                    //}
-                }
-                else
-                {
-                    string aMsg = "Card to Move is a King.";
-                    speakText(aMsg);
                 }
 
                 if (isGameOver())                           //Check if game still has playable positions
@@ -792,15 +727,190 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
-         * Method: ResetItem
-         * Parses the Rank from the Card Value passed.
+         * Method: selectKingToMove
+         * Locates and "Highlighs" the Kings in the Playing tableau; then waits for one to be
+         * selected.
          */
-        //private void ResetItem(int anIndex)
+        private int selectKingToMove()
+        {
+            myCurrentActivity.CurrentActivityText = "Select King to be Moved...";
+
+            int countKings = 0;                                  //Initialize Counter of Kings found
+            int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
+            int cardIndex = 0;                               //Counter to walk through Deck of Cards
+
+            int kingSourceIndex = -1;               //Initialize King Source Index to "not Selected"
+
+            while(countKings < maxKingCount)                //While Not all Kinds have been found...
+            {
+                if (gameDeck.deckCards[cardIndex].cardRank.ToLower() == "k" )     //If King Found...
+                {
+                    countKings++;                                    //Increment the King Counter...
+                    if(!isKingPosition(cardIndex))      //Check if King is not in a King Position...
+                    {
+                        string aMsg = "Found " + gameDeck.deckCards[cardIndex].cardRank + " of " + gameDeck.deckCards[cardIndex].cardSuit;
+                        speakText(aMsg);
+
+                        Task.Delay(5000);
+                    }
+                }
+
+                cardIndex++;                                 //Increment the Card Index to next card
+            }
+
+            //waitForKingSelection();
+
+            myCurrentActivity.CurrentActivityText = "";
+            return kingSourceIndex;
+        }
+        
+        /*******************************************************************************************
+         * Method: setUpNewGame
+         * Prepares the playing board, shuffles the deck of cards and initializes the tableau for
+         * playing the game
+         */
+        private void setUpNewGame()
+        {
+            Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
+
+            clearDeck();                                                  //Clear the Current Layout
+
+            myCurrentActivity.CurrentActivityText = "Shuffling and Cutting Cards...";
+            tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
+            tempDeck.cutDeck();                                                       //Cut the Deck
+
+            myCurrentActivity.CurrentActivityText = "Dealing Cards...";
+            dealCards(tempDeck);                                     //Deal the Cards to the Tableau
+
+            myCurrentActivity.CurrentActivityText = "Removing Aces...";
+            removeAces();                                    //Remove Aces to Initialize Play Spaces
+
+            //myUndoItems.Clear();                                             //Clear the Undo Buffer
+
+            moveCount = 0;                              //Initialize the Move Counter for a New Game
+            //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
+
+            //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
+            //gameTime.Start();                                                  //And start the clock
+
+            string speakingText = "New Game Setup Complete!";
+            speakText(speakingText);
+
+            myCurrentActivity.CurrentActivityText = "Click on Space to Move Card...";
+        }
+
+        /*******************************************************************************************
+          * Method: speakText
+          * Using Windows Media speech synthesizer, speaks the text passed as parameter.
+          */
+        private async Task speakText(string speechText)
+        {
+            string voiceLanguage = "en";
+
+            MediaPlayerElement mediaElement = new MediaPlayerElement();
+            var mediaPlayer = new MediaPlayer();
+
+            var synth = new SpeechSynthesizer();
+            // Set the voice
+            var voices = SpeechSynthesizer.AllVoices;
+            var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains(voiceLanguage));
+            synth.Voice = selectedVoice;
+
+            var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);
+
+            mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
+            mediaPlayer.Play();
+        }
+
+        /*******************************************************************************************
+        * Method: swapPlayCards
+        * Copies the Card Value and Card Face from the Source Play Position to the Destination
+        * Play Position, then sets the Card Face and Value of the Source to "Playable" if the
+        * source position is playable or "NotPlayable" otherwise.
+        */
+        private void swapPlayCards(int sourceIndex, int destinationIndex)
+        {
+            //Copy Source Card to Destination
+            gameDeck.deckCards[destinationIndex] = gameDeck.deckCards[sourceIndex];
+
+            if(isPlayable(sourceIndex))
+            {
+                gameDeck.deckCards[sourceIndex] = cardPlayable;
+            }
+            else
+            {
+                gameDeck.deckCards[sourceIndex] = cardNotPlayable;
+            }
+
+            //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
+            //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
+        }
+
+        //private void undoMove()
         //{
-        //    //if (anIndex >= 0 && anIndex < gameDeck.Count)
-        //    //{
-        //    //    gameDeck[anIndex] = new Card { cardRank = $"Reset Card {index}", cardSuit = "", cardFace = null };
-        //    //}
+        //    UndoItem undoMove = new UndoItem();                     //Object to store Undo Positions
+        //    undoMove = myUndoItems.Pop();                             //Get the last move from stack
+
+        //    //UndoBuffer.UndoItem myItem;                                //Local Storage for Undo Item
+        //    //myItem = myUndoBuffer.pop();                                 //Get the last Move Made...
+        //    swapPlayCards(undoMove.getToPosition(), undoMove.getFromPosition());      //And Undo it
+        //}
+
+        /*******************************************************************************************
+        * Method: waitForKingSelection
+        * Waits for a King to be selected, then passes the index back to calling process.
+        */
+        private async void waitForKingSelection()
+        {
+            //Wait for a selection to be made
+            while (dataGridGameBoard.SelectedItem == null)
+            {
+                var selectedItem = dataGridGameBoard.SelectedItem as Cards.Card;
+
+                await Task.Delay(100);
+            }
+        }
+
+        #endregion
+
+        /***********************************************************************************************
+         * Score Game
+         * Stores the procedures used to score the game.
+         **********************************************************************************************/
+        #region
+        /*******************************************************************************************
+         * Method: isSuitComplete
+         * Walks through a row on the Tableau to determine if the suit for that row
+         * is complete. For a suit to be complete, a King should be found in the leftmost
+         * column, and the rank of the same suit should decrease down to the deuce in the
+         * second column from the end. Strictly speaking, the rightmost column should be
+         * a "play space" character, but for the purposes of scoring, this is unimportant.
+         */
+        //private bool isSuitComplete(int currentRow)
+        //{
+        //    int currentCol = 0;
+
+        //    while (currentCol < Cards.Card.possibleRanks.Length - 2)        //If not at end of row...
+        //    {
+        //        PlayPosition thisCard = new PlayPosition(dataGridGameBoard, currentCol, currentRow);
+        //        String currentSuit = "";                  //Store the Current Suit from first Column
+
+        //        if (thisCard.getCard().Equals(playSpace))               //If Card is a Play Space...
+        //            return false;
+
+        //        if (currentCol == 0)                                         //If leftmost column...
+        //            currentSuit = thisCard.getSuit(thisCard.getCard());       //Get the Current Suit
+
+        //        if (!(thisCard.getSuit(thisCard.getCard()).Equals(currentSuit)))//If not Correct Suit
+        //            return false;
+
+        //        if (!isCorrectPosition(thisCard))                //If Card not in Correct Position...
+        //            return false;
+
+        //        currentCol++;                                                   //Move to Next Column
+        //    }
+
+        //    return true;
         //}
 
         /*******************************************************************************************
@@ -895,98 +1005,6 @@ namespace LeapFrogWinUI
         //    //Update Player Statistics then Display Results
         //    myPlayer.finishGameForPlayer(scoreThisGame, moveCount, computeTimePlayed());
         //    myPlayer.displayPlayerStats(scoreThisGame, moveCount, computeTimePlayed());
-        //}
-
-        /*******************************************************************************************
-         * Method: setUpNewGame
-         * Prepares the playing board, shuffles the deck of cards and initializes the tableau for
-         * playing the game
-         */
-        private void setUpNewGame()
-        {
-            Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
-
-            clearDeck();                                                  //Clear the Current Layout
-
-            myCurrentActivity.CurrentActivityText = "Shuffling and Cutting Cards...";
-            tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
-            tempDeck.cutDeck();                                                       //Cut the Deck
-
-            myCurrentActivity.CurrentActivityText = "Dealing Cards...";
-            dealCards(tempDeck);                                     //Deal the Cards to the Tableau
-
-            myCurrentActivity.CurrentActivityText = "Removing Aces...";
-            removeAces();                                    //Remove Aces to Initialize Play Spaces
-
-            //myUndoItems.Clear();                                             //Clear the Undo Buffer
-
-            moveCount = 0;                              //Initialize the Move Counter for a New Game
-            //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
-
-            //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
-            //gameTime.Start();                                                  //And start the clock
-
-            string speakingText = "New Game Setup Complete!";
-            speakText(speakingText);
-
-            myCurrentActivity.CurrentActivityText = "Click on Space to Move Card...";
-        }
-
-        /*******************************************************************************************
-          * Method: speakText
-          * Using Windows Media speech synthesizer, speaks the text passed as parameter.
-          */
-        private async Task speakText(string speechText)
-        {
-            string voiceLanguage = "en";
-
-            MediaPlayerElement mediaElement = new MediaPlayerElement();
-            var mediaPlayer = new MediaPlayer();
-
-            var synth = new SpeechSynthesizer();
-            // Set the voice
-            var voices = SpeechSynthesizer.AllVoices;
-            var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains(voiceLanguage));
-            synth.Voice = selectedVoice;
-
-            var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);
-
-            mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
-            mediaPlayer.Play();
-        }
-
-        /*******************************************************************************************
-        * Method: swapPlayCards
-        * Copies the Card Value and Card Face from the Source Play Position to the Destination
-        * Play Position, then sets the Card Face and Value of the Source to "Playable" if the
-        * source position is playable or "NotPlayable" otherwise.
-        */
-        private void swapPlayCards(int sourceIndex, int destinationIndex)
-        {
-            //Copy Source Card to Destination
-            gameDeck.deckCards[destinationIndex] = gameDeck.deckCards[sourceIndex];
-
-            if(isPlayable(sourceIndex))
-            {
-                gameDeck.deckCards[sourceIndex] = cardPlayable;
-            }
-            else
-            {
-                gameDeck.deckCards[sourceIndex] = cardNotPlayable;
-            }
-
-            //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
-            //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
-        }
-
-        //private void undoMove()
-        //{
-        //    UndoItem undoMove = new UndoItem();                     //Object to store Undo Positions
-        //    undoMove = myUndoItems.Pop();                             //Get the last move from stack
-
-        //    //UndoBuffer.UndoItem myItem;                                //Local Storage for Undo Item
-        //    //myItem = myUndoBuffer.pop();                                 //Get the last Move Made...
-        //    swapPlayCards(undoMove.getToPosition(), undoMove.getFromPosition());      //And Undo it
         //}
 
         #endregion

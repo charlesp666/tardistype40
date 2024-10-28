@@ -9,43 +9,45 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Height="800"
-      Width="1510"
+      Width="1600"
 >
 
     <Grid Name="gameTableau"
           Background="Blue"
-          BorderThickness="5"
+          BorderThickness="2"
           BorderBrush="White"
           CornerRadius="10"
     >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1500"/>
+            <ColumnDefinition Width="1550"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
-            <RowDefinition Height="590"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="600"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
         <!--Game Tableu Header -->
         <Grid Name="bdrHeader"
-                Grid.Row="0"
-                Margin="2,2"
-                Width="1498"
-                Height="50"
-                Background="Blue"
-                BorderThickness="2"
-                BorderBrush="Black"
+              Grid.Row="0"
+              Margin="2,2"
+              Width="1548"
+              Height="60"
+              Background="Blue"
+              BorderThickness="1"
+              BorderBrush="Black"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
         >
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="900"/>
             </Grid.ColumnDefinitions>
 
             <Border Name="someImage"
@@ -92,14 +94,15 @@
                     BorderThickness="1"
                     CornerRadius="10"
                     Height="48"
-                    Width="798"
+                    Width="850"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
             >
                 <TextBlock x:Name="tbCurrentActivity"
                            Text="{x:Bind myCurrentActivity.CurrentActivityText}"
                            Margin="1,1,1,1"
-                           Width="796"
-                           Height="46"
+                           Width="850"
+                           Height="50"
                            HorizontalTextAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="24pi"
@@ -112,16 +115,18 @@
         </Grid>
 
         <!--Game Tableu Playing Area -->
-        <!--SelectionMode="None"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
                   ItemsSource="{x:Bind gameDeck.deckCards, Mode=TwoWay}"
                   Margin="2"
-                  Height="575"
-                  Width="1498"
+                  Height="590"
+                  Width="1540"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
                   Background="Blue"
                   BorderThickness="2"
-                  BorderBrush="Black"
+                  BorderBrush="White"
+                  SelectionMode="None"
                   IsItemClickEnabled="True"
                   ItemClick="dataGridGameBoard_ItemClick"
         >
@@ -130,20 +135,25 @@
                 <DataTemplate x:Name="CardPosition"
                 >
                     <StackPanel Name="PlayingCard"
+                                Height="142"
+                                Width="114"
+                    >
+                        <!--Margin="1,1,1,1"-->
+                        <Border x:Name="CardBorder"
                                 Height="138"
                                 Width="110"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 BorderBrush="White"
                                 BorderThickness="1"
                                 CornerRadius="10"
-                    >
-
-                        <Image x:Name="CardFace"
-                               Height="138"
-                               Width="110"
-                               Margin="1,1,1,1"
-                               Stretch="Uniform"
-                               Source="{Binding cardFace, Mode=TwoWay}"
-                        />
+                                Background="White"
+                        >
+                             <Image x:Name="CardFace"
+                                    Stretch="Uniform"
+                                    Source="{Binding cardFace, Mode=TwoWay}"
+                             />
+                        </Border>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
