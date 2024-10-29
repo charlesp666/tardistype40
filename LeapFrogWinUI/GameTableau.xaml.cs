@@ -42,31 +42,6 @@ using System.Linq;
 
 namespace LeapFrogWinUI
 {
-    /// Class to reflect changes to current activity textblock as they
-    /// occur
-    public class CurrentActivity : INotifyPropertyChanged
-    {
-        private string currentActivity;
-        public string CurrentActivityText
-        {
-            get => currentActivity;
-            set
-            {
-                if (currentActivity != value)
-                {
-                    currentActivity = value;
-                    OnPropertyChanged(nameof(CurrentActivityText));
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -76,7 +51,6 @@ namespace LeapFrogWinUI
         * Class Variables and Constants
         */
         private AppWindow myWindow = null;
-        public CurrentActivity myCurrentActivity { get; set; }
 
         //Create Player and GameInformation Objects
         //private Player myAvatar = new Player();                  //Storage for Current Player Object
@@ -131,9 +105,6 @@ namespace LeapFrogWinUI
         {
             this.InitializeComponent();
 
-            myCurrentActivity = new CurrentActivity();
-            this.DataContext = myCurrentActivity;
-
             myWindow = getMyAppWindow();
             myWindow.Hide();
 
@@ -146,7 +117,9 @@ namespace LeapFrogWinUI
             myWindow.Show(true);
 
             //Get Text for Game Instructions
-            myCurrentActivity.CurrentActivityText = "Loading Help Text...";
+            tbCurrentActivity.Text = "Loading Help Text...";
+            Task.Delay(displayDelayMS);
+
             loadHelpText();
 
             //Clear the Game Deck to initialize the Game Board, and prepare for new game
@@ -154,11 +127,11 @@ namespace LeapFrogWinUI
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             //Build the Initial Game Board and set Data Context
-            myCurrentActivity.CurrentActivityText = "Preparing Initial Game Board...";
-
+            tbCurrentActivity.Text = "Preparing Initial Game Board...";
+            Task.Delay(displayDelayMS);
             buildInitialGameBoard();
 
-            myCurrentActivity.CurrentActivityText = "Waiting for User Input...";
+            tbCurrentActivity.Text = "Waiting for User Input...";
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             string aMsg = "This is the end, my only friend, the end...";
@@ -229,7 +202,7 @@ namespace LeapFrogWinUI
 
             // Show the page content after loading is complete
             this.Visibility = Visibility.Visible;
-            await Task.Delay(2000); // Adjust as necessary
+            await Task.Delay(displayDelayMS); // Adjust as necessary
         }
 
         /*******************************************************************************************
@@ -244,28 +217,6 @@ namespace LeapFrogWinUI
             SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
             appWindow.Resize(newSize);
         }
-
-        /*******************************************************************************************
-         * Menu: Help/About
-         * Displays the Help/About dialog
-         */
-        //private async void SelectedCard(int aCard)
-        //{
-
-        //    ContentDialog dlgSelectedCard = new ContentDialog
-        //    {
-        //        Title = "Selected Card is:",
-        //        Content = aCard.ToString(),
-        //        CloseButtonText = "OK"
-        //    };
-
-        //    //set the XamlRoot property
-        //    dlgSelectedCard.XamlRoot = btnHelp.XamlRoot;
-
-        //    string aMsg = "Selected Card is " + aCard.ToString();
-        //    speakText(aMsg);
-        //    ContentDialogResult result = await dlgSelectedCard.ShowAsync();
-        //}
 
         /*******************************************************************************************
          * Event Handler: btnExit_Click
@@ -301,7 +252,8 @@ namespace LeapFrogWinUI
          */
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
-            myCurrentActivity.CurrentActivityText = "Setting Up for New Game...";
+            tbCurrentActivity.Text = "Setting Up for a New Game...";
+            Task.Delay(displayDelayMS);
 
             setUpNewGame();                                    //Shuffle and Deal Cards for new game
         }
@@ -745,7 +697,8 @@ namespace LeapFrogWinUI
          */
         private int selectKingToMove()
         {
-            myCurrentActivity.CurrentActivityText = "Select King to be Moved...";
+            tbCurrentActivity.Text = "Setting Up for a New Game...";
+            Task.Delay(displayDelayMS);
 
             int countKings = 0;                                  //Initialize Counter of Kings found
             int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
@@ -772,7 +725,8 @@ namespace LeapFrogWinUI
 
             //waitForKingSelection();
 
-            myCurrentActivity.CurrentActivityText = "";
+            tbCurrentActivity.Text = "";
+
             return kingSourceIndex;
         }
         
@@ -787,14 +741,20 @@ namespace LeapFrogWinUI
 
             clearDeck();                                                  //Clear the Current Layout
 
-            myCurrentActivity.CurrentActivityText = "Shuffling and Cutting Cards...";
+            tbCurrentActivity.Text = "Shuffling and Cutting Cards...";
+            Task.Delay(displayDelayMS);
+
             tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
             tempDeck.cutDeck();                                                       //Cut the Deck
 
-            myCurrentActivity.CurrentActivityText = "Dealing Cards...";
+            tbCurrentActivity.Text = "Dealing Cards...";
+            Task.Delay(displayDelayMS);
+
             dealCards(tempDeck);                                     //Deal the Cards to the Tableau
 
-            myCurrentActivity.CurrentActivityText = "Removing Aces...";
+            tbCurrentActivity.Text = "Removing Aces...";
+            Task.Delay(displayDelayMS);
+
             removeAces();                                    //Remove Aces to Initialize Play Spaces
 
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
@@ -808,7 +768,7 @@ namespace LeapFrogWinUI
             string speakingText = "New Game Setup Complete!";
             speakText(speakingText);
 
-            myCurrentActivity.CurrentActivityText = "Click on Space to Move Card...";
+            tbCurrentActivity.Text = "Click on Play Space to Move Card...";
         }
 
         /*******************************************************************************************
