@@ -18,7 +18,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Threading.Tasks;
 
-
 //using Microsoft.UI.Xaml.Navigation;
 
 //using System;
@@ -31,6 +30,7 @@ using System.Threading.Tasks;
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
 using Windows.Graphics;
+//using Windows.UI.WindowManagement;
 
 using WinRT.Interop;
 
@@ -54,6 +54,8 @@ namespace LeapFrogWinUI
             myWindow = getMyAppWindow();
             myWindow.Show(false);
             ResizeAppWindow(myWindow);
+
+            CenterAppWindow(myWindow);
 
             this.Visibility = Visibility.Collapsed;
             this.Loaded += loadedSplashPage;
@@ -110,9 +112,24 @@ namespace LeapFrogWinUI
         //}
 
         /*******************************************************************************************
-        /* Method: ResizeAppWindow
+         * Method: CenterAppWindow
+         * Centers the AppWindow on the Display.
+         */
+        private void CenterAppWindow(AppWindow myAppWindow)
+        {
+            DisplayArea displayArea = DisplayArea.GetFromWindowId(myAppWindow.Id, DisplayAreaFallback.Primary);
+
+            RectInt32 displayAreaRect = displayArea.WorkArea;
+            int centerX = (displayAreaRect.Width - myAppWindow.Size.Width) / 2;
+            int centerY = (displayAreaRect.Height - myAppWindow.Size.Height) / 2;
+
+            myAppWindow.Move(new PointInt32(centerX, centerY));
+        }
+
+        /*******************************************************************************************
+        /* Method: getMyAppWindow
         /* 
-        /* Resizes the AppWindow to the size of the page.
+        /* Gets the Current AppWindow.
         /*/
         private AppWindow getMyAppWindow()
         {

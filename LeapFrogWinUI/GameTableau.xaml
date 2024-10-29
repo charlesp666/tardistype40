@@ -9,7 +9,7 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Height="800"
-      Width="1600"
+      Width="1650"
 >
 
     <Grid Name="gameTableau"
@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="600"/>
+            <RowDefinition Height="610"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
 
@@ -119,8 +119,8 @@
                   Grid.Row="1"
                   ItemsSource="{x:Bind gameDeck.deckCards, Mode=TwoWay}"
                   Margin="2"
-                  Height="590"
-                  Width="1540"
+                  Height="595"
+                  Width="1545"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Background="Blue"
@@ -134,11 +134,11 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition"
                 >
+                    <!--Margin="1,1,1,1"-->
                     <StackPanel Name="PlayingCard"
                                 Height="142"
                                 Width="114"
                     >
-                        <!--Margin="1,1,1,1"-->
                         <Border x:Name="CardBorder"
                                 Height="138"
                                 Width="110"

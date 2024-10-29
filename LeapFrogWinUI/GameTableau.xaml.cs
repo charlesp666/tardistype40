@@ -136,7 +136,9 @@ namespace LeapFrogWinUI
 
             myWindow = getMyAppWindow();
             myWindow.Hide();
-            ResizeAppWindow(myWindow);
+
+            ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
+            CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
 
             this.Visibility = Visibility.Collapsed;
             this.Loaded += loadedGameTableau;
@@ -185,10 +187,20 @@ namespace LeapFrogWinUI
             }
         }
 
-        //private void dataGridGameBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    dataGridGameBoard.SelectedIndex = -1;
-        //}
+        /*******************************************************************************************
+         * Method: CenterAppWindow
+         * Centers the AppWindow on the Display.
+         */
+        private void CenterAppWindow(AppWindow myAppWindow)
+        {
+            DisplayArea displayArea = DisplayArea.GetFromWindowId(myAppWindow.Id, DisplayAreaFallback.Primary);
+
+            RectInt32 displayAreaRect = displayArea.WorkArea;
+            int centerX = (displayAreaRect.Width - myAppWindow.Size.Width) / 2;
+            int centerY = (displayAreaRect.Height - myAppWindow.Size.Height) / 2;
+
+            myAppWindow.Move(new PointInt32(centerX, centerY));
+        }
 
         /*******************************************************************************************
         /* Method: ResizeAppWindow
