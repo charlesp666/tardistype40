@@ -103,7 +103,7 @@ namespace LeapFrogWinUI
             this.InitializeComponent();
 
             myWindow = getMyAppWindow();
-            myWindow.Hide();
+            myWindow.TitleBar.ExtendsContentIntoTitleBar = false;
 
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display

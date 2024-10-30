@@ -10,6 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Frame x:Name="MyFrame" Visibility="Collapsed"/>
         <TextBlock x:Name="pageTitle" Text="Main Page"
                Margin="16" Style="{StaticResource TitleTextBlockStyle}"
         />

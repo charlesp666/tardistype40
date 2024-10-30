@@ -66,10 +66,9 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
-  
+
   <PropertyGroup>
       <WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
-      <ApplicationIcon>Assets\GameImages\Icon1.ico</ApplicationIcon>
       <Description>A Game of Solitaire</Description>
       <Title>LeapFrog</Title>
       <AllowUnsafeBlocks>True</AllowUnsafeBlocks>

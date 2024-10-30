@@ -53,6 +53,9 @@ namespace LeapFrogWinUI
 
             myWindow = getMyAppWindow();
             myWindow.Show(false);
+
+            myWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+
             ResizeAppWindow(myWindow);
 
             CenterAppWindow(myWindow);

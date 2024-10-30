@@ -48,5 +48,15 @@ namespace WinUiPlayApp
                 myButton.Content = "Clicked";
             }
         }
+
+        private void ShowFrameButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Visibility = Visibility.Visible;
+        }
+
+        private void HideFrameButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Visibility = Visibility.Collapsed;
+        }
     }
 }
