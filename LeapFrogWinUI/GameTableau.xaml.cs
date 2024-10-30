@@ -108,11 +108,6 @@ namespace LeapFrogWinUI
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
 
-            this.Visibility = Visibility.Collapsed;
-            this.Loaded += loadedGameTableau;
-
-            myWindow.Show(true);
-
             //Get Text for Game Instructions
             updateCurrentActivityText("Loading Help Text...");
 
@@ -185,21 +180,6 @@ namespace LeapFrogWinUI
             var appWindow = AppWindow.GetFromWindowId(myWindowId);
 
             return appWindow;
-        }
-
-        /*******************************************************************************************
-        /* Method: loadedGameTableau
-        /* 
-        /* Reveals the GameTableu after the page is fully loaded.
-        /*/
-        private async void loadedGameTableau(object sender, RoutedEventArgs e)
-        {
-            // Wait for page loading to complete
-            while( this.IsLoaded != true);
-
-            // Show the page content after loading is complete
-            this.Visibility = Visibility.Visible;
-            await Task.Delay(displayDelayMS); // Adjust as necessary
         }
 
         /*******************************************************************************************

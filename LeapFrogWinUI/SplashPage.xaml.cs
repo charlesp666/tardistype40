@@ -52,16 +52,11 @@ namespace LeapFrogWinUI
             this.InitializeComponent();
 
             myWindow = getMyAppWindow();
-            myWindow.Show(false);
 
             myWindow.TitleBar.ExtendsContentIntoTitleBar = true;
 
             ResizeAppWindow(myWindow);
-
             CenterAppWindow(myWindow);
-
-            this.Visibility = Visibility.Collapsed;
-            this.Loaded += loadedSplashPage;
 
             // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
@@ -142,20 +137,6 @@ namespace LeapFrogWinUI
             var appWindow = AppWindow.GetFromWindowId(myWindowId);
 
             return appWindow;
-        }
-
-        /*******************************************************************************************
-        /* Method: loadedSplashPage
-        /* 
-        /* Reveals the SplashPage after the page is fully loaded.
-        /*/
-        private async void loadedSplashPage(object sender, RoutedEventArgs e)
-        {
-            // Simulate loading operations
-            await Task.Delay(linkDelayMS); // Adjust as necessary
-
-            // Show the page content after loading is complete
-            this.Visibility = Visibility.Visible;
         }
 
         /*******************************************************************************************
