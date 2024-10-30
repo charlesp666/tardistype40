@@ -15,8 +15,8 @@
   <mp:PhoneIdentity PhoneProductId="76dda59d-733f-4267-a0c4-e58cf9bff49b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>LeapFrogWinUI</DisplayName>
-    <PublisherDisplayName>charl</PublisherDisplayName>
+    <DisplayName>LeapFrog</DisplayName>
+    <PublisherDisplayName>CatsPaw Software</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
