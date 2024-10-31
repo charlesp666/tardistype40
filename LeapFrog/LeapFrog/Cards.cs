@@ -260,9 +260,9 @@ namespace LeapFrog
              * Constructor: Deck
              * Builds a deck of cards by creating an array of Card objects
              */
-            public Deck()
+            public Deck(bool isKingHigh = false)
             {
-                initializeDeck();
+                initializeDeck(isKingHigh);
             }
 
             /***************************************************************************************
@@ -397,16 +397,27 @@ namespace LeapFrog
              * Creates (or recreates) an original deck of cards in sorted order: A - K and
              * Spades - Diamonds.
              */
-            public void initializeDeck()
+            public void initializeDeck(bool isKingHigh = false)
             {
                 int aValue = 0;
 
                 for (int aSuit = 0; aSuit < Card.possibleSuits.Length; aSuit++)
                 {
-                    for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
+                    if (!isKingHigh)
                     {
-                        aValue = (aSuit * Card.possibleRanks.Length) + aRank;
-                        deckCards[aValue] = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]);
+                        for (int aRank = 0; aRank < Card.possibleRanks.Length; aRank++)
+                        {
+                            aValue = (aSuit * Card.possibleRanks.Length) + aRank;
+                            deckCards[aValue] = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]);
+                        }
+                    }
+                    else
+                    {
+                        for (int aRank = (Card.possibleRanks.Length - 1); aRank >= 0; aRank--)
+                        {
+                            aValue = (aSuit * Card.possibleRanks.Length) + aRank;
+                            deckCards[aValue] = new Card(Card.possibleRanks[aRank], Card.possibleSuits[aSuit]);
+                        }
                     }
                 }
             }

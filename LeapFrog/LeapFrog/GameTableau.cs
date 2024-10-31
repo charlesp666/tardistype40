@@ -60,7 +60,7 @@ namespace LeapFrog
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         //Declare and Initialize Game Playing Deck
-        private Cards.Deck gameDeck = new Cards.Deck();
+        private Cards.Deck gameDeck = new Cards.Deck(true);
 
         private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
