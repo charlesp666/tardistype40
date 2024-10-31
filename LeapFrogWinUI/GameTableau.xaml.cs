@@ -498,7 +498,8 @@ namespace LeapFrogWinUI
                 }
             }
 
-            return (countPlayPositions == 0);           //Return "True" if no positions are playable
+            flgGameOver = (countPlayPositions == 0);
+            return flgGameOver;                         //Return "True" if no positions are playable
         }
 
         /*******************************************************************************************
@@ -635,50 +636,31 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * Method: removeAces
-         * Removes the Aces from the playing area in order to initialize the play spots.
+         * Removes the Aces from the playing area in order to initialize the play spots, and
+         * assigns the "Playable" and "Not-Playable" icons/cards as appropriate.
          */
         public void removeAces()
         {
             int arrayPosition = 0;
 
-            for (int aRow = 0; aRow < numberOfSuits; aRow++)
+            for (int aRow = 0; aRow < numberOfSuits; aRow++)                       //For each Row...
             {
-                for (int aCol = 0; aCol < numberOfRanks; aCol++)
+                for (int aCol = 0; aCol < numberOfRanks; aCol++)                //And each Column...
                 {
-                    arrayPosition = gameDeck.calcArrayPosition(aRow, aCol);
-                    if (gameDeck.deckCards[arrayPosition].cardRank.ToLower() == "a")
+                    arrayPosition = gameDeck.calcArrayPosition(aRow, aCol);   //Get Index of Card...
+                    if (gameDeck.deckCards[arrayPosition].cardRank.ToLower() == "a")  //If an Ace...
                     {
-                        //int arrayElement = gameDeck.calcArrayPosition(aRow, aCol);
+                        dataGridGameBoard.SelectedIndex = arrayPosition;    //Set Current Postion...
+                        dataGridGameBoard.SelectedItem = null;           //Clear Current Contents...
 
-                        dataGridGameBoard.SelectedIndex = arrayPosition; // arrayElement;
-                        dataGridGameBoard.SelectedItem = null;
-
-                        gameDeck.deckCards[arrayPosition] = cardPlayable;
-                        dataGridGameBoard.SelectedItem = gameDeck.deckCards[arrayPosition]; // [arrayElement];
-
-                        if(isPlayable(arrayPosition))
+                        if(isPlayable(arrayPosition))                   //If the Card is Playable...
                         {
-                            gameDeck.deckCards[arrayPosition] = cardPlayable;
+                            gameDeck.deckCards[arrayPosition] = cardPlayable;    //Assign "Playable"
                         }
-                        else
+                        else                                    //Otherwise, Card is not Playable...
                         {
-                            gameDeck.deckCards[arrayPosition] = cardNotPlayable;
+                            gameDeck.deckCards[arrayPosition] = cardNotPlayable; //Assign "Not Playable"
                         }
-                        //if ((arrayPosition > 0) && (!isKingPosition(arrayPosition)))
-                        //{
-                        //    if ((gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "2")
-                        //      || (gameDeck.deckCards[arrayPosition - 1].cardRank.ToLower() == "p")
-                        //       )
-                        //    {
-                        //        gameDeck.deckCards[arrayPosition] = cardNotPlayable;
-                        //    }
-                        //    else
-                        //    {
-                        //        gameDeck.deckCards[arrayPosition] = cardPlayable;
-                        //    }
-                        //}
-
-                        //Task.Delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                     }
                 }
             }
