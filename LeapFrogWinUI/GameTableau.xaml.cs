@@ -36,6 +36,7 @@ using Windows.Storage;                                    //To load Help Instruc
 using WinRT.Interop;
 using Windows.Media.Core;
 using System.Linq;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -98,6 +99,10 @@ namespace LeapFrogWinUI
         private DateTime gameStartTime;                                            //Game Start Time
         private DateTime gameEndTime;                                      //Game "Now" and end time
 
+        /*******************************************************************************************
+        * GameTableau Constructor
+        * Initializes and constructs the Game Tableau and initial game board.
+        */
         public GameTableau()
         {
             this.InitializeComponent();
@@ -140,72 +145,17 @@ namespace LeapFrogWinUI
          * Event Handler: GameBoard_CellClicked
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        private void dataGridGameBoard_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var clickedItem = e.ClickedItem as Cards.Card;
-            int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
+        //private void dataGridGameBoard_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    var clickedItem = e.ClickedItem as Cards.Card;
+        //    int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
 
-            if(isGameSet)
-            {
-                playSpaceClicked(indexClickedCell);
-                dataGridGameBoard.SelectedIndex = -1;
-            }
-        }
-
-        /*******************************************************************************************
-         * Method: CenterAppWindow
-         * Centers the AppWindow on the Display.
-         */
-        private void CenterAppWindow(AppWindow myAppWindow)
-        {
-            DisplayArea displayArea = DisplayArea.GetFromWindowId(myAppWindow.Id, DisplayAreaFallback.Primary);
-
-            RectInt32 displayAreaRect = displayArea.WorkArea;
-            int centerX = (displayAreaRect.Width - myAppWindow.Size.Width) / 2;
-            int centerY = (displayAreaRect.Height - myAppWindow.Size.Height) / 2;
-
-            myAppWindow.Move(new PointInt32(centerX, centerY));
-        }
-
-        /*******************************************************************************************
-        /* Method: ResizeAppWindow
-        /* 
-        /* Resizes the AppWindow to the size of the page.
-        /*/
-        private AppWindow getMyAppWindow()
-        {
-            var myWindow = (Application.Current as App)?.m_window as MainWindow;
-            var hwnd = WindowNative.GetWindowHandle(myWindow);
-            var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
-            var appWindow = AppWindow.GetFromWindowId(myWindowId);
-
-            return appWindow;
-        }
-
-        /*******************************************************************************************
-        /* Method: ResizeAppWindow
-        /* 
-        /* Resizes the AppWindow to the size of the page.
-        /*/
-        private void ResizeAppWindow(AppWindow appWindow)
-        {
-            int pageWidth = (int)this.Width;
-            int pageHeight = (int)this.Height;
-            SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
-            appWindow.Resize(newSize);
-        }
-
-        /*******************************************************************************************
-        /* Method: ResizeAppWindow
-        /* 
-        /* Resizes the AppWindow to the size of the page.
-        /*/
-        private async void updateCurrentActivityText(string msgCurrentActivity)
-        {
-            tbCurrentActivity.Text = msgCurrentActivity;
-
-            await Task.Delay(displayDelayMS);
-        }
+        //    if(isGameSet)
+        //    {
+        //        playSpaceClicked(indexClickedCell);
+        //        dataGridGameBoard.SelectedIndex = -1;
+        //    }
+        //}
 
         /*******************************************************************************************
          * Event Handler: btnExit_Click
@@ -256,6 +206,31 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Event Handler: dataGridGameBoard_SelectionChanged
+         * Initiates moving a card when a destination is selected.
+         */
+        private void dataGridGameBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isGameSet)                               //If the Game has been setup for playing...
+            {
+                if (dataGridGameBoard.SelectedItem != null)
+                {
+                    var gridViewItem = dataGridGameBoard.ContainerFromItem(dataGridGameBoard.SelectedItem) as GridViewItem;
+                    if (gridViewItem != null)
+                    {
+                        var indexClickedCell = dataGridGameBoard.Items.IndexOf(dataGridGameBoard.SelectedItem);
+                        playSpaceClicked(indexClickedCell);
+                    }
+                }
+            }
+            else
+            {
+                string aMsg = "A game has not been started.";
+                speakText(aMsg);
+            }
+        }
+
+        /*******************************************************************************************
         * Event Handler: gameTimerTick
         * Displays the elapsed time for the current game.
         */
@@ -270,6 +245,57 @@ namespace LeapFrogWinUI
         //    //Display elapsed time after removing milliseconds
         //    lblGameTimer.Text = timeDisplay.Substring(0, (timeDisplay.IndexOf('.')));
         //}
+        #endregion
+
+        /*******************************************************************************************
+         *******************************************************************************************
+         ***********                   Initial Setup of Tableau                          ***********
+         *******************************************************************************************
+         ******************************************************************************************/
+        #region
+        /*******************************************************************************************
+         * Method: CenterAppWindow
+         * Centers the AppWindow on the Display.
+         */
+        private void CenterAppWindow(AppWindow myAppWindow)
+        {
+            DisplayArea displayArea = DisplayArea.GetFromWindowId(myAppWindow.Id, DisplayAreaFallback.Primary);
+
+            RectInt32 displayAreaRect = displayArea.WorkArea;
+            int centerX = (displayAreaRect.Width - myAppWindow.Size.Width) / 2;
+            int centerY = (displayAreaRect.Height - myAppWindow.Size.Height) / 2;
+
+            myAppWindow.Move(new PointInt32(centerX, centerY));
+        }
+
+        /*******************************************************************************************
+        /* Method: getMyAppWindow
+        /* 
+        /* Retrieves the AppWindow Object for Current Page.
+        /*/
+        private AppWindow getMyAppWindow()
+        {
+            var myWindow = (Application.Current as App)?.m_window as MainWindow;
+            var hwnd = WindowNative.GetWindowHandle(myWindow);
+            var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+            var appWindow = AppWindow.GetFromWindowId(myWindowId);
+
+            return appWindow;
+        }
+
+        /*******************************************************************************************
+        /* Method: ResizeAppWindow
+        /* 
+        /* Resizes the AppWindow to the size of the page.
+        /*/
+        private void ResizeAppWindow(AppWindow appWindow)
+        {
+            int pageWidth = (int)this.Width;
+            int pageHeight = (int)this.Height;
+            SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
+            appWindow.Resize(newSize);
+        }
+
         #endregion
 
         /*******************************************************************************************
@@ -335,15 +361,13 @@ namespace LeapFrogWinUI
          * Method: clearDeck
          * Clears the Game Deck of Cards for Initiating Display and new Game
          */
-        private async void clearDeck()
+        private void clearDeck()
         {
             Cards.Card blankCard = null;    //Create a blank card to load into each card in PlayDeck
 
-            //foreach (Cards.Card aCard in gameDeck.deckCards)
             for (int i = 0; i < gameDeck.deckCards.Count(); i++)
             {
                 gameDeck.deckCards[i] = blankCard;
-                await Task.Delay(displayDelayMS);
             }
         }
 
@@ -373,7 +397,6 @@ namespace LeapFrogWinUI
             for (int aCard = 0; aCard < countCards; aCard++)
             {
                 gameDeck.deckCards[aCard] = aDeck.deckCards[aCard];
-                Task.Delay(displayDelayMS);                 //Pause Deal for user to see cards dealt
             }
         }
 
@@ -655,7 +678,7 @@ namespace LeapFrogWinUI
                         //    }
                         //}
 
-                        Task.Delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
+                        //Task.Delay(displayDelayMS);                    //Pause Deal for user to see cards dealt
                     }
                 }
             }
@@ -710,6 +733,7 @@ namespace LeapFrogWinUI
         {
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
 
+            updateCurrentActivityText("Clearing the Playing Area...");
             clearDeck();                                                  //Clear the Current Layout
 
             updateCurrentActivityText("Shuffling and Cutting Cards...");
@@ -800,6 +824,18 @@ namespace LeapFrogWinUI
         //    //myItem = myUndoBuffer.pop();                                 //Get the last Move Made...
         //    swapPlayCards(undoMove.getToPosition(), undoMove.getFromPosition());      //And Undo it
         //}
+
+        /*******************************************************************************************
+        /* Method: updateCurrentActivityText
+        /* 
+        /* Updates the Text in the "Current Activity" TextBlock.
+        /*/
+        private async void updateCurrentActivityText(string msgCurrentActivity)
+        {
+            tbCurrentActivity.Text = msgCurrentActivity;
+
+            await Task.Delay(displayDelayMS);
+        }
 
         /*******************************************************************************************
         * Method: waitForKingSelection

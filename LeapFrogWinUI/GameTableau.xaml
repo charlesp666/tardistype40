@@ -115,6 +115,8 @@
         </Grid>
 
         <!--Game Tableu Playing Area -->
+        <!--IsItemClickEnabled="True"
+                  ItemClick="dataGridGameBoard_ItemClick"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
                   ItemsSource="{x:Bind gameDeck.deckCards, Mode=TwoWay}"
@@ -126,9 +128,8 @@
                   Background="Blue"
                   BorderThickness="2"
                   BorderBrush="White"
-                  SelectionMode="None"
-                  IsItemClickEnabled="True"
-                  ItemClick="dataGridGameBoard_ItemClick"
+                  SelectionMode="Single"
+                  SelectionChanged="dataGridGameBoard_SelectionChanged"
         >
 
             <GridView.ItemTemplate>
