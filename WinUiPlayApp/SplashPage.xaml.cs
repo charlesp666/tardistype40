@@ -1,17 +1,21 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
+//using Microsoft.UI.Xaml.Controls.Primitives;
+//using Microsoft.UI.Xaml.Data;
+//using Microsoft.UI.Xaml.Input;
+//using Microsoft.UI.Xaml.Media;
+//using Microsoft.UI.Xaml.Navigation;
+
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices.WindowsRuntime;
+
+//using Windows.Foundation;
+//using Windows.Foundation.Collections;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,6 +27,9 @@ namespace WinUiPlayApp
     /// </summary>
     public sealed partial class SplashPage : Page
     {
+        private MediaPlayer myMediaPlayer = new MediaPlayer();
+        private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+
         public SplashPage()
         {
             this.InitializeComponent();
@@ -58,5 +65,21 @@ namespace WinUiPlayApp
         {
             MyFrame.Visibility = Visibility.Collapsed;
         }
+
+        private void PlaySoundButton_Click(object sender, RoutedEventArgs e)
+        {
+            playSound(soundShuffling);
+        }
+
+        private void playSound(Uri soundFile)
+        {
+            //MediaPlayer myMediaPlayer = new MediaPlayer();
+
+            //var soundFile = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+
+            myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
+            myMediaPlayer.Play();
+        }
+
     }
 }

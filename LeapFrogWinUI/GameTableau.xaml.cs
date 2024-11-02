@@ -9,11 +9,13 @@ using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Navigation;
 
 using System;
-using System.ComponentModel;
+//using System.ComponentModel;
+//using System.Diagnostics;
 //using System.Collections.Generic;
 //using System.Collections.Immutable;
 //using System.IO;
-using System.Runtime.CompilerServices;
+using System.Linq;
+//using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 //using System.Runtime.CompilerServices;
@@ -26,17 +28,15 @@ using System.Threading.Tasks;
 using Windows.Graphics;
 //using Windows.Graphics.Display;                                      //For Adjusting App Window size
 //using Windows.Media.Core;
-using Windows.Media.SpeechSynthesis;
+using Windows.Media.Core;
 using Windows.Media.Playback;
+using Windows.Media.SpeechSynthesis;
 using Windows.Storage;                                    //To load Help Instructions from Text File
 //using Windows.UI.Popups;
 //using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 //using Windows.UI.Xaml;
 
 using WinRT.Interop;
-using Windows.Media.Core;
-using System.Linq;
-using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -69,6 +69,11 @@ namespace LeapFrogWinUI
 
         private String helpText = null;
 
+        //Media Player object to play various sounds during play; sound files
+        private MediaPlayer myMediaPlayer = new MediaPlayer();
+
+        //private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+
         // Define variables/constants for play area (main window)
         private static int numberOfSuits = Cards.Card.possibleSuits.Length;        //Play Area Rows
         private static int numberOfRanks = Cards.Card.possibleRanks.Length;  //Play Area Columns
@@ -79,6 +84,7 @@ namespace LeapFrogWinUI
 
         private static bool isGameSet = false;                   //Flag indicates play area is ready
         public bool flgGameOver = true;                               //Flag identifies game is over
+        private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         // Define parameters for Scoring Games (Determining Player's Winnings)
         private int incrementSequence = 2;             //Points to add for cards in correct sequence
@@ -86,7 +92,6 @@ namespace LeapFrogWinUI
         private int incrementCompleteSuit = 10;                  //Points to add for a complete suit
 
         private int gameWinningBonus = 100;                      //Bonus Amount for a completed Suit
-        private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -352,9 +357,9 @@ namespace LeapFrogWinUI
             dataGridGameBoard.AllowFocusOnInteraction = true;
             dataGridGameBoard.IsEnabled = true;
 
-            //Set SelectedIndex to No item
-            dataGridGameBoard.SelectedIndex = -1;
-            dataGridGameBoard.SelectedItem = null;
+            isGameSet = false;                         //Set Flag indicating no game is set for play
+            flgGameOver = true;                               //Set Flag indicating game is not over
+            moveCount = 0;                                                 //Initialize Move Counter
         }
 
         /*******************************************************************************************
@@ -575,6 +580,18 @@ namespace LeapFrogWinUI
 
                 playKingPosition = false;                                         //Ensure Flag is Unset
             }
+        }
+
+        /*******************************************************************************************
+         * Method: playSound
+         * Play the Sound in file passed as parameter.
+         */
+        private void playSound(Uri soundFile)
+        {
+            //var soundFile = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+
+            myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
+            myMediaPlayer.Play();
         }
 
         /*******************************************************************************************

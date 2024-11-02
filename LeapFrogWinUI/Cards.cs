@@ -11,17 +11,23 @@
 /***************************************************************************************************
  * System Class/Library Declarations
  */
-using Microsoft.UI.Xaml.Controls;
+//using Microsoft.UI.Xaml.Controls;
+
 using System;
 using System.Collections.ObjectModel;
-//using System.ComponentModel;
-using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
+
+
+//using System.ComponentModel;
+//using System.Linq;
+//using System.Runtime.CompilerServices;
+//using System.Threading.Tasks;
+
 using Windows.Media.Core;
 using Windows.Media.Playback;
-using Windows.Media.SpeechSynthesis;
-using WinRT;
-//using System.Runtime.CompilerServices;
+//using Windows.Media.SpeechSynthesis;
+
 //using WinRT;
 
 namespace LeapFrogWinUI
@@ -301,6 +307,11 @@ namespace LeapFrogWinUI
 
         private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
 
+        //Media Player object to play various sounds during play; sound files
+        private MediaPlayer myMediaPlayer = new MediaPlayer();
+
+        private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+
         /*******************************************************************************************
          * Constructor: Cards()
          * Builds a deck of cards by creating an array of Card objects
@@ -524,6 +535,16 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: playSound
+         * Play the Sound in file passed as parameter.
+         */
+        private void playSound(Uri soundFile)
+        {
+            myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
+            myMediaPlayer.Play();
+        }
+
+        /*******************************************************************************************
          * Method: sameRank
          * Returns "True" if the two cards passed as parameters have the Same Rank.
          */
@@ -547,20 +568,29 @@ namespace LeapFrogWinUI
          */
         public void shuffleDeck()
         {
-            Card aTemp = new Card();
-            int numberOfCards = this.deckCards.Count;
-            int firstCard = 0;
-            int secondCard = 0;
+            Card aTemp = new Card();                               //Card Object for swapping cards
+
+            int numberOfCards = this.deckCards.Count;                 //Number of Cards in the Deck
+            int firstCard = 0;                                        //Index of first card to swap
+            int secondCard = 0;                                      //Index of Second card to swap
+
+            int countPlaySound = (int)(countShuffle / 5);   //Number of swaps between playing sound
 
             //Find the two cards to swap
-            for (int aCount = 0; aCount <= countShuffle; aCount++)
+            for (int aCount = 0; aCount <= countShuffle; aCount++)   //For the number of "Swaps"...
             {
-                firstCard = (int)aRandom.Next(0, numberOfCards);
+                if ((aCount % countPlaySound) == 0)      //Play sound of at countPlaySound Multiple
+                {
+                    playSound(soundShuffling);                    //Play the "Shuffling Card" sound
+                }
+
+                firstCard = (int)aRandom.Next(0, numberOfCards);  //Randomly select first swap card
                 do
                 {
-                    secondCard = (int)aRandom.Next(0, numberOfCards);
-                } while (firstCard == secondCard);
+                    secondCard = (int)aRandom.Next(0, numberOfCards); //Randomly select second card
+                } while (firstCard == secondCard);                   //Ensure they are not the card
 
+                //Swap the two selected cards
                 aTemp = deckCards[firstCard];
                 deckCards[firstCard] = deckCards[secondCard];
                 deckCards[secondCard] = aTemp;

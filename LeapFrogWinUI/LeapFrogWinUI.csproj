@@ -46,6 +46,7 @@
     <Folder Include="Assets\CardBacks\" />
     <Folder Include="Assets\CardImages\" />
     <Folder Include="Assets\Data\" />
+    <Folder Include="Assets\Sounds\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="SplashPage.xaml">
