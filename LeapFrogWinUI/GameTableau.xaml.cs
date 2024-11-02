@@ -72,7 +72,7 @@ namespace LeapFrogWinUI
         //Media Player object to play various sounds during play; sound files
         private MediaPlayer myMediaPlayer = new MediaPlayer();
 
-        //private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+        private Uri soundNotPlayable = new Uri("ms-appx:///Assets//Sounds/NotPlayablePosition.wav");
 
         // Define variables/constants for play area (main window)
         private static int numberOfSuits = Cards.Card.possibleSuits.Length;        //Play Area Rows
@@ -538,15 +538,15 @@ namespace LeapFrogWinUI
         {
             bool retVal = true;                                          // Set default return value
 
-            if(!isKingPosition(selectedPostion))                   //If King Position is playable...
+            if (!isKingPosition(selectedPostion))                   //If King Position is playable...
             {
                 Cards.Card cardToLeft = gameDeck.deckCards[selectedPostion - 1];
 
-                if(  (cardToLeft.cardRank.ToLower() == "2")
+                if ((cardToLeft.cardRank.ToLower() == "2")
                   || (cardToLeft.cardRank.ToLower() == "n")
                   || (cardToLeft.cardRank.ToLower() == "p")
                   )
-                { 
+                {
                     retVal = false;
                 }
             }
@@ -601,52 +601,59 @@ namespace LeapFrogWinUI
          */
         public void playSpaceClicked(int destinationIndex)
         {
-            if (isPlayable(destinationIndex))                            //Playable or King Space...
+            if (gameDeck.deckCards[destinationIndex].cardRank.ToLower() != "p")
             {
-                if (!isKingPosition(destinationIndex))
+                playSound(soundNotPlayable);
+            }
+            else
+            {
+                if (isPlayable(destinationIndex))                            //Playable or King Space...
                 {
-                    Cards.Card sourceCard = gameDeck.deckCards[destinationIndex-1];
-                    Cards.Card cardToMove = gameDeck.findNextCardDescending(sourceCard);
-
-                    int sourceIndex = gameDeck.findCardIndex(cardToMove);
-
-                    string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
-                    speakText(aMsg);
-
-                    moveCard(sourceIndex, destinationIndex);
-
-                    //    moveCount++;                                         //Increment Move Counter
-                    //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
-                }
-                else
-                {
-                    string aMsg = "Card to Move is a King.";
-                    speakText(aMsg);
-
-                    playKingPosition = true;                               //Set King being Moved Flag
-
-                    int sourceIndex = selectKingToMove();
-                    //if (playKingPosition)                           //If King is being Moved...
-                    //{
-                    //    if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
-                    //    {
-                    //        displayWarning("King was not selected; cancelling move!");
-                    //        sourcePosition = destinationPosition;
-                    //    }
-                    //    else
-                    //    {
-                    //        sourcePosition = destinationPosition;//Set Source to Current Destination
-                    //        destinationPosition = tempStorage;        //Restore Original Destination
-                    //    }
-
-                    //    playKingPosition = false;                  //Unset the King being Moved Flag
-                    //}
-
-                }
-
-                if (isGameOver())                           //Check if game still has playable positions
-                {
-                    endGame();                   //Close out the current game, and set appropriate flags
+                    if (!isKingPosition(destinationIndex))
+                    {
+                        Cards.Card sourceCard = gameDeck.deckCards[destinationIndex-1];
+                        Cards.Card cardToMove = gameDeck.findNextCardDescending(sourceCard);
+               
+                        int sourceIndex = gameDeck.findCardIndex(cardToMove);
+               
+                        string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
+                        speakText(aMsg);
+               
+                        moveCard(sourceIndex, destinationIndex);
+               
+                        //    moveCount++;                                         //Increment Move Counter
+                        //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                    }
+                    else
+                    {
+                        string aMsg = "Card to Move is a King.";
+                        speakText(aMsg);
+               
+                        playKingPosition = true;                               //Set King being Moved Flag
+               
+                        int sourceIndex = selectKingToMove();
+                        //if (playKingPosition)                           //If King is being Moved...
+                        //{
+                        //    if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
+                        //    {
+                        //        displayWarning("King was not selected; cancelling move!");
+                        //        sourcePosition = destinationPosition;
+                        //    }
+                        //    else
+                        //    {
+                        //        sourcePosition = destinationPosition;//Set Source to Current Destination
+                        //        destinationPosition = tempStorage;        //Restore Original Destination
+                        //    }
+               
+                        //    playKingPosition = false;                  //Unset the King being Moved Flag
+                        //}
+               
+                    }
+               
+                    if (isGameOver())                           //Check if game still has playable positions
+                    {
+                        endGame();                   //Close out the current game, and set appropriate flags
+                    }
                 }
             }
         }
