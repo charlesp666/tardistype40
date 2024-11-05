@@ -11,12 +11,20 @@
  * System Class/Library Declarations
  */
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+
+
+
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
 
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Popups;
 
 namespace LeapFrogWinUI
@@ -27,7 +35,7 @@ namespace LeapFrogWinUI
         private int gameWinnings = 0;                                          //Cumulative Winnings
         private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
 
-        //private String namePlayer = "jdoe@somewhere.net";            //Set Current Player to Default
+        private String namePlayer = "jdoe@somewhere.net";            //Set Current Player to Default
         private TimeSpan timePlayed = new TimeSpan(0, 0, 0);         //Total Time for All Games Played
 
         //Parameters to track User Statistics
@@ -38,6 +46,8 @@ namespace LeapFrogWinUI
          */
         public Player()
         {
+            string aDummy = getPlayerName().ToString();
+
             loadPlayerStats();                            //Load Player Stats from Application Data
         }
 
@@ -203,9 +213,21 @@ namespace LeapFrogWinUI
          * Method: getPlayerName
          * Returns the Name of the Player of the Object that Invoked the Method.
          */
-        public String getPlayerName()
+        public async Task<string> getPlayerName()
         {
-            return ((string)PlayerStats.Values["PlayerName"]);
+            IReadOnlyList<User> users = await User.FindAllAsync();
+            string myUser = "";
+
+            User currentUser = users.FirstOrDefault();
+            // Assuming the first user in the list is the current user
+
+            if (currentUser != null)
+            {
+              myUser  = await currentUser.GetPropertyAsync(KnownUserProperties.AccountName) as string;
+            }
+
+            namePlayer = myUser;
+            return myUser.ToString();
         }
 
         /*******************************************************************************************
