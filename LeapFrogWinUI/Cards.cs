@@ -15,8 +15,9 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.Numerics;
-using System.Threading.Tasks;
+//using System.Numerics;
+//using System.Threading;
+//using System.Threading.Tasks;
 
 
 //using System.ComponentModel;
@@ -542,6 +543,7 @@ namespace LeapFrogWinUI
         {
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
             myMediaPlayer.Play();
+
         }
 
         /*******************************************************************************************

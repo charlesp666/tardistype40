@@ -9,12 +9,16 @@ using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Navigation;
 
 using System;
+using System.Diagnostics;
+
 //using System.ComponentModel;
 //using System.Diagnostics;
 //using System.Collections.Generic;
 //using System.Collections.Immutable;
 //using System.IO;
 using System.Linq;
+using System.Threading;
+
 //using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -74,6 +78,8 @@ namespace LeapFrogWinUI
 
         private Uri soundNotPlayable = new Uri("ms-appx:///Assets//Sounds/NotPlayablePosition.wav");
 
+        private string fileInstructions = folderGameData + "GameInstructions.txt";
+
         // Define variables/constants for play area (main window)
         private static int numberOfSuits = Cards.Card.possibleSuits.Length;        //Play Area Rows
         private static int numberOfRanks = Cards.Card.possibleRanks.Length;  //Play Area Columns
@@ -91,7 +97,7 @@ namespace LeapFrogWinUI
         private int incrementPosition = 5;             //Points to add for cards in correct position
         private int incrementCompleteSuit = 10;                  //Points to add for a complete suit
 
-        private int gameWinningBonus = 100;                      //Bonus Amount for a completed Suit
+        private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
@@ -136,8 +142,8 @@ namespace LeapFrogWinUI
             updateCurrentActivityText("Waiting for User Input...");
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
-            string aMsg = "This is the end, my only friend, the end...";
-            speakText(aMsg);
+            //string aMsg = "This is the end, my only friend, the end...";
+            //speakText(aMsg);
         }
 
         /*******************************************************************************************
@@ -216,22 +222,31 @@ namespace LeapFrogWinUI
          */
         private void dataGridGameBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (isGameSet)                               //If the Game has been setup for playing...
+            //If the Game is set for play and the Selected Item is not null...
+            if (isGameSet && (dataGridGameBoard.SelectedItem != null))
             {
-                if (dataGridGameBoard.SelectedItem != null)
+                var gridViewItem = dataGridGameBoard.ContainerFromItem(dataGridGameBoard.SelectedItem) as GridViewItem;
+                if (gridViewItem != null)
                 {
-                    var gridViewItem = dataGridGameBoard.ContainerFromItem(dataGridGameBoard.SelectedItem) as GridViewItem;
-                    if (gridViewItem != null)
-                    {
-                        var indexClickedCell = dataGridGameBoard.Items.IndexOf(dataGridGameBoard.SelectedItem);
-                        playSpaceClicked(indexClickedCell);
-                    }
+                    //var indexClickedCell = dataGridGameBoard.Items.IndexOf(dataGridGameBoard.SelectedItem);
+                    int indexClickedCell = dataGridGameBoard.SelectedIndex;
+
+                    //Debug.WriteLine($"SelectionChanged Clicked: {indexClickedCell}");
+                    //Debug.WriteLine($"SelectionChanged Index: {dataGridGameBoard.SelectedIndex}");
+                    playSpaceClicked(indexClickedCell);
                 }
+            }
+        }
+
+        private void enableSelectionChanged(bool enableEvent = true)
+        {
+            if (enableEvent)
+            {
+                dataGridGameBoard.SelectionChanged += dataGridGameBoard_SelectionChanged;
             }
             else
             {
-                string aMsg = "A game has not been started.";
-                speakText(aMsg);
+                dataGridGameBoard.SelectionChanged -= dataGridGameBoard_SelectionChanged;
             }
         }
 
@@ -350,6 +365,8 @@ namespace LeapFrogWinUI
           */
         private void buildInitialGameBoard()
         {
+            enableSelectionChanged(false);             //Disable the GridView SelectionChanged Event
+
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
 
@@ -374,6 +391,7 @@ namespace LeapFrogWinUI
             {
                 gameDeck.deckCards[i] = blankCard;
             }
+
         }
 
         /*******************************************************************************************
@@ -560,7 +578,6 @@ namespace LeapFrogWinUI
         */
         private async void loadHelpText()
         {
-            string fileInstructions = folderGameData + "GameInstructions.txt";
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
             helpText = await FileIO.ReadTextAsync(HelpFile);
@@ -588,8 +605,6 @@ namespace LeapFrogWinUI
          */
         private void playSound(Uri soundFile)
         {
-            //var soundFile = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
-
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
             myMediaPlayer.Play();
         }
@@ -601,6 +616,8 @@ namespace LeapFrogWinUI
          */
         public void playSpaceClicked(int destinationIndex)
         {
+            Debug.WriteLine($"playSpaceClicked Received: {destinationIndex}");
+
             if (gameDeck.deckCards[destinationIndex].cardRank.ToLower() != "p")
             {
                 playSound(soundNotPlayable);
@@ -609,6 +626,7 @@ namespace LeapFrogWinUI
             {
                 if (isPlayable(destinationIndex))                            //Playable or King Space...
                 {
+                    Debug.WriteLine($"playSpaceClicked KingPosition: {isKingPosition(destinationIndex)}");
                     if (!isKingPosition(destinationIndex))
                     {
                         Cards.Card sourceCard = gameDeck.deckCards[destinationIndex-1];
@@ -644,12 +662,11 @@ namespace LeapFrogWinUI
                         //        sourcePosition = destinationPosition;//Set Source to Current Destination
                         //        destinationPosition = tempStorage;        //Restore Original Destination
                         //    }
-               
-                        //    playKingPosition = false;                  //Unset the King being Moved Flag
                         //}
-               
+
+                        playKingPosition = false;                               //Set King being Moved Flag
                     }
-               
+
                     if (isGameOver())                           //Check if game still has playable positions
                     {
                         endGame();                   //Close out the current game, and set appropriate flags
@@ -756,21 +773,18 @@ namespace LeapFrogWinUI
             removeAces();                                    //Remove Aces to Initialize Play Spaces
             isGameOver();                                      // Initialize the icons for game play
 
-            //myUndoItems.Clear();                                             //Clear the Undo Buffer
-
             moveCount = 0;                              //Initialize the Move Counter for a New Game
             //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
-
-            //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
-            //gameTime.Start();                                                  //And start the clock
-
-            string speakingText = "New Game Setup Complete!";
-            speakText(speakingText);
 
             isGameSet = true;                                     //Set the game is set flag to true
             flgGameOver = false;                                 //Set the "Game Over" flag to false
 
-            //tbCurrentActivity.Text = "Click on Play Space to Move Card...";
+            enableSelectionChanged(true);               //Enable the GridView SelectionChanged Event
+
+            //myUndoItems.Clear();                                             //Clear the Undo Buffer
+            //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
+            //gameTime.Start();                                                  //And start the clock
+
             updateCurrentActivityText("Click on Play Space to Move Card...");
         }
 
@@ -840,7 +854,7 @@ namespace LeapFrogWinUI
         {
             tbCurrentActivity.Text = msgCurrentActivity;
 
-            await Task.Delay(displayDelayMS);
+            await Task.Run(() => Thread.Sleep(5000));
         }
 
         /*******************************************************************************************
@@ -854,7 +868,6 @@ namespace LeapFrogWinUI
             {
                 var selectedItem = dataGridGameBoard.SelectedItem as Cards.Card;
 
-                await Task.Delay(100);
             }
         }
 
@@ -1190,31 +1203,31 @@ namespace LeapFrogWinUI
         * Sub-Class UndoItem
         * Defines the structure of a single Undo Item.
         */
-        public partial class UndoItem
-        {
-            private PlayPosition fromPosition;                    //Card Position that move was from
-            private PlayPosition toPosition;                        //Card Position that move was to
+        //public partial class UndoItem
+        //{
+        //    private PlayPosition fromPosition;                    //Card Position that move was from
+        //    private PlayPosition toPosition;                        //Card Position that move was to
 
-            public UndoItem()
-            {
-            }
+        //    public UndoItem()
+        //    {
+        //    }
 
-            public UndoItem(PlayPosition aFromPosition, PlayPosition aToPosition)
-            {
-                fromPosition = aFromPosition;
-                toPosition = aToPosition;
-            }
+        //    public UndoItem(PlayPosition aFromPosition, PlayPosition aToPosition)
+        //    {
+        //        fromPosition = aFromPosition;
+        //        toPosition = aToPosition;
+        //    }
 
-            public PlayPosition getFromPosition()
-            {
-                return (fromPosition);
-            }
+        //    public PlayPosition getFromPosition()
+        //    {
+        //        return (fromPosition);
+        //    }
 
-            public PlayPosition getToPosition()
-            {
-                return (toPosition);
-            }
-        }
+        //    public PlayPosition getToPosition()
+        //    {
+        //        return (toPosition);
+        //    }
+        //}
 
         /*******************************************************************************************
          * Constructor: UndoBuffer (Default)
