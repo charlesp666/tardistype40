@@ -62,7 +62,7 @@ namespace LeapFrogWinUI
 
         private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
 
-        private int delayShuffling = 50;                        //Await delay value during shuffling
+        private int delayShuffling = 500;                        //Await delay value during shuffling
 
         /***********************************************************************************************
            * Partial Class Card:

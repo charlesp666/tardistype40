@@ -128,22 +128,11 @@ namespace LeapFrogWinUI
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
 
-            //Get Text for Game Instructions
-            updateCurrentActivityText("Loading Help Text...");
-
-            loadHelpText();
-
             //Clear the Game Deck to initialize the Game Board, and prepare for new game
             cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
-            //Build the Initial Game Board and set Data Context
-            updateCurrentActivityText("Preparing Initial Game Board...");
-
-            buildInitialGameBoard();
-
-            //tbCurrentActivity.Text = "Waiting for User Input...";
-            updateCurrentActivityText("Waiting for User Input...");
+            initialLoad(); 
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             //string aMsg = "This is the end, my only friend, the end...";
@@ -367,8 +356,11 @@ namespace LeapFrogWinUI
           * Initializes the Rows and Columns of the Game Grid and Configures Display and Other
           * Options.
           */
-        private void buildInitialGameBoard()
+        private async Task buildInitialGameBoard()
         {
+            string aMsg = "Initiating Layout Parameters...";
+            await updateCurrentActivityText(aMsg);
+
             enableSelectionChanged(false);             //Disable the GridView SelectionChanged Event
 
             //Configure the Game Playing Grid
@@ -398,7 +390,6 @@ namespace LeapFrogWinUI
                 await Task.Delay(delayClearDeck);
                 //await Task.Run(() => Thread.Sleep(delayClearDeck));
             }
-
         }
 
         /*******************************************************************************************
@@ -498,6 +489,27 @@ namespace LeapFrogWinUI
             //lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
             //moveCount = -1;                                                 //Reset the move counter
             //txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
+        }
+
+        /*******************************************************************************************
+         * Function: initialLoad
+         * Setups up the playing area when the game first loads.
+         */
+        private async Task initialLoad()
+        {
+            //Get Text for Game Instructions
+            await updateCurrentActivityText("Loading Help Text...");
+
+            await loadHelpText();
+
+            //Build the Initial Game Board and set Data Context
+            await updateCurrentActivityText("Preparing Initial Game Board...");
+
+            await buildInitialGameBoard();
+
+            //tbCurrentActivity.Text = "Waiting for User Input...";
+            await updateCurrentActivityText("Waiting for User Input...");
+
         }
 
         /*******************************************************************************************
@@ -768,19 +780,22 @@ namespace LeapFrogWinUI
             await updateCurrentActivityText("Clearing the Playing Area...");
             await clearDeck();                                           //Clear the Current Layout
 
-            await updateCurrentActivityText("Shuffling and Cutting Cards...");
+            do
+            {
+                await updateCurrentActivityText("Shuffling and Cutting Cards...");
 
-            await tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
-            await tempDeck.cutDeck();                                                       //Cut the Deck
+                await tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
+                await tempDeck.cutDeck();                                                       //Cut the Deck
 
-            await updateCurrentActivityText("Dealing Cards...");
+                await updateCurrentActivityText("Dealing Cards...");
 
-            await dealCards(tempDeck);                                     //Deal the Cards to the Tableau
+                await dealCards(tempDeck);                                     //Deal the Cards to the Tableau
 
-            await updateCurrentActivityText("Removing Aces...");
+                await updateCurrentActivityText("Removing Aces...");
 
-            await removeAces();                                    //Remove Aces to Initialize Play Spaces
-            isGameOver();                                      // Initialize the icons for game play
+                await removeAces();                                    //Remove Aces to Initialize Play Spaces
+            }
+            while(isGameOver());                                      // Initialize the icons for game play
 
             moveCount = 0;                              //Initialize the Move Counter for a New Game
             //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
