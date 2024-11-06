@@ -78,6 +78,10 @@ namespace LeapFrogWinUI
 
         private Uri soundNotPlayable = new Uri("ms-appx:///Assets//Sounds/NotPlayablePosition.wav");
 
+        private int delayClearDeck = 125;                //Task Delay when Clearing the Playing area
+        private int delayDealCards = 125;                            //Task Delay when Dealing Cards
+        private int delayRemoveAces = 125;                           //Task Delay when removing aces
+
         private string fileInstructions = folderGameData + "GameInstructions.txt";
 
         // Define variables/constants for play area (main window)
@@ -391,7 +395,8 @@ namespace LeapFrogWinUI
             {
                 gameDeck.deckCards[i] = blankCard;
 
-                await Task.Run(() => Thread.Sleep(250));
+                await Task.Delay(delayClearDeck);
+                //await Task.Run(() => Thread.Sleep(delayClearDeck));
             }
 
         }
@@ -422,7 +427,7 @@ namespace LeapFrogWinUI
             for (int aCard = 0; aCard < countCards; aCard++)
             {
                 gameDeck.deckCards[aCard] = aDeck.deckCards[aCard];
-                await Task.Delay(500);
+                await Task.Delay(delayDealCards);
             }
         }
 
@@ -430,18 +435,18 @@ namespace LeapFrogWinUI
          * Method: delay
          * Pause Processing for specified number of milliseconds.
          */
-        private void delay(int milliSecondsToPauseFor)
-        {
-            System.DateTime startInstant = System.DateTime.Now;
-            System.DateTime thisInstant = startInstant;
-            System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
-            System.DateTime finalInstant = thisInstant.Add(duration);
+        //private void delay(int milliSecondsToPauseFor)
+        //{
+        //    System.DateTime startInstant = System.DateTime.Now;
+        //    System.DateTime thisInstant = startInstant;
+        //    System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
+        //    System.DateTime finalInstant = thisInstant.Add(duration);
 
-            while (finalInstant >= thisInstant)
-            {
-                thisInstant = System.DateTime.Now;
-            }
-        }
+        //    while (finalInstant >= thisInstant)
+        //    {
+        //        thisInstant = System.DateTime.Now;
+        //    }
+        //}
 
         /*******************************************************************************************
          * Method: displayMessage
@@ -579,7 +584,7 @@ namespace LeapFrogWinUI
         * Method: loadHelpText
         * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
         */
-        private async void loadHelpText()
+        private async Task loadHelpText()
         {
             var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
 
@@ -606,10 +611,12 @@ namespace LeapFrogWinUI
          * Method: playSound
          * Play the Sound in file passed as parameter.
          */
-        private void playSound(Uri soundFile)
+        private async Task playSound(Uri soundFile, int delayTask = 1000)
         {
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
             myMediaPlayer.Play();
+
+            await Task.Delay(delayTask);
         }
 
         /*******************************************************************************************
@@ -617,19 +624,16 @@ namespace LeapFrogWinUI
          * Actions to perform when mouse is Clicked. Process determines the Grid
          * Component that was clicked then initiates a card move.
          */
-        public void playSpaceClicked(int destinationIndex)
+        public async Task playSpaceClicked(int destinationIndex)
         {
-            Debug.WriteLine($"playSpaceClicked Received: {destinationIndex}");
-
             if (gameDeck.deckCards[destinationIndex].cardRank.ToLower() != "p")
             {
-                playSound(soundNotPlayable);
+                await playSound(soundNotPlayable);
             }
             else
             {
                 if (isPlayable(destinationIndex))                            //Playable or King Space...
                 {
-                    Debug.WriteLine($"playSpaceClicked KingPosition: {isKingPosition(destinationIndex)}");
                     if (!isKingPosition(destinationIndex))
                     {
                         Cards.Card sourceCard = gameDeck.deckCards[destinationIndex-1];
@@ -638,7 +642,7 @@ namespace LeapFrogWinUI
                         int sourceIndex = gameDeck.findCardIndex(cardToMove);
                
                         string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
-                        speakText(aMsg);
+                        await speakText(aMsg);
                
                         moveCard(sourceIndex, destinationIndex);
                
@@ -648,7 +652,7 @@ namespace LeapFrogWinUI
                     else
                     {
                         string aMsg = "Card to Move is a King.";
-                        speakText(aMsg);
+                        await speakText(aMsg);
                
                         playKingPosition = true;                               //Set King being Moved Flag
                
@@ -700,13 +704,14 @@ namespace LeapFrogWinUI
                         if(isPlayable(arrayPosition))                   //If the Card is Playable...
                         {
                             gameDeck.deckCards[arrayPosition] = cardPlayable;    //Assign "Playable"
+                            await Task.Delay(delayRemoveAces);
                         }
                         else                                    //Otherwise, Card is not Playable...
                         {
                             gameDeck.deckCards[arrayPosition] = cardNotPlayable; //Assign "Not Playable"
+                            await Task.Delay(delayRemoveAces);
                         }
                     }
-                    await Task.Delay(500);
                 }
             }
         }
@@ -854,11 +859,11 @@ namespace LeapFrogWinUI
         /* 
         /* Updates the Text in the "Current Activity" TextBlock.
         /*/
-        private async Task updateCurrentActivityText(string msgCurrentActivity)
+        private async Task updateCurrentActivityText(string msgCurrentActivity, int delayTask = 1000)
         {
             tbCurrentActivity.Text = msgCurrentActivity;
 
-            await Task.Run(() => Thread.Sleep(5000));
+            await Task.Run(() => Thread.Sleep(delayTask));
         }
 
         /*******************************************************************************************

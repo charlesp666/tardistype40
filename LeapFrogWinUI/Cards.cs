@@ -41,6 +41,29 @@ namespace LeapFrogWinUI
         private static String folderGameImages = "/Assets/GameImages/";
         private static String folderCardFaces = "/Assets/CardImages/";
 
+        /*******************************************************************************************
+         * Class Variables and Constants
+         */
+        private static Random aRandom = new Random();       //Parameter for Random Number Generation
+
+        public ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
+
+        //Load the Default Card Back Image
+        private string cardBack = "/Assets/GameImages/defaultBack.jpg";
+
+        //Set CardFace to Default "NotPlayable" Image
+        private string bmpNotPlayable = folderGameImages + "NotPlayable.gif";
+        private string bmpPlayable = folderGameImages + "Playable.gif";
+
+        private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
+
+        //Media Player object to play various sounds during play; sound files
+        private MediaPlayer myMediaPlayer = new MediaPlayer();
+
+        private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
+
+        private int delayShuffling = 50;                        //Await delay value during shuffling
+
         /***********************************************************************************************
            * Partial Class Card:
            * Defines the Attributes and Methods of a Single Playing Card.
@@ -295,27 +318,6 @@ namespace LeapFrogWinUI
          */
 
         /*******************************************************************************************
-         * Class Variables and Constants
-         */
-        private static Random aRandom = new Random();       //Parameter for Random Number Generation
-
-        public ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
-
-        //Load the Default Card Back Image
-        private string cardBack = "/Assets/GameImages/defaultBack.jpg";
-
-        //Set CardFace to Default "NotPlayable" Image
-        private string bmpNotPlayable = folderGameImages + "NotPlayable.gif";
-        private string bmpPlayable = folderGameImages + "Playable.gif";
-
-        private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
-
-        //Media Player object to play various sounds during play; sound files
-        private MediaPlayer myMediaPlayer = new MediaPlayer();
-
-        private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
-
-        /*******************************************************************************************
          * Constructor: Cards()
          * Builds a deck of cards by creating an array of Card objects
          * 
@@ -360,7 +362,7 @@ namespace LeapFrogWinUI
                 }
                 this.deckCards[0].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
             }
-            await Task.Delay(1000);
+            await Task.Delay(50);
         }
 
         /*******************************************************************************************
@@ -542,12 +544,12 @@ namespace LeapFrogWinUI
          * Method: playSound
          * Play the Sound in file passed as parameter.
          */
-        private async Task playSound(Uri soundFile)
+        private async Task playSound(Uri soundFile, int taskDelay = 500)
         {
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
             myMediaPlayer.Play();
 
-            await Task.Delay(5000);
+            await Task.Delay(taskDelay);
         }
 
         /*******************************************************************************************
@@ -580,14 +582,16 @@ namespace LeapFrogWinUI
             int firstCard = 0;                                        //Index of first card to swap
             int secondCard = 0;                                      //Index of Second card to swap
 
-            int countPlaySound = (int)(countShuffle / 5);   //Number of swaps between playing sound
+            int countPlaySound = (int)(countShuffle / 5);   //Number of swaps between Shuffle sound
+
+            await playSound(soundShuffling, delayShuffling);           //Play the "Shuffling" sound
 
             //Find the two cards to swap
             for (int aCount = 0; aCount <= countShuffle; aCount++)   //For the number of "Swaps"...
             {
                 if ((aCount % countPlaySound) == 0)      //Play sound of at countPlaySound Multiple
                 {
-                    await playSound(soundShuffling);                    //Play the "Shuffling Card" sound
+                    await playSound(soundShuffling, delayShuffling);  //Play the "Shuffling" sound
                 }
 
                 firstCard = (int)aRandom.Next(0, numberOfCards);  //Randomly select first swap card
