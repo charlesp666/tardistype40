@@ -15,6 +15,8 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+
 //using System.Numerics;
 //using System.Threading;
 //using System.Threading.Tasks;
@@ -340,7 +342,7 @@ namespace LeapFrogWinUI
          * Process randomly selects a card in the Deck, then rotates the cards from bottom
          * to top until that card is reached thereby effective a "cut" of the deck of cards.
          */
-        public void cutDeck()
+        public async Task cutDeck()
         {
             Card aTemp = new Card();
             int numberOfCards = this.deckCards.Count;     //Difference between number and array
@@ -358,6 +360,7 @@ namespace LeapFrogWinUI
                 }
                 this.deckCards[0].setCard(aTemp.getRank(), aTemp.getSuit(), aTemp.getCardFace());
             }
+            await Task.Delay(1000);
         }
 
         /*******************************************************************************************
@@ -539,11 +542,12 @@ namespace LeapFrogWinUI
          * Method: playSound
          * Play the Sound in file passed as parameter.
          */
-        private void playSound(Uri soundFile)
+        private async Task playSound(Uri soundFile)
         {
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
             myMediaPlayer.Play();
 
+            await Task.Delay(5000);
         }
 
         /*******************************************************************************************
@@ -568,7 +572,7 @@ namespace LeapFrogWinUI
          * Method: shuffleDeck
          * Shuffles deck by randomly moving cards between entries in the deck array.
          */
-        public void shuffleDeck()
+        public async Task shuffleDeck()
         {
             Card aTemp = new Card();                               //Card Object for swapping cards
 
@@ -583,7 +587,7 @@ namespace LeapFrogWinUI
             {
                 if ((aCount % countPlaySound) == 0)      //Play sound of at countPlaySound Multiple
                 {
-                    playSound(soundShuffling);                    //Play the "Shuffling Card" sound
+                    await playSound(soundShuffling);                    //Play the "Shuffling Card" sound
                 }
 
                 firstCard = (int)aRandom.Next(0, numberOfCards);  //Randomly select first swap card

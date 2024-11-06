@@ -58,7 +58,7 @@ namespace LeapFrogWinUI
         private AppWindow myWindow = null;
 
         //Create Player and GameInformation Objects
-        private Player myAvatar = new Player();                  //Storage for Current Player Object
+        //private Player myAvatar = new Player();                  //Storage for Current Player Object
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
 
         //Declare and Initialize Game Playing Deck(s)
@@ -383,13 +383,15 @@ namespace LeapFrogWinUI
          * Method: clearDeck
          * Clears the Game Deck of Cards for Initiating Display and new Game
          */
-        private void clearDeck()
+        private async Task clearDeck()
         {
             Cards.Card blankCard = null;    //Create a blank card to load into each card in PlayDeck
 
             for (int i = 0; i < gameDeck.deckCards.Count(); i++)
             {
                 gameDeck.deckCards[i] = blankCard;
+
+                await Task.Run(() => Thread.Sleep(250));
             }
 
         }
@@ -413,13 +415,14 @@ namespace LeapFrogWinUI
          * 
          * aDeck - Deck Object containing cards to be dealt.
          */
-        private void dealCards(Cards aDeck)
+        private async Task dealCards(Cards aDeck)
         {
             int countCards = gameDeck.deckCards.Count;
 
             for (int aCard = 0; aCard < countCards; aCard++)
             {
                 gameDeck.deckCards[aCard] = aDeck.deckCards[aCard];
+                await Task.Delay(500);
             }
         }
 
@@ -680,7 +683,7 @@ namespace LeapFrogWinUI
          * Removes the Aces from the playing area in order to initialize the play spots, and
          * assigns the "Playable" and "Not-Playable" icons/cards as appropriate.
          */
-        public void removeAces()
+        public async Task removeAces()
         {
             int arrayPosition = 0;
 
@@ -703,6 +706,7 @@ namespace LeapFrogWinUI
                             gameDeck.deckCards[arrayPosition] = cardNotPlayable; //Assign "Not Playable"
                         }
                     }
+                    await Task.Delay(500);
                 }
             }
         }
@@ -752,25 +756,25 @@ namespace LeapFrogWinUI
          * Prepares the playing board, shuffles the deck of cards and initializes the tableau for
          * playing the game
          */
-        private void setUpNewGame()
+        private async Task setUpNewGame()
         {
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
 
-            updateCurrentActivityText("Clearing the Playing Area...");
-            clearDeck();                                                  //Clear the Current Layout
+            await updateCurrentActivityText("Clearing the Playing Area...");
+            await clearDeck();                                           //Clear the Current Layout
 
-            updateCurrentActivityText("Shuffling and Cutting Cards...");
+            await updateCurrentActivityText("Shuffling and Cutting Cards...");
 
-            tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
-            tempDeck.cutDeck();                                                       //Cut the Deck
+            await tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
+            await tempDeck.cutDeck();                                                       //Cut the Deck
 
-            updateCurrentActivityText("Dealing Cards...");
+            await updateCurrentActivityText("Dealing Cards...");
 
-            dealCards(tempDeck);                                     //Deal the Cards to the Tableau
+            await dealCards(tempDeck);                                     //Deal the Cards to the Tableau
 
-            updateCurrentActivityText("Removing Aces...");
+            await updateCurrentActivityText("Removing Aces...");
 
-            removeAces();                                    //Remove Aces to Initialize Play Spaces
+            await removeAces();                                    //Remove Aces to Initialize Play Spaces
             isGameOver();                                      // Initialize the icons for game play
 
             moveCount = 0;                              //Initialize the Move Counter for a New Game
@@ -850,7 +854,7 @@ namespace LeapFrogWinUI
         /* 
         /* Updates the Text in the "Current Activity" TextBlock.
         /*/
-        private async void updateCurrentActivityText(string msgCurrentActivity)
+        private async Task updateCurrentActivityText(string msgCurrentActivity)
         {
             tbCurrentActivity.Text = msgCurrentActivity;
 

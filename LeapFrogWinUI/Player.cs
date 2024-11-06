@@ -12,16 +12,10 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+//using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-
-
-
-//using System.Collections.Generic;
-//using System.Linq;
 //using System.Text;
-//using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 using Windows.Storage;
 using Windows.System;
@@ -36,17 +30,17 @@ namespace LeapFrogWinUI
         private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
 
         private String namePlayer = "jdoe@somewhere.net";            //Set Current Player to Default
-        private TimeSpan timePlayed = new TimeSpan(0, 0, 0);         //Total Time for All Games Played
+        private TimeSpan timePlayed = new TimeSpan(0, 0, 0);       //Total Time for All Games Played
 
         //Parameters to track User Statistics
-        private ApplicationDataContainer PlayerStats = ApplicationData.Current.LocalSettings;
+        private ApplicationDataContainer PlayerStats = null;
 
         /*******************************************************************************************
          * Constructor: Player (Default)
          */
         public Player()
         {
-            string aDummy = getPlayerName().ToString();
+            //string aDummy = getPlayerName();                             //Get Current User's "Name"
 
             loadPlayerStats();                            //Load Player Stats from Application Data
         }
@@ -213,22 +207,24 @@ namespace LeapFrogWinUI
          * Method: getPlayerName
          * Returns the Name of the Player of the Object that Invoked the Method.
          */
-        public async Task<string> getPlayerName()
-        {
-            IReadOnlyList<User> users = await User.FindAllAsync();
-            string myUser = "";
+        //public async Task<string> getPlayerName()
+        //{
+        //    IReadOnlyList<User> users = await User.FindAllAsync();
+        //    string myUser = "";
+        //    // Assuming the first user in the list is the current user
+        //    //User currentUser = users.FirstOrDefault();
+        //    //var currentUser = users.Where(p => p.AuthenticationStatus == UserAuthenticationStatus.LocallyAuthenticated &&
+        //    //                    p.Type == UserType.LocalUser).FirstOrDefault();
 
-            User currentUser = users.FirstOrDefault();
-            // Assuming the first user in the list is the current user
+        //    //if (currentUser != null)
+        //    //{
+        //    //    var aUser  = await Task.Run => currentUser.GetPropertyAsync(KnownUserProperties.AccountName) as string;
+        //    //    myUser = (string)aUser;
+        //    //}
 
-            if (currentUser != null)
-            {
-              myUser  = await currentUser.GetPropertyAsync(KnownUserProperties.AccountName) as string;
-            }
-
-            namePlayer = myUser;
-            return myUser.ToString();
-        }
+        //    //namePlayer = myUser;                             //Assigns User name to Global Parameter
+        //    return myUser;
+        //}
 
         /*******************************************************************************************
          * Method: getTimePlayed
@@ -257,7 +253,6 @@ namespace LeapFrogWinUI
          */
         private void loadPlayerStats()
         {
-
             if (PlayerStats is null)
             {
                 setGamesPlayed(0);
@@ -266,6 +261,7 @@ namespace LeapFrogWinUI
                 setTimePlayed(TimeSpan.Zero);
 
                 writePlayerStats();
+                PlayerStats = ApplicationData.Current.LocalSettings;
             }
 
             setGamesPlayed((int)PlayerStats.Values["GamesPlayed"]);
