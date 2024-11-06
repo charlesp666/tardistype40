@@ -381,13 +381,14 @@ namespace LeapFrogWinUI
          */
         private async Task clearDeck()
         {
-            Cards.Card blankCard = null;    //Create a blank card to load into each card in PlayDeck
+
+            Cards.Card blankCard = new Cards.Card("", "", gameDeck.deckCards[0].cardBack);
 
             for (int i = 0; i < gameDeck.deckCards.Count(); i++)
             {
                 gameDeck.deckCards[i] = blankCard;
 
-                await Task.Delay(delayClearDeck);
+                await Task.Delay(delayClearDeck);                   //Wait for the Display to Update
                 //await Task.Run(() => Thread.Sleep(delayClearDeck));
             }
         }
@@ -776,6 +777,8 @@ namespace LeapFrogWinUI
         private async Task setUpNewGame()
         {
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
+            isGameSet = false;
+            flgGameOver = false;
 
             await updateCurrentActivityText("Clearing the Playing Area...");
             await clearDeck();                                           //Clear the Current Layout

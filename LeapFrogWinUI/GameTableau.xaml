@@ -149,7 +149,7 @@
                                 BorderBrush="White"
                                 BorderThickness="1"
                                 CornerRadius="10"
-                                Background="White"
+                                Background="DarkGray"
                         >
                              <Image x:Name="CardFace"
                                     Stretch="Uniform"
