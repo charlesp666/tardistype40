@@ -9,29 +9,25 @@ using Microsoft.UI.Xaml.Controls;
 //using Microsoft.UI.Xaml.Navigation;
 
 using System;
-using System.Diagnostics;
+//using System.Diagnostics;
 
 //using System.ComponentModel;
 //using System.Diagnostics;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 //using System.Collections.Immutable;
 //using System.IO;
 using System.Linq;
+//using System.Runtime.CompilerServices;
+//using System.Runtime.InteropServices.WindowsRuntime;
+//using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
-
-//using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
-//using System.Runtime.CompilerServices;
-//using System.Runtime.InteropServices.WindowsRuntime;
-//using System.Runtime.InteropServices.WindowsRuntime;
 
 //using Windows.ApplicationModel.Core;
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
 using Windows.Graphics;
 //using Windows.Graphics.Display;                                      //For Adjusting App Window size
-//using Windows.Media.Core;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Media.SpeechSynthesis;
@@ -105,9 +101,7 @@ namespace LeapFrogWinUI
 
         //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
 
-        //private Stack<UndoItem> myUndoItems = new Stack<UndoItem>();
-
-        //private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
+        private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
         private static int displayDelayMS = 5000;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
@@ -1065,159 +1059,159 @@ namespace LeapFrogWinUI
          * Stores the Play Position as an object to simplify parameter passing during game play.
          **********************************************************************************************/
         #region
-        public partial class PlayPosition
-        {
-            /*******************************************************************************************
-             * Class Variables and Constants
-             */
-            private String cardValue;                                            //Rank and Suit of Card
-            private int positionRow;                             //Row of Play Position in the Grid View
-            private int positionColumn;                       //Column of Play Position in the Grid View
+        //public partial class PlayPosition
+        //{
+        //    /*******************************************************************************************
+        //     * Class Variables and Constants
+        //     */
+        //    private String cardValue;                                            //Rank and Suit of Card
+        //    private int positionRow;                             //Row of Play Position in the Grid View
+        //    private int positionColumn;                       //Column of Play Position in the Grid View
 
-            const int cardsInSuit = 13;        //Number of Cards in a Suit; number of columns in Tableau
+        //    const int cardsInSuit = 13;        //Number of Cards in a Suit; number of columns in Tableau
 
-            /*******************************************************************************************
-             * Constructor: PlayPosition (Default)
-             * Default constructor for a PlayPostion.
-             */
-            public PlayPosition(GridView aGrid, int aColumn, int aRow)
-            {
-                cardValue = aGrid.SelectedIndex.ToString(); //[aColumn, aRow].Tag.ToString();        //Store Rank and Suit of the Card
-                positionRow = aRow;                                     //Store Row of the Play Position
-                positionColumn = aColumn;                            //Store Column of the Play Position
-            }
+        //    /*******************************************************************************************
+        //     * Constructor: PlayPosition (Default)
+        //     * Default constructor for a PlayPostion.
+        //     */
+        //    public PlayPosition(GridView aGrid, int aColumn, int aRow)
+        //    {
+        //        cardValue = aGrid.SelectedIndex.ToString(); //[aColumn, aRow].Tag.ToString();        //Store Rank and Suit of the Card
+        //        positionRow = aRow;                                     //Store Row of the Play Position
+        //        positionColumn = aColumn;                            //Store Column of the Play Position
+        //    }
 
-            /*******************************************************************************************
-             * Constructor: PlayPosition (Default)
-             * 
-             * Creates an "empty" play position.
-             */
-            private PlayPosition()
-            {
-                cardValue = null;                                      //Store Rank and Suit of the Card
-                positionRow = -1;                                       //Store Row of the Play Position
-                positionColumn = -1;                                 //Store Column of the Play Position
-            }
+        //    /*******************************************************************************************
+        //     * Constructor: PlayPosition (Default)
+        //     * 
+        //     * Creates an "empty" play position.
+        //     */
+        //    private PlayPosition()
+        //    {
+        //        cardValue = null;                                      //Store Rank and Suit of the Card
+        //        positionRow = -1;                                       //Store Row of the Play Position
+        //        positionColumn = -1;                                 //Store Column of the Play Position
+        //    }
 
-            /*******************************************************************************************
-            * Method: computeRow
-            * Computes and Returns the Tableau column Value for the Selected Card.
-            */
-            public int computeColumn(int indexValue)
-            {
-                return (int)(indexValue % cardsInSuit);
-            }
+        //    /*******************************************************************************************
+        //    * Method: computeRow
+        //    * Computes and Returns the Tableau column Value for the Selected Card.
+        //    */
+        //    public int computeColumn(int indexValue)
+        //    {
+        //        return (int)(indexValue % cardsInSuit);
+        //    }
 
-            /*******************************************************************************************
-              * Method: computeRow
-              * Computes and Returns the Tableau row Value for the Selected Card.
-              */
-            public int computeRow(int indexValue)
-            {
-                double rowNumber = indexValue / cardsInSuit;
-                return (int)Math.Truncate(rowNumber);
-            }
+        //    /*******************************************************************************************
+        //      * Method: computeRow
+        //      * Computes and Returns the Tableau row Value for the Selected Card.
+        //      */
+        //    public int computeRow(int indexValue)
+        //    {
+        //        double rowNumber = indexValue / cardsInSuit;
+        //        return (int)Math.Truncate(rowNumber);
+        //    }
 
-            /*******************************************************************************************
-             * Function: findPlayCard
-             * Returns the Play Position object for the Card currently being played (that is, the card
-             * to move to the currently selected play position).
-             */
-            public PlayPosition findPlayCard(GridView aGrid)
-            {
-                PlayPosition playCard = new PlayPosition();                 //Create Return Value Object
+        //    /*******************************************************************************************
+        //     * Function: findPlayCard
+        //     * Returns the Play Position object for the Card currently being played (that is, the card
+        //     * to move to the currently selected play position).
+        //     */
+        //    public PlayPosition findPlayCard(GridView aGrid)
+        //    {
+        //        PlayPosition playCard = new PlayPosition();                 //Create Return Value Object
 
-                playCard.cardValue = identifyPlayCard(aGrid);               //Get the Card to Search for
+        //        playCard.cardValue = identifyPlayCard(aGrid);               //Get the Card to Search for
 
-                //Search the Grid for the Desired Card
-                foreach (var gridCard in aGrid.Items)
-                {
-                    if (gridCard.Equals(playCard))
-                    {
-                        playCard.positionColumn = computeColumn(aGrid.SelectedIndex);                       //Set the Column Value
-                        playCard.positionRow = computeRow(aGrid.SelectedIndex);                             //Set the Row Value
+        //        //Search the Grid for the Desired Card
+        //        foreach (var gridCard in aGrid.Items)
+        //        {
+        //            if (gridCard.Equals(playCard))
+        //            {
+        //                playCard.positionColumn = computeColumn(aGrid.SelectedIndex);                       //Set the Column Value
+        //                playCard.positionRow = computeRow(aGrid.SelectedIndex);                             //Set the Row Value
 
-                        break;
-                    }
-                }
+        //                break;
+        //            }
+        //        }
 
-                return playCard;
-            }
+        //        return playCard;
+        //    }
 
-            /*******************************************************************************************
-             * Method: getCard
-             * Return the Value for the Card (Rank and Suit) in the Play Position.
-             */
-            public String getCard()
-            {
-                return this.cardValue;
-            }
+        //    /*******************************************************************************************
+        //     * Method: getCard
+        //     * Return the Value for the Card (Rank and Suit) in the Play Position.
+        //     */
+        //    public String getCard()
+        //    {
+        //        return this.cardValue;
+        //    }
 
-            /*******************************************************************************************
-             * Method: getColumn
-             * Return the Value for the Column in the Play Position.
-             */
-            public int getColumn()
-            {
-                return this.positionColumn;
-            }
+        //    /*******************************************************************************************
+        //     * Method: getColumn
+        //     * Return the Value for the Column in the Play Position.
+        //     */
+        //    public int getColumn()
+        //    {
+        //        return this.positionColumn;
+        //    }
 
-            /*******************************************************************************************
-             * Method: getRank
-             * Parses the Rank from the CardValue passed.
-             */
-            public String getRank(String aCardValue)
-            {
-                int cardLength = aCardValue.Length;                         //Store Length of Card Value
-                int rankLength = cardLength - 1;              //Determine Length of String for Card Rank
+        //    /*******************************************************************************************
+        //     * Method: getRank
+        //     * Parses the Rank from the CardValue passed.
+        //     */
+        //    public String getRank(String aCardValue)
+        //    {
+        //        int cardLength = aCardValue.Length;                         //Store Length of Card Value
+        //        int rankLength = cardLength - 1;              //Determine Length of String for Card Rank
 
-                return (aCardValue.Substring(0, rankLength));                        //Return Card's Rank
-            }
+        //        return (aCardValue.Substring(0, rankLength));                        //Return Card's Rank
+        //    }
 
-            /*******************************************************************************************
-             * Method: getSuit
-             * Parses the Rank from the Card Value passed.
-             */
-            public String getSuit(String aCardValue)
-            {
-                int suitPosition = aCardValue.Length - 1;         //Determine Position in String of Suit
+        //    /*******************************************************************************************
+        //     * Method: getSuit
+        //     * Parses the Rank from the Card Value passed.
+        //     */
+        //    public String getSuit(String aCardValue)
+        //    {
+        //        int suitPosition = aCardValue.Length - 1;         //Determine Position in String of Suit
 
-                return (aCardValue.Substring(suitPosition, 1));                 //Return the Card's Suit
-            }
+        //        return (aCardValue.Substring(suitPosition, 1));                 //Return the Card's Suit
+        //    }
 
-            /*******************************************************************************************
-             * Method: getRow
-             * Return the Value for the Row in the Play Position.
-             */
-            public int getRow()
-            {
-                return this.positionRow;
-            }
+        //    /*******************************************************************************************
+        //     * Method: getRow
+        //     * Return the Value for the Row in the Play Position.
+        //     */
+        //    public int getRow()
+        //    {
+        //        return this.positionRow;
+        //    }
 
-            /*******************************************************************************************
-             * Function: identifyPlayCard
-             * Based on the array index of the selected play position, looks at the card
-             * to the left, then determines the card to be played.
-             */
-            private String identifyPlayCard(GridView aGrid)
-            {
-                //Get the Rank and Suit of Card in Cell to Left
-                Cards.Card searchItem = (Cards.Card)aGrid.SelectedItem; //aGrid[this.getColumn() - 1, this.getRow()].Tag.ToString();
-                                                                        //String searchValue = searchItem.
+        //    /*******************************************************************************************
+        //     * Function: identifyPlayCard
+        //     * Based on the array index of the selected play position, looks at the card
+        //     * to the left, then determines the card to be played.
+        //     */
+        //    private String identifyPlayCard(GridView aGrid)
+        //    {
+        //        //Get the Rank and Suit of Card in Cell to Left
+        //        Cards.Card searchItem = (Cards.Card)aGrid.SelectedItem; //aGrid[this.getColumn() - 1, this.getRow()].Tag.ToString();
+        //                                                                //String searchValue = searchItem.
 
-                String cardSuit = searchItem.getSuit().ToString(); ;//getSuit(searchValue);                            //Get the Card's Suit
-                String cardRank = searchItem.getRank().ToString();//getRank(searchValue);                            //Get the Card's Rank
+        //        String cardSuit = searchItem.getSuit().ToString(); ;//getSuit(searchValue);                            //Get the Card's Suit
+        //        String cardRank = searchItem.getRank().ToString();//getRank(searchValue);                            //Get the Card's Rank
 
-                int anIndex = 2;     //Set Search Start Postion in Possible Rank (Ace and Deuce ignored)
-                while (!(Cards.Card.possibleRanks[anIndex].Equals(cardRank)))
-                {
-                    anIndex++;
-                }
-                cardRank = Cards.Card.possibleRanks[anIndex - 1];            //Get the Located Card Rank
+        //        int anIndex = 2;     //Set Search Start Postion in Possible Rank (Ace and Deuce ignored)
+        //        while (!(Cards.Card.possibleRanks[anIndex].Equals(cardRank)))
+        //        {
+        //            anIndex++;
+        //        }
+        //        cardRank = Cards.Card.possibleRanks[anIndex - 1];            //Get the Located Card Rank
 
-                return (cardRank + cardSuit);                                    //Return the Card Value
-            }
-        }
+        //        return (cardRank + cardSuit);                                    //Return the Card Value
+        //    }
+        //}
 
         #endregion
 
@@ -1226,75 +1220,72 @@ namespace LeapFrogWinUI
          * Defines an object that stores the from and to card locations for a move.
          **********************************************************************************************/
         #region
-        //public partial class UndoBuffer
-        //{
-        /*******************************************************************************************
-        * Sub-Class UndoItem
-        * Defines the structure of a single Undo Item.
-        */
-        //public partial class UndoItem
-        //{
-        //    private PlayPosition fromPosition;                    //Card Position that move was from
-        //    private PlayPosition toPosition;                        //Card Position that move was to
+        public partial class UndoBuffer
+        {
+            List<UndoItem> myUndoItems;
 
-        //    public UndoItem()
-        //    {
-        //    }
-
-        //    public UndoItem(PlayPosition aFromPosition, PlayPosition aToPosition)
-        //    {
-        //        fromPosition = aFromPosition;
-        //        toPosition = aToPosition;
-        //    }
-
-        //    public PlayPosition getFromPosition()
-        //    {
-        //        return (fromPosition);
-        //    }
-
-        //    public PlayPosition getToPosition()
-        //    {
-        //        return (toPosition);
-        //    }
-        //}
+            /*******************************************************************************************
+            * Sub-Class UndoItem
+            * Defines the structure of a single Undo Item.
+            */
+            public partial class UndoItem
+            {
+                private int fromPosition;                    //Card Position that move was from
+                private int toPosition;                        //Card Position that move was to
+    
+                public UndoItem(int aFromPosition, int aToPosition)
+                {
+                    fromPosition = aFromPosition;
+                    toPosition = aToPosition;
+                }
+    
+                public int getFromPosition()
+                {
+                    return (fromPosition);
+                }
+    
+                public int getToPosition()
+                {
+                    return (toPosition);
+                }
+            }
 
         /*******************************************************************************************
          * Constructor: UndoBuffer (Default)
          * Initializes the Undo Buffer.
          */
-        //public UndoBuffer()
-        //{
-        //     //No Initialization State required
-        //}
+        public UndoBuffer()
+        {
+            //No Initialization State required
+        }
 
         /*******************************************************************************************
          * Method: pop
          * "Pops" the last move made from the Stack
          */
-        //public UndoItem pop()
-        //{
-        //    int bufferItem = myUndoItems.Count - 1;                             //Top Item in Buffer
-        //    UndoItem myItem = null;                                                //Local Undo Item
+        public UndoItem pop()
+        {
+            int bufferItem = myUndoItems.Count - 1;                             //Top Item in Buffer
+            UndoItem myItem = null;                                                //Local Undo Item
 
-        //    if(bufferItem >= 0)
-        //    {
-        //        myItem = myUndoItems[bufferItem];                      //Get the most recent move...
-        //        myUndoItems.RemoveAt(bufferItem);              //and Remove "popped" item from stack
-        //    }
-        //    return (myItem);
-        //}
+            if (bufferItem >= 0)
+            {
+                myItem = myUndoItems[bufferItem];                      //Get the most recent move...
+                myUndoItems.RemoveAt(bufferItem);              //and Remove "popped" item from stack
+            }
+            return (myItem);
+        }
 
-        /*******************************************************************************************
-         * Method: push
-         * "Pushes" the most recent move made to the Stack
-         */
-        //public void push(PlayPosition aFromPosition, PlayPosition aToPosition)
-        //{
-        //    UndoItem newItem = new UndoItem(aFromPosition, aToPosition);
-        //    myUndoItems.Add(newItem);
-        //}
-        //}
-
+            /*******************************************************************************************
+             * Method: push
+             * "Pushes" the most recent move made to the Stack
+             */
+            public void push(int aFromPosition, int aToPosition)
+            {
+                UndoItem newItem = new UndoItem(aFromPosition, aToPosition);
+                myUndoItems.Add(newItem);
+            }
+        }
         #endregion
     }
 }
