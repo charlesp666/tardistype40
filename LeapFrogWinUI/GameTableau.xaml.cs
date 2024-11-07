@@ -132,7 +132,7 @@ namespace LeapFrogWinUI
             cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
-            initialLoad(); 
+            initialLoad();
 
             //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
             //string aMsg = "This is the end, my only friend, the end...";
@@ -195,8 +195,6 @@ namespace LeapFrogWinUI
          */
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
-            updateCurrentActivityText("Setting Up for a New Game...");
-
             setUpNewGame();                                    //Shuffle and Deal Cards for new game
         }
 
@@ -370,9 +368,12 @@ namespace LeapFrogWinUI
             dataGridGameBoard.AllowFocusOnInteraction = true;
             dataGridGameBoard.IsEnabled = true;
 
-            isGameSet = false;                         //Set Flag indicating no game is set for play
-            flgGameOver = true;                               //Set Flag indicating game is not over
-            moveCount = 0;                                                 //Initialize Move Counter
+            //Build a "Dummy" Layout
+            Cards tempDeck = new Cards(true);           //Create a working deck to shuffle, cut, etc.
+
+            await clearDeck();                                           //Clear the Current Layout
+            await dealCards(tempDeck);                                     //Deal the Cards to the Tableau
+            await removeAces();                                    //Remove Aces to Initialize Play Spaces
         }
 
         /*******************************************************************************************
@@ -510,7 +511,6 @@ namespace LeapFrogWinUI
 
             //tbCurrentActivity.Text = "Waiting for User Input...";
             await updateCurrentActivityText("Waiting for User Input...");
-
         }
 
         /*******************************************************************************************
@@ -776,6 +776,8 @@ namespace LeapFrogWinUI
          */
         private async Task setUpNewGame()
         {
+            await updateCurrentActivityText("Setting Up for a New Game...");
+
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
             isGameSet = false;
             flgGameOver = false;
