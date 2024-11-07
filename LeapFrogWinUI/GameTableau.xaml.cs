@@ -213,25 +213,10 @@ namespace LeapFrogWinUI
                 var gridViewItem = dataGridGameBoard.ContainerFromItem(dataGridGameBoard.SelectedItem) as GridViewItem;
                 if (gridViewItem != null)
                 {
-                    //var indexClickedCell = dataGridGameBoard.Items.IndexOf(dataGridGameBoard.SelectedItem);
                     int indexClickedCell = dataGridGameBoard.SelectedIndex;
 
-                    //Debug.WriteLine($"SelectionChanged Clicked: {indexClickedCell}");
-                    //Debug.WriteLine($"SelectionChanged Index: {dataGridGameBoard.SelectedIndex}");
                     playSpaceClicked(indexClickedCell);
                 }
-            }
-        }
-
-        private void enableSelectionChanged(bool enableEvent = true)
-        {
-            if (enableEvent)
-            {
-                dataGridGameBoard.SelectionChanged += dataGridGameBoard_SelectionChanged;
-            }
-            else
-            {
-                dataGridGameBoard.SelectionChanged -= dataGridGameBoard_SelectionChanged;
             }
         }
 
@@ -344,10 +329,23 @@ namespace LeapFrogWinUI
          ******************************************************************************************/
         #region
         /*******************************************************************************************
-          * Method: buildInitialGameBoard
-          * Initializes the Rows and Columns of the Game Grid and Configures Display and Other
-          * Options.
-          */
+        * Method: AnimateCell
+        * "Animates" the GridViewItem passed as parameter.
+        */
+        private void AnimateCell(GridViewItem item, string animationName)
+        {
+            var container = dataGridGameBoard.ContainerFromItem(item) as GridViewItem;
+            if (container != null)
+            {
+                VisualStateManager.GoToState(container, animationName, true);
+            }
+        }
+
+        /*******************************************************************************************
+        * Method: buildInitialGameBoard
+        * Initializes the Rows and Columns of the Game Grid and Configures Display and Other
+        * Options.
+        */
         private async Task buildInitialGameBoard()
         {
             string aMsg = "Initiating Layout Parameters...";
@@ -415,6 +413,22 @@ namespace LeapFrogWinUI
             {
                 gameDeck.deckCards[aCard] = aDeck.deckCards[aCard];
                 await Task.Delay(delayDealCards);
+            }
+        }
+
+        /*******************************************************************************************
+        * Method: enableSelectionChanged
+        * Programatically enables and disables the SelectionChanged Event.
+        */
+        private void enableSelectionChanged(bool enableEvent = true)
+        {
+            if (enableEvent)
+            {
+                dataGridGameBoard.SelectionChanged += dataGridGameBoard_SelectionChanged;
+            }
+            else
+            {
+                dataGridGameBoard.SelectionChanged -= dataGridGameBoard_SelectionChanged;
             }
         }
 
@@ -588,6 +602,28 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Function: isPlayableShuffle
+         * Checks if the shuffled deck has at least one playable position; returns "true" if the
+         * shuffle can be played; "false" if all "Ace" positions are not playable.
+         */
+        private bool isPlayableShuffle(Cards aDeck)
+        {
+            int countPlayPositions = 0;
+
+            for (int i = 0; i < aDeck.deckCards.Count; i++)
+            {
+                Cards.Card currentCard = aDeck.deckCards[i];
+                //Check if the Current Card is a "play position" (Is not a playing card)...
+                if ((currentCard.cardRank.ToLower() == "a") && (isPlayable(i)))
+                {
+                        countPlayPositions++;              //And increment Playable position counter
+                }
+            }
+
+            return !(countPlayPositions == 0);   //Return "True" if at least one position is playable
+        }
+
+        /*******************************************************************************************
         * Method: loadHelpText
         * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
         */
@@ -648,8 +684,8 @@ namespace LeapFrogWinUI
                
                         int sourceIndex = gameDeck.findCardIndex(cardToMove);
                
-                        string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
-                        await speakText(aMsg);
+                        //string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
+                        //await speakText(aMsg);
                
                         moveCard(sourceIndex, destinationIndex);
                
@@ -658,8 +694,8 @@ namespace LeapFrogWinUI
                     }
                     else
                     {
-                        string aMsg = "Card to Move is a King.";
-                        await speakText(aMsg);
+                        //string aMsg = "Card to Move is a King.";
+                        //await speakText(aMsg);
                
                         playKingPosition = true;                               //Set King being Moved Flag
                
@@ -730,8 +766,8 @@ namespace LeapFrogWinUI
          */
         private int selectKingToMove()
         {
-            tbCurrentActivity.Text = "Setting Up for a New Game...";
-            Task.Delay(displayDelayMS);
+            string aMsg = "Marking Kings for Moving...";
+            updateCurrentActivityText(aMsg);
 
             int countKings = 0;                                  //Initialize Counter of Kings found
             int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
@@ -739,17 +775,18 @@ namespace LeapFrogWinUI
 
             int kingSourceIndex = -1;               //Initialize King Source Index to "not Selected"
 
-            while(countKings < maxKingCount)                //While Not all Kinds have been found...
+            while(countKings < maxKingCount)             //While Not all Kinds have been found...
             {
                 if (gameDeck.deckCards[cardIndex].cardRank.ToLower() == "k" )     //If King Found...
                 {
                     countKings++;                                    //Increment the King Counter...
                     if(!isKingPosition(cardIndex))      //Check if King is not in a King Position...
                     {
-                        string aMsg = "Found " + gameDeck.deckCards[cardIndex].cardRank + " of " + gameDeck.deckCards[cardIndex].cardSuit;
-                        speakText(aMsg);
+                        dataGridGameBoard.SelectedIndex = cardIndex;
+                        var selectedItem = dataGridGameBoard.SelectedItem;
+                        var myItemContainer = (GridViewItem)dataGridGameBoard.ContainerFromItem(selectedItem);
 
-                        Task.Delay(5000);
+                        AnimateCell(myItemContainer, "AnimateState");
                     }
                 }
 
@@ -757,8 +794,6 @@ namespace LeapFrogWinUI
             }
 
             //waitForKingSelection();
-
-            tbCurrentActivity.Text = "";
 
             return kingSourceIndex;
         }
@@ -779,22 +814,20 @@ namespace LeapFrogWinUI
             await updateCurrentActivityText("Clearing the Playing Area...");
             await clearDeck();                                           //Clear the Current Layout
 
+            //Shuffle the Deck of Cards Until Shuffled Deck has at least one playable position
+            await updateCurrentActivityText("Shuffling and Cutting Cards...");
             do
             {
-                await updateCurrentActivityText("Shuffling and Cutting Cards...");
-
-                await tempDeck.shuffleDeck();                                      //Shuffle the Deck of Cards
-                await tempDeck.cutDeck();                                                       //Cut the Deck
-
-                await updateCurrentActivityText("Dealing Cards...");
-
-                await dealCards(tempDeck);                                     //Deal the Cards to the Tableau
-
-                await updateCurrentActivityText("Removing Aces...");
-
-                await removeAces();                                    //Remove Aces to Initialize Play Spaces
+                await tempDeck.shuffleDeck();                            //Shuffle the Deck of Cards
+                await tempDeck.cutDeck();                                             //Cut the Deck
             }
-            while(isGameOver());                                      // Initialize the icons for game play
+            while(!isPlayableShuffle(tempDeck));//Does Shuffled Deck has at least one playable space?
+
+            await updateCurrentActivityText("Dealing Cards...");
+            await dealCards(tempDeck);                               //Deal the Cards to the Tableau
+
+            await updateCurrentActivityText("Removing Aces...");
+            await removeAces();                              //Remove Aces to Initialize Play Spaces
 
             moveCount = 0;                              //Initialize the Move Counter for a New Game
             //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
@@ -893,7 +926,6 @@ namespace LeapFrogWinUI
 
             }
         }
-
         #endregion
 
         /***********************************************************************************************
