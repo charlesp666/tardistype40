@@ -11,21 +11,17 @@
 /***************************************************************************************************
  * System Class/Library Declarations
  */
+//using Microsoft.UI.Xaml;
 //using Microsoft.UI.Xaml.Controls;
 
 using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-
-//using System.Numerics;
-//using System.Threading;
-//using System.Threading.Tasks;
-
-
 //using System.ComponentModel;
 //using System.Linq;
+//using System.Numerics;
 //using System.Runtime.CompilerServices;
-//using System.Threading.Tasks;
+//using System.Threading;
+using System.Threading.Tasks;
 
 using Windows.Media.Core;
 using Windows.Media.Playback;
@@ -59,6 +55,7 @@ namespace LeapFrogWinUI
 
         //Media Player object to play various sounds during play; sound files
         private MediaPlayer myMediaPlayer = new MediaPlayer();
+        private TaskCompletionSource<bool> myTask;                //Task for Playing Shuffling Sound
 
         private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
 
@@ -327,7 +324,8 @@ namespace LeapFrogWinUI
          */
         public Cards(bool isKingHigh = false)
         {
-            initializeDeck(isKingHigh);
+            initializeDeck(isKingHigh);         //Initialize the deck of Cards (King or ace on left)
+            InitializeMediaPlayer();           //Initialize the Media Player to play shuffling sound
         }
 
         /*******************************************************************************************
@@ -541,15 +539,45 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: InitializeMediaPlayer
+         * Initializes the MediaPlayer so that it can play the shuffling sound multiple times
+         * without error.
+         */
+        private void InitializeMediaPlayer()
+        {
+            if (myMediaPlayer != null)
+            {
+                myMediaPlayer.MediaEnded -= OnMediaEnded;
+            }
+            myMediaPlayer = new MediaPlayer();
+            myMediaPlayer.MediaEnded += OnMediaEnded;
+        }
+
+        /*******************************************************************************************
+         * Method: OnMediaEnded
+         * MediaPlayer event to clear so that the shuffling sound can be played multiple times.
+         */
+        private void OnMediaEnded(MediaPlayer sender, object args)
+        {
+            myTask.SetResult(true);
+        }
+
+        /*******************************************************************************************
          * Method: playSound
          * Play the Sound in file passed as parameter.
          */
         private async Task playSound(Uri soundFile, int taskDelay = 500)
         {
+            myTask = new TaskCompletionSource<bool>();
+
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
+
             myMediaPlayer.Play();
 
-            await Task.Delay(taskDelay);
+            await myTask.Task;
+
+            myMediaPlayer.Pause();
+            myMediaPlayer.Source = null;
         }
 
         /*******************************************************************************************
@@ -584,7 +612,7 @@ namespace LeapFrogWinUI
 
             int countPlaySound = (int)(countShuffle / 5);   //Number of swaps between Shuffle sound
 
-            await playSound(soundShuffling, delayShuffling);           //Play the "Shuffling" sound
+            //await playSound(soundShuffling, delayShuffling);           //Play the "Shuffling" sound
 
             //Find the two cards to swap
             for (int aCount = 0; aCount <= countShuffle; aCount++)   //For the number of "Swaps"...

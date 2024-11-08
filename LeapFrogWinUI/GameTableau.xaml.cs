@@ -2,6 +2,9 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+
+
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
@@ -14,6 +17,7 @@ using System;
 //using System.ComponentModel;
 //using System.Diagnostics;
 using System.Collections.Generic;
+
 //using System.Collections.Immutable;
 //using System.IO;
 using System.Linq;
@@ -32,6 +36,7 @@ using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Media.SpeechSynthesis;
 using Windows.Storage;                                    //To load Help Instructions from Text File
+using Windows.UI;
 //using Windows.UI.Popups;
 //using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 //using Windows.UI.Xaml;
@@ -329,29 +334,18 @@ namespace LeapFrogWinUI
          ******************************************************************************************/
         #region
         /*******************************************************************************************
-        * Method: AnimateCell
-        * "Animates" the GridViewItem passed as parameter.
-        */
-        private void AnimateCell(GridViewItem item, string animationName)
-        {
-            var container = dataGridGameBoard.ContainerFromItem(item) as GridViewItem;
-            if (container != null)
-            {
-                VisualStateManager.GoToState(container, animationName, true);
-            }
-        }
-
-        /*******************************************************************************************
         * Method: buildInitialGameBoard
         * Initializes the Rows and Columns of the Game Grid and Configures Display and Other
         * Options.
         */
         private async Task buildInitialGameBoard()
         {
+            enableSelectionChanged(false);             //Disable the GridView SelectionChanged Event
+
             string aMsg = "Initiating Layout Parameters...";
             await updateCurrentActivityText(aMsg);
 
-            enableSelectionChanged(false);             //Disable the GridView SelectionChanged Event
+            await removeAces();                              //Remove Aces to Initialize Play Spaces
 
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
@@ -361,11 +355,10 @@ namespace LeapFrogWinUI
             dataGridGameBoard.IsEnabled = true;
 
             //Build a "Dummy" Layout
-            Cards tempDeck = new Cards(true);           //Create a working deck to shuffle, cut, etc.
+            //Cards tempDeck = new Cards(true);           //Create a working deck to shuffle, cut, etc.
 
-            await clearDeck();                                           //Clear the Current Layout
-            await dealCards(tempDeck);                                     //Deal the Cards to the Tableau
-            await removeAces();                                    //Remove Aces to Initialize Play Spaces
+            //await clearDeck();                                            //Clear the Current Layout
+            //await dealCards(tempDeck);                               //Deal the Cards to the Tableau
         }
 
         /*******************************************************************************************
@@ -502,6 +495,76 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: flagKingForMoving
+         * Changes Border Color and Thickness on King that can be moved.
+         */
+        private async Task flagKingForMoving(int gridIndex, bool highlightKing = false)
+        {
+            Color normalBorderBrush = Colors.White;
+            Color highlightedBorderBrush = Colors.Black;
+
+            int normalBorderWidth = 1;
+            int highlightedBorderWidth = 5;
+
+            Color newBorderBrush = normalBorderBrush;
+            int newBorderWidth = normalBorderWidth;
+
+            if (highlightKing)
+            {
+                newBorderBrush = highlightedBorderBrush;
+                newBorderWidth = highlightedBorderWidth;
+            }
+
+            dataGridGameBoard.SelectedIndex = gridIndex;
+            var myItem = dataGridGameBoard.SelectedItem;
+            var myContainer = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
+
+            if (myContainer != null)
+            {
+                var border = FindChild<Border>(myContainer, "ItemBorder");
+                if (border != null)
+                { // Change properties directly
+                    border.BorderBrush = new SolidColorBrush(newBorderBrush);
+                    border.BorderThickness = new Thickness(newBorderWidth);
+
+                    await Task.Run(() => Thread.Sleep(50));
+                }
+            }
+        }
+
+        private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        {
+            // Check for null
+            if (parent == null) return null;
+
+            T foundChild = null;
+
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                // Check the child’s type
+                if (child is T childType)
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        foundChild = childType;
+                        break;
+                    }
+                }
+                else
+                {
+                    foundChild = FindChild<T>(child, childName);
+                    if (foundChild != null) break;
+                }
+            }
+
+            return foundChild;
+        }
+
+        /*******************************************************************************************
          * Function: initialLoad
          * Setups up the playing area when the game first loads.
          */
@@ -556,11 +619,21 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * Function: isKing
+         * Function verifies the selected card is a king by checking if the Card Rank is "k." 
+         * Returns "True" if the card matches; othewise returns "False."
+         */
+        private bool isKing(Cards.Card aCard)
+        {
+            return (aCard.cardRank.ToLower() == "k");
+        }
+
+        /*******************************************************************************************
+         * Function: isKing
          * Function verifies the selected card is a king by checking if the Card String contains
          * the value of the highest possible Card Rank. Returns "True" if the card matches; 
          * othewise returns "False."
          */
-        private bool isKing(String aCard)
+        private bool isKing(string aCard)
         {
             return aCard.StartsWith(Cards.Card.possibleRanks[Cards.Card.possibleRanks.Length - 1]);
         }
@@ -775,24 +848,25 @@ namespace LeapFrogWinUI
 
             int kingSourceIndex = -1;               //Initialize King Source Index to "not Selected"
 
-            while(countKings < maxKingCount)             //While Not all Kinds have been found...
+            enableSelectionChanged(false);                   //Disable the Selection Change Event...
+            while (countKings < maxKingCount)               //While Not all Kinds have been found...
             {
-                if (gameDeck.deckCards[cardIndex].cardRank.ToLower() == "k" )     //If King Found...
+                if (isKing(gameDeck.deckCards[cardIndex]))                    //If Card is a King...
                 {
                     countKings++;                                    //Increment the King Counter...
                     if(!isKingPosition(cardIndex))      //Check if King is not in a King Position...
                     {
-                        dataGridGameBoard.SelectedIndex = cardIndex;
-                        var selectedItem = dataGridGameBoard.SelectedItem;
-                        var myItemContainer = (GridViewItem)dataGridGameBoard.ContainerFromItem(selectedItem);
+                        //dataGridGameBoard.SelectedIndex = cardIndex;
+                        //var selectedItem = dataGridGameBoard.SelectedItem;
+                        //var myItemContainer = (GridViewItem)dataGridGameBoard.ContainerFromItem(selectedItem);
 
-                        AnimateCell(myItemContainer, "AnimateState");
+                        flagKingForMoving(cardIndex, true);
                     }
                 }
 
                 cardIndex++;                                 //Increment the Card Index to next card
             }
-
+            enableSelectionChanged(true);                   //Reenable the Selection Change Event...
             //waitForKingSelection();
 
             return kingSourceIndex;

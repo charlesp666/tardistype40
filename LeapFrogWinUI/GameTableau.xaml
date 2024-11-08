@@ -151,21 +151,6 @@
                                 CornerRadius="10"
                                 Background="DarkGray"
                         >
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="AnimationStates">
-                                    <VisualState x:Name="NormalState"/>
-                                    <VisualState x:Name="AnimateState">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="ItemBorder"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             From="0.0" To="1.0"
-                                                             Duration="0:0:1"
-                                            />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            
                             <Image x:Name="CardFace"
                                     Stretch="Uniform"
                                     Source="{Binding cardFace, Mode=TwoWay}"
