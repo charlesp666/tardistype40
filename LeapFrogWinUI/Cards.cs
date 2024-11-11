@@ -52,6 +52,7 @@ namespace LeapFrogWinUI
         private string bmpPlayable = folderGameImages + "Playable.gif";
 
         private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
+        private int countShuffleSound = 4;        //Number of times to play sound of Shuffling cards
 
         //Media Player object to play various sounds during play; sound files
         private MediaPlayer myMediaPlayer = new MediaPlayer();
@@ -610,7 +611,7 @@ namespace LeapFrogWinUI
             int firstCard = 0;                                        //Index of first card to swap
             int secondCard = 0;                                      //Index of Second card to swap
 
-            int countPlaySound = (int)(countShuffle / 5);   //Number of swaps between Shuffle sound
+            int countPlaySound = (int)(countShuffle / countShuffleSound);   //Number of swaps between Shuffle sound
 
             //await playSound(soundShuffling, delayShuffling);           //Play the "Shuffling" sound
 
