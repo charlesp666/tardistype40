@@ -9,7 +9,7 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Height="800"
-      Width="1650"
+      Width="1575"
 >
 
     <Grid Name="gameTableau"
@@ -47,7 +47,8 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="900"/>
+                <ColumnDefinition Width="445"/>
+                <ColumnDefinition Width="500"/>
             </Grid.ColumnDefinitions>
 
             <Border Name="someImage"
@@ -66,46 +67,22 @@
                 />
             </Border>
 
-            <Image x:Name="PlayableImage"
-                   Grid.Column="1"
-                   Margin="3,3,0,0"
-                   Height="50"
-                   Width="50"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Source="{Binding cardPlayable.cardFace}"
-                   FocusVisualPrimaryBrush="White"
-            />
-
-            <Image x:Name="NotPlayableImage"
-                   Grid.Column="2"
-                   Margin="3,3,0,0"
-                   Height="50"
-                   Width="50"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Source="{Binding cardNotPlayable.cardFace}"
-                   FocusVisualPrimaryBrush="White"
-            />
-
             <Border Name="brdCurrentActivity"
-                    Grid.Column="3"
+                    Grid.Column="4"
                     BorderBrush="White"
                     BorderThickness="1"
                     CornerRadius="10"
-                    Height="48"
-                    Width="850"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    Height="50"
+                    Width="500"
             >
                 <!--Margin="1,1,1,1"-->
                 <TextBlock x:Name="tbCurrentActivity"
                            Text="Initializing..."
-                           Width="850"
-                           Height="50"
+                           Width="494"
+                           Height="46"
                            HorizontalTextAlignment="Center"
                            VerticalAlignment="Center"
-                           FontSize="24pi"
+                           FontSize="20pi"
                            FontFamily="Arial"
                            FontWeight="Medium"
                            FontStyle="Italic"
@@ -137,7 +114,7 @@
                 <DataTemplate x:Name="CardPosition"
                 >
                     <!--Margin="1,1,1,1"-->
-                    <StackPanel Name="PlayingCard"
+                    <StackPanel x:Name="PlayingCard"
                                 Height="142"
                                 Width="114"
                     >

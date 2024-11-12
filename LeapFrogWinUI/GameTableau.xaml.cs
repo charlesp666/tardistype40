@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
-
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
@@ -37,6 +36,7 @@ using Windows.Media.Playback;
 using Windows.Media.SpeechSynthesis;
 using Windows.Storage;                                    //To load Help Instructions from Text File
 using Windows.UI;
+using Windows.UI.Composition;
 //using Windows.UI.Popups;
 //using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 //using Windows.UI.Xaml;
@@ -83,18 +83,18 @@ namespace LeapFrogWinUI
         private int delayDealCards = 125;                            //Task Delay when Dealing Cards
         private int delayRemoveAces = 125;                           //Task Delay when removing aces
 
+        private static int displayDelayMS = 5000;      //Action display delay so user can see changes
+
         private string fileInstructions = folderGameData + "GameInstructions.txt";
 
         // Define variables/constants for play area (main window)
-        private static int numberOfSuits = Cards.Card.possibleSuits.Length;        //Play Area Rows
-        private static int numberOfRanks = Cards.Card.possibleRanks.Length;  //Play Area Columns
+        private static int numberOfSuits = Cards.Card.possibleSuits.Length;         //Play Area Rows
+        private static int numberOfRanks = Cards.Card.possibleRanks.Length;      //Play Area Columns
 
-        //private static String playSpace = "";             //String or character to use on play spots
+        private bool flgGameOver = true;                              //Flag identifies game is over
+        private bool isGameSet = false;                          //Flag indicates play area is ready
+        private bool isKingMoving = false;                   //Flag indicating a King is being moved
 
-        private bool playKingPosition = false;          //Flag Indicating the Position is for a King
-
-        private static bool isGameSet = false;                   //Flag indicates play area is ready
-        public bool flgGameOver = true;                               //Flag identifies game is over
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         // Define parameters for Scoring Games (Determining Player's Winnings)
@@ -104,10 +104,7 @@ namespace LeapFrogWinUI
 
         private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
 
-        //private PlayPosition tempStorage;      //Storage for PlayPosition Object-Needed to Move King
-
         private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
-        private static int displayDelayMS = 5000;      //Action display delay so user can see changes
 
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DateTime gameStartTime;                                            //Game Start Time
@@ -144,22 +141,6 @@ namespace LeapFrogWinUI
          *******************************************************************************************
          ******************************************************************************************/
         #region
-        /*******************************************************************************************
-         * Event Handler: GameBoard_CellClicked
-         * Handles the Closing of the Game Tableau Windows Form.
-         */
-        //private void dataGridGameBoard_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    var clickedItem = e.ClickedItem as Cards.Card;
-        //    int indexClickedCell = gameDeck.deckCards.IndexOf(clickedItem);
-
-        //    if(isGameSet)
-        //    {
-        //        playSpaceClicked(indexClickedCell);
-        //        dataGridGameBoard.SelectedIndex = -1;
-        //    }
-        //}
-
         /*******************************************************************************************
          * Event Handler: btnExit_Click
          * Handles the Closing of the Game Tableau Windows Form.
@@ -486,50 +467,12 @@ namespace LeapFrogWinUI
 
             flgGameOver = true;                                               //Set "Game Over" flag
             isGameSet = false;                                               //Set the game set flag
-            playKingPosition = false;                             //Ensure Moving King Flag is Unset
+            isKingMoving = false;                                   //Ensure Moving King Flag is Unset
 
             //clearBoard(gameDeck);                                                //Clear the tableau
             //lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
             //moveCount = -1;                                                 //Reset the move counter
             //txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
-        }
-
-        /*******************************************************************************************
-         * Method: flagKingForMoving
-         * Changes Border Color and Thickness on King that can be moved.
-         */
-        private async Task flagKingForMoving(int gridIndex, bool highlightKing = false)
-        {
-            Color normalBorderBrush = Colors.White;
-            Color highlightedBorderBrush = Colors.Black;
-
-            int normalBorderWidth = 1;
-            int highlightedBorderWidth = 5;
-
-            Color newBorderBrush = normalBorderBrush;
-            int newBorderWidth = normalBorderWidth;
-
-            if (highlightKing)
-            {
-                newBorderBrush = highlightedBorderBrush;
-                newBorderWidth = highlightedBorderWidth;
-            }
-
-            dataGridGameBoard.SelectedIndex = gridIndex;
-            var myItem = dataGridGameBoard.SelectedItem;
-            var myContainer = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
-
-            if (myContainer != null)
-            {
-                var border = FindChild<Border>(myContainer, "ItemBorder");
-                if (border != null)
-                { // Change properties directly
-                    border.BorderBrush = new SolidColorBrush(newBorderBrush);
-                    border.BorderThickness = new Thickness(newBorderWidth);
-
-                    await Task.Run(() => Thread.Sleep(50));
-                }
-            }
         }
 
         private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
@@ -562,6 +505,45 @@ namespace LeapFrogWinUI
             }
 
             return foundChild;
+        }
+
+        /*******************************************************************************************
+         * Method: highlightKingForMoving
+         * Changes Border Color and Thickness on King that can be moved.
+         */
+        private async Task highlightKingForMoving(int gridIndex, bool highlightKing = false)
+        {
+            Color normalBorderBrush = Colors.White;
+            Color highlightedBorderBrush = Colors.Black;
+
+            int normalBorderWidth = 1;
+            int highlightedBorderWidth = 5;
+
+            Color newBorderBrush = normalBorderBrush;
+            int newBorderWidth = normalBorderWidth;
+
+            if (highlightKing)
+            {
+                newBorderBrush = highlightedBorderBrush;
+                newBorderWidth = highlightedBorderWidth;
+            }
+
+            dataGridGameBoard.SelectedIndex = gridIndex;
+            var myItem = dataGridGameBoard.SelectedItem;
+
+            //var myContainer = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
+
+            //if (myContainer != null)
+            //{
+            //    var border = FindChild<Border>(myContainer, "ItemBorder");
+            //    if (border != null)
+            //    { // Change properties directly
+                    //border.BorderBrush = new SolidColorBrush(newBorderBrush);
+                    //border.BorderThickness = new Thickness(newBorderWidth);
+
+                //    await Task.Run(() => Thread.Sleep(50));
+                //}
+            //}
         }
 
         /*******************************************************************************************
@@ -719,7 +701,7 @@ namespace LeapFrogWinUI
                 swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
                 moveCount++;                                             //Increment the Move Count
 
-                playKingPosition = false;                                         //Ensure Flag is Unset
+                isKingMoving = false;                                         //Ensure Flag is Unset
             }
         }
 
@@ -742,7 +724,7 @@ namespace LeapFrogWinUI
          */
         public async Task playSpaceClicked(int destinationIndex)
         {
-            if (gameDeck.deckCards[destinationIndex].cardRank.ToLower() != "p")
+            if ((gameDeck.deckCards[destinationIndex].cardRank.ToLower() != "p") && !isKingMoving)
             {
                 await playSound(soundNotPlayable);
             }
@@ -757,42 +739,33 @@ namespace LeapFrogWinUI
                
                         int sourceIndex = gameDeck.findCardIndex(cardToMove);
                
-                        //string aMsg = "Card to Move is " + cardToMove.cardRank.ToLower() + " " + cardToMove.cardSuit.ToLower();
-                        //await speakText(aMsg);
-               
                         moveCard(sourceIndex, destinationIndex);
-               
-                        //    moveCount++;                                         //Increment Move Counter
+
+                        moveCount++;                                         //Increment Move Counter
                         //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
                     }
                     else
                     {
-                        //string aMsg = "Card to Move is a King.";
-                        //await speakText(aMsg);
+                        isKingMoving = true;                             //Set King being Moved Flag
                
-                        playKingPosition = true;                               //Set King being Moved Flag
-               
-                        int sourceIndex = selectKingToMove();
-                        //if (playKingPosition)                           //If King is being Moved...
+                        int sourceIndex = selectKingToMove();             //Get the King to be Moved
+                        //if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
                         //{
-                        //    if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
-                        //    {
-                        //        displayWarning("King was not selected; cancelling move!");
-                        //        sourcePosition = destinationPosition;
-                        //    }
-                        //    else
-                        //    {
-                        //        sourcePosition = destinationPosition;//Set Source to Current Destination
-                        //        destinationPosition = tempStorage;        //Restore Original Destination
-                        //    }
+                        //    displayWarning("King was not selected; cancelling move!");
+                        //    sourcePosition = destinationPosition;
                         //}
-
-                        playKingPosition = false;                               //Set King being Moved Flag
+                        //else
+                        //{
+                        //    moveCount++;                                         //Increment Move Counter
+                        //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                        //}
                     }
 
-                    if (isGameOver())                           //Check if game still has playable positions
+                    isKingMoving = false;                                   //Reset King Moving Flag 
+
+                    if (isGameOver())                   //Check if game still has playable positions
                     {
-                        endGame();                   //Close out the current game, and set appropriate flags
+                        endGame();           //Close out the current game, and set appropriate flags
                     }
                 }
             }
@@ -839,9 +812,6 @@ namespace LeapFrogWinUI
          */
         private int selectKingToMove()
         {
-            string aMsg = "Marking Kings for Moving...";
-            updateCurrentActivityText(aMsg);
-
             int countKings = 0;                                  //Initialize Counter of Kings found
             int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
             int cardIndex = 0;                               //Counter to walk through Deck of Cards
@@ -849,6 +819,10 @@ namespace LeapFrogWinUI
             int kingSourceIndex = -1;               //Initialize King Source Index to "not Selected"
 
             enableSelectionChanged(false);                   //Disable the Selection Change Event...
+
+            string aMsg = "Marking Kings for Moving...";
+            updateCurrentActivityText(aMsg);
+
             while (countKings < maxKingCount)               //While Not all Kinds have been found...
             {
                 if (isKing(gameDeck.deckCards[cardIndex]))                    //If Card is a King...
@@ -860,14 +834,16 @@ namespace LeapFrogWinUI
                         //var selectedItem = dataGridGameBoard.SelectedItem;
                         //var myItemContainer = (GridViewItem)dataGridGameBoard.ContainerFromItem(selectedItem);
 
-                        flagKingForMoving(cardIndex, true);
+                        highlightKingForMoving(cardIndex, true);
                     }
                 }
 
                 cardIndex++;                                 //Increment the Card Index to next card
             }
+
             enableSelectionChanged(true);                   //Reenable the Selection Change Event...
-            //waitForKingSelection();
+            isKingMoving = true;
+            waitForKingSelection();
 
             return kingSourceIndex;
         }
@@ -882,8 +858,7 @@ namespace LeapFrogWinUI
             await updateCurrentActivityText("Setting Up for a New Game...");
 
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
-            isGameSet = false;
-            flgGameOver = false;
+            flgGameOver = false;                                       //Set Game Over Flag to false
 
             await updateCurrentActivityText("Clearing the Playing Area...");
             await clearDeck();                                           //Clear the Current Layout
@@ -903,15 +878,15 @@ namespace LeapFrogWinUI
             await updateCurrentActivityText("Removing Aces...");
             await removeAces();                              //Remove Aces to Initialize Play Spaces
 
-            moveCount = 0;                              //Initialize the Move Counter for a New Game
-            //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
-
             isGameSet = true;                                     //Set the game is set flag to true
-            flgGameOver = false;                                 //Set the "Game Over" flag to false
 
             enableSelectionChanged(true);               //Enable the GridView SelectionChanged Event
 
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
+
+            moveCount = 0;                              //Initialize the Move Counter for a New Game
+            //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
+
             //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
             //gameTime.Start();                                                  //And start the clock
 
@@ -993,6 +968,8 @@ namespace LeapFrogWinUI
         */
         private async void waitForKingSelection()
         {
+            updateCurrentActivityText("Select King to Move...");
+
             //Wait for a selection to be made
             while (dataGridGameBoard.SelectedItem == null)
             {
