@@ -472,7 +472,7 @@ namespace LeapFrogWinUI
             //clearBoard(gameDeck);                                                //Clear the tableau
             //lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
             //moveCount = -1;                                                 //Reset the move counter
-            //txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
+            //updateMoveCountText(moveCount);                           //Clear the Move count Text box
         }
 
         private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
@@ -552,6 +552,8 @@ namespace LeapFrogWinUI
          */
         private async Task initialLoad()
         {
+            await updateMoveCountText(-1);                       //Clear the "Move Count" text block
+
             //Get Text for Game Instructions
             await updateCurrentActivityText("Loading Help Text...");
 
@@ -699,9 +701,9 @@ namespace LeapFrogWinUI
             if (sourceIndex != destinationIndex)       //If the Source and Destination not Equal...
             {
                 swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
-                moveCount++;                                             //Increment the Move Count
+                //moveCount++;                                             //Increment the Move Count
 
-                isKingMoving = false;                                         //Ensure Flag is Unset
+                //isKingMoving = false;                                         //Ensure Flag is Unset
             }
         }
 
@@ -730,7 +732,7 @@ namespace LeapFrogWinUI
             }
             else
             {
-                if (isPlayable(destinationIndex))                            //Playable or King Space...
+                if (isPlayable(destinationIndex))                        //Playable or King Space...
                 {
                     if (!isKingPosition(destinationIndex))
                     {
@@ -741,8 +743,8 @@ namespace LeapFrogWinUI
                
                         moveCard(sourceIndex, destinationIndex);
 
-                        moveCount++;                                         //Increment Move Counter
-                        //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                        moveCount++;                                        //Increment Move Counter
+                        updateMoveCountText(moveCount);             //Update the Move Count Text box
                     }
                     else
                     {
@@ -757,7 +759,7 @@ namespace LeapFrogWinUI
                         //else
                         //{
                         //    moveCount++;                                         //Increment Move Counter
-                        //    txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                        //    updateMoveCountText(moveCount);               //Clear the Move count Text box
                         //}
                     }
 
@@ -885,7 +887,7 @@ namespace LeapFrogWinUI
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
 
             moveCount = 0;                              //Initialize the Move Counter for a New Game
-            //txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
+            updateMoveCountText(moveCount);                             //Update Move count Text box
 
             //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
             //gameTime.Start();                                                  //And start the clock
@@ -958,6 +960,25 @@ namespace LeapFrogWinUI
         private async Task updateCurrentActivityText(string msgCurrentActivity, int delayTask = 1000)
         {
             tbCurrentActivity.Text = msgCurrentActivity;
+
+            await Task.Run(() => Thread.Sleep(delayTask));
+        }
+
+        /*******************************************************************************************
+        /* Method: updateCurrentActivityText
+        /* 
+        /* Updates the Text in the "Current Activity" TextBlock.
+        /*/
+        private async Task updateMoveCountText(int currentMoveCount, int delayTask = 1000)
+        {
+            string msgMoveCount = "";
+
+            if (currentMoveCount > -1)
+            {
+                msgMoveCount = "Moves: " + currentMoveCount.ToString() + "...";
+            }
+
+            tbMoveCount.Text = msgMoveCount;
 
             await Task.Run(() => Thread.Sleep(delayTask));
         }

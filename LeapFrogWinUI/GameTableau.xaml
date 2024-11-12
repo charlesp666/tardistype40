@@ -67,6 +67,29 @@
                 />
             </Border>
 
+            <Border Name="brdMoveCount"
+                    Grid.Column="3"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Height="50"
+                    Width="445"
+            >
+                <!--Margin="1,1,1,1"-->
+                <TextBlock x:Name="tbMoveCount"
+                           Text=""
+                           Width="441"
+                           Height="46"
+                           HorizontalTextAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="20pi"
+                           FontFamily="Arial"
+                           FontWeight="Medium"
+                           FontStyle="Italic"
+                           Foreground="White"
+                />
+            </Border>
+
             <Border Name="brdCurrentActivity"
                     Grid.Column="4"
                     BorderBrush="White"
