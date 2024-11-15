@@ -95,6 +95,9 @@ namespace LeapFrogWinUI
         private bool isGameSet = false;                          //Flag indicates play area is ready
         private bool isKingMoving = false;                   //Flag indicating a King is being moved
 
+        private int indexKingSelected = -1;         //Storage for the Index of King selected to move
+        private int indexKingDestination = -1;         //Storage for the index of a Kings desination
+
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         // Define parameters for Scoring Games (Determining Player's Winnings)
@@ -201,7 +204,15 @@ namespace LeapFrogWinUI
                 {
                     int indexClickedCell = dataGridGameBoard.SelectedIndex;
 
-                    playSpaceClicked(indexClickedCell);
+                    if (!isKingMoving)
+                    {
+                        playSpaceClicked(indexClickedCell);
+                    }
+                    else
+                    {
+                        //indexKingSelected = indexClickedCell;
+                        moveKing(indexClickedCell);
+                    }
                 }
             }
         }
@@ -467,7 +478,6 @@ namespace LeapFrogWinUI
 
             flgGameOver = true;                                               //Set "Game Over" flag
             isGameSet = false;                                               //Set the game set flag
-            isKingMoving = false;                                   //Ensure Moving King Flag is Unset
 
             //clearBoard(gameDeck);                                                //Clear the tableau
             //lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
@@ -702,9 +712,34 @@ namespace LeapFrogWinUI
             {
                 swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
                 //moveCount++;                                             //Increment the Move Count
-
-                //isKingMoving = false;                                         //Ensure Flag is Unset
             }
+        }
+
+        /*******************************************************************************************
+         * Method: moveCard
+         * Moves the Card from the Source Position to the Destination Position, then checks if the
+         * move ended the game.
+         */
+        private void moveKing(int sourceIndex)
+        {
+            if (sourceIndex != indexKingDestination)       //If the Source and Destination not Equal...
+            {
+                if (!isKing(gameDeck.deckCards[sourceIndex]))  //If a King was not selected...
+                {
+                    string aMsg = "King not Selected; Cancelling Move...";
+                    updateCurrentActivityText(aMsg);
+                }
+                else
+                {
+                    swapPlayCards(sourceIndex, indexKingDestination);       //Move the Selected King
+
+                    //moveCount++;                                    //Increment Move Counter
+                    //updateMoveCountText(moveCount);          //Clear the Move count Text box
+                }
+            }
+
+            isKingMoving = false;
+            indexKingDestination = -1;
         }
 
         /*******************************************************************************************
@@ -743,27 +778,27 @@ namespace LeapFrogWinUI
                
                         moveCard(sourceIndex, destinationIndex);
 
-                        moveCount++;                                        //Increment Move Counter
-                        updateMoveCountText(moveCount);             //Update the Move Count Text box
+                        //moveCount++;                                        //Increment Move Counter
+                        //updateMoveCountText(moveCount);             //Update the Move Count Text box
                     }
                     else
                     {
                         isKingMoving = true;                             //Set King being Moved Flag
-               
-                        int sourceIndex = selectKingToMove();             //Get the King to be Moved
-                        //if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
+                        indexKingDestination = destinationIndex;
+
+                        selectKingToMove();                               //Get the King to be Moved
+                        //if (!isKing(gameDeck.deckCards[sourceIndex]))  //If a King was not selected...
                         //{
-                        //    displayWarning("King was not selected; cancelling move!");
-                        //    sourcePosition = destinationPosition;
+                        //    string aMsg = "King not Selected; Cancelling Move...";
                         //}
                         //else
                         //{
-                        //    moveCount++;                                         //Increment Move Counter
-                        //    updateMoveCountText(moveCount);               //Clear the Move count Text box
+                        //    moveCard(sourceIndex, destinationIndex);
+
+                        //    moveCount++;                                    //Increment Move Counter
+                        //    updateMoveCountText(moveCount);          //Clear the Move count Text box
                         //}
                     }
-
-                    isKingMoving = false;                                   //Reset King Moving Flag 
 
                     if (isGameOver())                   //Check if game still has playable positions
                     {
@@ -812,42 +847,41 @@ namespace LeapFrogWinUI
          * Locates and "Highlighs" the Kings in the Playing tableau; then waits for one to be
          * selected.
          */
-        private int selectKingToMove()
+        private async Task selectKingToMove()
         {
             int countKings = 0;                                  //Initialize Counter of Kings found
-            int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
             int cardIndex = 0;                               //Counter to walk through Deck of Cards
-
-            int kingSourceIndex = -1;               //Initialize King Source Index to "not Selected"
+            int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
 
             enableSelectionChanged(false);                   //Disable the Selection Change Event...
 
             string aMsg = "Marking Kings for Moving...";
             updateCurrentActivityText(aMsg);
 
-            while (countKings < maxKingCount)               //While Not all Kinds have been found...
+            while (countKings < maxKingCount)               //While Not all Kings have been found...
             {
                 if (isKing(gameDeck.deckCards[cardIndex]))                    //If Card is a King...
                 {
                     countKings++;                                    //Increment the King Counter...
                     if(!isKingPosition(cardIndex))      //Check if King is not in a King Position...
                     {
-                        //dataGridGameBoard.SelectedIndex = cardIndex;
-                        //var selectedItem = dataGridGameBoard.SelectedItem;
-                        //var myItemContainer = (GridViewItem)dataGridGameBoard.ContainerFromItem(selectedItem);
-
-                        highlightKingForMoving(cardIndex, true);
+                        highlightKingForMoving(cardIndex, true);         //"Highlight" it as movable
                     }
                 }
 
                 cardIndex++;                                 //Increment the Card Index to next card
             }
 
+            //isKingMoving = true;                             //Set flag indicating King is moving...
             enableSelectionChanged(true);                   //Reenable the Selection Change Event...
-            isKingMoving = true;
-            waitForKingSelection();
 
-            return kingSourceIndex;
+            //Wait for a selection to be made
+            updateCurrentActivityText("Select King to Move...");
+
+            while (dataGridGameBoard.SelectedItem == null)
+            {
+                await Task.Delay(1000);
+            }
         }
         
         /*******************************************************************************************
@@ -938,6 +972,9 @@ namespace LeapFrogWinUI
                 gameDeck.deckCards[sourceIndex] = cardNotPlayable;
             }
 
+            moveCount++;                                //Initialize the Move Counter for a New Game
+            updateMoveCountText(moveCount);                             //Update Move count Text box
+
             //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
             //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
         }
@@ -987,17 +1024,16 @@ namespace LeapFrogWinUI
         * Method: waitForKingSelection
         * Waits for a King to be selected, then passes the index back to calling process.
         */
-        private async void waitForKingSelection()
-        {
-            updateCurrentActivityText("Select King to Move...");
+        //private async void waitForKingSelection()
+        //{
+        //    updateCurrentActivityText("Select King to Move...");
 
-            //Wait for a selection to be made
-            while (dataGridGameBoard.SelectedItem == null)
-            {
-                var selectedItem = dataGridGameBoard.SelectedItem as Cards.Card;
-
-            }
-        }
+        //    //Wait for a selection to be made
+        //    while (dataGridGameBoard.SelectedItem == null)
+        //    {
+        //       await Task.Delay(1000);
+        //    }
+        //}
         #endregion
 
         /***********************************************************************************************
