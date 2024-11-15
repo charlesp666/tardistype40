@@ -132,10 +132,6 @@ namespace LeapFrogWinUI
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             initialLoad();
-
-            //Junk Code to announce completion of GameTableau--Remove when tableau is working  *****
-            //string aMsg = "This is the end, my only friend, the end...";
-            //speakText(aMsg);
         }
 
         /*******************************************************************************************
@@ -210,7 +206,6 @@ namespace LeapFrogWinUI
                     }
                     else
                     {
-                        //indexKingSelected = indexClickedCell;
                         moveKing(indexClickedCell);
                     }
                 }
@@ -471,9 +466,10 @@ namespace LeapFrogWinUI
             //gameTime.Stop();                                                   //Stop the Game Timer
 
             string aMsg = "Game Over!";
-            speakText(aMsg);
+            updateCurrentActivityText(aMsg);
 
-            //displayMessage("Game Over!");
+            //speakText(aMsg);
+
             //scoreGame();               //Compute Score for Current Game and Update Player Statistics
 
             flgGameOver = true;                                               //Set "Game Over" flag
@@ -481,8 +477,6 @@ namespace LeapFrogWinUI
 
             //clearBoard(gameDeck);                                                //Clear the tableau
             //lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
-            //moveCount = -1;                                                 //Reset the move counter
-            //updateMoveCountText(moveCount);                           //Clear the Move count Text box
         }
 
         private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
@@ -590,6 +584,7 @@ namespace LeapFrogWinUI
             for (int i = 0; i < gameDeck.deckCards.Count; i++)
             {
                 Cards.Card currentCard = gameDeck.deckCards[i];
+
                 //Check if the Current Card is a "play position" (Is not a playing card)...
                 if ( (currentCard.cardRank.ToLower() == "n")
                   || (currentCard.cardRank.ToLower() == "p")
@@ -711,7 +706,6 @@ namespace LeapFrogWinUI
             if (sourceIndex != destinationIndex)       //If the Source and Destination not Equal...
             {
                 swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
-                //moveCount++;                                             //Increment the Move Count
             }
         }
 
@@ -732,9 +726,6 @@ namespace LeapFrogWinUI
                 else
                 {
                     swapPlayCards(sourceIndex, indexKingDestination);       //Move the Selected King
-
-                    //moveCount++;                                    //Increment Move Counter
-                    //updateMoveCountText(moveCount);          //Clear the Move count Text box
                 }
             }
 
@@ -777,9 +768,6 @@ namespace LeapFrogWinUI
                         int sourceIndex = gameDeck.findCardIndex(cardToMove);
                
                         moveCard(sourceIndex, destinationIndex);
-
-                        //moveCount++;                                        //Increment Move Counter
-                        //updateMoveCountText(moveCount);             //Update the Move Count Text box
                     }
                     else
                     {
@@ -787,17 +775,8 @@ namespace LeapFrogWinUI
                         indexKingDestination = destinationIndex;
 
                         selectKingToMove();                               //Get the King to be Moved
-                        //if (!isKing(gameDeck.deckCards[sourceIndex]))  //If a King was not selected...
-                        //{
-                        //    string aMsg = "King not Selected; Cancelling Move...";
-                        //}
-                        //else
-                        //{
-                        //    moveCard(sourceIndex, destinationIndex);
 
-                        //    moveCount++;                                    //Increment Move Counter
-                        //    updateMoveCountText(moveCount);          //Clear the Move count Text box
-                        //}
+                        //UnHighlight Kings to move...
                     }
 
                     if (isGameOver())                   //Check if game still has playable positions
@@ -872,16 +851,15 @@ namespace LeapFrogWinUI
                 cardIndex++;                                 //Increment the Card Index to next card
             }
 
-            //isKingMoving = true;                             //Set flag indicating King is moving...
             enableSelectionChanged(true);                   //Reenable the Selection Change Event...
 
             //Wait for a selection to be made
             updateCurrentActivityText("Select King to Move...");
 
-            while (dataGridGameBoard.SelectedItem == null)
-            {
-                await Task.Delay(1000);
-            }
+            //while (dataGridGameBoard.SelectedItem == null)
+            //{
+            //    await Task.Delay(1000);
+            //}
         }
         
         /*******************************************************************************************
@@ -1019,21 +997,6 @@ namespace LeapFrogWinUI
 
             await Task.Run(() => Thread.Sleep(delayTask));
         }
-
-        /*******************************************************************************************
-        * Method: waitForKingSelection
-        * Waits for a King to be selected, then passes the index back to calling process.
-        */
-        //private async void waitForKingSelection()
-        //{
-        //    updateCurrentActivityText("Select King to Move...");
-
-        //    //Wait for a selection to be made
-        //    while (dataGridGameBoard.SelectedItem == null)
-        //    {
-        //       await Task.Delay(1000);
-        //    }
-        //}
         #endregion
 
         /***********************************************************************************************

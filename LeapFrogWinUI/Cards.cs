@@ -11,23 +11,12 @@
 /***************************************************************************************************
  * System Class/Library Declarations
  */
-//using Microsoft.UI.Xaml;
-//using Microsoft.UI.Xaml.Controls;
-
 using System;
 using System.Collections.ObjectModel;
-//using System.ComponentModel;
-//using System.Linq;
-//using System.Numerics;
-//using System.Runtime.CompilerServices;
-//using System.Threading;
 using System.Threading.Tasks;
 
 using Windows.Media.Core;
 using Windows.Media.Playback;
-//using Windows.Media.SpeechSynthesis;
-
-//using WinRT;
 
 namespace LeapFrogWinUI
 {
@@ -52,7 +41,7 @@ namespace LeapFrogWinUI
         private string bmpPlayable = folderGameImages + "Playable.gif";
 
         private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
-        private int countShuffleSound = 4;        //Number of times to play sound of Shuffling cards
+        private int countShuffleSound = 3;        //Number of times to play sound of Shuffling cards
 
         //Media Player object to play various sounds during play; sound files
         private MediaPlayer myMediaPlayer = new MediaPlayer();
