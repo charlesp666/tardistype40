@@ -42,6 +42,7 @@ using Windows.UI.Composition;
 //using Windows.UI.Xaml;
 
 using WinRT.Interop;
+using static System.Net.Mime.MediaTypeNames;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -95,7 +96,7 @@ namespace LeapFrogWinUI
         private bool isGameSet = false;                          //Flag indicates play area is ready
         private bool isKingMoving = false;                   //Flag indicating a King is being moved
 
-        private int indexKingSelected = -1;         //Storage for the Index of King selected to move
+        //private int indexKingSelected = -1;         //Storage for the Index of King selected to move
         private int indexKingDestination = -1;         //Storage for the index of a Kings desination
 
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
@@ -112,6 +113,23 @@ namespace LeapFrogWinUI
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DateTime gameStartTime;                                            //Game Start Time
         private DateTime gameEndTime;                                      //Game "Now" and end time
+
+        //Current Activity Messages
+        private string errKingNotSelected = "King not Selected; Cancelling Move...";
+
+        private string msgClearPlayArea = "Clearing the Playing Area...";
+        private string msgDealing = "Dealing Cards...";
+        private string msgGameOver = "Game Over!";
+        private string msgInitialLayout = "Initiating Layout Parameters...";
+        private string msgLoadingHelp = "Loading Help Text...";
+        private string msgMarkingKings = "Marking Kings for Moving...";
+        private string msgPrepareInitial = "Preparing Initial Game Board...";
+        private string msgRemoveAces = "Removing Aces...";
+        private string msgSelectKing = "Select King to Move...";
+        private string msgSelectPlay = "Click on Play Space to Move Card...";
+        private string msgSettingNewGame = "Setting Up for a New Game...";
+        private string msgShuffling = "Shuffling and Cutting Cards...";
+        private string msgWaiting = "Waiting for User Input...";
 
         /*******************************************************************************************
         * GameTableau Constructor
@@ -157,8 +175,9 @@ namespace LeapFrogWinUI
         {
             ContentDialog dlgGameInstructions = new ContentDialog
             {
-                Title = "How to Play Leapfrog",
-                Content = helpText,
+                Name = "theGameInstructions",
+                Title = "How to Play LeapFrog",
+                Content =  helpText,
                 CloseButtonText = "OK"
             };
 
@@ -257,7 +276,7 @@ namespace LeapFrogWinUI
         /*/
         private AppWindow getMyAppWindow()
         {
-            var myWindow = (Application.Current as App)?.m_window as MainWindow;
+            var myWindow = (Microsoft.UI.Xaml.Application.Current as App)?.m_window as MainWindow;
             var hwnd = WindowNative.GetWindowHandle(myWindow);
             var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
             var appWindow = AppWindow.GetFromWindowId(myWindowId);
@@ -329,8 +348,7 @@ namespace LeapFrogWinUI
         {
             enableSelectionChanged(false);             //Disable the GridView SelectionChanged Event
 
-            string aMsg = "Initiating Layout Parameters...";
-            await updateCurrentActivityText(aMsg);
+            await updateCurrentActivityText(msgInitialLayout);
 
             await removeAces();                              //Remove Aces to Initialize Play Spaces
 
@@ -465,10 +483,8 @@ namespace LeapFrogWinUI
         {
             //gameTime.Stop();                                                   //Stop the Game Timer
 
-            string aMsg = "Game Over!";
-            updateCurrentActivityText(aMsg);
-
-            //speakText(aMsg);
+            updateCurrentActivityText(msgGameOver);
+            //speakText(msgGameOver);
 
             //scoreGame();               //Compute Score for Current Game and Update Player Statistics
 
@@ -559,17 +575,17 @@ namespace LeapFrogWinUI
             await updateMoveCountText(-1);                       //Clear the "Move Count" text block
 
             //Get Text for Game Instructions
-            await updateCurrentActivityText("Loading Help Text...");
+            await updateCurrentActivityText(msgLoadingHelp);
 
             await loadHelpText();
 
             //Build the Initial Game Board and set Data Context
-            await updateCurrentActivityText("Preparing Initial Game Board...");
+            await updateCurrentActivityText(msgPrepareInitial);
 
             await buildInitialGameBoard();
 
             //tbCurrentActivity.Text = "Waiting for User Input...";
-            await updateCurrentActivityText("Waiting for User Input...");
+            await updateCurrentActivityText(msgWaiting);
         }
 
         /*******************************************************************************************
@@ -720,8 +736,7 @@ namespace LeapFrogWinUI
             {
                 if (!isKing(gameDeck.deckCards[sourceIndex]))  //If a King was not selected...
                 {
-                    string aMsg = "King not Selected; Cancelling Move...";
-                    updateCurrentActivityText(aMsg);
+                    updateCurrentActivityText(errKingNotSelected);
                 }
                 else
                 {
@@ -731,6 +746,8 @@ namespace LeapFrogWinUI
 
             isKingMoving = false;
             indexKingDestination = -1;
+
+            updateCurrentActivityText(msgSelectPlay);
         }
 
         /*******************************************************************************************
@@ -834,8 +851,8 @@ namespace LeapFrogWinUI
 
             enableSelectionChanged(false);                   //Disable the Selection Change Event...
 
-            string aMsg = "Marking Kings for Moving...";
-            updateCurrentActivityText(aMsg);
+            //string aMsg = "Marking Kings for Moving...";
+            updateCurrentActivityText(msgMarkingKings);
 
             while (countKings < maxKingCount)               //While Not all Kings have been found...
             {
@@ -854,7 +871,7 @@ namespace LeapFrogWinUI
             enableSelectionChanged(true);                   //Reenable the Selection Change Event...
 
             //Wait for a selection to be made
-            updateCurrentActivityText("Select King to Move...");
+            updateCurrentActivityText(msgSelectKing);
 
             //while (dataGridGameBoard.SelectedItem == null)
             //{
@@ -869,16 +886,16 @@ namespace LeapFrogWinUI
          */
         private async Task setUpNewGame()
         {
-            await updateCurrentActivityText("Setting Up for a New Game...");
+            await updateCurrentActivityText(msgSettingNewGame);
 
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
             flgGameOver = false;                                       //Set Game Over Flag to false
 
-            await updateCurrentActivityText("Clearing the Playing Area...");
+            await updateCurrentActivityText(msgClearPlayArea);
             await clearDeck();                                           //Clear the Current Layout
 
             //Shuffle the Deck of Cards Until Shuffled Deck has at least one playable position
-            await updateCurrentActivityText("Shuffling and Cutting Cards...");
+            await updateCurrentActivityText(msgShuffling);
             do
             {
                 await tempDeck.shuffleDeck();                            //Shuffle the Deck of Cards
@@ -886,10 +903,10 @@ namespace LeapFrogWinUI
             }
             while(!isPlayableShuffle(tempDeck));//Does Shuffled Deck has at least one playable space?
 
-            await updateCurrentActivityText("Dealing Cards...");
+            await updateCurrentActivityText(msgDealing);
             await dealCards(tempDeck);                               //Deal the Cards to the Tableau
 
-            await updateCurrentActivityText("Removing Aces...");
+            await updateCurrentActivityText(msgRemoveAces);
             await removeAces();                              //Remove Aces to Initialize Play Spaces
 
             isGameSet = true;                                     //Set the game is set flag to true
@@ -904,7 +921,7 @@ namespace LeapFrogWinUI
             //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
             //gameTime.Start();                                                  //And start the clock
 
-            updateCurrentActivityText("Click on Play Space to Move Card...");
+            updateCurrentActivityText(msgSelectPlay);
         }
 
         /*******************************************************************************************

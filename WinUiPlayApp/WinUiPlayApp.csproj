@@ -38,6 +38,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Data\" />
     <Folder Include="Assets\Sounds\" />
   </ItemGroup>
 

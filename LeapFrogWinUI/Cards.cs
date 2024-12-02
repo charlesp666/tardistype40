@@ -31,7 +31,8 @@ namespace LeapFrogWinUI
          */
         private static Random aRandom = new Random();       //Parameter for Random Number Generation
 
-        public ObservableCollection<Card> deckCards = new ObservableCollection<Card>();       //Declare List to store Deck of Cards for game play
+        //Declare List to store Deck of Cards for game play
+        public ObservableCollection<Card> deckCards = new ObservableCollection<Card>();
 
         //Load the Default Card Back Image
         private string cardBack = "/Assets/GameImages/defaultBack.jpg";
@@ -40,16 +41,18 @@ namespace LeapFrogWinUI
         private string bmpNotPlayable = folderGameImages + "NotPlayable.gif";
         private string bmpPlayable = folderGameImages + "Playable.gif";
 
-        private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
-        private int countShuffleSound = 3;        //Number of times to play sound of Shuffling cards
-
         //Media Player object to play various sounds during play; sound files
         private MediaPlayer myMediaPlayer = new MediaPlayer();
         private TaskCompletionSource<bool> myTask;                //Task for Playing Shuffling Sound
 
+        private int countShuffle = 5000;                 //Number of times to swap cards for Shuffle
+
+        //Number of times to play sound of Shuffling cards; this reflects one less than the actual
+        //number of times the shuffing cards sound if played.
+        private int countShuffleSound = 2;
         private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
 
-        private int delayShuffling = 500;                        //Await delay value during shuffling
+        private int delayShuffling = 500; //Await delay value during shuffling to ensure sound plays
 
         /***********************************************************************************************
            * Partial Class Card:
