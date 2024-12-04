@@ -60,6 +60,10 @@ namespace WinUiPlayApp
             this.DataContext = myCurrentActivity;
 
             myCurrentActivity.CurrentActivityText = "Reached Page 2..." ;
+
+            Player myAvatar = new Player();
+
+            myAvatar.displayPlayerStats();
         }
 
         // Page2.xaml.cs
