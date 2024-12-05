@@ -21,7 +21,7 @@ using Windows.Storage;
 //using Windows.System;
 using Windows.UI.Popups;
 
-namespace WinUiPlayApp //LeapFrogWinUI
+namespace LeapFrogWinUI
 {
     internal class Player
     {
@@ -31,7 +31,6 @@ namespace WinUiPlayApp //LeapFrogWinUI
         private int gameWinnings = 0;                                          //Cumulative Winnings
         private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
 
-        private String namePlayer = "jdoe@somewhere.net";            //Set Current Player to Default
         private TimeSpan timePlayed = new TimeSpan(0, 0, 0);       //Total Time for All Games Played
 
         //Parameters to track User Statistics
@@ -42,8 +41,6 @@ namespace WinUiPlayApp //LeapFrogWinUI
          */
         public Player()
         {
-            //string aDummy = getPlayerName();                             //Get Current User's "Name"
-
             loadPlayerStats();                             //Load Player Stats from Application Data
         }
 
@@ -206,29 +203,6 @@ namespace WinUiPlayApp //LeapFrogWinUI
         }
 
         /*******************************************************************************************
-         * Method: getPlayerName
-         * Returns the Name of the Player of the Object that Invoked the Method.
-         */
-        //public async Task<string> getPlayerName()
-        //{
-        //    IReadOnlyList<User> users = await User.FindAllAsync();
-        //    string myUser = "";
-        //    // Assuming the first user in the list is the current user
-        //    //User currentUser = users.FirstOrDefault();
-        //    //var currentUser = users.Where(p => p.AuthenticationStatus == UserAuthenticationStatus.LocallyAuthenticated &&
-        //    //                    p.Type == UserType.LocalUser).FirstOrDefault();
-
-        //    //if (currentUser != null)
-        //    //{
-        //    //    var aUser  = await Task.Run => currentUser.GetPropertyAsync(KnownUserProperties.AccountName) as string;
-        //    //    myUser = (string)aUser;
-        //    //}
-
-        //    //namePlayer = myUser;                             //Assigns User name to Global Parameter
-        //    return myUser;
-        //}
-
-        /*******************************************************************************************
          * Method: getTimePlayed
          * Returns the Amount of Time Played
          */
@@ -340,6 +314,8 @@ namespace WinUiPlayApp //LeapFrogWinUI
          */
         private void writePlayerStats()
         {
+            PlayerStats.Values["ContainerName"] = this.containerName;
+
             PlayerStats.Values["GamesPlayed"] = this.gamesPlayed;
             PlayerStats.Values["Winnings"] = this.gameWinnings;
             PlayerStats.Values["Moves"] = this.countMoves;

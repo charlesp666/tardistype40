@@ -60,7 +60,7 @@ namespace LeapFrogWinUI
         private AppWindow myWindow = null;
 
         //Create Player and GameInformation Objects
-        //private Player myAvatar = new Player();                  //Storage for Current Player Object
+        private Player myAvatar = new Player();                  //Storage for Current Player Object
         private GameInformation myGameInfo = new GameInformation();  //Local Game Information Object
 
         //Declare and Initialize Game Playing Deck(s)

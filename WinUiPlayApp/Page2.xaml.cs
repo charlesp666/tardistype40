@@ -63,7 +63,7 @@ namespace WinUiPlayApp
 
             Player myAvatar = new Player();
 
-            myAvatar.displayPlayerStats();
+            //myAvatar.displayPlayerStats();
         }
 
         // Page2.xaml.cs
