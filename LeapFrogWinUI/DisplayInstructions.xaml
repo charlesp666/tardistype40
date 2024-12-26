@@ -8,20 +8,20 @@
                BorderBrush="White"
                BorderThickness="2"
                CornerRadius="10"
-               Height="500"
-               Width="240"
+               Height="600"
+               Width="350"
                PrimaryButtonText="Ok"
 >
     <Grid Name="grdDisplayInstructions"
           DataContext="myHelpText"
-          Height="290"
-          Width="230"
+          Height="590"
+          Width="340"
           VerticalAlignment="Top"
           HorizontalAlignment="Left"
     >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="450"/>
+            <RowDefinition Height="540"/>
         </Grid.RowDefinitions>
         
          <Grid x:Name="ttlSpInstructions"
@@ -30,23 +30,23 @@
                BorderBrush="White"
                BorderThickness="2"
                CornerRadius="10"
-               VerticalAlignment="Center"
+               VerticalAlignment="Top"
                HorizontalAlignment="Center"
                Height="36"
-               Width="220"
+               Width="280"
          >
                 <TextBlock Name="ttlPlayInstructions"
-                        Text="How to Play LeapFrog"
-                        TextAlignment="Center"
-                        FontFamily="Helvetica"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        FontStyle="Italic"
-                        Foreground="White"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="30"
-                        Width="210"
+                           Text="How to Play LeapFrog"
+                           TextAlignment="Center"
+                           FontFamily="Helvetica"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           FontStyle="Italic"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Height="30"
+                           Width="270"
                 />
          </Grid>
 
@@ -61,6 +61,7 @@
                         FontSize="12"
                         FontWeight="Normal"
                         Foreground="White"
+                        Width="320"
              />
          </ScrollViewer>
     </Grid>
