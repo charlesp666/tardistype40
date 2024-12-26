@@ -1,4 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <PackageVersionSettings>None.NoneWithAutoReset.None</PackageVersionSettings>
+  </PropertyGroup>
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
@@ -77,5 +81,19 @@
       <Company>CatsPaw Saftware</Company>
       <Product>LeapFrog</Product>
       <Authors>Charles J Pilgrim</Authors>
+      <ShouldCreateLogs>True</ShouldCreateLogs>
+      <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+      <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+      <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+      <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+      <UpdatePackageVersion>True</UpdatePackageVersion>
+      <PackageVersionSettings>None.IncrementOnce.None</PackageVersionSettings>
+      <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+      <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+      <Version>1.0.5</Version>
+      <AssemblyFileVersionSettings>None.None.Increment.DateStamp</AssemblyFileVersionSettings>
+      <AssemblyVersion>1.0.5.1946</AssemblyVersion>
+      <FileVersion>1.0.5.24345</FileVersion>
+      <AssemblyVersionSettings>None.None.Increment.TimeStamp</AssemblyVersionSettings>
   </PropertyGroup>
 </Project>

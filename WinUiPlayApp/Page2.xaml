@@ -10,23 +10,92 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock x:Name="pageTitle"
-                   Text="Page 2"
-                   Margin="16"
-                   Style="{StaticResource TitleTextBlockStyle}"
-        />
-
-        <HyperlinkButton Content="Click to go to main page"
-                         Click="HyperlinkButton_Click"
-                         HorizontalAlignment="Center"
-        />
-
-        <StackPanel Name="pnlTextRefresh"
-                    Margin="100"
+        <Grid Name="gameTableau"
+          Background="Blue"
+          BorderThickness="2"
+          BorderBrush="White"
+          CornerRadius="10"
         >
-            <TextBox Name="UpdatedText" Text="Unchanged"/>
-            <TextBlock Text="{Binding CurrentActivityText}" FontSize="20"/>
-            <Button Content="Update Text" Click="UpdateTextButton_Click"/>
-        </StackPanel>
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1550"/>
+            </Grid.ColumnDefinitions>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Grid Name="bdrHeader"
+              Grid.Row="0"
+              Margin="2,2"
+              Background="Blue"
+              BorderThickness="1"
+              BorderBrush="Black"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+            >
+                <TextBlock x:Name="pageTitle"
+                           Text="Page 2"
+                           Margin="16"
+                           Style="{StaticResource TitleTextBlockStyle}"
+                           Foreground="White"
+                />
+            </Grid>
+
+            <Grid Name="bdrSecondGrid"
+                  Grid.Row="1"
+                  Margin="2,2"
+                  Background="Blue"
+                  BorderThickness="1"
+                  BorderBrush="Black"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+            >
+                <HyperlinkButton Content="Click to go to main page"
+                                 Click="HyperlinkButton_Click"
+                                 HorizontalAlignment="Center"
+                                 Foreground="White"
+                />
+
+                <StackPanel Name="pnlTextRefresh"
+                            Margin="100"
+                >
+                    <TextBox Name="UpdatedText"
+                             Text="Unchanged"
+                             Foreground="White"
+                    />
+                    <TextBlock Text="{Binding CurrentActivityText}"
+                               FontSize="20"
+                               Foreground="White"
+                    />
+                    <Button Content="Update Text"
+                            Click="UpdateTextButton_Click"
+                            Foreground="White"
+                     />
+                </StackPanel>
+            </Grid>
+
+            <Grid Name="bdrThirdGrid"
+                  Grid.Row="2"
+                  Margin="2,2"
+                  Background="Blue"
+                  BorderThickness="1"
+                  BorderBrush="Black"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  CornerRadius="10"
+            >
+                <Button x:Name="btnHelp"
+                    Content="Help"
+                    Grid.Column="8"
+                    Margin="2,2,2,2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="24pi"
+                    Foreground="White"
+                    Click="btnHelp_Click"
+                />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

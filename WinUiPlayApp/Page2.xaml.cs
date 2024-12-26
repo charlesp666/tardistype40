@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
+
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
@@ -9,7 +11,9 @@ using Microsoft.UI.Xaml.Controls;
 //using System;
 //using System.Collections.Generic;
 using System.ComponentModel;
-using Windows.Media.Playback;
+using System.Threading.Tasks;
+//using Windows.Media.Playback;
+using Windows.Storage;
 //using System.IO;
 //using System.Linq;
 //using System.Runtime.InteropServices.WindowsRuntime;
@@ -52,9 +56,16 @@ namespace WinUiPlayApp
     {
         public CurrentActivity myCurrentActivity { get; set; }
 
+        private static String folderGameData = "ms-appx:///Assets//Data//";
+        private string fileInstructions = folderGameData + "GameInstructions.txt";
+
+        private String helpText = "The quick brown fox jumped over the lazy god."; //null;
+
         public Page2()
         {
             this.InitializeComponent();
+
+            //loadHelpText();
 
             myCurrentActivity = new CurrentActivity();
             this.DataContext = myCurrentActivity;
@@ -66,7 +77,20 @@ namespace WinUiPlayApp
             //myAvatar.displayPlayerStats();
         }
 
-        // Page2.xaml.cs
+        /*******************************************************************************************
+         * Event Handler: Help
+         * Displays the Help/About dialog
+         */
+        private async void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            var gameInstructions = new DisplayInstructions(helpText);
+            gameInstructions.XamlRoot = this.XamlRoot;
+
+            await gameInstructions.ShowAsync();
+
+            ////set the XamlRoot property
+            //dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
+        }
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
@@ -75,8 +99,18 @@ namespace WinUiPlayApp
 
         private void UpdateTextButton_Click(object sender, RoutedEventArgs e)
         {
-            //ViewModel.Text = "New text!";
             myCurrentActivity.CurrentActivityText = UpdatedText.Text;
+        }
+
+        /*******************************************************************************************
+        * Method: loadHelpText
+        * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
+        */
+        private async Task loadHelpText()
+        {
+            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
+
+            helpText = await FileIO.ReadTextAsync(HelpFile);
         }
     }
 }

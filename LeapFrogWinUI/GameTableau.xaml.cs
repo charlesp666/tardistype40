@@ -173,18 +173,10 @@ namespace LeapFrogWinUI
          */
         private async void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog dlgGameInstructions = new ContentDialog
-            {
-                Name = "theGameInstructions",
-                Title = "How to Play LeapFrog",
-                Content =  helpText,
-                CloseButtonText = "OK"
-            };
+            var gameInstructions = new DisplayInstructions(helpText);
+            gameInstructions.XamlRoot = this.XamlRoot;
 
-            //set the XamlRoot property
-            dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
-
-            ContentDialogResult result = await dlgGameInstructions.ShowAsync();
+            await gameInstructions.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -358,12 +350,6 @@ namespace LeapFrogWinUI
             dataGridGameBoard.Background = myGameInfo.getBackgroundColor();   //Set Background Color
             dataGridGameBoard.AllowFocusOnInteraction = true;
             dataGridGameBoard.IsEnabled = true;
-
-            //Build a "Dummy" Layout
-            //Cards tempDeck = new Cards(true);           //Create a working deck to shuffle, cut, etc.
-
-            //await clearDeck();                                            //Clear the Current Layout
-            //await dealCards(tempDeck);                               //Deal the Cards to the Tableau
         }
 
         /*******************************************************************************************

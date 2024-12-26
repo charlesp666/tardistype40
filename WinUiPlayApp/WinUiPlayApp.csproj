@@ -12,6 +12,9 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="DisplayInstructions.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -41,6 +44,11 @@
     <Folder Include="Assets\Data\" />
     <Folder Include="Assets\Sounds\" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Update="DisplayInstructions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
@@ -53,5 +61,7 @@
   
   <PropertyGroup>
       <WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
+      <AssemblyVersion>1.0.14.14</AssemblyVersion>
+      <FileVersion>1.0.14.14</FileVersion>
   </PropertyGroup>
 </Project>
