@@ -60,6 +60,7 @@ namespace WinUiPlayApp
         private string fileInstructions = folderGameData + "GameInstructions.txt";
 
         private String helpText = "The quick brown fox jumped over the lazy god."; //null;
+        private Player myAvatar = new Player();
 
         public Page2()
         {
@@ -72,7 +73,7 @@ namespace WinUiPlayApp
 
             myCurrentActivity.CurrentActivityText = "Reached Page 2..." ;
 
-            Player myAvatar = new Player();
+            //Player myAvatar = new Player();
 
             //myAvatar.displayPlayerStats();
         }
@@ -87,9 +88,18 @@ namespace WinUiPlayApp
             gameInstructions.XamlRoot = this.XamlRoot;
 
             await gameInstructions.ShowAsync();
+        }
 
-            ////set the XamlRoot property
-            //dlgGameInstructions.XamlRoot = btnHelp.XamlRoot;
+        /*******************************************************************************************
+         * Event Handler: Player Stats
+         * Displays Player Statistics dialog
+         */
+        private async void btnPlayerStats_Click(object sender, RoutedEventArgs e)
+        {
+            var playerStats = new DisplayPlayerStats(myAvatar);
+            playerStats.XamlRoot = this.XamlRoot;
+
+            await playerStats.ShowAsync();
         }
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)

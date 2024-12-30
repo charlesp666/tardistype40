@@ -101,16 +101,10 @@ namespace LeapFrogWinUI
 
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
-        // Define parameters for Scoring Games (Determining Player's Winnings)
-        private int incrementSequence = 2;             //Points to add for cards in correct sequence
-        private int incrementPosition = 5;             //Points to add for cards in correct position
-        private int incrementCompleteSuit = 10;                  //Points to add for a complete suit
-
-        private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
-
         private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
 
         //Below Parameters used to reflect Game time and store Accumulated play time
+
         private DateTime gameStartTime;                                            //Game Start Time
         private DateTime gameEndTime;                                      //Game "Now" and end time
 
@@ -1007,6 +1001,13 @@ namespace LeapFrogWinUI
          * Stores the procedures used to score the game.
          **********************************************************************************************/
         #region
+        // Define parameters for Scoring Games (Determining Player's Winnings)
+        private int incrementSequence = 1;             //Points to add for cards in correct sequence
+        private int incrementPosition = 2;             //Points to add for cards in correct position
+        private int incrementCompleteSuit = 10;                  //Points to add for a complete suit
+
+        private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
+
         /*******************************************************************************************
          * Function: isCorrectPosition
          * Compares card position in row and determines if this is correctly placed. Returns "true"

@@ -23,16 +23,17 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
             <Grid Name="bdrHeader"
-              Grid.Row="0"
-              Margin="2,2"
-              Background="Blue"
-              BorderThickness="1"
-              BorderBrush="Black"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
+                  Grid.Row="0"
+                  Margin="2,2"
+                  Background="Blue"
+                  BorderThickness="1"
+                  BorderBrush="Black"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
             >
                 <TextBlock x:Name="pageTitle"
                            Text="Page 2"
@@ -94,6 +95,28 @@
                     FontSize="24pi"
                     Foreground="White"
                     Click="btnHelp_Click"
+                />
+            </Grid>
+
+            <Grid Name="bdrFourthGrid"
+                  Grid.Row="3"
+                  Margin="2,2"
+                  Background="Blue"
+                  BorderThickness="1"
+                  BorderBrush="Black"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  CornerRadius="10"
+            >
+                <Button x:Name="btnPlayerStats"
+                        Content="Stats"
+                        Grid.Column="8"
+                        Margin="2,2,2,2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="24pi"
+                        Foreground="White"
+                        Click="btnPlayerStats_Click"
                 />
             </Grid>
         </Grid>
