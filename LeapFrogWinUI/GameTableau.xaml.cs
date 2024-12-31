@@ -16,6 +16,8 @@ using System;
 //using System.ComponentModel;
 //using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 
 //using System.Collections.Immutable;
 //using System.IO;
@@ -84,7 +86,7 @@ namespace LeapFrogWinUI
         private int delayDealCards = 125;                            //Task Delay when Dealing Cards
         private int delayRemoveAces = 125;                           //Task Delay when removing aces
 
-        private static int displayDelayMS = 5000;      //Action display delay so user can see changes
+        //private static int displayDelayMS = 5000;      //Action display delay so user can see changes
 
         private string fileInstructions = folderGameData + "GameInstructions.txt";
 
@@ -104,9 +106,11 @@ namespace LeapFrogWinUI
         private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
 
         //Below Parameters used to reflect Game time and store Accumulated play time
+        private DispatcherTimer myGameTimer;
+        private Stopwatch myGameStopwatch;
 
-        private DateTime gameStartTime;                                            //Game Start Time
-        private DateTime gameEndTime;                                      //Game "Now" and end time
+        //private DateTime gameStartTime;                                            //Game Start Time
+        //private DateTime gameEndTime;                                      //Game "Now" and end time
 
         //Current Activity Messages
         private string errKingNotSelected = "King not Selected; Cancelling Move...";
@@ -138,6 +142,8 @@ namespace LeapFrogWinUI
 
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
+
+            InitializeTimer();
 
             //Clear the Game Deck to initialize the Game Board, and prepare for new game
             cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
@@ -271,6 +277,15 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Event Handler: GameTimer
+         * Displays the Time Played
+         */
+        private void MyGameTimer_Tick(object sender, object e)
+        {
+            myTimerDisplay.Text = myGameStopwatch.Elapsed.ToString(@"hh\:mm\:ss");
+        }
+
+        /*******************************************************************************************
         /* Method: ResizeAppWindow
         /* 
         /* Resizes the AppWindow to the size of the page.
@@ -368,13 +383,13 @@ namespace LeapFrogWinUI
          * Method: computeTimePlayed
          * Computes the Time Played for Last Game
          */
-        private TimeSpan computeTimePlayed()
-        {
-            gameEndTime = System.DateTime.Now;                  //Set the Current Game Time to "Now"
-            TimeSpan elapsedTime = gameEndTime - gameStartTime;          //Compute Current Game Time
+        //private TimeSpan computeTimePlayed()
+        //{
+        //    gameEndTime = System.DateTime.Now;                  //Set the Current Game Time to "Now"
+        //    TimeSpan elapsedTime = gameEndTime - gameStartTime;          //Compute Current Game Time
 
-            return elapsedTime;
-        }
+        //    return elapsedTime;
+        //}
 
         /*******************************************************************************************
          * Method: dealCards
@@ -461,10 +476,9 @@ namespace LeapFrogWinUI
          */
         private void endGame()
         {
-            //gameTime.Stop();                                                   //Stop the Game Timer
+            StopTimer();                                                      //Stop the Game Timer
 
             updateCurrentActivityText(msgGameOver);
-            //speakText(msgGameOver);
 
             //scoreGame();               //Compute Score for Current Game and Update Player Statistics
 
@@ -566,6 +580,21 @@ namespace LeapFrogWinUI
 
             //tbCurrentActivity.Text = "Waiting for User Input...";
             await updateCurrentActivityText(msgWaiting);
+        }
+
+        /*******************************************************************************************
+         * InitializeTimer()
+         * Sets Up the Game Timer
+         */
+        private void InitializeTimer()
+        {
+            myGameStopwatch = new Stopwatch();
+
+            myGameTimer = new DispatcherTimer();
+            myGameTimer.Interval = TimeSpan.FromSeconds(1);
+            myGameTimer.Tick += MyGameTimer_Tick;
+
+            myTimerDisplay.Text = "00:00:00";
         }
 
         /*******************************************************************************************
@@ -819,6 +848,16 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * ResetTimer()
+         * Stops the Game Timer
+         */
+        private void ResetTimer()
+        {
+            myGameStopwatch.Reset();
+            myTimerDisplay.Text = "00:00:00";
+        }
+
+        /*******************************************************************************************
          * Method: selectKingToMove
          * Locates and "Highlighs" the Kings in the Playing tableau; then waits for one to be
          * selected.
@@ -898,8 +937,7 @@ namespace LeapFrogWinUI
             moveCount = 0;                              //Initialize the Move Counter for a New Game
             updateMoveCountText(moveCount);                             //Update Move count Text box
 
-            //gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
-            //gameTime.Start();                                                  //And start the clock
+            StartTimer();                                                     //Start the Game Timer
 
             updateCurrentActivityText(msgSelectPlay);
         }
@@ -925,6 +963,27 @@ namespace LeapFrogWinUI
 
             mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
             mediaPlayer.Play();
+        }
+
+        /*******************************************************************************************
+         * StartTimer()
+         * Sets Up the Game Timer
+         */
+        private void StartTimer()
+        {
+            ResetTimer(); // myGameStopwatch.Reset();
+            myGameStopwatch.Start();
+            myGameTimer.Start();
+        }
+
+        /*******************************************************************************************
+         * StopTimer()
+         * Stops the Game Timer
+         */
+        private void StopTimer()
+        {
+            myGameTimer.Stop();
+            myGameStopwatch.Stop();
         }
 
         /*******************************************************************************************

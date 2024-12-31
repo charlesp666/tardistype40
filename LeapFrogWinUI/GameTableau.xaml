@@ -44,26 +44,34 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="445"/>
-                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Border Name="someImage"
-                    Background="White"
-                    BorderBrush="Black"
+            <Border Name="brdGameTimer"
+                    Grid.Column="2"
+                    Background="Blue"
+                    BorderBrush="White"
                     BorderThickness="1"
                     Height="50"
-                    Width="50"
+                    Width="auto"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
             >
-                <Image x:Name="someJunk"
-                       Grid.Column="0"
-                       Source="/Assets/GameImages/CardsIcon.png"
-                       FocusVisualPrimaryBrush="Blue"
+                <TextBox x:Name="myTimerDisplay"
+                         HorizontalAlignment="Center"
+                         HorizontalTextAlignment="Center"
+                         VerticalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Height="auto"
+                         Width="auto"
+                         FontFamily="Helvetica"
+                         FontSize="24"
+                         FontWeight="Bold"
+                         Foreground="White"
                 />
             </Border>
 
@@ -73,17 +81,17 @@
                     BorderThickness="1"
                     CornerRadius="10"
                     Height="50"
-                    Width="445"
+                    Width="auto"
             >
                 <!--Margin="1,1,1,1"-->
                 <TextBlock x:Name="tbMoveCount"
                            Text=""
-                           Width="441"
+                           Width="auto"
                            Height="46"
                            HorizontalTextAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="20pi"
-                           FontFamily="Arial"
+                           FontFamily="Helvetica"
                            FontWeight="Medium"
                            FontStyle="Italic"
                            Foreground="White"
@@ -96,12 +104,12 @@
                     BorderThickness="1"
                     CornerRadius="10"
                     Height="50"
-                    Width="500"
+                    Width="auto"
             >
                 <!--Margin="1,1,1,1"-->
                 <TextBlock x:Name="tbCurrentActivity"
                            Text="Initializing..."
-                           Width="494"
+                           Width="auto"
                            Height="46"
                            HorizontalTextAlignment="Center"
                            VerticalAlignment="Center"

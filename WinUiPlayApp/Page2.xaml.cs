@@ -11,6 +11,7 @@ using System;
 //using System;
 //using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 //using Windows.Media.Playback;
 using Windows.Storage;
@@ -62,6 +63,12 @@ namespace WinUiPlayApp
         private String helpText = "The quick brown fox jumped over the lazy god."; //null;
         private Player myAvatar = new Player();
 
+        private DispatcherTimer myGameTimer;
+        private Stopwatch myGameStopwatch;
+
+        private DateTime gameStartTime;                                            //Game Start Time
+        private DateTime gameEndTime;                                      //Game "Now" and end time
+
         public Page2()
         {
             this.InitializeComponent();
@@ -73,9 +80,99 @@ namespace WinUiPlayApp
 
             myCurrentActivity.CurrentActivityText = "Reached Page 2..." ;
 
-            //Player myAvatar = new Player();
+            //Setup the Game Timer
 
-            //myAvatar.displayPlayerStats();
+            InitializeTimer();
+
+            //Setup the Game Timer
+            //myGameTimer = new DispatcherTimer();
+            //myGameTimer.Interval =TimeSpan.FromSeconds(1);
+            //myGameTimer.Tick += MyGameTimer_Tick;
+            //myGameTimer.Start();
+        }
+
+        /*******************************************************************************************
+         * Method: computeTimePlayed
+         * Computes the Time Played for Last Game
+         */
+        private TimeSpan computeTimePlayed()
+        {
+            gameEndTime = System.DateTime.Now;                  //Set the Current Game Time to "Now"
+            TimeSpan elapsedTime = gameEndTime - gameStartTime;          //Compute Current Game Time
+
+            return elapsedTime;
+        }
+
+        /*******************************************************************************************
+         * InitializeTimer()
+         * Sets Up the Game Timer
+         */
+        private void InitializeTimer()
+        {
+            myGameStopwatch = new Stopwatch();
+
+            myGameTimer = new DispatcherTimer();
+            myGameTimer.Interval = TimeSpan.FromSeconds(1);
+            myGameTimer.Tick += MyGameTimer_Tick;
+        }
+
+        /*******************************************************************************************
+         * StartTimer()
+         * Sets Up the Game Timer
+         */
+        private void StartTimer()
+        {
+            ResetTimer(); // myGameStopwatch.Reset();
+            myGameStopwatch.Start();
+            myGameTimer.Start();
+        }
+
+        /*******************************************************************************************
+         * StopTimer()
+         * Stops the Game Timer
+         */
+        private void StopTimer()
+        {
+            myGameTimer.Stop();
+            myGameStopwatch.Stop();
+        }
+
+        /*******************************************************************************************
+         * ResetTimer()
+         * Stops the Game Timer
+         */
+        private void ResetTimer()
+        {
+            myGameStopwatch.Reset();
+            myTimerDisplay.Text = "00:00:00";
+        }
+
+        /*******************************************************************************************
+         * Event Handler: GameTimer
+         * Displays the Time Played
+         */
+        private void MyGameTimer_Tick(object sender, object e)
+        {
+            myTimerDisplay.Text = myGameStopwatch.Elapsed.ToString(@"hh\:mm\:ss"); //DateTime.Now.ToString("hh:mm:ss");
+        }
+
+        /*******************************************************************************************
+         * Event Handler: Help
+         * Displays the Help/About dialog
+         */
+        private void btnStartTimer_Click(object sender, RoutedEventArgs e)
+        {
+            ResetTimer();
+            StartTimer();
+        }
+
+        /*******************************************************************************************
+         * Event Handler: Help
+         * Displays the Help/About dialog
+         */
+        private void btnStopTimer_Click(object sender, RoutedEventArgs e)
+        {
+            StopTimer();
         }
 
         /*******************************************************************************************

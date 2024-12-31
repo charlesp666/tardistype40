@@ -24,6 +24,7 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
             <Grid Name="bdrHeader"
@@ -117,6 +118,60 @@
                         FontSize="24pi"
                         Foreground="White"
                         Click="btnPlayerStats_Click"
+                />
+            </Grid>
+            
+            <Grid Name="bdrGameTimer"
+                  Grid.Row="4"
+                  Grid.Column="6"
+                  Margin="2,2"
+                  Background="Blue"
+                  BorderThickness="1"
+                  BorderBrush="Black"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  CornerRadius="10"
+            >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox x:Name="myTimerDisplay"
+                         Grid.Column="0"
+                         HorizontalAlignment="Center"
+                         HorizontalTextAlignment="Center"
+                         VerticalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Height="auto"
+                         Width="auto"
+                         FontFamily="Helvetica"
+                         FontSize="24"
+                         FontWeight="Bold"
+                         Foreground="White"
+                />
+                
+                <Button x:Name="btnStartTimer"
+                        Content="Start Timer"
+                        Grid.Column="1"
+                        Margin="2,2,2,2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="24pi"
+                        Foreground="White"
+                        Click="btnStartTimer_Click"
+                />
+
+                <Button x:Name="btnStopTimer"
+                        Content="Stop Timer"
+                        Grid.Column="2"
+                        Margin="2,2,2,2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="24pi"
+                        Foreground="White"
+                        Click="btnStopTimer_Click"
                 />
             </Grid>
         </Grid>
