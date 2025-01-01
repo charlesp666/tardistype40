@@ -153,7 +153,7 @@ namespace WinUiPlayApp
          */
         private void MyGameTimer_Tick(object sender, object e)
         {
-            myTimerDisplay.Text = myGameStopwatch.Elapsed.ToString(@"hh\:mm\:ss"); //DateTime.Now.ToString("hh:mm:ss");
+            myTimerDisplay.Text = myGameStopwatch.Elapsed.ToString(@"hh\:mm\:ss");
         }
 
         /*******************************************************************************************

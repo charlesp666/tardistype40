@@ -3,7 +3,6 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
@@ -12,13 +11,10 @@ using Microsoft.UI.Xaml.Media;
 
 using System;
 //using System.Diagnostics;
-
 //using System.ComponentModel;
 //using System.Diagnostics;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-
 //using System.Collections.Immutable;
 //using System.IO;
 using System.Linq;
@@ -108,6 +104,8 @@ namespace LeapFrogWinUI
         //Below Parameters used to reflect Game time and store Accumulated play time
         private DispatcherTimer myGameTimer;
         private Stopwatch myGameStopwatch;
+
+        private TimeSpan totalTimePlayed = TimeSpan.Zero;
 
         //private DateTime gameStartTime;                                            //Game Start Time
         //private DateTime gameEndTime;                                      //Game "Now" and end time
@@ -849,7 +847,7 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * ResetTimer()
-         * Stops the Game Timer
+         * Resets Game Timer to "Zero."
          */
         private void ResetTimer()
         {
@@ -967,11 +965,11 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * StartTimer()
-         * Sets Up the Game Timer
+         * Starts the Game Timer
          */
         private void StartTimer()
         {
-            ResetTimer(); // myGameStopwatch.Reset();
+            ResetTimer();
             myGameStopwatch.Start();
             myGameTimer.Start();
         }
@@ -984,6 +982,8 @@ namespace LeapFrogWinUI
         {
             myGameTimer.Stop();
             myGameStopwatch.Stop();
+
+            totalTimePlayed = myGameStopwatch.Elapsed;
         }
 
         /*******************************************************************************************
