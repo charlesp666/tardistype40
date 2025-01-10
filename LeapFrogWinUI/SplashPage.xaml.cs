@@ -3,20 +3,22 @@
 * 
 * Entry or "Splash" Page definition for launching of game.
 * 
-* @Copyright (c) 2024 Charles J. Pilgrim
+* @Copyright (c) 2025 Charles J. Pilgrim
 * All Rights Reserved.
 */
 
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
+//using Microsoft.UI;
+//using Microsoft.UI.Windowing;
+//using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
+using System.Threading.Tasks;
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
 //using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
-using System.Threading.Tasks;
+//using Microsoft.UI.Xaml.Media.Animation;
 
 //using Microsoft.UI.Xaml.Navigation;
 
@@ -26,13 +28,14 @@ using System.Threading.Tasks;
 //using System.Linq;
 //using System.Reflection;
 //using System.Runtime.InteropServices.WindowsRuntime;
+//using System.Threading.Tasks;
 
 //using Windows.Foundation;
 //using Windows.Foundation.Collections;
-using Windows.Graphics;
+//using Windows.Graphics;
 //using Windows.UI.WindowManagement;
 
-using WinRT.Interop;
+//using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -44,19 +47,12 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
-        private static int linkDelayMS = 100;      //Action display delay so user can see changes
-        private AppWindow myWindow = null;
+        private static int linkDelayMS = 200;      //Action display delay so user can see changes
 
         public SplashPage()
         {
             this.InitializeComponent();
-
-            myWindow = getMyAppWindow();
-
-            myWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-
-            ResizeAppWindow(myWindow);
-            CenterAppWindow(myWindow);
+            this.Loaded += SplashPage_Loaded;
 
             // Build the Game Information object
             GameInformation myGameInfo = new GameInformation();
@@ -70,96 +66,44 @@ namespace LeapFrogWinUI
             txtVersion.Text = "Version: " + myGameInfo.getVersion();             //Game Version Number
 
             picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
-
-            myWindow.Show(true);
-            //UpdateProgressBarValue();
         }
 
         /*******************************************************************************************
-        /* Method: btnLaunchGame_Click
+        /* Method: SplashPage_Loaded
         /* 
-        /* Navigates to the GameTableau (Playing area) when the "Launch Game" button is clicked.
+        /* Handles the SplashPage Loaded Event.
         /*/
-        private async void btnLaunchGame_Click(object sender, RoutedEventArgs e)
+        private async void SplashPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if(this.Visibility == Visibility.Visible)
-            {
-                this.Visibility= Visibility.Collapsed;
-                await Task.Delay(linkDelayMS); // Adjust as necessary
-            }
+            // Load MainPage asynchronously
+            await LoadMainPageAsync();
+        }
 
-            GameTableau myGameTableau = new GameTableau();
+        /*******************************************************************************************
+        /* Method: LoadMainPageAsync
+        /* 
+        /* Displays the SplashPage for awhile then Navigates to GameTableau.
+        /*/
+        private async Task LoadMainPageAsync()
+        {
+            await UpdateProgressBarValue();
+
             Frame.Navigate(typeof(GameTableau), null, new EntranceNavigationTransitionInfo());
         }
 
         /*******************************************************************************************
-         * Method: delay
-         * Pause Processing for specified number of milliseconds.
-         */
-        //private void delay(int milliSecondsToPauseFor)
-        //{
-        //    System.DateTime startInstant = System.DateTime.Now;
-        //    System.DateTime thisInstant = startInstant;
-        //    System.TimeSpan duration = new System.TimeSpan(0, 0, 0, 0, milliSecondsToPauseFor);
-        //    System.DateTime finalInstant = thisInstant.Add(duration);
-
-        //    while (finalInstant >= thisInstant)
-        //    {
-        //        thisInstant = System.DateTime.Now;
-        //    }
-        //}
-
-        /*******************************************************************************************
-         * Method: CenterAppWindow
-         * Centers the AppWindow on the Display.
-         */
-        private void CenterAppWindow(AppWindow myAppWindow)
-        {
-            DisplayArea displayArea = DisplayArea.GetFromWindowId(myAppWindow.Id, DisplayAreaFallback.Primary);
-
-            RectInt32 displayAreaRect = displayArea.WorkArea;
-            int centerX = (displayAreaRect.Width - myAppWindow.Size.Width) / 2;
-            int centerY = (displayAreaRect.Height - myAppWindow.Size.Height) / 2;
-
-            myAppWindow.Move(new PointInt32(centerX, centerY));
-        }
-
-        /*******************************************************************************************
-        /* Method: getMyAppWindow
+        /* Method: UpdateProgressBarValue
         /* 
-        /* Gets the Current AppWindow.
+        /* Updates the ProgressBar while the SplashPage is displayed.
         /*/
-        private AppWindow getMyAppWindow()
+        private async Task UpdateProgressBarValue()
         {
-            var myWindow = (Application.Current as App)?.m_window as MainWindow;
-            var hwnd = WindowNative.GetWindowHandle(myWindow);
-            var myWindowId = Win32Interop.GetWindowIdFromWindow(hwnd);
-            var appWindow = AppWindow.GetFromWindowId(myWindowId);
+            for (int i = 0; i < 100; i++)
+            {
+                linkToGameTableau.Value = i;
 
-            return appWindow;
+                await Task.Delay(linkDelayMS);
+            }
         }
-
-        /*******************************************************************************************
-        /* Method: ResizeAppWindow
-        /* 
-        /* Resizes the AppWindow to the size of the page.
-        /*/
-        private void ResizeAppWindow(AppWindow appWindow)
-        {
-            int pageWidth = (int)this.Width;
-            int pageHeight = (int)this.Height;
-            SizeInt32 newSize = new SizeInt32(pageWidth, pageHeight);
-            appWindow.Resize(newSize);
-        }
-
-        //private void UpdateProgressBarValue()
-        //{
-        //    for (int i = 0; i < 100; i++)
-        //    {
-        //        linkToGameTableau.Value = i;
-
-        //        delay(linkDelayMS);
-        //    }
-        //}
     }
 }

@@ -12,9 +12,9 @@ using System;
 //using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 //using Windows.Media.Playback;
-using Windows.Storage;
+//using Windows.Storage;
 //using System.IO;
 //using System.Linq;
 //using System.Runtime.InteropServices.WindowsRuntime;
@@ -66,14 +66,9 @@ namespace WinUiPlayApp
         private DispatcherTimer myGameTimer;
         private Stopwatch myGameStopwatch;
 
-        private DateTime gameStartTime;                                            //Game Start Time
-        private DateTime gameEndTime;                                      //Game "Now" and end time
-
         public Page2()
         {
             this.InitializeComponent();
-
-            //loadHelpText();
 
             myCurrentActivity = new CurrentActivity();
             this.DataContext = myCurrentActivity;
@@ -81,26 +76,7 @@ namespace WinUiPlayApp
             myCurrentActivity.CurrentActivityText = "Reached Page 2..." ;
 
             //Setup the Game Timer
-
             InitializeTimer();
-
-            //Setup the Game Timer
-            //myGameTimer = new DispatcherTimer();
-            //myGameTimer.Interval =TimeSpan.FromSeconds(1);
-            //myGameTimer.Tick += MyGameTimer_Tick;
-            //myGameTimer.Start();
-        }
-
-        /*******************************************************************************************
-         * Method: computeTimePlayed
-         * Computes the Time Played for Last Game
-         */
-        private TimeSpan computeTimePlayed()
-        {
-            gameEndTime = System.DateTime.Now;                  //Set the Current Game Time to "Now"
-            TimeSpan elapsedTime = gameEndTime - gameStartTime;          //Compute Current Game Time
-
-            return elapsedTime;
         }
 
         /*******************************************************************************************
@@ -122,7 +98,7 @@ namespace WinUiPlayApp
          */
         private void StartTimer()
         {
-            ResetTimer(); // myGameStopwatch.Reset();
+            ResetTimer();
             myGameStopwatch.Start();
             myGameTimer.Start();
         }
@@ -201,23 +177,12 @@ namespace WinUiPlayApp
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SplashPage));
+            Frame.Navigate(typeof(MainPage));
         }
 
         private void UpdateTextButton_Click(object sender, RoutedEventArgs e)
         {
             myCurrentActivity.CurrentActivityText = UpdatedText.Text;
-        }
-
-        /*******************************************************************************************
-        * Method: loadHelpText
-        * Loads the Intstructions on How to Play the Game from Text file in Assets folder.
-        */
-        private async Task loadHelpText()
-        {
-            var HelpFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fileInstructions));
-
-            helpText = await FileIO.ReadTextAsync(HelpFile);
         }
     }
 }

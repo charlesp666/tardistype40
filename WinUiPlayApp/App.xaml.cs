@@ -52,9 +52,8 @@ namespace WinUiPlayApp
             // by passing required information as a navigation parameter
             rootFrame.Navigate(typeof(SplashPage), args.Arguments);
 
-            // Place the frame in the current Window
+            // Place the frame in the current Window and ensure it is activated
             m_window.Content = rootFrame;
-            // Ensure the MainWindow is active
             m_window.Activate();
         }
 

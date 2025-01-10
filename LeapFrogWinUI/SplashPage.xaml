@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Height="370"
     Width="800"
-    >
+>
 
     <!--Height="400"
           Width="810"-->
@@ -19,6 +19,7 @@
           VerticalAlignment="Top"
           Background="#FF0000C0"
           BorderThickness="1"
+          BorderBrush="Black"
           CornerRadius="10"
     >
          <Grid.ColumnDefinitions>
@@ -121,30 +122,14 @@
            />
           
            <!--Link to Game Tableau -->
-           <!--<ProgressBar x:Name="linkToGameTableau"
+           <ProgressBar x:Name="linkToGameTableau"
                         Width="300"
-                        Height="50"
-                        Margin="5,310,0,0"
+                        Height="75"
+                        Margin="5,180,0,0"
                         Minimum="0"
                         Maximum="100"
+                        Foreground="WhiteSmoke"
                         Value="0"
-           />-->
-          
-           <HyperlinkButton x:Name="LaunchGame"
-                            Content="Launch Game"
-                            Height="50"
-                            Width="150"
-                            Margin="5,310,0,0"
-                            VerticalAlignment="Top"
-                            FontFamily="Arial"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            FontStyle="Italic"
-                            Foreground="White"
-                            Background="Blue"
-                            BorderBrush="White"
-                            BorderThickness="2"
-                            Click="btnLaunchGame_Click" Grid.RowSpan="2"
            />
         </Grid>
     </Grid>

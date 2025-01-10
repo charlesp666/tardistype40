@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUiPlayApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUiPlayApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Frame x:Name="MyFrame" Visibility="Collapsed"/>
+        <TextBlock x:Name="pageTitle" Text="Main Page"
+               Margin="16" Style="{StaticResource TitleTextBlockStyle}"
+        />
+
+        <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+        >
+            <!--<Button x:Name="SplashPage"
+                    Click="ShowSplashPage_Click">
+                Splash
+            </Button>-->
+
+            <Button x:Name="myButton"
+                    Click="myButton_Click">
+                Click Me
+            </Button>
+            
+            <Button Content="Play Sound"
+                    Click="PlaySoundButton_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+            />
+            
+            <HyperlinkButton Content="Click to go to page 2"
+                                 Click="HyperlinkButton_Click"
+                                 HorizontalAlignment="Center"
+            />
+        </StackPanel>
+    </Grid>
+</Page>

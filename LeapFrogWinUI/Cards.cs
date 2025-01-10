@@ -417,7 +417,7 @@ namespace LeapFrogWinUI
          */
         public Card findNextCardDescending(Card thePlayCard)
         {
-            Card nextCard = null;                         //Dummy Card Object to Access Card Methods
+            Card nextCard = null;                                      //Dummy Card for return value
 
             String cardRank = thePlayCard.cardRank.ToLower();             //Get the Rank of PlayCard
             String cardSuit = thePlayCard.cardSuit.ToLower();             //Get the Suit of PlayCard
