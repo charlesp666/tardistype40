@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog x:Class="LeapFrogWinUI.DisplayPlayerStats"
+               x:Name="MyPlayInstructions"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:local="using:LeapFrogWinUI"
+               Background="Blue"
+               BorderBrush="White"
+               BorderThickness="2"
+               CornerRadius="10"
+               Height="auto"
+               Width="auto"
+               PrimaryButtonText="Ok"
+>
+    <Grid Name="PlayerStatistics"
+          Height="auto"
+          Width="auto"
+          VerticalAlignment="Top"
+          HorizontalAlignment="Center"
+    >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Name="grdDisplayPlayerStats"
+              Grid.Row="0"
+              Height="auto"
+              Width="auto"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Center"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <!--Display Dialog Box Header -->
+             <Grid x:Name="grdTtlPlayerStats"
+                   Grid.Row="0"
+                   Background="Blue"
+                   BorderBrush="White"
+                   BorderThickness="2"
+                   CornerRadius="10"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Stretch"
+                   Height="auto"
+                   Width="auto"
+                   Margin="3,3,3,3"
+             >
+                  <TextBlock Name="ttlPlayerStats"
+                             Text="Player Statistics"
+                             TextAlignment="Center"
+                             FontFamily="Helvetica"
+                             FontSize="24"
+                             FontWeight="Bold"
+                             FontStyle="Italic"
+                             Foreground="White"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch"
+                             Height="auto"
+                             Width="auto"
+                  />
+             </Grid>
+        
+            <!--Display Player Stored Statistics -->
+            <Grid Name="PlayerStats"
+                  Grid.Row="1"
+                  Height="auto"
+                  Width="auto"
+                  Margin="3,3,3,3"
+                  Background="Blue"
+                  BorderBrush="White"
+                  BorderThickness="2"
+                  CornerRadius="5"
+            >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+        
+                <!-- Display Total Number of Games Played-->
+                <Grid Name="grdHdrGamesPlayed"
+                      HorizontalAlignment="Left"
+                      Grid.Row="0"
+                      Grid.Column="0"
+                      Margin="5,5,5,5"
+                >
+                    <TextBlock x:Name="hdrGamesPlayed"
+                               Text="Games Played:"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalTextAlignment="Right"
+                               VerticalAlignment="Center"
+                     />
+                </Grid>
+                <Grid Name="grdGamesPlayed"
+                      HorizontalAlignment="Right"
+                      Grid.Row="0"
+                      Grid.Column="1"
+                >
+                    <TextBlock x:Name="tbGamesPlayed"
+                               Text="Default Text"
+                               FontSize="18"
+                               FontWeight="Normal"
+                               Foreground="White"
+                               HorizontalTextAlignment="Right"
+                               VerticalAlignment="Center"
+                     />
+                </Grid>
+        
+                <!-- Display Total Accumulated Score-->
+                <Grid Name="grdHdrTotalScore"
+                      HorizontalAlignment="Left"
+                      Grid.Row="1"
+                      Grid.Column="0"
+                >
+                    <TextBlock x:Name="hdrTotalScore"
+                               Text="Accumlated Score:"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalTextAlignment="Right"
+                               VerticalAlignment="Center"
+                     />
+                </Grid>
+                <Grid Name="grdTotalScore"
+                      HorizontalAlignment="Left"
+                      Grid.Row="1"
+                      Grid.Column="1"
+                >
+                    <TextBlock x:Name="tbTotalScore"
+                               Text="Default Text"
+                               FontSize="18"
+                               FontWeight="Normal"
+                               Foreground="White"
+                               HorizontalTextAlignment="Right"
+                               VerticalAlignment="Center"
+                     />
+                </Grid>
+        
+                <!-- Display Total Time Played-->
+                <Grid Name="grdHdrTotalTime"
+                      HorizontalAlignment="Left"
+                      Grid.Row="2"
+                      Grid.Column="0"
+                >
+                    <TextBlock x:Name="hdrTotalTime"
+                               Text="Total Time Played:"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalTextAlignment="Right"
+                               VerticalAlignment="Center"
+                     />
+                </Grid>
+                <Grid Name="grdTotalTime"
+                      HorizontalAlignment="Left"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                >
+                    <TextBlock x:Name="tbTotalTime"
+                               Text="Default Text"
+                               FontSize="18"
+                               FontWeight="Normal"
+                               Foreground="White"
+                               HorizontalTextAlignment="Right"
+                               VerticalAlignment="Center"
+                     />
+                </Grid>
+            </Grid>
+            
+            <!--Display Dialog Box Header -->
+            <!--<Grid x:Name="ComputedPlayerStats"
+                  Grid.Row="1"
+                  Background="Blue"
+                  BorderBrush="White"
+                  BorderThickness="2"
+                  CornerRadius="10"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Stretch"
+                  Height="auto"
+                  Width="auto"
+                  Margin="3,3,3,3"
+            >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+        
+                --><!--Display Dialog Box Header --><!--
+                <Grid x:Name="grdComputedPlayerStats"
+                      Grid.Row="0"
+                      Background="Blue"
+                      BorderBrush="White"
+                      BorderThickness="2"
+                      CornerRadius="10"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      Height="auto"
+                      Width="auto"
+                      Margin="3,3,3,3"
+                >
+                    <TextBlock Name="ttlComputedlPlayerStats"
+                               Text="Averages"
+                               TextAlignment="Center"
+                               FontFamily="Helvetica"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               FontStyle="Italic"
+                               Foreground="White"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               Height="auto"
+                               Width="auto"
+                  />
+                </Grid>
+            </Grid>-->
+        </Grid>
+    </Grid>
+</ContentDialog>

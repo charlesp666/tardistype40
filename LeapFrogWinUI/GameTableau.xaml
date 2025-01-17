@@ -44,12 +44,22 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
+
+            <Image x:Name="picGameImage"
+                   Source="/Assets/GameImages/SmilingFrogFace.ico"
+                   Stretch="Uniform"
+                   Grid.Column="0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="0,0,0,0"
+                   FocusVisualPrimaryBrush="#FF0000C0"
+            />
 
             <Border Name="brdGameTimer"
                     Grid.Column="2"

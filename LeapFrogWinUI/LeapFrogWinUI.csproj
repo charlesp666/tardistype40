@@ -95,5 +95,6 @@
       <AssemblyVersion>1.0.5.1946</AssemblyVersion>
       <FileVersion>1.0.5.24345</FileVersion>
       <AssemblyVersionSettings>None.None.Increment.TimeStamp</AssemblyVersionSettings>
+      <ApplicationIcon>Assets\GameImages\SmilingFrogFace.ico</ApplicationIcon>
   </PropertyGroup>
 </Project>

@@ -23,7 +23,7 @@ using Windows.UI.Popups;
 
 namespace LeapFrogWinUI
 {
-    internal class Player
+    public class Player
     {
         private string containerName = "LeapFrog";              //Name for the Player Local Settings
 

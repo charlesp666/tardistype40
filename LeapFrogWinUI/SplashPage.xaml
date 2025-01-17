@@ -18,7 +18,7 @@
     <Grid HorizontalAlignment="Left"
           VerticalAlignment="Top"
           Background="#FF0000C0"
-          BorderThickness="1"
+          BorderThickness="5"
           BorderBrush="Black"
           CornerRadius="10"
     >

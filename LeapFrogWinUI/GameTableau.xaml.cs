@@ -34,13 +34,13 @@ using Windows.Media.Playback;
 using Windows.Media.SpeechSynthesis;
 using Windows.Storage;                                    //To load Help Instructions from Text File
 using Windows.UI;
-using Windows.UI.Composition;
+//using Windows.UI.Composition;
 //using Windows.UI.Popups;
 //using Windows.UI.ViewManagement;             //For ApplicationView Object; adjusting App Window size
 //using Windows.UI.Xaml;
 
 using WinRT.Interop;
-using static System.Net.Mime.MediaTypeNames;
+//using static System.Net.Mime.MediaTypeNames;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -70,6 +70,7 @@ namespace LeapFrogWinUI
 
         //private static String folderPlayableIcons = "ms-appx://Assets//GameImages//";
         private static String folderGameData = "ms-appx:///Assets//Data//";
+        private static String folderGameImages = "ms-appx:///Assets//GameImages//";
 
         private String helpText = null;
 
@@ -85,6 +86,7 @@ namespace LeapFrogWinUI
         //private static int displayDelayMS = 5000;      //Action display delay so user can see changes
 
         private string fileInstructions = folderGameData + "GameInstructions.txt";
+        private string imgSmilingFrog = folderGameImages + "SmilingFrogFace.ico";
 
         // Define variables/constants for play area (main window)
         private static int numberOfSuits = Cards.Card.possibleSuits.Length;         //Play Area Rows
@@ -108,21 +110,23 @@ namespace LeapFrogWinUI
         private TimeSpan totalTimePlayed = TimeSpan.Zero;
 
         //Current Activity Messages
-        private string errKingNotSelected = "King not Selected; Cancelling Move...";
+        private static string errKingNotSelected = "King not Selected; Cancelling Move...";
 
-        private string msgClearPlayArea = "Clearing the Playing Area...";
-        private string msgDealing = "Dealing Cards...";
-        private string msgGameOver = "Game Over!";
-        private string msgInitialLayout = "Initiating Layout Parameters...";
-        private string msgLoadingHelp = "Loading Help Text...";
-        private string msgMarkingKings = "Marking Kings for Moving...";
-        private string msgPrepareInitial = "Preparing Initial Game Board...";
-        private string msgRemoveAces = "Removing Aces...";
-        private string msgSelectKing = "Select King to Move...";
-        private string msgSelectPlay = "Click on Play Space to Move Card...";
-        private string msgSettingNewGame = "Setting Up for a New Game...";
-        private string msgShuffling = "Shuffling and Cutting Cards...";
-        private string msgWaiting = "Waiting for User Input...";
+        private static string msgClearPlayArea = "Clearing the Playing Area...";
+        private static string msgDealing = "Dealing Cards...";
+        private static string msgGameOver = "Game Over!";
+        private static string msgInitialLayout = "Initiating Layout Parameters...";
+        private static string msgLoadingHelp = "Loading Help Text...";
+        private static string msgMarkingKings = "Marking Kings for Moving...";
+        private static string msgPrepareInitial = "Preparing Initial Game Board...";
+        private static string msgRemoveAces = "Removing Aces...";
+        private static string msgSelectKing = "Select King to Move...";
+        private static string msgSelectPlay = "Click on Play Space to Move Card...";
+        private static string msgSettingNewGame = "Setting Up for a New Game...";
+        private static string msgShuffling = "Shuffling and Cutting Cards...";
+        private static string msgWaiting = "Waiting for User Input...";
+
+        private static string dialogTitle = "LeapFrog";
 
         /*******************************************************************************************
         * GameTableau Constructor
@@ -133,6 +137,7 @@ namespace LeapFrogWinUI
             this.InitializeComponent();
 
             myWindow = getMyAppWindow();
+            myWindow.SetIcon(imgSmilingFrog);
             myWindow.TitleBar.ExtendsContentIntoTitleBar = false;
 
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
@@ -145,6 +150,9 @@ namespace LeapFrogWinUI
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             initialLoad();
+
+            displayMessage("Ready to Start New Game.");
+            speakText("Ready to Start New Game.");
         }
 
         /*******************************************************************************************
@@ -187,9 +195,12 @@ namespace LeapFrogWinUI
          * Event Handler: Player Statistics
          * Handles the Closing of the Game Tableau Windows Form.
          */
-        private void btnStats_Click(object sender, RoutedEventArgs e)
+        private async void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            //myAvatar.displayPlayerStats();
+            var playerStats = new DisplayPlayerStats(myAvatar);
+            playerStats.XamlRoot = this.XamlRoot;
+
+            await playerStats.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -376,6 +387,21 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: displayMessage
+         * Displays the informational Message passed as parameter.
+         */
+        private async Task displayMessage(String theMessage)
+        {
+            ContentDialog myMessage = new ContentDialog();
+
+            myMessage.Title = dialogTitle;
+            myMessage.Content = theMessage;
+            myMessage.PrimaryButtonText = "OK";
+
+            await myMessage.ShowAsync();
+        }
+
+        /*******************************************************************************************
         * Method: enableSelectionChanged
         * Programatically enables and disables the SelectionChanged Event.
         */
@@ -390,15 +416,6 @@ namespace LeapFrogWinUI
                 dataGridGameBoard.SelectionChanged -= dataGridGameBoard_SelectionChanged;
             }
         }
-
-        /*******************************************************************************************
-         * Method: displayMessage
-         * Displays the informational Message passed as parameter.
-         */
-        //private void displayMessage(String theMessage)
-        //{
-        //    MessageBox.Show(theMessage, "Leapfrog", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //}
 
         /*******************************************************************************************
          * Method: displayWarning
@@ -436,6 +453,9 @@ namespace LeapFrogWinUI
 
             flgGameOver = true;                                               //Set "Game Over" flag
             isGameSet = false;                                               //Set the game set flag
+
+            speakText(msgGameOver);
+            displayMessage(msgGameOver);                                //Display "Game Over" Dialog
         }
 
         /*******************************************************************************************
@@ -627,8 +647,8 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
-         * Method: moveCard
-         * Moves the Card from the Source Position to the Destination Position, then checks if the
+         * Method: moveKing
+         * Moves the King from the Source Position to the Destination Position, then checks if the
          * move ended the game.
          */
         private void moveKing(int sourceIndex)
@@ -642,11 +662,10 @@ namespace LeapFrogWinUI
                 else
                 {
                     swapPlayCards(sourceIndex, indexKingDestination);       //Move the Selected King
+                    isKingMoving = false;
+                    indexKingDestination = -1;
                 }
             }
-
-            isKingMoving = false;
-            indexKingDestination = -1;
 
             updateCurrentActivityText(msgSelectPlay);
         }
@@ -928,7 +947,7 @@ namespace LeapFrogWinUI
         {
             tbCurrentActivity.Text = msgCurrentActivity;
 
-            await Task.Run(() => Thread.Sleep(delayTask));
+            await Task.Delay(delayTask);
         }
 
         /*******************************************************************************************

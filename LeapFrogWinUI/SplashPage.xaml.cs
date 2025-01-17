@@ -10,10 +10,14 @@
 //using Microsoft.UI;
 //using Microsoft.UI.Windowing;
 //using Microsoft.UI.Xaml;
+using Microsoft.UI.Windowing;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Threading.Tasks;
+using Windows.Graphics;
+using WinRT.Interop;
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
@@ -47,6 +51,8 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
+        private AppWindow myWindow = null;
+
         private static int linkDelayMS = 200;      //Action display delay so user can see changes
 
         public SplashPage()
@@ -73,10 +79,10 @@ namespace LeapFrogWinUI
         /* 
         /* Handles the SplashPage Loaded Event.
         /*/
-        private async void SplashPage_Loaded(object sender, RoutedEventArgs e)
+        private void SplashPage_Loaded(object sender, RoutedEventArgs e)
         {
             // Load MainPage asynchronously
-            await LoadMainPageAsync();
+            LoadMainPageAsync();
         }
 
         /*******************************************************************************************
