@@ -4,7 +4,7 @@
  * Defines the Data and Methods for a Deck of Cards by defining the partial or sub-class of "Card"
  * then extends this to a deck of cards. 
  * 
- * @Copyright (c) 2024 Charles J. Pilgrim
+ * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
  */
 

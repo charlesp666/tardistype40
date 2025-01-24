@@ -32,14 +32,40 @@ namespace WinUiPlayApp
         private MediaPlayer myMediaPlayer = new MediaPlayer();
         private Uri soundShuffling = new Uri("ms-appx:///Assets//Sounds/ShufflingCards.mp3");
 
+        private string dialogTitle = "Playing Around...";
+
         public MainPage()
         {
             this.InitializeComponent();
 
-            //ShowSplashPage();
+            this.DataContext = this;
+
+            displayMessage("Initialization Complete.");
         }
 
         // MainPage.xaml.cs
+
+        /*******************************************************************************************
+         * Method: displayMessage
+         * Displays the informational Message passed as parameter.
+         */
+        private async Task displayMessage(String theMessage)
+        {
+            ContentDialog myMessage = new ContentDialog();
+
+            myMessage.Title = dialogTitle;
+            myMessage.Content = theMessage;
+            myMessage.PrimaryButtonText = "OK";
+
+            myMessage.XamlRoot = this.XamlRoot;
+
+            await myMessage.ShowAsync();
+        }
+
+        private void DisplayContentDialog_Click(object sender, RoutedEventArgs e)
+        {
+            displayMessage("Message from Button Click...");
+        }
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
@@ -65,23 +91,10 @@ namespace WinUiPlayApp
             playSound(soundShuffling);
         }
 
-        //private void ShowSplashPage_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ShowSplashPage();
-        //}
-
         private void playSound(Uri soundFile)
         {
             myMediaPlayer.Source = MediaSource.CreateFromUri(soundFile);
             myMediaPlayer.Play();
         }
-
-        //private async Task ShowSplashPage()
-        //{
-        //    var mySplashPage = new SplashPage();
-        //    mySplashPage.XamlRoot = this.XamlRoot;
-
-        //    await mySplashPage.ShowAsync();
-        //}
     }
 }

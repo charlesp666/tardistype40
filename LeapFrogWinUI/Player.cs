@@ -3,7 +3,7 @@
  * 
  * Defines the Properties and Methods for the Player Object. 
  * 
- * @Copyright (c) 2024 Charles J. Pilgrim
+ * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
  */
 

@@ -34,7 +34,13 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
             />
-            
+
+            <Button Content="Display ContentDialog"
+                    Click="DisplayContentDialog_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+            />
+
             <HyperlinkButton Content="Click to go to page 2"
                                  Click="HyperlinkButton_Click"
                                  HorizontalAlignment="Center"

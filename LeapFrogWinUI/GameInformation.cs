@@ -4,7 +4,7 @@
  * Class stores general information about the game such as the Name of the Game,
  * Copyright Data and Rights notices, etc. 
  * 
- * @Copyright (c) 2024 Charles J. Pilgrim
+ * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
  */
 
@@ -54,7 +54,7 @@ namespace LeapFrogWinUI
         private SolidColorBrush colorForeground;      //Color to assignt to Foreground of game board
 
         //Constants
-        private String copyrightNotice = "Copyright (c) 2024 Charles J. Pilgrim";
+        private String copyrightNotice = "Copyright (c) 2025 Charles J. Pilgrim";
         private String rightsNotice = "All Rights Reserved";
 
         /*******************************************************************************************

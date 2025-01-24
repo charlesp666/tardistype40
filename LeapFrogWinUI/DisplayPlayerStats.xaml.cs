@@ -1,3 +1,12 @@
+/***************************************************************************************************
+* CustomDialog: DisplayPlayerStats
+* 
+* CustomDialog that displays the players information and game statistics.
+* 
+* @Copyright (c) 2025 Charles J. Pilgrim
+* All Rights Reserved.
+*/
+
 using System;
 using Microsoft.UI.Xaml.Controls;
 

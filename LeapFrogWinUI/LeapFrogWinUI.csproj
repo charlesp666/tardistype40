@@ -53,6 +53,12 @@
     <Folder Include="Assets\Sounds\" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Assets\GameImages\SmilingFrogFace.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="SplashPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,5 +102,6 @@
       <FileVersion>1.0.5.24345</FileVersion>
       <AssemblyVersionSettings>None.None.Increment.TimeStamp</AssemblyVersionSettings>
       <ApplicationIcon>Assets\GameImages\SmilingFrogFace.ico</ApplicationIcon>
+      <PackageIcon>SmilingFrogFace.png</PackageIcon>
   </PropertyGroup>
 </Project>

@@ -1,3 +1,12 @@
+/***************************************************************************************************
+* Page Class: GameTableau
+* 
+* Main Page definition for playing game.
+* 
+* @Copyright (c) 2025 Charles J. Pilgrim
+* All Rights Reserved.
+*/
+
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -142,6 +151,8 @@ namespace LeapFrogWinUI
 
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
+
+            speakText("Initializing.");
 
             InitializeTimer();
 
@@ -398,7 +409,9 @@ namespace LeapFrogWinUI
             myMessage.Content = theMessage;
             myMessage.PrimaryButtonText = "OK";
 
-            await myMessage.ShowAsync();
+            myMessage.XamlRoot = this.XamlRoot;
+
+            var messageResponse = await myMessage.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -416,15 +429,6 @@ namespace LeapFrogWinUI
                 dataGridGameBoard.SelectionChanged -= dataGridGameBoard_SelectionChanged;
             }
         }
-
-        /*******************************************************************************************
-         * Method: displayWarning
-         * Displays the Warning message passed as parameter.
-         */
-        //private void displayWarning(String theMessage)
-        //{
-        //    MessageBox.Show(theMessage, "Leapfrog", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //}
 
         /*******************************************************************************************
          * Method: exitGame
@@ -802,11 +806,6 @@ namespace LeapFrogWinUI
 
             //Wait for a selection to be made
             updateCurrentActivityText(msgSelectKing);
-
-            //while (dataGridGameBoard.SelectedItem == null)
-            //{
-            //    await Task.Delay(1000);
-            //}
         }
         
         /*******************************************************************************************
@@ -1024,13 +1023,13 @@ namespace LeapFrogWinUI
             for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
             {
                 countSequence = 0;                     //Ensure Sequence Count is reset for each row
-                int currentCard = 0;               //Set initial column position for the current row
+                int currentRank = 0;       //Set initial column or Rank position for the current row
                 bool correctPosition = false;          //Initialize "Correct Position" flag to "Not"
 
-                while(currentCard < 12)
+                while(currentRank < 12)
                 {
                     //Compute the Play Position of the Current Card being checked
-                    int playPosition = gameDeck.calcArrayPosition(aSuit, currentCard);
+                    int playPosition = gameDeck.calcArrayPosition(aSuit, currentRank);
 
                     Cards.Card thisCard = gameDeck.deckCards[playPosition];              //This Card
                     Cards.Card nextCard = gameDeck.deckCards[playPosition + 1];          //Next Card
@@ -1069,7 +1068,7 @@ namespace LeapFrogWinUI
                         correctPosition = false;                     //And the Correct Position Flag
                     }
 
-                    currentCard++;                                                //Go the next card
+                    currentRank++;                                                //Go the next card
                 }
             }
 
