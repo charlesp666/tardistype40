@@ -1,7 +1,7 @@
 /***************************************************************************************************
 * Page Class: GameTableau
 * 
-* Main Page definition for playing game.
+* Main Page for playing game.
 * 
 * @Copyright (c) 2025 Charles J. Pilgrim
 * All Rights Reserved.
@@ -17,7 +17,6 @@ using Microsoft.UI.Xaml.Media.Animation;
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
-//using Microsoft.UI.Xaml.Media;
 //using Microsoft.UI.Xaml.Navigation;
 
 using System;
@@ -106,6 +105,7 @@ namespace LeapFrogWinUI
         private bool flgGameOver = true;                              //Flag identifies game is over
         private bool isGameSet = false;                          //Flag indicates play area is ready
         private bool isKingMoving = false;                   //Flag indicating a King is being moved
+        private Storyboard myStoryBoard = new Storyboard();
 
         //private int indexKingSelected = -1;         //Storage for the Index of King selected to move
         private int indexKingDestination = -1;         //Storage for the index of a Kings desination
@@ -153,8 +153,6 @@ namespace LeapFrogWinUI
 
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
-
-            speakText("Initializing.");
 
             InitializeTimer();
 
@@ -210,10 +208,12 @@ namespace LeapFrogWinUI
          */
         private async void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            var playerStats = new DisplayPlayerStats(myAvatar);
-            playerStats.XamlRoot = this.XamlRoot;
+            displayPlayerStats(myAvatar);
 
-            await playerStats.ShowAsync();
+            //var playerStats = new DisplayPlayerStats(myAvatar);
+            //playerStats.XamlRoot = this.XamlRoot;
+
+            //await playerStats.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -319,15 +319,6 @@ namespace LeapFrogWinUI
         //}
 
         /*******************************************************************************************
-         * Menu: Game/Player Statistics
-         * Displays the Current Player Statistics Message Box.
-         */
-        //private void playerStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    myPlayer.displayPlayerStats();
-        //}
-
-        /*******************************************************************************************
          * Menu: Game/Undo
          * Displays the Current Player Statistics Message Box.
          */
@@ -406,14 +397,25 @@ namespace LeapFrogWinUI
         private async Task displayMessage(String theMessage)
         {
             ContentDialog myMessage = new ContentDialog();
+            myMessage.XamlRoot = this.XamlRoot;
 
             myMessage.Title = dialogTitle;
             myMessage.Content = theMessage;
             myMessage.PrimaryButtonText = "OK";
 
-            myMessage.XamlRoot = this.XamlRoot;
-
             var messageResponse = await myMessage.ShowAsync();
+        }
+
+        /*******************************************************************************************
+         * Method: displayMessage
+         * Displays the informational Message passed as parameter.
+         */
+        private async Task displayPlayerStats(Player myAvatar)
+        {
+            var playerStats = new DisplayPlayerStats(myAvatar);
+            playerStats.XamlRoot = this.XamlRoot;
+
+            await playerStats.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -455,13 +457,13 @@ namespace LeapFrogWinUI
             int currentScore = scoreGame();                        //Compute Score for Current Game
             //Update Player Statistics then Display Results
             myAvatar.finishGameForPlayer(currentScore, moveCount, totalTimePlayed);
-            //myAvatar.displayPlayerStats(scoreThisGame, moveCount, totalTimePlayed);
-
             flgGameOver = true;                                               //Set "Game Over" flag
             isGameSet = false;                                               //Set the game set flag
 
             speakText(msgGameOver);
             displayMessage(msgGameOver);                                //Display "Game Over" Dialog
+
+            //myAvatar.displayPlayerStats(scoreThisGame, moveCount, totalTimePlayed);
         }
 
         /*******************************************************************************************
@@ -470,29 +472,37 @@ namespace LeapFrogWinUI
          */
         private async Task highlightKingForMoving(int gridIndex, bool highlightKing = false)
         {
-            Color normalBorderBrush = Colors.White;
-            Color highlightedBorderBrush = Colors.Black;
+            SolidColorBrush normalBorderBrush = new SolidColorBrush();
+            SolidColorBrush highlightBorderBrush = new SolidColorBrush();
+
+            Thickness newBorderWidth = new Thickness();
+
+            normalBorderBrush.Color = Colors.Blue; 
+            highlightBorderBrush.Color = Colors.Green;
 
             int normalBorderWidth = 1;
-            int highlightedBorderWidth = 5;
+            int highlightBorderWidth = 5;
 
-            Color newBorderBrush = normalBorderBrush;
-            int newBorderWidth = normalBorderWidth;
+            SolidColorBrush newBorderBrush = normalBorderBrush;
+            newBorderWidth = new Thickness(normalBorderWidth);
 
             if (highlightKing)
             {
-                newBorderBrush = highlightedBorderBrush;
-                newBorderWidth = highlightedBorderWidth;
+                newBorderBrush = highlightBorderBrush;
+                newBorderWidth = new Thickness(highlightBorderWidth);
             }
 
             dataGridGameBoard.SelectedIndex = gridIndex;
             var myItem = dataGridGameBoard.SelectedItem;
-
             var anItem = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
-            var myStackPanel = anItem.ContentTemplateRoot as StackPanel;
-            var myStoryBoard = myStackPanel.Resources["ZoomInMoveableKing"] as Storyboard;
 
-            myStoryBoard.Begin();
+            anItem.BorderBrush = newBorderBrush;
+            anItem.BorderThickness = newBorderWidth;
+
+            //var myStackPanel = anItem.ContentTemplateRoot as StackPanel;
+            //myStoryBoard = myStackPanel.Resources["ZoomInMoveableKing"] as Storyboard;
+
+            //myStoryBoard.Begin();
         }
 
         /*******************************************************************************************

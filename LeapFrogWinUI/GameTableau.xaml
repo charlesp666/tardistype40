@@ -166,10 +166,10 @@
                         <StackPanel.Resources>
                             <Storyboard x:Name="ZoomInMoveableKing">
                                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 From="1" To="1.2" Duration="0:0:0"
+                                                 From="1" To="1.5" Duration="0:0:0"
                                 />
                                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 From="1" To="1.2" Duration="0:0:0"
+                                                 From="1" To="1.5" Duration="0:0:0"
                                 />
                             </Storyboard>
                         </StackPanel.Resources>

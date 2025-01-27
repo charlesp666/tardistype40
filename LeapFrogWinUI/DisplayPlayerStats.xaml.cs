@@ -27,7 +27,7 @@ namespace LeapFrogWinUI
 
             tbGamesPlayed.Text = gamesPlayed.ToString();
             tbTotalScore.Text = totalMoves.ToString();
-            tbTotalTime.Text = ttlTimePlayed.ToString();
+            tbTotalTime.Text = ttlTimePlayed.ToString(@"hh\:mm\:ss");
         }
     }
 }
