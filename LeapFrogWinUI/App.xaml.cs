@@ -50,5 +50,10 @@ namespace LeapFrogWinUI
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
+        public void ShowMainWindow()
+        {
+            this.m_window.Activate();
+        }
+
     }
 }

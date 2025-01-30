@@ -7,42 +7,10 @@
 * All Rights Reserved.
 */
 
-//using Microsoft.UI;
-//using Microsoft.UI.Windowing;
-//using Microsoft.UI.Xaml;
-using Microsoft.UI.Windowing;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using System.Threading.Tasks;
-using Windows.Graphics;
-using WinRT.Interop;
-//using Microsoft.UI.Xaml.Controls.Primitives;
-//using Microsoft.UI.Xaml.Data;
-//using Microsoft.UI.Xaml.Input;
-//using Microsoft.UI.Xaml.Media;
-//using Microsoft.UI.Xaml.Media.Animation;
-
-//using Microsoft.UI.Xaml.Navigation;
-
-//using System;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Linq;
-//using System.Reflection;
-//using System.Runtime.InteropServices.WindowsRuntime;
-//using System.Threading.Tasks;
-
-//using Windows.Foundation;
-//using Windows.Foundation.Collections;
-//using Windows.Graphics;
-//using Windows.UI.WindowManagement;
-
-//using WinRT.Interop;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace LeapFrogWinUI
 {
@@ -51,9 +19,7 @@ namespace LeapFrogWinUI
     /// </summary>
     public sealed partial class SplashPage : Page
     {
-        private AppWindow myWindow = null;
-
-        private static int linkDelayMS = 200;      //Action display delay so user can see changes
+        private static int linkDelayMS = 150;         //Action display delay so user can see changes
 
         public SplashPage()
         {
@@ -64,14 +30,14 @@ namespace LeapFrogWinUI
             GameInformation myGameInfo = new GameInformation();
 
             // Populate the Splash page components
-            lblGameTitle.Text = myGameInfo.getNameOfGame();                     //Name of appliication
-            txtSubTitle.Text = myGameInfo.getGameSubTitle();                       //Subtitle for Game
-            lblCopyright.Text = myGameInfo.getCopyrightNotice();                    //Copyright Notice
-            txtRights.Text = myGameInfo.getRightsNotice();                             //Rights Notice
-            txtPublisher.Text = "Pubished by: " + myGameInfo.getPublisher();       //Name of Publisher
-            txtVersion.Text = "Version: " + myGameInfo.getVersion();             //Game Version Number
+            lblGameTitle.Text = myGameInfo.getNameOfGame();                   //Name of appliication
+            txtSubTitle.Text = myGameInfo.getGameSubTitle();                     //Subtitle for Game
+            lblCopyright.Text = myGameInfo.getCopyrightNotice();                  //Copyright Notice
+            txtRights.Text = myGameInfo.getRightsNotice();                           //Rights Notice
+            txtPublisher.Text = "Pubished by: " + myGameInfo.getPublisher();     //Name of Publisher
+            txtVersion.Text = "Version: " + myGameInfo.getVersion();           //Game Version Number
 
-            picGameImage.Source = myGameInfo.getGameImage();                      //Get the Game Image
+            picGameImage.Source = myGameInfo.getGameImage();                    //Get the Game Image
         }
 
         /*******************************************************************************************
@@ -93,6 +59,8 @@ namespace LeapFrogWinUI
         private async Task LoadMainPageAsync()
         {
             await UpdateProgressBarValue();
+
+            //UnhideMainWindow();
 
             Frame.Navigate(typeof(GameTableau), null, new EntranceNavigationTransitionInfo());
         }

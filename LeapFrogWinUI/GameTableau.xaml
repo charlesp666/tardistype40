@@ -9,8 +9,7 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Height="800"
-      Width="1575"
->
+      Width="1575">
 
     <Grid Name="gameTableau"
           Background="Blue"
@@ -61,29 +60,29 @@
                    FocusVisualPrimaryBrush="#FF0000C0"
             />
 
+            <!--Background="Blue"-->
             <Border Name="brdGameTimer"
                     Grid.Column="2"
-                    Background="Blue"
                     BorderBrush="White"
                     BorderThickness="1"
                     CornerRadius="10"
                     Height="50"
-                    Width="auto"
+                    Width="200"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
             >
                 <TextBox x:Name="myTimerDisplay"
-                         Background="Blue"
                          HorizontalAlignment="Center"
                          HorizontalTextAlignment="Center"
                          VerticalAlignment="Center"
                          VerticalContentAlignment="Center"
                          Height="auto"
-                         Width="auto"
+                         Width="190"
                          FontFamily="Helvetica"
                          FontSize="24"
                          FontWeight="Bold"
                          Foreground="White"
+                         Background="Blue"
                 />
             </Border>
 
@@ -94,21 +93,23 @@
                     CornerRadius="10"
                     Margin="3,3,3,3"
                     Height="50"
-                    Width="auto"
+                    Width="200"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
             >
-                <TextBlock x:Name="tbMoveCount"
-                           Text=""
-                           Width="auto"
-                           Height="46"
-                           HorizontalTextAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontFamily="Helvetica"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           FontStyle="Italic"
-                           Foreground="White"
+                <TextBox x:Name="tbMoveCount"
+                         Text=""
+                         Width="190"
+                         Height="46"
+                         HorizontalTextAlignment="Center"
+                         VerticalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         FontFamily="Helvetica"
+                         FontSize="24"
+                         FontWeight="Bold"
+                         FontStyle="Italic"
+                         Foreground="White"
+                         Background="Blue"
                 />
             </Border>
 
@@ -118,20 +119,22 @@
                     BorderThickness="1"
                     CornerRadius="10"
                     Height="50"
-                    Width="auto"
+                    Width="400"
             >
                 <!--Margin="1,1,1,1"-->
-                <TextBlock x:Name="tbCurrentActivity"
-                           Text="Initializing..."
-                           Width="auto"
-                           Height="46"
-                           HorizontalTextAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="20pi"
-                           FontFamily="Arial"
-                           FontWeight="Medium"
-                           FontStyle="Italic"
-                           Foreground="White"
+                <TextBox x:Name="tbCurrentActivity"
+                         Text="Initializing..."
+                         Width="390"
+                         Height="46"
+                         HorizontalTextAlignment="Center"
+                         VerticalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         FontSize="24"
+                         FontFamily="Helvetica"
+                         FontWeight="Medium"
+                         FontStyle="Italic"
+                         Foreground="White"
+                         Background="Blue"
                 />
             </Border>
         </Grid>

@@ -105,10 +105,18 @@ namespace LeapFrogWinUI
         private bool flgGameOver = true;                              //Flag identifies game is over
         private bool isGameSet = false;                          //Flag indicates play area is ready
         private bool isKingMoving = false;                   //Flag indicating a King is being moved
-        private Storyboard myStoryBoard = new Storyboard();
 
-        //private int indexKingSelected = -1;         //Storage for the Index of King selected to move
         private int indexKingDestination = -1;         //Storage for the index of a Kings desination
+        private List<int> playableKingPositions = new List<int>();
+
+        private SolidColorBrush normalBorderBrush = new SolidColorBrush(Colors.Blue);
+        private SolidColorBrush highlightBorderBrush = new SolidColorBrush(Colors.Green);
+
+        Thickness newBorderWidth = new Thickness();
+
+        private int normalBorderWidth = 1;
+        private int highlightBorderWidth = 5;
+
 
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
@@ -467,21 +475,47 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: findPlayableKings
+         * Locates and stores the gridview indexes of the Kings that are playable; that is, have not
+         * already been moved to the "King Position."
+         */
+        private void findPlayableKings()
+        {
+            int countKings = 0;                                  //Initialize Counter of Kings found
+            int cardIndex = 0;                               //Counter to walk through Deck of Cards
+            int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
+
+            while ((countKings < maxKingCount) && (cardIndex < gameDeck.deckCards.Count))               //While Not all Kings have been found...
+            {
+                if (isKing(gameDeck.deckCards[cardIndex]))                    //If Card is a King...
+                {
+                    countKings++;                                    //Increment the King Counter...
+                    if (!isKingPosition(cardIndex))      //Check if King is not in a King Position...
+                    {
+                        playableKingPositions.Add(cardIndex);
+                    }
+                }
+
+                cardIndex++;                                 //Increment the Card Index to next card
+            }
+        }
+
+        /*******************************************************************************************
          * Method: highlightKingForMoving
          * Changes Border Color and Thickness on King that can be moved.
          */
         private async Task highlightKingForMoving(int gridIndex, bool highlightKing = false)
         {
-            SolidColorBrush normalBorderBrush = new SolidColorBrush();
-            SolidColorBrush highlightBorderBrush = new SolidColorBrush();
+            //SolidColorBrush normalBorderBrush = new SolidColorBrush();
+            //SolidColorBrush highlightBorderBrush = new SolidColorBrush();
 
-            Thickness newBorderWidth = new Thickness();
+            //Thickness newBorderWidth = new Thickness();
 
-            normalBorderBrush.Color = Colors.Blue; 
-            highlightBorderBrush.Color = Colors.Green;
+            //normalBorderBrush.Color = Colors.Blue; 
+            //highlightBorderBrush.Color = Colors.Green;
 
-            int normalBorderWidth = 1;
-            int highlightBorderWidth = 5;
+            //int normalBorderWidth = 1;
+            //int highlightBorderWidth = 5;
 
             SolidColorBrush newBorderBrush = normalBorderBrush;
             newBorderWidth = new Thickness(normalBorderWidth);
@@ -511,7 +545,10 @@ namespace LeapFrogWinUI
          */
         private async Task initialLoad()
         {
-            await updateMoveCountText(-1);                       //Clear the "Move Count" text block
+            ResetTimer();                                                 //Ensure Timer has stopped
+
+            await updateMoveCountText(0);                            //Clear the move count text box
+            playableKingPositions.Clear();               //Ensure the Playable Kings List is cleared
 
             //Get Text for Game Instructions
             await updateCurrentActivityText(msgLoadingHelp);
@@ -523,8 +560,9 @@ namespace LeapFrogWinUI
 
             await buildInitialGameBoard();
 
-            //tbCurrentActivity.Text = "Waiting for User Input...";
             await updateCurrentActivityText(msgWaiting);
+
+            picGameImage.Focus(FocusState.Pointer);
         }
 
         /*******************************************************************************************
@@ -538,8 +576,6 @@ namespace LeapFrogWinUI
             myGameTimer = new DispatcherTimer();
             myGameTimer.Interval = TimeSpan.FromSeconds(1);
             myGameTimer.Tick += MyGameTimer_Tick;
-
-            myTimerDisplay.Text = "00:00:00";
         }
 
         /*******************************************************************************************
@@ -684,8 +720,16 @@ namespace LeapFrogWinUI
                 else
                 {
                     swapPlayCards(sourceIndex, indexKingDestination);       //Move the Selected King
+
+                    //foreach (var kingPosition in playableKingPositions)  //Disable King Highlighting
+                    //{
+                    //    highlightKingForMoving(kingPosition, false);
+                    //}
+
+                    //reset King Moving Parameters; i.e. turn off King Moving.
                     isKingMoving = false;
                     indexKingDestination = -1;
+                    playableKingPositions.Clear();
                 }
             }
 
@@ -787,7 +831,7 @@ namespace LeapFrogWinUI
         private void ResetTimer()
         {
             myGameStopwatch.Reset();
-            myTimerDisplay.Text = "00:00:00";
+            myTimerDisplay.Text = myGameStopwatch.Elapsed.ToString(@"hh\:mm\:ss");// "00:00:00";
         }
 
         /*******************************************************************************************
@@ -795,29 +839,25 @@ namespace LeapFrogWinUI
          * Locates and "Highlighs" the Kings in the Playing tableau; then waits for one to be
          * selected.
          */
-        private async Task selectKingToMove()
+        private void selectKingToMove()
         {
-            int countKings = 0;                                  //Initialize Counter of Kings found
-            int cardIndex = 0;                               //Counter to walk through Deck of Cards
-            int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
-
             enableSelectionChanged(false);                   //Disable the Selection Change Event...
+
+            findPlayableKings();
 
             //string aMsg = "Marking Kings for Moving...";
             updateCurrentActivityText(msgMarkingKings);
 
-            while (countKings < maxKingCount)               //While Not all Kings have been found...
+            if(playableKingPositions.Count > 1)
             {
-                if (isKing(gameDeck.deckCards[cardIndex]))                    //If Card is a King...
+                foreach (var kingPosition in playableKingPositions)
                 {
-                    countKings++;                                    //Increment the King Counter...
-                    if(!isKingPosition(cardIndex))      //Check if King is not in a King Position...
-                    {
-                        highlightKingForMoving(cardIndex, true);         //"Highlight" it as movable
-                    }
+                    highlightKingForMoving(kingPosition, true);
                 }
-
-                cardIndex++;                                 //Increment the Card Index to next card
+            }
+            else
+            {
+                moveKing(playableKingPositions[0]);
             }
 
             enableSelectionChanged(true);                   //Reenable the Selection Change Event...
@@ -833,10 +873,20 @@ namespace LeapFrogWinUI
          */
         private async Task setUpNewGame()
         {
-            StopTimer();                                                  //Ensure Timer has stopped
+            //If a game is currently running, score the game before setting up new game
+            if(isGameSet)
+            {
+                scoreGame();
+
+                await displayPlayerStats(myAvatar);
+            }
+
+            ResetTimer();                                                 //Ensure Timer has stopped
+            updateMoveCountText(0);                                  //Clear the move count text box
+            playableKingPositions.Clear();               //Ensure the Playable Kings List is cleared
 
             await updateCurrentActivityText(msgSettingNewGame);
-
+            
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
             flgGameOver = false;                                       //Set Game Over Flag to false
 
@@ -978,7 +1028,7 @@ namespace LeapFrogWinUI
 
             if (currentMoveCount > -1)
             {
-                msgMoveCount = "Moves: " + currentMoveCount.ToString() + "...";
+                msgMoveCount = "Moves: " + currentMoveCount.ToString();
             }
 
             tbMoveCount.Text = msgMoveCount;
