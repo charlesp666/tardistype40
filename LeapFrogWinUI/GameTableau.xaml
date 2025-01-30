@@ -70,19 +70,18 @@
                     Width="200"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
+                    Background="Blue"
             >
-                <TextBox x:Name="myTimerDisplay"
+                <TextBlock x:Name="myTimerDisplay"
                          HorizontalAlignment="Center"
                          HorizontalTextAlignment="Center"
                          VerticalAlignment="Center"
-                         VerticalContentAlignment="Center"
                          Height="auto"
                          Width="190"
                          FontFamily="Helvetica"
                          FontSize="24"
                          FontWeight="Bold"
                          Foreground="White"
-                         Background="Blue"
                 />
             </Border>
 
@@ -96,20 +95,19 @@
                     Width="200"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
+                    Background="Blue"
             >
-                <TextBox x:Name="tbMoveCount"
+                <TextBlock x:Name="tbMoveCount"
                          Text=""
                          Width="190"
                          Height="46"
                          HorizontalTextAlignment="Center"
                          VerticalAlignment="Center"
-                         VerticalContentAlignment="Center"
                          FontFamily="Helvetica"
                          FontSize="24"
                          FontWeight="Bold"
                          FontStyle="Italic"
                          Foreground="White"
-                         Background="Blue"
                 />
             </Border>
 
@@ -120,21 +118,20 @@
                     CornerRadius="10"
                     Height="50"
                     Width="400"
+                    Background="Blue"
             >
                 <!--Margin="1,1,1,1"-->
-                <TextBox x:Name="tbCurrentActivity"
+                <TextBlock x:Name="tbCurrentActivity"
                          Text="Initializing..."
                          Width="390"
                          Height="46"
                          HorizontalTextAlignment="Center"
                          VerticalAlignment="Center"
-                         VerticalContentAlignment="Center"
                          FontSize="24"
                          FontFamily="Helvetica"
                          FontWeight="Medium"
                          FontStyle="Italic"
                          Foreground="White"
-                         Background="Blue"
                 />
             </Border>
         </Grid>
@@ -240,6 +237,7 @@
                     HorizontalAlignment="Center"
                     FontSize="24pi"
                     Foreground="White"
+                    Background="BlueViolet"
                     Click="btnNewGame_Click"
             />
 
@@ -251,6 +249,7 @@
                     HorizontalAlignment="Center"
                     FontSize="24pi"
                     Foreground="White"
+                    Background="BlueViolet"
                     Click="btnStats_Click"
             />
 
@@ -262,6 +261,7 @@
                     HorizontalAlignment="Center"
                     FontSize="24pi"
                     Foreground="White"
+                    Background="BlueViolet"
                     Click="btnHelp_Click"
             />
 
@@ -273,6 +273,7 @@
                     HorizontalAlignment="Center"
                     FontSize="24pi"
                     Foreground="White"
+                    Background="BlueViolet"
                     Click="btnExit_Click"
             />
         </Grid>

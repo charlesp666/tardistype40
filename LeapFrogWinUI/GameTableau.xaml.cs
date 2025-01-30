@@ -117,7 +117,6 @@ namespace LeapFrogWinUI
         private int normalBorderWidth = 1;
         private int highlightBorderWidth = 5;
 
-
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
@@ -561,8 +560,6 @@ namespace LeapFrogWinUI
             await buildInitialGameBoard();
 
             await updateCurrentActivityText(msgWaiting);
-
-            picGameImage.Focus(FocusState.Pointer);
         }
 
         /*******************************************************************************************
