@@ -168,9 +168,6 @@ namespace LeapFrogWinUI
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             initialLoad();
-
-            displayMessage("Ready to Start New Game.");
-            speakText("Ready to Start New Game.");
         }
 
         /*******************************************************************************************
@@ -181,7 +178,7 @@ namespace LeapFrogWinUI
         #region
         /*******************************************************************************************
          * Event Handler: btnExit_Click
-         * Handles the Closing of the Game Tableau Windows Form.
+         * Handles the Closing of the Game Application.
          */
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
@@ -202,7 +199,7 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * Event Handler: New Game
-         * Handles the Closing of the Game Tableau Windows Form.
+         * Calls procedure to setup new game.
          */
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
@@ -211,16 +208,11 @@ namespace LeapFrogWinUI
 
         /*******************************************************************************************
          * Event Handler: Player Statistics
-         * Handles the Closing of the Game Tableau Windows Form.
+         * Calls procedure to display player statistics.
          */
         private async void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            displayPlayerStats(myAvatar);
-
-            //var playerStats = new DisplayPlayerStats(myAvatar);
-            //playerStats.XamlRoot = this.XamlRoot;
-
-            //await playerStats.ShowAsync();
+            await displayPlayerStats(myAvatar);
         }
 
         /*******************************************************************************************
@@ -237,14 +229,44 @@ namespace LeapFrogWinUI
                 {
                     int indexClickedCell = dataGridGameBoard.SelectedIndex;
 
-                    if (!isKingMoving)
-                    {
+                    //if (!isKingMoving)
+                    //{
                         playSpaceClicked(indexClickedCell);
-                    }
-                    else
-                    {
-                        moveKing(indexClickedCell);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    moveKing(indexClickedCell);
+                    //}
+                }
+            }
+        }
+
+        /*******************************************************************************************
+         * Event Handler: dataGridGameBoardKing_SelectionChanged
+         * Initiates moving a King when a destination is selected.
+         */
+        private void dataGridGameBoardKing_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //If the Game is set for play and the Selected Item is not null...
+            if (isGameSet && isKingMoving)
+            {
+                var myGridView = sender as GridView;
+                if(myGridView != null) //if(dataGridGameBoard.SelectedItem != null)
+                {
+                    var gridViewItem = myGridView.SelectedIndex; // dataGridGameBoard.ContainerFromItem(dataGridGameBoard.SelectedItem) as GridViewItem;
+                    //if (gridViewItem != null)
+                    //{
+                        int indexClickedCell = dataGridGameBoard.SelectedIndex;
+
+                        if (isPlayableKing(indexClickedCell))
+                        {
+                            moveKing(indexClickedCell);
+                        }
+                        else
+                        {
+                            playSound(soundNotPlayable);
+                        }
+                    //}
                 }
             }
         }
@@ -352,7 +374,7 @@ namespace LeapFrogWinUI
 
             await updateCurrentActivityText(msgInitialLayout);
 
-            await removeAces();                              //Remove Aces to Initialize Play Spaces
+            //await removeAces();                              //Remove Aces to Initialize Play Spaces
 
             //Configure the Game Playing Grid
             gameTableau.Background = myGameInfo.getBackgroundColor();       //Set Tableau Background
@@ -377,6 +399,25 @@ namespace LeapFrogWinUI
 
                 await Task.Delay(delayClearDeck);                   //Wait for the Display to Update
             }
+        }
+
+        /*******************************************************************************************
+         * Method: deactivateKingMove
+         * Disables the flags and whatnot that are used to activate and perform a move of a King to
+         * a King Position (Leftmost column).
+         */
+        private async void deactivateKingMove()
+        {
+            highlightKingForMoving(playableKingPositions, false);
+
+            isKingMoving = false;
+            indexKingDestination = -1;
+            playableKingPositions.Clear();
+
+            enableSelectionKingChanged(false);             //Turn off the SelectionKingChanged Event
+            enableSelectionChanged(true);                  //Turn on the Play SelectionChanged Event
+
+            await updateCurrentActivityText(msgSelectPlay);
         }
 
         /*******************************************************************************************
@@ -442,6 +483,22 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+        * Method: enableSelectionKingChanged
+        * Programatically enables and disables the SelectionKingChanged Event.
+        */
+        private void enableSelectionKingChanged(bool enableEvent = true)
+        {
+            if (enableEvent)
+            {
+                dataGridGameBoard.SelectionChanged += dataGridGameBoardKing_SelectionChanged;
+            }
+            else
+            {
+                dataGridGameBoard.SelectionChanged -= dataGridGameBoardKing_SelectionChanged;
+            }
+        }
+
+        /*******************************************************************************************
          * Method: exitGame
          * Closes Out all processing and Exits or Closes the Application.
          */
@@ -455,11 +512,11 @@ namespace LeapFrogWinUI
          * Process finishes all the tasks that are necessary when a game has ended; i.e.
          * accumulate the score for the game, set the public "Game Over" flag, etc.
          */
-        private void endGame()
+        private async void endGame()
         {
             StopTimer();                                                      //Stop the Game Timer
 
-            updateCurrentActivityText(msgGameOver);
+            await updateCurrentActivityText(msgGameOver);
 
             int currentScore = scoreGame();                        //Compute Score for Current Game
             //Update Player Statistics then Display Results
@@ -467,10 +524,10 @@ namespace LeapFrogWinUI
             flgGameOver = true;                                               //Set "Game Over" flag
             isGameSet = false;                                               //Set the game set flag
 
-            speakText(msgGameOver);
-            displayMessage(msgGameOver);                                //Display "Game Over" Dialog
+            await speakText(msgGameOver);
+            await displayMessage(msgGameOver);                          //Display "Game Over" Dialog
 
-            //myAvatar.displayPlayerStats(scoreThisGame, moveCount, totalTimePlayed);
+            await displayPlayerStats(myAvatar);
         }
 
         /*******************************************************************************************
@@ -478,7 +535,7 @@ namespace LeapFrogWinUI
          * Locates and stores the gridview indexes of the Kings that are playable; that is, have not
          * already been moved to the "King Position."
          */
-        private void findPlayableKings()
+        private async Task findPlayableKings()
         {
             int countKings = 0;                                  //Initialize Counter of Kings found
             int cardIndex = 0;                               //Counter to walk through Deck of Cards
@@ -503,18 +560,9 @@ namespace LeapFrogWinUI
          * Method: highlightKingForMoving
          * Changes Border Color and Thickness on King that can be moved.
          */
-        private async Task highlightKingForMoving(int gridIndex, bool highlightKing = false)
+        private async Task highlightKingForMoving(List<int> KingPositions, bool highlightKing = false)
         {
-            //SolidColorBrush normalBorderBrush = new SolidColorBrush();
-            //SolidColorBrush highlightBorderBrush = new SolidColorBrush();
-
-            //Thickness newBorderWidth = new Thickness();
-
-            //normalBorderBrush.Color = Colors.Blue; 
-            //highlightBorderBrush.Color = Colors.Green;
-
-            //int normalBorderWidth = 1;
-            //int highlightBorderWidth = 5;
+            enableSelectionChanged(false);        //Disable Selection Event while highlighting Kings
 
             SolidColorBrush newBorderBrush = normalBorderBrush;
             newBorderWidth = new Thickness(normalBorderWidth);
@@ -525,17 +573,21 @@ namespace LeapFrogWinUI
                 newBorderWidth = new Thickness(highlightBorderWidth);
             }
 
-            dataGridGameBoard.SelectedIndex = gridIndex;
-            var myItem = dataGridGameBoard.SelectedItem;
-            var anItem = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
+            foreach (int kingPosition in KingPositions)
+            {
+                dataGridGameBoard.SelectedIndex = kingPosition;
+                var myItem = dataGridGameBoard.SelectedItem;
+                var anItem = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
 
-            anItem.BorderBrush = newBorderBrush;
-            anItem.BorderThickness = newBorderWidth;
+                anItem.BorderBrush = newBorderBrush;
+                anItem.BorderThickness = newBorderWidth;
+            }
 
             //var myStackPanel = anItem.ContentTemplateRoot as StackPanel;
             //myStoryBoard = myStackPanel.Resources["ZoomInMoveableKing"] as Storyboard;
 
             //myStoryBoard.Begin();
+            enableSelectionChanged(true);        //Reenable Selection Event after highlighting Kings
         }
 
         /*******************************************************************************************
@@ -544,14 +596,13 @@ namespace LeapFrogWinUI
          */
         private async Task initialLoad()
         {
+            //Ensure parameters and various knick-knacks are initialized for new game
             ResetTimer();                                                 //Ensure Timer has stopped
-
             await updateMoveCountText(0);                            //Clear the move count text box
             playableKingPositions.Clear();               //Ensure the Playable Kings List is cleared
 
             //Get Text for Game Instructions
             await updateCurrentActivityText(msgLoadingHelp);
-
             await loadHelpText();
 
             //Build the Initial Game Board and set Data Context
@@ -656,6 +707,26 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Function: isPlayableKing
+         * Compares the Index of the "selected King" to the indexes in the list of playable Kings.
+         * Returns "true" if a match is found; otherwise returns "false"
+         */
+        private bool isPlayableKing(int kingPosition)
+        {
+            bool isPlayable = false;
+            foreach (int playableKing in playableKingPositions)
+            {
+                if (playableKing == kingPosition)
+                {
+                    isPlayable = true;
+                    break;
+                }
+            }
+
+            return isPlayable;
+        }
+
+        /*******************************************************************************************
          * Function: isPlayableShuffle
          * Checks if the shuffled deck has at least one playable position; returns "true" if the
          * shuffle can be played; "false" if all "Ace" positions are not playable.
@@ -706,31 +777,24 @@ namespace LeapFrogWinUI
          * Moves the King from the Source Position to the Destination Position, then checks if the
          * move ended the game.
          */
-        private void moveKing(int sourceIndex)
+        private async Task moveKing(int sourceIndex)
         {
-            if (sourceIndex != indexKingDestination)       //If the Source and Destination not Equal...
+            if (sourceIndex != indexKingDestination)    //If the Source and Destination not Equal...
             {
-                if (!isKing(gameDeck.deckCards[sourceIndex]))  //If a King was not selected...
-                {
-                    updateCurrentActivityText(errKingNotSelected);
-                }
-                else
-                {
+                enableSelectionKingChanged(false);
+
+                //if (!isKing(gameDeck.deckCards[sourceIndex]))        //If a King was not selected...
+                //{
+                //    await playSound(soundNotPlayable);
+                //    await updateCurrentActivityText(errKingNotSelected);
+                //}
+                //else
+                //{
                     swapPlayCards(sourceIndex, indexKingDestination);       //Move the Selected King
 
-                    //foreach (var kingPosition in playableKingPositions)  //Disable King Highlighting
-                    //{
-                    //    highlightKingForMoving(kingPosition, false);
-                    //}
-
-                    //reset King Moving Parameters; i.e. turn off King Moving.
-                    isKingMoving = false;
-                    indexKingDestination = -1;
-                    playableKingPositions.Clear();
-                }
+                    deactivateKingMove();  //reset King Moving Parameters; i.e. turn off King Moving
+                //}
             }
-
-            updateCurrentActivityText(msgSelectPlay);
         }
 
         /*******************************************************************************************
@@ -774,9 +838,9 @@ namespace LeapFrogWinUI
                         isKingMoving = true;                             //Set King being Moved Flag
                         indexKingDestination = destinationIndex;
 
-                        selectKingToMove();                               //Get the King to be Moved
+                        setupKingMove();                                  //Get the King to be Moved
 
-                        //UnHighlight Kings to move...
+                        dataGridGameBoard.SelectedIndex = -1; //Deselect Grid Item...
                     }
 
                     if (isGameOver())                   //Check if game still has playable positions
@@ -832,35 +896,32 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
-         * Method: selectKingToMove
+         * Method: setupKingMove
          * Locates and "Highlighs" the Kings in the Playing tableau; then waits for one to be
          * selected.
          */
-        private void selectKingToMove()
+        private async void setupKingMove()
         {
+            string currentActivityMessage = msgSelectKing;
             enableSelectionChanged(false);                   //Disable the Selection Change Event...
 
-            findPlayableKings();
+            await findPlayableKings();    //Find positions of kings not currently in "King Position"
 
-            //string aMsg = "Marking Kings for Moving...";
-            updateCurrentActivityText(msgMarkingKings);
-
-            if(playableKingPositions.Count > 1)
+            await updateCurrentActivityText(msgMarkingKings);
+            if(playableKingPositions.Count > 1)               //If more than one King is playable...
             {
-                foreach (var kingPosition in playableKingPositions)
-                {
-                    highlightKingForMoving(kingPosition, true);
-                }
+                await highlightKingForMoving(playableKingPositions, true);
             }
-            else
+            else                           //otherwise, just move the last King not in King Position
             {
-                moveKing(playableKingPositions[0]);
+                await moveKing(playableKingPositions[0]);
+                currentActivityMessage = msgSelectPlay;
             }
 
-            enableSelectionChanged(true);                   //Reenable the Selection Change Event...
+            enableSelectionKingChanged(true);            //Enable the King Selection Change Event...
 
             //Wait for a selection to be made
-            updateCurrentActivityText(msgSelectKing);
+            await updateCurrentActivityText(currentActivityMessage);
         }
         
         /*******************************************************************************************
@@ -871,11 +932,9 @@ namespace LeapFrogWinUI
         private async Task setUpNewGame()
         {
             //If a game is currently running, score the game before setting up new game
-            if(isGameSet)
+            if(isGameSet)                                     //If a Game is currently in process...
             {
-                scoreGame();
-
-                await displayPlayerStats(myAvatar);
+               endGame();                          //Score the Current Layout and Reset for New Game
             }
 
             ResetTimer();                                                 //Ensure Timer has stopped
@@ -897,7 +956,7 @@ namespace LeapFrogWinUI
                 await tempDeck.shuffleDeck();                            //Shuffle the Deck of Cards
                 await tempDeck.cutDeck();                                             //Cut the Deck
             }
-            while(!isPlayableShuffle(tempDeck));//Does Shuffled Deck has at least one playable space?
+            while(!isPlayableShuffle(tempDeck));   //Shuffled Deck have at least one playable space?
 
             await updateCurrentActivityText(msgDealing);
             await dealCards(tempDeck);                               //Deal the Cards to the Tableau
@@ -990,6 +1049,8 @@ namespace LeapFrogWinUI
 
             //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
             //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
+
+            isGameOver();                            //Check if there are no more playable positions
         }
 
         //private void undoMove()

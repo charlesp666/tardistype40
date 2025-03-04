@@ -125,7 +125,7 @@
     <value>..\GameImages\defaultBack.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GameInstructions" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Data\GameInstructions.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Data\GameInstructions.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="LeapFrog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\GameImages\LeapFrog.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,14 +226,8 @@
   <data name="_4d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\CardImages\4d.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_4h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\CardImages\4h.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_4s" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\CardImages\4s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_5c" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\CardImages\5c.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_5d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\CardImages\5d.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -291,5 +285,11 @@
   </data>
   <data name="_9s" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\CardImages\9s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_4h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CardImages\4h.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_5c" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CardImages\5c.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

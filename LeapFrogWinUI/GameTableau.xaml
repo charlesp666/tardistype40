@@ -44,7 +44,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="210"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -54,39 +54,39 @@
                    Source="/Assets/GameImages/SmilingFrogFace.ico"
                    Stretch="Uniform"
                    Grid.Column="0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
                    Margin="0,0,0,0"
                    FocusVisualPrimaryBrush="#FF0000C0"
             />
 
             <!--Background="Blue"-->
             <Border Name="brdGameTimer"
-                    Grid.Column="2"
+                    Grid.Column="1"
                     BorderBrush="White"
                     BorderThickness="1"
                     CornerRadius="10"
                     Height="50"
                     Width="200"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Blue"
             >
                 <TextBlock x:Name="myTimerDisplay"
-                         HorizontalAlignment="Center"
-                         HorizontalTextAlignment="Center"
-                         VerticalAlignment="Center"
-                         Height="auto"
-                         Width="190"
-                         FontFamily="Helvetica"
-                         FontSize="24"
-                         FontWeight="Bold"
-                         Foreground="White"
+                           HorizontalAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalAlignment="Center"
+                           Height="auto"
+                           Width="190"
+                           FontFamily="Helvetica"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="White"
                 />
             </Border>
 
             <Border Name="brdMoveCount"
-                    Grid.Column="3"
+                    Grid.Column="2"
                     BorderBrush="White"
                     BorderThickness="1"
                     CornerRadius="10"
@@ -98,16 +98,16 @@
                     Background="Blue"
             >
                 <TextBlock x:Name="tbMoveCount"
-                         Text=""
-                         Width="190"
-                         Height="46"
-                         HorizontalTextAlignment="Center"
-                         VerticalAlignment="Center"
-                         FontFamily="Helvetica"
-                         FontSize="24"
-                         FontWeight="Bold"
-                         FontStyle="Italic"
-                         Foreground="White"
+                           Text=""
+                           Width="190"
+                           Height="46"
+                           HorizontalTextAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontFamily="Helvetica"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           FontStyle="Italic"
+                           Foreground="White"
                 />
             </Border>
 
@@ -119,6 +119,8 @@
                     Height="50"
                     Width="400"
                     Background="Blue"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
             >
                 <!--Margin="1,1,1,1"-->
                 <TextBlock x:Name="tbCurrentActivity"
@@ -137,11 +139,9 @@
         </Grid>
 
         <!--Game Tableu Playing Area -->
-        <!--IsItemClickEnabled="True"
-                  ItemClick="dataGridGameBoard_ItemClick"-->
         <GridView x:Name="dataGridGameBoard"
                   Grid.Row="1"
-                  ItemsSource="{x:Bind gameDeck.deckCards, Mode=OneWay}"
+                  ItemsSource="{x:Bind gameDeck.deckCards}"
                   Margin="2"
                   Height="595"
                   Width="1545"
@@ -235,7 +235,7 @@
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    FontSize="24pi"
+                    FontSize="24p"
                     Foreground="White"
                     Background="BlueViolet"
                     Click="btnNewGame_Click"
@@ -247,7 +247,7 @@
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    FontSize="24pi"
+                    FontSize="24"
                     Foreground="White"
                     Background="BlueViolet"
                     Click="btnStats_Click"
@@ -259,7 +259,7 @@
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    FontSize="24pi"
+                    FontSize="24"
                     Foreground="White"
                     Background="BlueViolet"
                     Click="btnHelp_Click"
@@ -271,7 +271,7 @@
                     Margin="2,2,2,2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    FontSize="24pi"
+                    FontSize="24"
                     Foreground="White"
                     Background="BlueViolet"
                     Click="btnExit_Click"
