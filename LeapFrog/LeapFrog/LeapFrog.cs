@@ -42,13 +42,15 @@ namespace LeapFrog
             Application.UseWaitCursor = true;                          //Set the Wait Cursor Display
 
             //Build the Game Information object
-            GameInformation myGameInfo = new GameInformation( Application.ProductName
-                                                            , "A Game of Solitaire"
-                                                            );
+            GameInformation myGameInfo = new GameInformation();
 
             //Populate the Form components
             lblGameTitle.Text = myGameInfo.getNameOfGame();                   //Name of appliication
             textSubtitle.Text = myGameInfo.getGameSubTitle();                    //Subtitle for Game
+            lblVersion.Text = "Version: " + myGameInfo.getVersion();        //Version Number of Game
+
+            lblCompanyName.Text = myGameInfo?.getCompanyName();                       //Company Name
+
             lblCopyright.Text = myGameInfo.getCopyrightNotice();                  //Copyright Notice
             textRights.Text = myGameInfo.getRightsNotice();                          //Rights Notice
 

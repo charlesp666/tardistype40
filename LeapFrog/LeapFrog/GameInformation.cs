@@ -16,6 +16,8 @@
  */
 using System;
 using System.Drawing;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 /***************************************************************************************************
  * Namespace Definition
@@ -27,9 +29,16 @@ namespace LeapFrog
      **********************************************************************************************/
     public class GameInformation
     {
+        private Assembly myAssembly = Assembly.GetExecutingAssembly();         //Get Assembly Object
+
         /*******************************************************************************************
          * Class Variables and Constants
          */
+        private AssemblyName assemblyName;                                        //Name of Assembly
+
+        private String companyName;                             //Name of Company Releasing the Game
+        private String copyrightNotice;                             //Copyright Notice from Assemply
+        private String gameVersion;                                         //Version Number of Game
         private String helpText;                                      //Text for the display of Help
         private String nameOfGame;                         //Storage for the Name of the Game Object
         private String subTitleOfGame;                                      //Sub-Title for the Game
@@ -41,18 +50,25 @@ namespace LeapFrog
         private Color colorForeground;                //Color to assignt to Foreground of game board
 
         //Constants
-        private String copyrightNotice = "Copyright (c) 2013-2017 Charles J. Pilgrim";
-        private String rightsNotice = "All Rights Reserved";
+        private const String copyrightOwner = "Charles J. Pilgrim";
+        private const String rightsNotice = "All Rights Reserved";
 
         /*******************************************************************************************
-         * Constructor: GameInformation (Default)
+         * Constructor: GameInformatio2025n (Default)
          * 
          * Creates and Displays the Splash Screen when Game is first started
          */
-        public GameInformation(String aNameOfGame, String aSubTitle = null)
-        {   
-            nameOfGame = aNameOfGame;                       //Set the value for the name of the game
-            subTitleOfGame = aSubTitle;                        //Set the value for the Game Subtitle
+        public GameInformation()
+        {
+            assemblyName = myAssembly.GetName();                       //Get the AssemblyName Object
+
+            nameOfGame = assemblyName.Name;                     //Set Value for the name of the game
+            subTitleOfGame = extractSubTitle(); ;              //Set the value for the Game Subtitle
+            gameVersion = buildFullVersionNumber();                    //Get the Full Version Number
+
+            companyName = extractCompanyName();                 //Get the Company Name from Assembly
+
+            copyrightNotice = extractCopyrightNotice() + " " + copyrightOwner;//Get Copyright notice
 
             helpText = LeapFrog.Properties.Resources.GameInstructions;     //Store Help Instructions
             gameImage = LeapFrog.Properties.Resources.LeapFrog;         //Get the Image for the game
@@ -72,12 +88,73 @@ namespace LeapFrog
          ******************************************************************************************/
         #region
         /*******************************************************************************************
+          * Method: buildFullVersionNumber
+          * Builds and Returns the Full Version number ("Major.Minor.Build).
+          */
+        public String buildFullVersionNumber()
+        {
+            String thisVersion = "";
+            Version myVersion = assemblyName.Version;
+
+            string major = myVersion.Major.ToString();
+            string minor = myVersion.Minor.ToString();
+            string build = myVersion.Build.ToString();
+            //string revision = myVersion.Revision.ToString();
+
+            thisVersion = major + "." + minor + "." + build; // + "." + revision;
+
+            return (thisVersion);
+        }
+
+        /*******************************************************************************************
+          * Method: extractCompanyName
+          * Extracts the Company Name from the Assembly Object
+          */
+        public String extractCompanyName()
+        {
+            var companyAttribute = myAssembly.GetCustomAttribute<AssemblyCompanyAttribute>();
+
+            return (companyAttribute?.Company ?? "No Company Information");
+        }
+
+        /*******************************************************************************************
+          * Method: extractCopyrightNotice
+          * Extracts the Copyright Notice from the Assembly Object
+          */
+        public String extractCopyrightNotice()
+        {
+            var copyrightAttribute = myAssembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
+
+            return (copyrightAttribute?.Copyright ?? "No Copyright Notice");
+        }
+
+        /*******************************************************************************************
+          * Method: extractSubTitle
+          * Extracts the Subtitle (Assembly Description) from the Assembly Object.
+          */
+        public String extractSubTitle()
+        {
+            var descriptionAttribute = myAssembly.GetCustomAttribute<AssemblyDescriptionAttribute>();
+
+            return (descriptionAttribute?.Description ?? "No Description");
+        }
+
+        /*******************************************************************************************
           * Method: getBackgroundColor
-          * Returns the Copyright Notice Text.
+          * Returns the Background Color for Tablean/Windows.
           */
         public Color getBackgroundColor()
         {
             return (colorBackground);
+        }
+
+        /*******************************************************************************************
+          * Method: getCopyrightNotice
+          * Returns the Copyright Notice Text.
+          */
+        public String getCompanyName()
+        {
+            return (companyName);
         }
 
         /*******************************************************************************************
@@ -141,6 +218,15 @@ namespace LeapFrog
         public String getRightsNotice()
         {
             return (rightsNotice);
+        }
+
+        /*******************************************************************************************
+          * Method: getVersion
+          * Returns the Version Number.
+          */
+        public String getVersion()
+        {
+            return (gameVersion);
         }
 
         /*******************************************************************************************

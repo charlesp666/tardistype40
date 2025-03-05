@@ -35,6 +35,8 @@
             this.textSubtitle = new System.Windows.Forms.TextBox();
             this.textRights = new System.Windows.Forms.TextBox();
             this.pbGameIntro = new System.Windows.Forms.ProgressBar();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picGameImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCopyright.ForeColor = System.Drawing.Color.White;
-            this.lblCopyright.Location = new System.Drawing.Point(166, 135);
+            this.lblCopyright.Location = new System.Drawing.Point(166, 187);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(103, 20);
             this.lblCopyright.TabIndex = 1;
@@ -66,7 +68,7 @@
             this.picGameImage.Image = ((System.Drawing.Image)(resources.GetObject("picGameImage.Image")));
             this.picGameImage.Location = new System.Drawing.Point(22, 28);
             this.picGameImage.Name = "picGameImage";
-            this.picGameImage.Size = new System.Drawing.Size(132, 183);
+            this.picGameImage.Size = new System.Drawing.Size(132, 226);
             this.picGameImage.TabIndex = 2;
             this.picGameImage.TabStop = false;
             // 
@@ -76,12 +78,11 @@
             this.textSubtitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textSubtitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textSubtitle.ForeColor = System.Drawing.Color.White;
-            this.textSubtitle.Location = new System.Drawing.Point(170, 95);
+            this.textSubtitle.Location = new System.Drawing.Point(170, 86);
             this.textSubtitle.Name = "textSubtitle";
             this.textSubtitle.Size = new System.Drawing.Size(352, 22);
             this.textSubtitle.TabIndex = 3;
             this.textSubtitle.Text = "textSubtitle";
-            this.textSubtitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textRights
             // 
@@ -89,26 +90,47 @@
             this.textRights.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textRights.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textRights.ForeColor = System.Drawing.Color.White;
-            this.textRights.Location = new System.Drawing.Point(170, 167);
+            this.textRights.Location = new System.Drawing.Point(170, 210);
             this.textRights.Name = "textRights";
             this.textRights.Size = new System.Drawing.Size(120, 15);
             this.textRights.TabIndex = 4;
             this.textRights.Text = "textRights";
-            this.textRights.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pbGameIntro
             // 
-            this.pbGameIntro.Location = new System.Drawing.Point(170, 198);
+            this.pbGameIntro.Location = new System.Drawing.Point(170, 242);
             this.pbGameIntro.Name = "pbGameIntro";
             this.pbGameIntro.Size = new System.Drawing.Size(352, 12);
             this.pbGameIntro.TabIndex = 5;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(166, 151);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(88, 20);
+            this.lblVersion.TabIndex = 6;
+            this.lblVersion.Text = "lblVersion";
+            // 
+            // lblCompanyName
+            // 
+            this.lblCompanyName.AutoSize = true;
+            this.lblCompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompanyName.Location = new System.Drawing.Point(166, 111);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(120, 24);
+            this.lblCompanyName.TabIndex = 7;
+            this.lblCompanyName.Text = "lblCompany";
             // 
             // LeapFrogSplashScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(534, 231);
+            this.ClientSize = new System.Drawing.Size(534, 266);
+            this.Controls.Add(this.lblCompanyName);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.pbGameIntro);
             this.Controls.Add(this.textRights);
             this.Controls.Add(this.textSubtitle);
@@ -133,6 +155,8 @@
         private System.Windows.Forms.TextBox textSubtitle;
         private System.Windows.Forms.TextBox textRights;
         private System.Windows.Forms.ProgressBar pbGameIntro;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.Label lblCompanyName;
     }
 }
 
