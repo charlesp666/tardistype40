@@ -42,6 +42,10 @@ namespace LeapFrog
 
             this.Text = "About " + localGameInfo.getNameOfGame(); //Add Name of Game to Window title
             lblNameOfGame.Text = localGameInfo.getNameOfGame();       //Put Name of Game into Dialog
+            lblSubTitle.Text = localGameInfo.getGameSubTitle();           //Put Subtitle into Dialog
+            lblCompanyName.Text = localGameInfo.getCompanyName();      //Put CompanyName into Dialog
+            lblVersion.Text = localGameInfo.getVersion();           //Put Version Number into Dialog
+
             lblCopyright.Text = localGameInfo.getCopyrightNotice(); //Put Copyright Notice in Dialog
             lblRights.Text = localGameInfo.getRightsNotice();                    //Add Rights Notice
 
