@@ -6,7 +6,10 @@
  * Author:              Charles J Pilgrim
  * Created:             10-October-2013
  * 
- * @Copyright (c) 2013-2017 Charles J. Pilgrim
+ * LastMaintainedBy:    Charles J Pilgrim
+ * LastMaintained:      05-March-2025
+ * 
+ * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
  */
 

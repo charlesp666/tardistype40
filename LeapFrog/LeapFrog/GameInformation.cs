@@ -7,7 +7,10 @@
  * Author:              Charles J Pilgrim
  * Created:             25-January-2016
  * 
- * @Copyright (c) 2013-2017 Charles J. Pilgrim
+ * LastMaintainedBy:    Charles J Pilgrim
+ * LastMaintained:      05-March-2025
+ * 
+ * Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
  */
 
@@ -17,7 +20,7 @@
 using System;
 using System.Drawing;
 using System.Reflection;
-using System.Runtime.InteropServices;
+//using System.Runtime.InteropServices;
 
 /***************************************************************************************************
  * Namespace Definition
