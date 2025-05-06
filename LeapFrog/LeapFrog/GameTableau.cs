@@ -55,11 +55,12 @@ namespace LeapFrog
         private GameInformation myGameInfo;              //Storage for Local Game Information Object
 
         // Define parameters for Scoring Games (Determining Player's Winnings)
-        private int incrementSequence = 2;             //Points to add for cards in correct sequence
-        private int incrementPosition = 5;             //Points to add for cards in correct position
-        private int incrementCompleteSuit = 10;                  //Points to add for a complete suit
+        private int pointsForSequence = 1;             //Points to add for cards in correct sequence
+        private int pointsForPosition = 2;             //Points to add for cards in correct position
+        private int pointsForCompleteSuit = 10;                  //Points to add for a complete suit
 
-        private int gameBuyIn = 100;                  //Deduction to player's score to buy into game
+        private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
+
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
 
         //Declare and Initialize Game Playing Deck
@@ -367,8 +368,14 @@ namespace LeapFrog
         {
             gameTime.Stop();                                                   //Stop the Game Timer
 
+            int gameScore = 0;
+
             displayMessage("Game Over!");
-            scoreGame();               //Compute Score for Current Game and Update Player Statistics
+            gameScore = scoreGame();   //Compute Score for Current Game and Update Player Statistics
+
+            //Update Player Statistics then Display Results
+            myPlayer.finishGameForPlayer(gameScore, moveCount, computeTimePlayed());
+            myPlayer.displayPlayerStats(gameScore, moveCount, computeTimePlayed());
 
             flgGameOver = true;                                               //Set "Game Over" flag
             isGameSet = false;                                               //Set the game set flag
@@ -627,101 +634,85 @@ namespace LeapFrog
          * Method: scoreGame
          * Adds up the score of the current game; scoring as follows:
          * 
-         * 2 points for each card in correct sequence (by rank and suit)
-         * 5 points for each card in correct position (column by rank)
+         * 1 points for each card in correct sequence (by rank and suit)
+         * 2 points for each card in correct position (column by rank)
          * 10 points for completion of a suit (King through 2 of same suit on same row)
          */
-        private void scoreGame()
+        private int scoreGame()
         {
-            //int thisGameScore = 0;              //Local variable to accumulate score of current game
-            //int completedSuits = 0;                          //Count of the Suits that are completed
-            //int countSequence = 0;                   //Count the number of cards in correct sequence
+            int thisGameScore = 0;              //Local variable to accumulate score of current game
+            int completedSuits = 0;                          //Count of the Suits that are completed
+            int countSequence = 0;                   //Count the number of cards in correct sequence
 
-            int scoreThisGame = 0;                                          //Score for Current Game
+            //int scoreThisGame = 0;                                          //Score for Current Game
 
             // Sum score for cards that are in correct sequence and correct position
             for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
             {
-                int countSequence = 0;                     //Counter for Number of Cards in Sequence
+                countSequence = 0;                         //Counter for Number of Cards in Sequence
+                int currentRank = 0;       //Set initial column or Rank position for the current row
                 bool correctPosition = false;                //Ensure Correct Position Flag is Unset
 
-                for (int aRank = 0; aRank < Cards.Card.possibleRanks.Length - 1; aRank++)
+                while (currentRank < 12)
                 {
-                    PlayPosition aPosition = new PlayPosition(dataGridGameBoard, aRank, aSuit);
+                    PlayPosition theCorrectPosition = new PlayPosition(dataGridGameBoard, currentRank, aSuit);
 
-                    String thisCard = dataGridGameBoard[aRank, aSuit].Tag.ToString();//This Card Value
-                    String nextCard = dataGridGameBoard[aRank + 1, aSuit].Tag.ToString();  //Next Card
+                    String thisCard = dataGridGameBoard[currentRank, aSuit].Tag.ToString();
+                    String nextCard = dataGridGameBoard[currentRank + 1, aSuit].Tag.ToString();
 
                     if (thisCard.Equals(playSpace))              //If No Card in Current Position...
                     {
                         correctPosition = false;             //Ensure Correct Position Flag is Unset
-                        countSequence = 0; //Ensure Sequence Counter
+                        countSequence = 0;                                  //Reset Sequence Counter
                     }
                     else               //Card is in Current position, begin checking for sequence...
                     {
                         if (!(nextCard.Equals(playSpace)))        //If Next Card is not Play Space...
                         {
-                            correctPosition = isCorrectPosition(aPosition);
-                            if (aPosition.getSuit(thisCard) == aPosition.getSuit(nextCard)) //Same Suit?
+                            correctPosition = isCorrectPosition(theCorrectPosition);
+                            if (theCorrectPosition.getSuit(thisCard) == theCorrectPosition.getSuit(nextCard)) //Same Suit?
                             {
                                 if (nextCard.Equals(gameDeck.getNextCardDescending(thisCard)))
                                 {
                                     countSequence++;                    //Increment Sequence Counter
-                                    scoreThisGame += incrementSequence;     //Add Score for sequence
-                                    if ((countSequence > 0) && (correctPosition))
-                                        scoreThisGame += incrementPosition; //Add Score for Position
                                 }
                                 else
                                 {
-                                    if ((countSequence > 0) && (correctPosition))
-                                        scoreThisGame += incrementPosition; //Add Score for Position
+                                    countSequence++;                      //Adjust Sequence Count for first card
+
+                                    if (countSequence == 12)                         //If the suit is complete...
+                                    {
+                                        completedSuits++;                //Increment the Completed Suits counter
+                                        thisGameScore += pointsForCompleteSuit; //Add Completed Suits points to score
+                                    }
+
+                                    if (countSequence > 2)       //If at least 3 cards are in correct sequence...
+                                    {
+                                        thisGameScore += (countSequence * pointsForSequence); //Add points to score
+
+                                        if (correctPosition)                //If cards are in correct position...
+                                        {
+                                            thisGameScore += (countSequence * pointsForPosition); //Add points to score
+                                        }
+                                    }
 
                                     countSequence = 0;           //Reset Number of Cards in Sequence
                                     correctPosition = false; //Ensure Correct Position Flag is Unset
                                 }
                             }
-                            else              //Card of Different Suit, end sequence accumulation...
-                            {
-                                if ((countSequence > 0) && (correctPosition))
-                                    scoreThisGame += incrementPosition;     //Add Score for Position
-
-                                countSequence = 0;               //Reset Number of Cards in Sequence
-                                correctPosition = false;     //Ensure Correct Position Flag is Unset
-                            }
-                        }
-                        else                   //Otherwise, next Card is a "Play Space" (no Card)...
-                        {
-                            if ((countSequence > 0) && (correctPosition))
-                                scoreThisGame += incrementPosition;         //Add Score for Position
-
-                            countSequence = 0;                   //Reset Number of Cards in Sequence
-                            correctPosition = false;         //Ensure Correct Position Flag is Unset
                         }
                     }
+
+                    currentRank++;                                                //Go the next card
                 }
             }
 
-            //Sum Score for completed Suits - Use recursive call to function isSuitComplete
-            int suitsCompleted = 0;     //Count number of suits that were completed; if 4, game won!
-
-            for (int aRow = 0; aRow < Cards.Card.possibleSuits.Length; aRow++)
+            if (completedSuits == 4)                                  //If all Suits are completed...
             {
-                if (isSuitComplete(aRow))                  //If the row contains a completed suit...
-                {
-                    scoreThisGame += incrementCompleteSuit;    //Increment score for a complete suit
-                    suitsCompleted++;                            //Increment suits completed counter
-                }
+                thisGameScore += gameWinningBonus;                          //Add Winning Game Bonus
             }
 
-            if (suitsCompleted == 4)                           //If All four suits are completed...
-                scoreThisGame += (suitsCompleted * gameBuyIn); //Add Game winning bonus!!
-
-            //Adjust current game score for buy-in and record to Player's stats
-            scoreThisGame -= gameBuyIn;                             // Deduct the Game Buy-In Amount
-
-            //Update Player Statistics then Display Results
-            myPlayer.finishGameForPlayer(scoreThisGame, moveCount, computeTimePlayed()); 
-            myPlayer.displayPlayerStats(scoreThisGame, moveCount, computeTimePlayed());
+            return thisGameScore;
         }
 
         /*******************************************************************************************
