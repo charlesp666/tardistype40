@@ -633,20 +633,24 @@ namespace LeapFrog
          */
         private void scoreGame()
         {
+            //int thisGameScore = 0;              //Local variable to accumulate score of current game
+            //int completedSuits = 0;                          //Count of the Suits that are completed
+            //int countSequence = 0;                   //Count the number of cards in correct sequence
+
             int scoreThisGame = 0;                                          //Score for Current Game
 
             // Sum score for cards that are in correct sequence and correct position
-            for (int aRow = 0; aRow < Cards.Card.possibleSuits.Length; aRow++)
+            for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
             {
                 int countSequence = 0;                     //Counter for Number of Cards in Sequence
                 bool correctPosition = false;                //Ensure Correct Position Flag is Unset
 
-                for (int aCol = 0; aCol < Cards.Card.possibleRanks.Length - 1; aCol++)
+                for (int aRank = 0; aRank < Cards.Card.possibleRanks.Length - 1; aRank++)
                 {
-                    PlayPosition aPosition = new PlayPosition(dataGridGameBoard, aCol, aRow);
+                    PlayPosition aPosition = new PlayPosition(dataGridGameBoard, aRank, aSuit);
 
-                    String thisCard = dataGridGameBoard[aCol, aRow].Tag.ToString();//This Card Value
-                    String nextCard = dataGridGameBoard[aCol + 1, aRow].Tag.ToString();  //Next Card
+                    String thisCard = dataGridGameBoard[aRank, aSuit].Tag.ToString();//This Card Value
+                    String nextCard = dataGridGameBoard[aRank + 1, aSuit].Tag.ToString();  //Next Card
 
                     if (thisCard.Equals(playSpace))              //If No Card in Current Position...
                     {
