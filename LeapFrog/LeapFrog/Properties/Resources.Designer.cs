@@ -481,6 +481,16 @@ namespace LeapFrog.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Froggy {
+            get {
+                object obj = ResourceManager.GetObject("Froggy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  Leapfrog solitaire is played on a tableau of four rows of thirteen cards or blank spaces. The tableau is setup by dealing out a standard, shuffled deck of 52 cards into the four rows of thirteen cards each. The aces are then removed to create the &quot;play-spaces.&quot; 
         ///
         /// The object of the game is to move cards into these play-spaces so that the suits are in descending, sorted order beginning with the King in the left-most column. Clicking on a play-space moves the card next in descending sequence to the card on [rest of string was truncated]&quot;;.

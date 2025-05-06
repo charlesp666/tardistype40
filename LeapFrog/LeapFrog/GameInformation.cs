@@ -8,7 +8,7 @@
  * Created:             25-January-2016
  * 
  * LastMaintainedBy:    Charles J Pilgrim
- * LastMaintained:      05-March-2025
+ * LastMaintained:      06-March-2025
  * 
  * Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
@@ -73,7 +73,7 @@ namespace LeapFrog
             copyrightNotice = extractCopyrightNotice() + " " + copyrightOwner;//Get Copyright notice
 
             helpText = LeapFrog.Properties.Resources.GameInstructions;     //Store Help Instructions
-            gameImage = LeapFrog.Properties.Resources.LeapFrog;         //Get the Image for the game
+            gameImage = LeapFrog.Properties.Resources.LeapFrog;           //Get the Image for the game
 
             colorBackground = Color.Blue;              //Set the value for the Game board background
             colorForeground = Color.White;             //Set the value for the Game board foreground
