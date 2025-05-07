@@ -343,7 +343,7 @@ namespace LeapFrog
          */
         private void displayMessage(String theMessage)
         {
-            MessageBox.Show(theMessage, "Leapfrog", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(theMessage, myGameInfo.getNameOfGame(), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /*******************************************************************************************
@@ -352,7 +352,7 @@ namespace LeapFrog
          */
         private void displayWarning(String theMessage)
         {
-            MessageBox.Show(theMessage, "Leapfrog", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(theMessage, myGameInfo.getNameOfGame(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         /*******************************************************************************************
