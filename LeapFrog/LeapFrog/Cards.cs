@@ -8,7 +8,7 @@
  * Created:             06-September-2013
  * 
  * Last Maintained By:  Charles J Pilgrim
- * Last Maintained:     05-March-2025
+ * Last Maintained:     07-March-2025
  * 
  * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
@@ -318,10 +318,10 @@ namespace LeapFrog
             }
 
             /***************************************************************************************
-             * Method: getNextCardAscending
+             * Method: findNextCardAscending
              * Returns the Card Value of the Next Ascending Card
              */
-            public String getNextCardAscending(String aCardFace)
+            public String findNextCardAscending(String aCardFace)
             {
                 Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
 
@@ -344,10 +344,10 @@ namespace LeapFrog
             }
 
             /***************************************************************************************
-             * Method: getNextCardDescending
+             * Method: findNextCardDescending
              * Returns the Card Value of the Next Descending Card
              */
-            public String getNextCardDescending(String aCardFace)
+            public String findNextCardDescending(String aCardFace)
             {
                 Card aCard = new Card();                  //Dummy Card Object to Access Card Methods
 

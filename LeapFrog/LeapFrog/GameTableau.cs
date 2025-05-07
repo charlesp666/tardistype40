@@ -7,7 +7,7 @@
  * Created:             24-September-2013
  * 
  * LastMaintainedBy:    Charles J Pilgrim
- * LastMaintained:      05-March-2025
+ * LastMaintained:      07-March-2025
  * 
 * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
@@ -660,7 +660,7 @@ namespace LeapFrog
                     if (!(thisCard.Equals(playSpace)))        //If Next Card is not Play Space...
                     {
                         String nextCard = dataGridGameBoard[currentRank + 1, aSuit].Tag.ToString();
-                        String nextCardInSequence = gameDeck.getNextCardDescending(thisCard);
+                        String nextCardInSequence = gameDeck.findNextCardDescending(thisCard);
 
                         if (nextCard.Equals(nextCardInSequence))
                         {
