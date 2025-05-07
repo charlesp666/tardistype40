@@ -75,6 +75,11 @@ namespace LeapFrog
         private DateTime gameStartTime;                                            //Game Start Time
         private DateTime gameEndTime;                                      //Game "Now" and end time
 
+        //Constants to store Message Values
+        private string msgGameOver = "Game Over!";
+        private string msgSelectKing = "Select King to Move to this Position...";
+        private string msgKingNotSelected = "King was not selected; cancelling move!";
+
         /*******************************************************************************************
          * Constructor: GameTableau (Default)
          * 
@@ -370,7 +375,7 @@ namespace LeapFrog
 
             int gameScore = 0;
 
-            displayMessage("Game Over!");
+            displayMessage(msgGameOver);
             gameScore = scoreGame();   //Compute Score for Current Game and Update Player Statistics
 
             //Update Player Statistics then Display Results
@@ -570,7 +575,7 @@ namespace LeapFrog
                     {
                         tempStorage = destinationPosition;           //Store the Current Destination
 
-                        displayMessage("Select King to Move to this Position...");  //Prompt User...
+                        displayMessage(msgSelectKing);                              //Prompt User...
                         playKingPosition = true;                         //Set King being Moved Flag
                     }
                     else if (!playKingPosition)                            //If not Moving a King...
@@ -581,7 +586,7 @@ namespace LeapFrog
                     {
                         if (!isKing(destinationPosition.getCard()))  //If a King was not selected...
                         {
-                            displayWarning("King was not selected; cancelling move!");
+                            displayWarning(msgKingNotSelected);
                             sourcePosition = destinationPosition;
                         }
                         else
