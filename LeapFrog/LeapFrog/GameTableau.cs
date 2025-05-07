@@ -644,62 +644,51 @@ namespace LeapFrog
             int completedSuits = 0;                          //Count of the Suits that are completed
             int countSequence = 0;                   //Count the number of cards in correct sequence
 
-            //int scoreThisGame = 0;                                          //Score for Current Game
-
-            // Sum score for cards that are in correct sequence and correct position
+            // For each suit (row) in the current played deck, walk-through and score the ranks
             for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
             {
                 countSequence = 0;                         //Counter for Number of Cards in Sequence
                 int currentRank = 0;       //Set initial column or Rank position for the current row
                 bool correctPosition = false;                //Ensure Correct Position Flag is Unset
 
-                while (currentRank < 12)
+                while (currentRank < 12)                   //If not at the end of the current row...
                 {
                     PlayPosition theCorrectPosition = new PlayPosition(dataGridGameBoard, currentRank, aSuit);
 
                     String thisCard = dataGridGameBoard[currentRank, aSuit].Tag.ToString();
-                    String nextCard = dataGridGameBoard[currentRank + 1, aSuit].Tag.ToString();
 
-                    if (thisCard.Equals(playSpace))              //If No Card in Current Position...
+                    if (!(thisCard.Equals(playSpace)))        //If Next Card is not Play Space...
                     {
-                        correctPosition = false;             //Ensure Correct Position Flag is Unset
-                        countSequence = 0;                                  //Reset Sequence Counter
-                    }
-                    else               //Card is in Current position, begin checking for sequence...
-                    {
-                        if (!(nextCard.Equals(playSpace)))        //If Next Card is not Play Space...
+                        String nextCard = dataGridGameBoard[currentRank + 1, aSuit].Tag.ToString();
+                        String nextCardInSequence = gameDeck.getNextCardDescending(thisCard);
+
+                        if (nextCard.Equals(nextCardInSequence))
                         {
+                            countSequence++;                            //Increment Sequence Counter
                             correctPosition = isCorrectPosition(theCorrectPosition);
-                            if (theCorrectPosition.getSuit(thisCard) == theCorrectPosition.getSuit(nextCard)) //Same Suit?
+                        }
+                        else
+                        {
+                            countSequence++;                  //Adjust Sequence Count for first card
+
+                            if (countSequence == 12)                    //If the suit is complete...
                             {
-                                if (nextCard.Equals(gameDeck.getNextCardDescending(thisCard)))
+                                completedSuits++;            //Increment the Completed Suits counter
+                                thisGameScore += pointsForCompleteSuit; //Add Completed Suits points
+                            }
+
+                            if (countSequence > 2)  //If at least 3 cards are in correct sequence...
+                            {
+                                thisGameScore += (countSequence * pointsForSequence);   //Add points
+
+                                if (correctPosition)           //If cards are in correct position...
                                 {
-                                    countSequence++;                    //Increment Sequence Counter
-                                }
-                                else
-                                {
-                                    countSequence++;                      //Adjust Sequence Count for first card
-
-                                    if (countSequence == 12)                         //If the suit is complete...
-                                    {
-                                        completedSuits++;                //Increment the Completed Suits counter
-                                        thisGameScore += pointsForCompleteSuit; //Add Completed Suits points to score
-                                    }
-
-                                    if (countSequence > 2)       //If at least 3 cards are in correct sequence...
-                                    {
-                                        thisGameScore += (countSequence * pointsForSequence); //Add points to score
-
-                                        if (correctPosition)                //If cards are in correct position...
-                                        {
-                                            thisGameScore += (countSequence * pointsForPosition); //Add points to score
-                                        }
-                                    }
-
-                                    countSequence = 0;           //Reset Number of Cards in Sequence
-                                    correctPosition = false; //Ensure Correct Position Flag is Unset
+                                    thisGameScore += (countSequence * pointsForPosition);//Add points
                                 }
                             }
+
+                            countSequence = 0;                   //Reset Number of Cards in Sequence
+                            correctPosition = false;         //Ensure Correct Position Flag is Unset
                         }
                     }
 
@@ -707,7 +696,7 @@ namespace LeapFrog
                 }
             }
 
-            if (completedSuits == 4)                                  //If all Suits are completed...
+            if (completedSuits == 4)                                 //If all Suits are completed...
             {
                 thisGameScore += gameWinningBonus;                          //Add Winning Game Bonus
             }
