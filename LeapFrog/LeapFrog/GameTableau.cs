@@ -237,6 +237,8 @@ namespace LeapFrog
             dataGridGameBoard.AllowUserToDeleteRows = false;           //Disallow Rows to be Deleted
             dataGridGameBoard.ReadOnly = true;                               //Set Grid to Read-Only
 
+            dataGridGameBoard.DefaultCellStyle.Padding = new Padding(5);
+
             //Build the Game Board and Insert Default Image into Grid Cells
             Image defaultImage = gameDeck.getCardBack();                         //Get Default Image
 
