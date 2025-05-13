@@ -44,6 +44,7 @@
             this.txtMoveCount = new System.Windows.Forms.TextBox();
             this.gameTime = new System.Windows.Forms.Timer(this.components);
             this.lblGameTimer = new System.Windows.Forms.Label();
+            this.grpGameInfo = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridGameBoard)).BeginInit();
             this.menuStripGame.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             // 
             this.dataGridGameBoard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridGameBoard.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridGameBoard.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridGameBoard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridGameBoard.ColumnHeadersVisible = false;
             this.dataGridGameBoard.EnableHeadersVisualStyles = false;
@@ -59,7 +61,7 @@
             this.dataGridGameBoard.Name = "dataGridGameBoard";
             this.dataGridGameBoard.RowHeadersVisible = false;
             this.dataGridGameBoard.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridGameBoard.Size = new System.Drawing.Size(1015, 412);
+            this.dataGridGameBoard.Size = new System.Drawing.Size(1015, 417);
             this.dataGridGameBoard.TabIndex = 0;
             this.dataGridGameBoard.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridGameBoard_CellClick);
             // 
@@ -149,7 +151,7 @@
             this.lblMoveCount.BackColor = System.Drawing.Color.Blue;
             this.lblMoveCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMoveCount.ForeColor = System.Drawing.Color.White;
-            this.lblMoveCount.Location = new System.Drawing.Point(6, 454);
+            this.lblMoveCount.Location = new System.Drawing.Point(7, 471);
             this.lblMoveCount.Name = "lblMoveCount";
             this.lblMoveCount.Size = new System.Drawing.Size(65, 20);
             this.lblMoveCount.TabIndex = 4;
@@ -160,7 +162,7 @@
             this.txtMoveCount.BackColor = System.Drawing.Color.Blue;
             this.txtMoveCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoveCount.ForeColor = System.Drawing.Color.White;
-            this.txtMoveCount.Location = new System.Drawing.Point(78, 452);
+            this.txtMoveCount.Location = new System.Drawing.Point(78, 468);
             this.txtMoveCount.Name = "txtMoveCount";
             this.txtMoveCount.ReadOnly = true;
             this.txtMoveCount.Size = new System.Drawing.Size(100, 26);
@@ -175,22 +177,32 @@
             this.lblGameTimer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblGameTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGameTimer.ForeColor = System.Drawing.Color.White;
-            this.lblGameTimer.Location = new System.Drawing.Point(201, 454);
+            this.lblGameTimer.Location = new System.Drawing.Point(201, 471);
             this.lblGameTimer.Name = "lblGameTimer";
             this.lblGameTimer.Size = new System.Drawing.Size(121, 22);
             this.lblGameTimer.TabIndex = 6;
             this.lblGameTimer.Text = "lblGameTimer";
             // 
+            // grpGameInfo
+            // 
+            this.grpGameInfo.BackColor = System.Drawing.Color.Blue;
+            this.grpGameInfo.Location = new System.Drawing.Point(4, 457);
+            this.grpGameInfo.Name = "grpGameInfo";
+            this.grpGameInfo.Size = new System.Drawing.Size(1016, 42);
+            this.grpGameInfo.TabIndex = 7;
+            this.grpGameInfo.TabStop = false;
+            // 
             // GameTableau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 483);
+            this.ClientSize = new System.Drawing.Size(1020, 506);
             this.Controls.Add(this.lblGameTimer);
             this.Controls.Add(this.txtMoveCount);
             this.Controls.Add(this.lblMoveCount);
             this.Controls.Add(this.menuStripGame);
             this.Controls.Add(this.dataGridGameBoard);
+            this.Controls.Add(this.grpGameInfo);
             this.Name = "GameTableau";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LeapFrog";
@@ -220,5 +232,6 @@
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.Timer gameTime;
         private System.Windows.Forms.Label lblGameTimer;
+        private System.Windows.Forms.GroupBox grpGameInfo;
     }
 }
