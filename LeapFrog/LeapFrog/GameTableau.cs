@@ -19,6 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /***************************************************************************************************
@@ -46,6 +48,7 @@ namespace LeapFrog
 
         private static String playSpace = "";             //String or character to use on play spots
 
+        private List<PlayPosition> playableKingPositions = new List<PlayPosition>();
         private bool playKingPosition = false;          //Flag Indicating the Position is for a King
 
         private static bool isGameSet = false;                  // Flag indicates play area is ready
@@ -256,7 +259,29 @@ namespace LeapFrog
             }
 
             //Set Current Cell to Upper Leftmost to Remove Extra Row that Appears
-            dataGridGameBoard.CurrentCell = dataGridGameBoard.Rows[0].Cells[0];
+            dataGridGameBoard.CurrentCell = null; // dataGridGameBoard.Rows[0].Cells[0];
+        }
+
+        /*******************************************************************************************
+         * Method: calcColFromIndex
+         * Calculates the Row given an array index.
+         * 
+         * anIndex - the array index to find the row value for.
+         */
+        private int calcColFromIndex(int anIndex)
+        {
+            return (anIndex % 13);
+        }
+
+        /*******************************************************************************************
+         * Method: calcRowFromIndex
+         * Calculates the Row given an array index.
+         * 
+         * anIndex - the array index to find the row value for.
+         */
+        private int calcRowFromIndex(int anIndex)
+        {
+            return (int)(anIndex / 13);
         }
 
         /*******************************************************************************************
@@ -390,8 +415,40 @@ namespace LeapFrog
 
             clearBoard(gameDeck);                                                //Clear the tableau
             lblGameTimer.Text = String.Empty;                             //Clear the Timer Text box
-            moveCount = -1;                                                  //Reset the move counter
+            moveCount = 0;                                                  //Reset the move counter
             txtMoveCount.Text = moveCount.ToString();                //Clear the Move count Text box
+        }
+
+        /*******************************************************************************************
+         * Method: findPlayableKings
+         * Locates and stores the gridview indexes of the Kings that are playable; that is, have not
+         * already been moved to the "King Position."
+         */
+        private void findPlayableKings()
+        {
+            int countKings = 0;                                  //Initialize Counter of Kings found
+            int cardIndex = 0;                               //Counter to walk through Deck of Cards
+            int maxKingCount = Cards.Card.possibleSuits.Length;                 //Max Count of Kings
+            int maxCardIndex = Cards.Card.possibleSuits.Length * Cards.Card.possibleRanks.Length; 
+
+            while ((countKings < maxKingCount) && (cardIndex < maxCardIndex)) //While Not all Kings have been found...
+            {
+                int thisRow = calcRowFromIndex(cardIndex);
+                int thisCol = calcColFromIndex(cardIndex);
+
+                PlayPosition currentPosition = new PlayPosition(dataGridGameBoard, thisCol, thisRow);
+
+                if (isKing(currentPosition.getCard()))                       //If Card is a King...
+                {
+                    countKings++;                                    //Increment the King Counter...
+                    if (!isKingPosition(thisCol))       //Check if King is not in a King Position...
+                    {
+                        playableKingPositions.Add(currentPosition);
+                    }
+                }
+
+                cardIndex++;                                 //Increment the Card Index to next card
+            }
         }
 
         /*******************************************************************************************
@@ -550,20 +607,13 @@ namespace LeapFrog
         {
             if (sourcePosition != destinationPosition)   //If the Source and Destination not Equal...
                 swapPlayCards(sourcePosition, destinationPosition);         //Move the Selected Card
-
-            playKingPosition = false;                                         //Ensure Flag is Unset
-
-            if (isGameOver())                           //Check if game still has playable positions
-            {
-                endGame();                   //Close out the current game, and set appropriate flags
-            }
         }
 
         /*******************************************************************************************
-         * playSpaceClicked
-         * Actions to perform when mouse is Clicked. Process determines the Grid
-         * Component that was clicked then initiates a card move.
-         */
+          * playSpaceClicked
+          * Actions to perform when mouse is Clicked. Process determines the Grid
+          * Component that was clicked then initiates a card move.
+          */
         public void playSpaceClicked(int playCol, int playRow)
         {
             if (isGameSet)                                         //Playing Area is set for play...
@@ -576,6 +626,8 @@ namespace LeapFrog
                     if (isKingPosition(playCol))               //If Clicked Cell is Leftmost Cell...
                     {
                         tempStorage = destinationPosition;           //Store the Current Destination
+
+                        findPlayableKings();              //Find the locations of the Playable Kings
 
                         displayMessage(msgSelectKing);                              //Prompt User...
                         playKingPosition = true;                         //Set King being Moved Flag
@@ -593,10 +645,10 @@ namespace LeapFrog
                         }
                         else
                         {
-                            sourcePosition = destinationPosition;//Set Source to Current Destination
-                            destinationPosition = tempStorage;        //Restore Original Destination
+                            moveCard(destinationPosition, tempStorage);
                         }
 
+                        playableKingPositions.Clear();                //Clear the Playable King List
                         playKingPosition = false;                  //Unset the King being Moved Flag
                     }
 
@@ -605,9 +657,16 @@ namespace LeapFrog
                     {
                         moveCard(sourcePosition, destinationPosition);     //Move the Designated Card
 
-                        moveCount++;                                         //Increment Move Counter
-                        txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
+                        //moveCount++;                                         //Increment Move Counter
+                        //txtMoveCount.Text = moveCount.ToString();            //Display Count of Moves
                     }
+                }
+
+                txtMoveCount.Text = moveCount.ToString();                   //Display Count of Moves
+
+                if (isGameOver())                       //Check if game still has playable positions
+                {
+                    endGame();               //Close out the current game, and set appropriate flags
                 }
             }
         }
@@ -747,6 +806,8 @@ namespace LeapFrog
             //Set Source to "Playable"
             dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Tag = playSpace;
             dataGridGameBoard[sourceCard.getColumn(), sourceCard.getRow()].Value = playSpaceIcon;
+
+            moveCount++;                                         //Increment Move Counter
 
             myUndoBuffer.push(sourceCard, destinationCard);             //Push Move onto Undo Buffer
         }
