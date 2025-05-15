@@ -629,8 +629,18 @@ namespace LeapFrog
 
                         findPlayableKings();              //Find the locations of the Playable Kings
 
-                        displayMessage(msgSelectKing);                              //Prompt User...
-                        playKingPosition = true;                         //Set King being Moved Flag
+                        if (playableKingPositions.Count == 1)      //If only one King is playable...
+                        {
+                            moveCard(playableKingPositions[0], tempStorage);               //Move it
+
+                            playableKingPositions.Clear();            //Clear the Playable King List
+                            playKingPosition = false;        //Ensure King being Moved Flag is unset
+                        }
+                        else
+                        {
+                            displayMessage(msgSelectKing);                          //Prompt User...
+                            playKingPosition = true;                     //Set King being Moved Flag
+                        }
                     }
                     else if (!playKingPosition)                            //If not Moving a King...
                     {
