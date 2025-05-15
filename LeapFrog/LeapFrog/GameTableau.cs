@@ -7,7 +7,7 @@
  * Created:             24-September-2013
  * 
  * LastMaintainedBy:    Charles J Pilgrim
- * LastMaintained:      07-March-2025
+ * LastMaintained:      15-March-2025
  * 
 * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
@@ -19,8 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+//using System.Runtime.InteropServices;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /***************************************************************************************************
@@ -97,8 +97,6 @@ namespace LeapFrog
 
             //Customize the Game Tableau Form/Window
             this.Icon = myGameInfo.getWindowIcon();               //Set the Icon for the Main window
-
-            this.Text = this.Text + ":" + playerID.getPlayerName();   //Add Player Name to Title Bar
 
             this.BackColor = myGameInfo.getBackgroundColor();         //Set Tableau Background Color
             this.ForeColor = myGameInfo.getForegroundColor();         //Set Tableau Foreground Color

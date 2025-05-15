@@ -7,7 +7,7 @@
  * Created:             10-October-2013
  * 
  * LastMaintainedBy:    Charles J Pilgrim
- * LastMaintained:      07-March-2025
+ * LastMaintained:      15-March-2025
  * 
  * @Copyright (c) 2025 Charles J. Pilgrim
  * All Rights Reserved.
@@ -35,12 +35,10 @@ namespace LeapFrog
         private static RegistryKey playerBaseKey = Registry.CurrentUser; //Base Key Game Information
         private RegistryKey playerSubKey;
 
-        private System.Security.Principal.WindowsIdentity playerID = System.Security.Principal.WindowsIdentity.GetCurrent();
-
         private int gamesPlayed = 0;                             //Cumulative Number of Games Played
         private int gameWinnings = 0;                                          //Cumulative Winnings
         private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
-        private String namePlayer = "";                         //Name or Identity of Current Player
+        //private String namePlayer = "";                         //Name or Identity of Current Player
         private TimeSpan timePlayed = new TimeSpan(0,0,0);         //Total Time for All Games Played
         
         /*******************************************************************************************
@@ -49,7 +47,6 @@ namespace LeapFrog
         public Player()
         {
             //Set Default Values before Attempting to Load Stats from Registry
-            setPlayerName(playerID.Name);          //Set the Player Name to the Logged In User Name
             setGameWinnings(0);                                 // Initialize the Player's Winnings
             setGamesPlayed(0);                        // Initialize the Player's Games Played Count
 
@@ -115,7 +112,7 @@ namespace LeapFrog
         {
             String messageBoxTitle = "Player Score";
 
-            String reportScore = "For " + getPlayerName() + "\n\nGames Played : " + getGamesPlayed();
+            String reportScore = "\nGames Played : " + getGamesPlayed();
             reportScore += "\n\nScore for All Games: " + getGameWinnings();
             reportScore += "\n\nTotal Moves for All Games: " + getCountMoves();
 
@@ -134,7 +131,7 @@ namespace LeapFrog
         {
             String messageBoxTitle = "Player Score";
 
-            String reportScore = "For " + getPlayerName() + "\n\nGames Played : " + getGamesPlayed();
+            String reportScore = "\nGames Played : " + getGamesPlayed();
             reportScore += "\n\nScore for Current Game: " + currentScore.ToString();
             reportScore += "\nMoves in Current Game: " + currentMoves.ToString();
             reportScore += "\n\nScore for All Games: " + getGameWinnings();
@@ -194,15 +191,6 @@ namespace LeapFrog
         }
         
         /*******************************************************************************************
-         * Method: getPlayerName
-         * Returns the Name of the Player of the Object that Invoked the Method.
-         */
-        public String getPlayerName()
-        {
-            return this.namePlayer;
-        }
-
-        /*******************************************************************************************
          * Method: getTimePlayed
          * Returns the Amount of Time Played
          */
@@ -234,7 +222,6 @@ namespace LeapFrog
             }
             else                                    //Otherwise, load the Stats from the Registry...
              {
-                setPlayerName((string)playerSubKey.GetValue("PlayerName"));
                 setGamesPlayed((int)playerSubKey.GetValue("GamesPlayed"));
                 setGameWinnings((int)playerSubKey.GetValue("Winnings"));
                 setCountMoves((int)playerSubKey.GetValue("Moves"));
@@ -272,15 +259,6 @@ namespace LeapFrog
         }
         
         /*******************************************************************************************
-         * Method: setPlayerName
-         * Sets the Name of the Player of the Object that Invoked the Method.
-         */
-        public void setPlayerName(String aName)
-        {
-            this.namePlayer = aName;
-        }
-
-        /*******************************************************************************************
          * Method: setTimePlayed
          * Sets the Total Time Played.
          */
@@ -295,7 +273,6 @@ namespace LeapFrog
          */
         private void writePlayerStats()
         {
-            playerSubKey.SetValue("PlayerName", this.namePlayer);
             playerSubKey.SetValue("GamesPlayed", this.gamesPlayed);
             playerSubKey.SetValue("Winnings", this.gameWinnings);
             playerSubKey.SetValue("Moves", this.countMoves);
