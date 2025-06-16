@@ -45,6 +45,8 @@
             this.gameTime = new System.Windows.Forms.Timer(this.components);
             this.lblGameTimer = new System.Windows.Forms.Label();
             this.grpGameInfo = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtScore = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridGameBoard)).BeginInit();
             this.menuStripGame.SuspendLayout();
             this.grpGameInfo.SuspendLayout();
@@ -187,6 +189,8 @@
             // grpGameInfo
             // 
             this.grpGameInfo.BackColor = System.Drawing.Color.Blue;
+            this.grpGameInfo.Controls.Add(this.txtScore);
+            this.grpGameInfo.Controls.Add(this.label1);
             this.grpGameInfo.Controls.Add(this.lblGameTimer);
             this.grpGameInfo.Controls.Add(this.txtMoveCount);
             this.grpGameInfo.Controls.Add(this.lblMoveCount);
@@ -195,6 +199,28 @@
             this.grpGameInfo.Size = new System.Drawing.Size(1040, 49);
             this.grpGameInfo.TabIndex = 7;
             this.grpGameInfo.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(336, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 20);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Score:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtScore
+            // 
+            this.txtScore.BackColor = System.Drawing.Color.Blue;
+            this.txtScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtScore.ForeColor = System.Drawing.Color.White;
+            this.txtScore.Location = new System.Drawing.Point(403, 12);
+            this.txtScore.Name = "txtScore";
+            this.txtScore.Size = new System.Drawing.Size(100, 26);
+            this.txtScore.TabIndex = 8;
             // 
             // GameTableau
             // 
@@ -236,5 +262,7 @@
         private System.Windows.Forms.Timer gameTime;
         private System.Windows.Forms.Label lblGameTimer;
         private System.Windows.Forms.GroupBox grpGameInfo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtScore;
     }
 }

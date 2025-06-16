@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Win32;
+
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
 //using Microsoft.UI.Xaml.Input;
@@ -8,6 +10,8 @@ using Microsoft.UI.Xaml.Controls;
 
 using System;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+
 
 //using System.Collections.Generic;
 //using System.IO;
@@ -34,6 +38,10 @@ namespace WinUiPlayApp
 
         private string dialogTitle = "Playing Around...";
 
+        private static String keyName = "SOFTWARE\\Microsoft\\IdentityStore\\LogonCache";         //Name of App and Registry Key
+        private static RegistryKey playerBaseKey = Registry.LocalMachine; //Base Key Game Information
+        //private static RegistryKey playerBaseKey = Registry.CurrentUser; //Base Key Game Information
+        private RegistryKey playerSubKey;
         public MainPage()
         {
             this.InitializeComponent();
@@ -72,6 +80,42 @@ namespace WinUiPlayApp
             Frame.Navigate(typeof(Page2));
         }
 
+        private void LoadPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            loadPlayerStats();
+        }
+
+        /*******************************************************************************************
+        * Method: loadPlayerStats
+        * Loads the Player Stats from the Registry for the Current User.
+        */
+        private void loadPlayerStats()
+        {
+            //string myName = ReadRegistryValue(string keyPath, string valueName);
+
+            playerSubKey = playerBaseKey.OpenSubKey(keyName, true); //Attempt to Open the Sub Key...
+            if (playerSubKey == null)                                       //If no Sub Key found...
+            {
+                playerSubKey = playerBaseKey.CreateSubKey(keyName);          //Create the Sub Key...
+                //writePlayerStats();                                        //And Save Default Values
+            }
+            //else                                    //Otherwise, load the Stats from the Registry...
+            //{
+            //    setGamesPlayed((int)playerSubKey.GetValue("GamesPlayed"));
+            //    setGameWinnings((int)playerSubKey.GetValue("Winnings"));
+            //    setCountMoves((int)playerSubKey.GetValue("Moves"));
+
+            //    setTimePlayed(convertRegistryTimePlayed());
+            //}
+        }
+
+        //public static string ReadRegistryValue(string keyPath, string valueName)
+        //{
+        //    using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyPath))
+        //    {
+        //        return key?.GetValue(valueName)?.ToString() ?? "Value not found";
+        //    }
+        //}
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
             var currentValue = myButton.Content;

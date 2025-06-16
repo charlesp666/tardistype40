@@ -671,6 +671,8 @@ namespace LeapFrog
                 }
 
                 txtMoveCount.Text = moveCount.ToString();                   //Display Count of Moves
+                int myScore = scoreGame();                                   //Compute Current Score
+                txtScore.Text = myScore.ToString();                          //Display Current Score
 
                 if (isGameOver())                       //Check if game still has playable positions
                 {
@@ -793,6 +795,9 @@ namespace LeapFrog
 
             moveCount = 0;                              //Initialize the Move Counter for a New Game
             txtMoveCount.Text = moveCount.ToString();                       //Display Count of Moves
+
+            int myScore = 0;
+            txtScore.Text = myScore.ToString();
 
             gameStartTime = System.DateTime.Now;                 //Set the Starting Time for Game...
             gameTime.Start();                                                  //And start the clock

@@ -167,3 +167,4 @@ C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.csproj.CoreCompileInputs.cache
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe
 C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.pdb
+C:\Users\charl\source\repos\charlesp666\tardistype40\LeapFrog\LeapFrog\obj\Debug\LeapFrog.exe.config
