@@ -45,6 +45,11 @@
     <Folder Include="Assets\Sounds\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="PlayerStatsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="DisplayInstructions.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

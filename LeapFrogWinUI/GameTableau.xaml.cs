@@ -12,7 +12,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
+//using Microsoft.UI.Xaml.Media.Animation;
 
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
@@ -212,7 +212,20 @@ namespace LeapFrogWinUI
          */
         private async void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            await displayPlayerStats(myAvatar);
+            var statsStyle = (Style)this.Resources["DialogButtonStyle"];
+
+            //Title = "Player Statistics",
+            var dialog = new ContentDialog
+            {
+                Content = new PlayerStatsDialog(myAvatar),
+                Background = new SolidColorBrush(Colors.Blue),
+                PrimaryButtonText = "OK",
+                PrimaryButtonStyle = statsStyle,
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = this.XamlRoot // Required in WinUI 3
+            };
+
+            await dialog.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -847,6 +860,9 @@ namespace LeapFrogWinUI
                     {
                         endGame();           //Close out the current game, and set appropriate flags
                     }
+
+                    int myScore = scoreGame();
+                    tbScore.Text = "Score: " + myScore.ToString();
                 }
             }
         }

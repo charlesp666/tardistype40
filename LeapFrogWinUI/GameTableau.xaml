@@ -9,7 +9,23 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Height="800"
-      Width="1575">
+      Width="1575"
+>
+
+    <Page.Resources>
+        <!--Style to Apply to the Dislay Player Statistics Dialog -->
+        <Style x:Key="DialogButtonStyle"
+               TargetType="Button"
+        >
+            <Setter Property="Background" Value="Blue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Name="gameTableau"
           Background="Blue"
@@ -100,6 +116,33 @@
                 <TextBlock x:Name="tbMoveCount"
                            Text=""
                            Width="190"
+                           Height="46"
+                           HorizontalTextAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontFamily="Helvetica"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           FontStyle="Italic"
+                           Foreground="White"
+                />
+            </Border>
+
+            <Border Name="brdScore"
+                    Grid.Column="3"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Margin="3,3,3,3"
+                    Height="50"
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Blue"
+            >
+                
+                <TextBlock x:Name="tbScore"
+                           Text=""
+                           Width="100"
                            Height="46"
                            HorizontalTextAlignment="Center"
                            VerticalAlignment="Center"

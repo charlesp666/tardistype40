@@ -25,13 +25,16 @@ namespace LeapFrogWinUI
 {
     public class Player
     {
-        private string containerName = "LeapFrog";              //Name for the Player Local Settings
+        private string containerName = "LeapFrog"; //Name for the Container of Player Local Settings
 
         private int gamesPlayed = 0;                             //Cumulative Number of Games Played
         private int gameWinnings = 0;                                          //Cumulative Winnings
         private int countMoves = 0;             //Cumulative Count of Moves Made in All Games Played
 
         private TimeSpan timePlayed = new TimeSpan(0, 0, 0);       //Total Time for All Games Played
+
+        private string myFirstPlay = null;
+        private string myMostRecentPlay = null;
 
         //Parameters to track User Statistics
         private ApplicationDataContainer PlayerStats = ApplicationData.Current.LocalSettings;
@@ -172,6 +175,8 @@ namespace LeapFrogWinUI
             this.addToMoves(numberMoves);                      //Add Moves to Move Count Accumulator
             this.addToTime(gameTime);                     //Add Game Time to Time Played Accumulator
 
+            this.setDateMostRecent();                        //Set the Date for the Most Recent Play
+
             writePlayerStats();                          //Write Updated Statistics Back to Registry
         }
 
@@ -185,12 +190,24 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
-         * Method: getGameWinnings
-         * Returns the total Game Winnings for the Object that Invoked the method
+         * Method: getGameFirstPlayed
+         * Returns the Date that the Game was first played.
          */
-        public int getGameWinnings()
+        public string getGameFirstPlayed()
         {
-            return ((int)PlayerStats.Values["Winnings"]);
+            return (PlayerStats.Values["myFirstPlay"].ToString());
+        }
+
+        /*******************************************************************************************
+         * Method: getGameMostRecentPlayed
+         * Returns the Date the game was most recently played.
+         */
+        public string getGameMostRecentPlayed()
+        {
+            string returnValue = "";
+            if (PlayerStats.Values["myMostRecentPlay"] is not null)
+             { returnValue = PlayerStats.Values["myMostRecentPlay"].ToString(); }
+            return returnValue;
         }
 
         /*******************************************************************************************
@@ -209,6 +226,15 @@ namespace LeapFrogWinUI
         public TimeSpan getTimePlayed()
         {
             return (TimeSpan)PlayerStats.Values["TimePlayed"];
+        }
+
+        /*******************************************************************************************
+         * Method: getGameWinnings
+         * Returns the total Game Winnings for the Object that Invoked the method
+         */
+        public int getGameWinnings()
+        {
+            return ((int)PlayerStats.Values["Winnings"]);
         }
 
         /*******************************************************************************************
@@ -259,7 +285,21 @@ namespace LeapFrogWinUI
                 countNullValues++;
             }
 
-            //Write/Update PlayerStats in local settins if any Values were created
+            //Check if "myFirstPlay" Date has been previously set; create if not
+            if (PlayerStats.Values["myFirstPlay"] is null)
+            {
+                setDateFirstPlayed();
+                countNullValues++;
+            }
+
+            ////Check if "GamesPlayed" has been previously set; create if not
+            //if (PlayerStats.Values["myMostRecentPlay"] is null)
+            //{
+            //    setDateMostRecent();
+            //    countNullValues++;
+            //}
+
+            //Write/Update PlayerStats in local settings if any Values were created
             if (countNullValues != 0) {writePlayerStats();}
 
             //Transfer the PlayerStats values to local variables.
@@ -268,6 +308,9 @@ namespace LeapFrogWinUI
             setCountMoves((int)PlayerStats.Values["Moves"]);
 
             setTimePlayed(convertRegistryTimePlayed());
+
+            setDateFirstPlayedGame((string)PlayerStats.Values["myFirstPlay"]);
+            setDateFirstPlayedGame((string)PlayerStats.Values["myMostRecentPlay"]);
         }
 
         /*******************************************************************************************
@@ -278,6 +321,42 @@ namespace LeapFrogWinUI
         {
 
             this.countMoves = aValue;
+        }
+
+        /*******************************************************************************************
+         * Method: setDateFirstPlayed
+         * Sets the Date for the first time this user has played the game.
+         */
+        public void setDateFirstPlayed()
+        {
+            this.myFirstPlay = DateTime.Now.ToString("dd-MMM-yyyy");
+        }
+
+        /*******************************************************************************************
+         * Method: setDateMostRecent
+         * Sets the Date for the first time this user has played the game.
+         */
+        public void setDateMostRecent()
+        {
+            this.myMostRecentPlay = DateTime.Now.ToString("dd-MMM-yyyy");
+        }
+
+        /*******************************************************************************************
+         * Method: setDateFirstPlayedGame
+         * Sets the Date for the first time this user has played the game.
+         */
+        public void setDateFirstPlayedGame(string theDate)
+        {
+            this.myFirstPlay = theDate;
+        }
+
+        /*******************************************************************************************
+         * Method: setDateMostRecentPlayedGame
+         * Sets the Date for the first time this user has played the game.
+         */
+        public void setDateMostRecentPlayedGame(string theDate)
+        {
+            this.myMostRecentPlay = theDate;
         }
 
         /*******************************************************************************************
@@ -320,6 +399,9 @@ namespace LeapFrogWinUI
             PlayerStats.Values["Winnings"] = this.gameWinnings;
             PlayerStats.Values["Moves"] = this.countMoves;
             PlayerStats.Values["TimePlayed"] = this.timePlayed;
+
+            PlayerStats.Values["myFirstPlay"] = this.myFirstPlay;
+            PlayerStats.Values["myMostRecentPlay"] = this.myMostRecentPlay;
         }
     }
 }

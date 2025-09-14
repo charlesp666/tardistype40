@@ -1,6 +1,8 @@
+//using Microsoft.UI;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System;
+using Microsoft.UI.Xaml.Media;
 
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
@@ -8,7 +10,7 @@ using System;
 //using Microsoft.UI.Xaml.Media;
 //using Microsoft.UI.Xaml.Navigation;
 
-//using System;
+using System;
 //using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -169,10 +171,20 @@ namespace WinUiPlayApp
          */
         private async void btnPlayerStats_Click(object sender, RoutedEventArgs e)
         {
-            var playerStats = new DisplayPlayerStats(myAvatar);
-            playerStats.XamlRoot = this.XamlRoot;
+            var statsStyle = (Style)this.Resources["DialogButtonStyle"];
 
-            await playerStats.ShowAsync();
+            //Title = "Player Statistics",
+           var dialog = new ContentDialog
+            {
+                Content = new PlayerStatsDialog(myAvatar),
+                Background = new SolidColorBrush(Colors.Blue),
+                PrimaryButtonText = "OK",
+                PrimaryButtonStyle = statsStyle,
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = this.XamlRoot // Required in WinUI 3
+            };
+
+            await dialog.ShowAsync();
         }
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)

@@ -41,12 +41,6 @@
                     VerticalAlignment="Center"
             />
 
-            <Button Content="Load Player"
-                    Click="LoadPlayer_Click"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-            />
-
             <HyperlinkButton Content="Click to go to page 2"
                                  Click="HyperlinkButton_Click"
                                  HorizontalAlignment="Center"

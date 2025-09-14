@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="LeapFrogWinUI.PlayerStatsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeapFrogWinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+    Width="auto"
+    Height="auto"
+>
+    <Grid Name="playerStats"
+          Background="Blue"
+          Margin="2,2,0,0"
+          Width="auto"
+          Height="auto"
+    >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Display the Header for the Dialog-->
+        <Grid Name="iconFroggyStats"
+              Grid.Row="0"
+        >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="390"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Display the "Froggy Stats" icon/image-->
+            <Border Name="bdrStatsImage"
+                    Grid.Column="0"
+                    BorderBrush="White"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Margin="2,2,0,0"
+            >
+                <Image x:Name="picStatsImage"
+                       Source="/Assets/GameImages/FroggyStats.png"
+                       Stretch="UniformToFill"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Height="80"
+                       Width="90"
+                       FocusVisualPrimaryBrush="#FF0000C0"
+                />
+            </Border>
+
+            <!--Display Dialog Header icon/image-->
+            <Border Name="bdrHdrPlayerStats"
+                    Grid.Column="1"
+                    BorderBrush="White"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Margin="2,2,0,0"
+            >
+                <TextBlock Name="hdrPlayerStats"
+                           Text="Player Statistics"
+                           FontFamily="Arial Black"
+                           FontSize="24"
+                           FontStyle="Italic"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalAlignment="Center"
+                />
+            </Border>
+        </Grid>
+
+        <!-- Display the Accumulated Statistics, e.g.: Total Moves; total time; etc.-->
+        <Grid Name="dispPlayerGameDates"
+              Grid.Row="1"
+              BorderBrush="white"
+              BorderThickness="2"
+              Background="Blue"
+              CornerRadius="10"
+              Margin="2,2,0,0"
+              Height="70"
+              Width="490"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Display the First Date Played-->
+            <TextBlock Name="lblGameFirstPlayed"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Game First Played: "
+                       FontSize="18"
+                       Margin="2,0,0,0"
+            />
+            <TextBlock Name="txtGameFirstPlayed"
+                      Grid.Row="0"
+                      Grid.Column="1"
+                      Text=""
+                      FontSize="18"
+                      Margin="0,0,0,10"
+            />
+
+            <!-- Display the Most Recent Date Played-->
+            <TextBlock Name="lblGameMostRecentlyPlayed"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Game Most Recently Played: "
+                       FontSize="18"
+                       Margin="2,0,0,0"
+            />
+            <TextBlock Name="txtGameMostRecentlyPlayed"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Text=""
+                       FontSize="18"
+                       Margin="0,0,0,10"
+            />
+        </Grid>
+
+        <!-- Display the Accumulated Statistics, e.g.: Total Moves; total time; etc.-->
+        <Grid Name="dispPlayerStats"
+              Grid.Row="2"
+              BorderBrush="white"
+              BorderThickness="2"
+              Background="Blue"
+              CornerRadius="10"
+              Margin="2,2,0,0"
+              Height="130"
+              Width="490"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Display Section Header-->
+            <TextBlock Name="lblDataSectionHeader"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Text="Accumulated Statistics"
+                       FontSize="18"
+                       Margin="2,0,0,0"
+                       FontWeight="Bold"
+                       FontStyle="Italic"
+                       VerticalAlignment="Center"
+                       HorizontalTextAlignment="Center"
+            />
+
+            <!-- Display the Total Time Played-->
+            <TextBlock Name="lblTimePlayed"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Total Time of Games Played: "
+                       FontSize="18"
+                       Margin="2,0,0,0"
+            />
+            <TextBlock Name="txtTimePlayed"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Text=""
+                       FontSize="18"
+                       Margin="0,0,0,10"
+            />
+
+            <!-- Display the Count of Games Played-->
+            <TextBlock Name="lblGameCount"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Number of Games Played: "
+                       FontSize="18"
+                       Margin="2,0,0,0"
+            />
+            <TextBlock Name="txtGameCount"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       Text=""
+                       FontSize="18"
+                       Margin="0,0,0,10"
+            />
+
+            <!-- Display the Players Total Score-->
+            <TextBlock Name="lblTotalScore"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Total Score For All Games: "
+                       FontSize="18"
+                       Margin="2,0,0,0"
+            />
+            
+            <TextBlock Name="txtTotalScore"
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       Text=""
+                       FontSize="18"
+                       Margin="0,0,0,10"
+            />
+        </Grid>
+
+        <!-- Display Computed Statistics, e.g.: Mean Moves per game; mean time dper game; etc.-->
+        <Grid Name="dispPlayerComputedStats"
+              Grid.Row="3"
+              BorderBrush="white"
+              BorderThickness="2"
+              Background="Blue"
+              CornerRadius="10"
+              Margin="2,2,0,0"
+              Height="100"
+              Width="490"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Display Section Header-->
+            <TextBlock Name="lblComputedSectionHeader"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Text="Computed Statistics"
+                       FontSize="18"
+                       Margin="2,0,0,0"
+                       FontWeight="Bold"
+                       FontStyle="Italic"
+                       VerticalAlignment="Center"
+                       HorizontalTextAlignment="Center"
+            />
+
+            <!-- Display the Mean Time per Game-->
+            <TextBlock Name="lblMeanTimePerGame"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Text="Mean Time per Game: "
+                           FontSize="18"
+                           Margin="2,0,0,0"
+            />
+            <TextBlock Name="txtMeanTimePerGame"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Text=""
+                           FontSize="18"
+                           Margin="0,0,0,10"
+            />
+
+            <!-- Display the Mean Score per Game-->
+            <TextBlock Name="lblMeanScorePerGame"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           Text="Mean Score per Game: "
+                           FontSize="18"
+                           Margin="2,0,0,0"
+            />
+            <TextBlock Name="txtMeanScorePerGame"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           Text=""
+                           FontSize="18"
+                           Margin="0,0,0,10"
+            />
+        </Grid>
+    </Grid>
+</UserControl>
