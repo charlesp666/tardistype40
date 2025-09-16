@@ -13,7 +13,7 @@
 >
 
     <Page.Resources>
-        <!--Style to Apply to the Dislay Player Statistics Dialog -->
+        <!--Style to Apply to the Display Player Statistics Dialog -->
         <Style x:Key="DialogButtonStyle"
                TargetType="Button"
         >
@@ -24,6 +24,33 @@
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!--Style to Apply to the Borders of the Header objects -->
+        <Style x:Key="HeaderBorderStyle"
+               TargetType="Border"
+        >
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Blue"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!--Style to Apply to the TextBlocks in the Border -->
+        <Style x:Key="HeaderTextBlockStyle"
+               TargetType="TextBlock"
+        >
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontStyle" Value="Italic"/>
         </Style>
     </Page.Resources>
 
@@ -49,8 +76,6 @@
               Width="1548"
               Height="60"
               Background="Blue"
-              BorderThickness="1"
-              BorderBrush="Black"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
         >
@@ -60,7 +85,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="210"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -76,107 +101,50 @@
                    FocusVisualPrimaryBrush="#FF0000C0"
             />
 
-            <!--Background="Blue"-->
-            <Border Name="brdGameTimer"
+            <Border Name="brdCurrentActivity"
                     Grid.Column="1"
-                    BorderBrush="White"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Height="50"
-                    Width="200"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Blue"
+                    Width="400"
+                    Style="{StaticResource HeaderBorderStyle}"
             >
-                <TextBlock x:Name="myTimerDisplay"
-                           HorizontalAlignment="Center"
-                           HorizontalTextAlignment="Center"
-                           VerticalAlignment="Center"
-                           Height="auto"
-                           Width="190"
-                           FontFamily="Helvetica"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           Foreground="White"
-                />
-            </Border>
-
-            <Border Name="brdMoveCount"
-                    Grid.Column="2"
-                    BorderBrush="White"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Margin="3,3,3,3"
-                    Height="50"
-                    Width="200"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Background="Blue"
-            >
-                <TextBlock x:Name="tbMoveCount"
-                           Text=""
-                           Width="190"
-                           Height="46"
-                           HorizontalTextAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontFamily="Helvetica"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           FontStyle="Italic"
-                           Foreground="White"
+                <TextBlock x:Name="tbCurrentActivity"
+                           Text="Initializing..."
+                           Width="390"
+                           Style="{StaticResource HeaderTextBlockStyle}"
                 />
             </Border>
 
             <Border Name="brdScore"
-                    Grid.Column="3"
-                    BorderBrush="White"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Margin="3,3,3,3"
-                    Height="50"
+                    Grid.Column="2"
                     Width="200"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Background="Blue"
+                   Style="{StaticResource HeaderBorderStyle}"
             >
-                
                 <TextBlock x:Name="tbScore"
-                           Text=""
+                           Text="Score: 0"
                            Width="100"
-                           Height="46"
-                           HorizontalTextAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontFamily="Helvetica"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           FontStyle="Italic"
-                           Foreground="White"
+                           Style="{StaticResource HeaderTextBlockStyle}"
                 />
             </Border>
 
-            <Border Name="brdCurrentActivity"
-                    Grid.Column="4"
-                    BorderBrush="White"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Height="50"
-                    Width="400"
-                    Background="Blue"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
+            <Border Name="brdMoveCount"
+                    Grid.Column="3"
+                    Width="200"
+                    Style="{StaticResource HeaderBorderStyle}"
             >
-                <!--Margin="1,1,1,1"-->
-                <TextBlock x:Name="tbCurrentActivity"
-                         Text="Initializing..."
-                         Width="390"
-                         Height="46"
-                         HorizontalTextAlignment="Center"
-                         VerticalAlignment="Center"
-                         FontSize="24"
-                         FontFamily="Helvetica"
-                         FontWeight="Medium"
-                         FontStyle="Italic"
-                         Foreground="White"
+                <TextBlock x:Name="tbMoveCount"
+                           Text=""
+                           Width="190"
+                           Style="{StaticResource HeaderTextBlockStyle}"
+                />
+            </Border>
+
+            <Border Name="brdGameTimer"
+                    Grid.Column="4"
+                    Width="200"
+                    Style="{StaticResource HeaderBorderStyle}"
+            >
+                <TextBlock x:Name="myTimerDisplay"
+                           Width="190"
+                           Style="{StaticResource HeaderTextBlockStyle}"
                 />
             </Border>
         </Grid>
@@ -192,7 +160,6 @@
                   VerticalAlignment="Center"
                   Background="Blue"
                   BorderThickness="2"
-                  BorderBrush="White"
                   IsItemClickEnabled="True"
                   SelectionMode="Single"
                   SelectionChanged="dataGridGameBoard_SelectionChanged"
@@ -201,7 +168,6 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="CardPosition"
                 >
-                    <!--Margin="1,1,1,1"-->
                     <StackPanel x:Name="PlayingCard"
                                 Height="142"
                                 Width="114"
@@ -252,8 +218,6 @@
               Height="48"
               Width="1478"
               Background="Blue"
-              BorderThickness="2"
-              BorderBrush="Black"
         >
             <Grid.RowDefinitions>
                 <RowDefinition Height="46"></RowDefinition>
@@ -276,11 +240,7 @@
                     Content="New Game"
                     Grid.Column="2"
                     Margin="2,2,2,2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    FontSize="24p"
-                    Foreground="White"
-                    Background="BlueViolet"
+                    Style="{StaticResource DialogButtonStyle}"
                     Click="btnNewGame_Click"
             />
 
@@ -288,11 +248,7 @@
                     Content="Statistics"
                     Grid.Column="7"
                     Margin="2,2,2,2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    FontSize="24"
-                    Foreground="White"
-                    Background="BlueViolet"
+                    Style="{StaticResource DialogButtonStyle}"
                     Click="btnStats_Click"
             />
 
@@ -300,11 +256,7 @@
                     Content="Help"
                     Grid.Column="8"
                     Margin="2,2,2,2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    FontSize="24"
-                    Foreground="White"
-                    Background="BlueViolet"
+                    Style="{StaticResource DialogButtonStyle}"
                     Click="btnHelp_Click"
             />
 
@@ -312,11 +264,7 @@
                     Content="Exit"
                     Grid.Column="9"
                     Margin="2,2,2,2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    FontSize="24"
-                    Foreground="White"
-                    Background="BlueViolet"
+                    Style="{StaticResource DialogButtonStyle}"
                     Click="btnExit_Click"
             />
         </Grid>

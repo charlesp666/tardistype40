@@ -155,15 +155,18 @@ namespace LeapFrogWinUI
             {
                 bool retVal = false;                                 //Set Default return value to false
 
-                string rankToMatch = someCard.cardRank.ToLower();          //Store Rank of Card to Match
-                string suitToMatch = someCard.cardSuit.ToLower();          //Store Suit of Card to Match
+                if (someCard is not null)
+                {
+                    string rankToMatch = someCard.cardRank.ToLower();          //Store Rank of Card to Match
+                    string suitToMatch = someCard.cardSuit.ToLower();          //Store Suit of Card to Match
 
-                string thisRank = this.cardRank.ToLower();                     //Store Rank of this card
-                string thisSuit = this.cardSuit.ToLower();                     //Store Suit of this card
+                    string thisRank = this.cardRank.ToLower();                     //Store Rank of this card
+                    string thisSuit = this.cardSuit.ToLower();                     //Store Suit of this card
 
-                if(thisSuit == suitToMatch)                                      //If the Suits match...
-                    if(thisRank == rankToMatch)                                 //and the Ranks match...
-                        retVal = true;                                        //Set return value to true
+                    if (thisSuit == suitToMatch)                                      //If the Suits match...
+                        if (thisRank == rankToMatch)                                 //and the Ranks match...
+                            retVal = true;                                        //Set return value to true
+                }
 
                 return retVal;
             }

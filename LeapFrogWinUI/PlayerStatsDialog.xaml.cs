@@ -10,8 +10,9 @@
 /***************************************************************************************************
  * System Class/Library Declarations
  */
-//using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+
 using System;
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
@@ -38,12 +39,24 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
          * Constructor: PlayerStatsDialog (Default)
          */
-        public PlayerStatsDialog(Player thePlayer)
+        public PlayerStatsDialog(Player thePlayer, bool isGameSet = false)
         {
             InitializeComponent();
 
+            /*Check if game is active and hide/display the Current Game Statistics Accordingly    */
+            if(isGameSet)
+            {
+                dispCurrentGame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                dispCurrentGame.Visibility = Visibility.Collapsed;
+            }
+
             /*Get and Store Total Time Played, Total Games Played and Total Score                 */
-            string totalTimePlayed = thePlayer.getTimePlayed().ToString();
+            string [] transTimePlayed = (thePlayer.getTimePlayed().ToString()).Split(".");
+            string totalTimePlayed = transTimePlayed[0];
+
             int totalGamesPlayed = thePlayer.getGamesPlayed();
             int totalScore = thePlayer.getGameWinnings();
 
@@ -86,11 +99,13 @@ namespace LeapFrogWinUI
          */
         public string computeMeanTimePerGame(string timePlayed, int countGames)
         {
-            string[] timeComponents = timePlayed.Split(":");
+            string[] timeComponents = timePlayed.Split(":");        //Split time into HH, MM and SS
+
+            string timeSeconds = (timeComponents[2].Split("."))[0];        //Remove Partial Seconds
 
             int Hours = int.Parse(timeComponents[0]);
             int Minutes = int.Parse(timeComponents[1]);
-            int Seconds = int.Parse(timeComponents[2]);
+            int Seconds = int.Parse(timeSeconds);
 
             int totalSeconds = (((Hours * 60) + Minutes) * 60) + Seconds;
 

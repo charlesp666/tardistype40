@@ -22,6 +22,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!-- Display the Header for the Dialog-->
@@ -280,6 +281,41 @@
                            Text=""
                            FontSize="18"
                            Margin="0,0,0,10"
+            />
+        </Grid>
+
+        <!-- Display the Current Game Statistics-->
+        <Grid Name="dispCurrentGame"
+              Grid.Row="4"
+              BorderBrush="white"
+              BorderThickness="2"
+              Background="Blue"
+              CornerRadius="10"
+              Margin="2,2,0,0"
+              Height="100"
+              Width="490"
+        >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Display Section Header-->
+            <TextBlock Name="lblCurrentSectionHeader"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Text="Current Statistics"
+                       FontSize="18"
+                       Margin="2,0,0,0"
+                       FontWeight="Bold"
+                       FontStyle="Italic"
+                       VerticalAlignment="Center"
+                       HorizontalTextAlignment="Center"
             />
         </Grid>
     </Grid>

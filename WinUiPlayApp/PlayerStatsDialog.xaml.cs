@@ -10,8 +10,9 @@
 /***************************************************************************************************
  * System Class/Library Declarations
  */
-//using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+
 using System;
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
@@ -38,12 +39,22 @@ namespace WinUiPlayApp
         /*******************************************************************************************
          * Constructor: PlayerStatsDialog (Default)
          */
-        public PlayerStatsDialog(Player thePlayer)
+        public PlayerStatsDialog(Player thePlayer, bool isGameSet = false)
         {
             InitializeComponent();
 
-            /*Get and Store Total Time Played, Total Games Played and Total Score                 */
-            string totalTimePlayed = thePlayer.getTimePlayed().ToString();
+            /*Check if game is active and hide/display the Current Game Statistics Accordingly    */
+            if(isGameSet)
+            {
+                dispCurrentGame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                dispCurrentGame.Visibility = Visibility.Collapsed;
+            }
+
+                /*Get and Store Total Time Played, Total Games Played and Total Score                 */
+                string totalTimePlayed = thePlayer.getTimePlayed().ToString();
             int totalGamesPlayed = thePlayer.getGamesPlayed();
             int totalScore = thePlayer.getGameWinnings();
 

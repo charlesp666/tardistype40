@@ -310,7 +310,7 @@ namespace LeapFrogWinUI
             setTimePlayed(convertRegistryTimePlayed());
 
             setDateFirstPlayedGame((string)PlayerStats.Values["myFirstPlay"]);
-            setDateFirstPlayedGame((string)PlayerStats.Values["myMostRecentPlay"]);
+            setDateMostRecentPlayedGame((string)PlayerStats.Values["myMostRecentPlay"]);
         }
 
         /*******************************************************************************************

@@ -47,7 +47,7 @@ namespace WinUiPlayApp
     /// </summary>
     public sealed partial class SplashPage : Page
     {
-        private static int linkDelayMS = 200;      //Action display delay so user can see changes
+        private static int linkDelayMS = 50;      //Action display delay so user can see changes
 
         public SplashPage()
         {

@@ -11,6 +11,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 //using Microsoft.UI.Xaml.Media.Animation;
 
@@ -43,6 +44,7 @@ using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Media.SpeechSynthesis;
 using Windows.Storage;                                    //To load Help Instructions from Text File
+using Windows.System;
 using Windows.UI;
 //using Windows.UI.Composition;
 //using Windows.UI.Popups;
@@ -161,6 +163,10 @@ namespace LeapFrogWinUI
             ResizeAppWindow(myWindow);              //Resize the AppWindow to Match GameTableau size
             CenterAppWindow(myWindow);                         //Center the AppWindow on the Display
 
+            //Setup capture of the "Esc" Key
+            this.KeyDown += GamePlay_KeyDown;
+            this.Focus(FocusState.Programmatic); // Ensure the page has focus
+
             InitializeTimer();
 
             //Clear the Game Deck to initialize the Game Board, and prepare for new game
@@ -210,22 +216,23 @@ namespace LeapFrogWinUI
          * Event Handler: Player Statistics
          * Calls procedure to display player statistics.
          */
-        private async void btnStats_Click(object sender, RoutedEventArgs e)
+        private void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            var statsStyle = (Style)this.Resources["DialogButtonStyle"];
+            displayPlayerStats(myAvatar, isGameSet);
 
-            //Title = "Player Statistics",
-            var dialog = new ContentDialog
-            {
-                Content = new PlayerStatsDialog(myAvatar),
-                Background = new SolidColorBrush(Colors.Blue),
-                PrimaryButtonText = "OK",
-                PrimaryButtonStyle = statsStyle,
-                DefaultButton = ContentDialogButton.Primary,
-                XamlRoot = this.XamlRoot // Required in WinUI 3
-            };
+            //var statsStyle = (Style)this.Resources["DialogButtonStyle"];
 
-            await dialog.ShowAsync();
+            //var dialog = new ContentDialog
+            //{
+            //    Content = new PlayerStatsDialog(myAvatar, isGameSet),
+            //    Background = new SolidColorBrush(Colors.Blue),
+            //    PrimaryButtonText = "OK",
+            //    PrimaryButtonStyle = statsStyle,
+            //    DefaultButton = ContentDialogButton.Primary,
+            //    XamlRoot = this.XamlRoot // Required in WinUI 3
+            //};
+
+            //await dialog.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -284,6 +291,18 @@ namespace LeapFrogWinUI
             }
         }
         #endregion
+
+        /*******************************************************************************************
+         * Event Handler: GamePlay_KeyDown
+         * Traps a KeyPress event, checks if the key was "esc" and disables King Selection if so.
+         */
+        private void GamePlay_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if ((isGameSet) && (e.Key == VirtualKey.Escape))      //If game active and "esc" pressed
+            {
+                deactivateKingMove();
+            }
+        }
 
         /*******************************************************************************************
          *******************************************************************************************
@@ -471,12 +490,21 @@ namespace LeapFrogWinUI
          * Method: displayMessage
          * Displays the informational Message passed as parameter.
          */
-        private async Task displayPlayerStats(Player myAvatar)
+        private async Task displayPlayerStats(Player myAvatar, bool isGameSet)
         {
-            var playerStats = new DisplayPlayerStats(myAvatar);
-            playerStats.XamlRoot = this.XamlRoot;
+            var statsStyle = (Style)this.Resources["DialogButtonStyle"];
 
-            await playerStats.ShowAsync();
+            var dialog = new ContentDialog
+            {
+                Content = new PlayerStatsDialog(myAvatar, isGameSet),
+                Background = new SolidColorBrush(Colors.Blue),
+                PrimaryButtonText = "OK",
+                PrimaryButtonStyle = statsStyle,
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = this.XamlRoot // Required in WinUI 3
+            };
+
+            await dialog.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -517,7 +545,12 @@ namespace LeapFrogWinUI
          */
         private void exitGame(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            if (isGameSet)                                        //If a Game is currently Active...
+            {
+                endGame();                          //Accumulate Current Score for Game being Exited
+            }
+
+            Environment.Exit(0);                                                     //Exit the Game
         }
 
         /*******************************************************************************************
@@ -530,17 +563,18 @@ namespace LeapFrogWinUI
             StopTimer();                                                      //Stop the Game Timer
 
             await updateCurrentActivityText(msgGameOver);
+            await displayMessage(msgGameOver);                          //Display "Game Over" Dialog
 
-            int currentScore = scoreGame();                        //Compute Score for Current Game
+            /* Compute the Score of Current Game                                                  */
+            GameScore myScore = new GameScore(gameDeck);        //Accumulate Current Game Statistics
+            int currentScore = myScore.getGameScore();  //Store Current Score for further processing
+
             //Update Player Statistics then Display Results
             myAvatar.finishGameForPlayer(currentScore, moveCount, totalTimePlayed);
             flgGameOver = true;                                               //Set "Game Over" flag
+
+            await displayPlayerStats(myAvatar, isGameSet);
             isGameSet = false;                                               //Set the game set flag
-
-            await speakText(msgGameOver);
-            await displayMessage(msgGameOver);                          //Display "Game Over" Dialog
-
-            await displayPlayerStats(myAvatar);
         }
 
         /*******************************************************************************************
@@ -575,30 +609,32 @@ namespace LeapFrogWinUI
          */
         private async Task highlightKingForMoving(List<int> KingPositions, bool highlightKing = false)
         {
-            enableSelectionChanged(false);        //Disable Selection Event while highlighting Kings
-
-            SolidColorBrush newBorderBrush = normalBorderBrush;
-            newBorderWidth = new Thickness(normalBorderWidth);
-
-            if (highlightKing)
+            if (KingPositions is not null)
             {
-                newBorderBrush = highlightBorderBrush;
-                newBorderWidth = new Thickness(highlightBorderWidth);
+                enableSelectionChanged(false);        //Disable Selection Event while highlighting Kings
+
+                SolidColorBrush newBorderBrush = normalBorderBrush;
+                newBorderWidth = new Thickness(normalBorderWidth);
+
+                if (highlightKing)
+                {
+                    newBorderBrush = highlightBorderBrush;
+                    newBorderWidth = new Thickness(highlightBorderWidth);
+                }
+
+                foreach (int kingPosition in KingPositions)
+                {
+                    dataGridGameBoard.SelectedIndex = kingPosition;
+                    var myItem = dataGridGameBoard.SelectedItem;
+                    var anItem = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
+
+                    anItem.BorderBrush = newBorderBrush;
+                    anItem.BorderThickness = newBorderWidth;
+                }
+
+                //var myStackPanel = anItem.ContentTemplateRoot as StackPanel;
+                //myStoryBoard = myStackPanel.Resources["ZoomInMoveableKing"] as Storyboard;
             }
-
-            foreach (int kingPosition in KingPositions)
-            {
-                dataGridGameBoard.SelectedIndex = kingPosition;
-                var myItem = dataGridGameBoard.SelectedItem;
-                var anItem = dataGridGameBoard.ContainerFromItem(myItem) as GridViewItem;
-
-                anItem.BorderBrush = newBorderBrush;
-                anItem.BorderThickness = newBorderWidth;
-            }
-
-            //var myStackPanel = anItem.ContentTemplateRoot as StackPanel;
-            //myStoryBoard = myStackPanel.Resources["ZoomInMoveableKing"] as Storyboard;
-
             //myStoryBoard.Begin();
             enableSelectionChanged(true);        //Reenable Selection Event after highlighting Kings
         }
@@ -829,6 +865,7 @@ namespace LeapFrogWinUI
          */
         public async Task playSpaceClicked(int destinationIndex)
         {
+            /*Check if Clicked Space is a not a playable position; bleep error if not playable    */
             if ((gameDeck.deckCards[destinationIndex].cardRank.ToLower() != "p") && !isKingMoving)
             {
                 await playSound(soundNotPlayable);
@@ -861,8 +898,9 @@ namespace LeapFrogWinUI
                         endGame();           //Close out the current game, and set appropriate flags
                     }
 
-                    int myScore = scoreGame();
-                    tbScore.Text = "Score: " + myScore.ToString();
+                    GameScore myScore = new GameScore(gameDeck);
+                    //int myScore = scoreGame();
+                    tbScore.Text = "Score: " + myScore.getGameScore().ToString();
                 }
             }
         }
@@ -1066,7 +1104,7 @@ namespace LeapFrogWinUI
             //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
             //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
 
-            isGameOver();                            //Check if there are no more playable positions
+            //isGameOver();                            //Check if there are no more playable positions
         }
 
         //private void undoMove()
@@ -1117,35 +1155,35 @@ namespace LeapFrogWinUI
          ******************************************************************************************/
         #region
         // Define parameters for Scoring Games (Determining Player's Winnings)
-        private int pointsForSequence = 1;             //Points to add for cards in correct sequence
-        private int pointsForPosition = 2;             //Points to add for cards in correct position
-        private int pointsForCompleteSuit = 10;                  //Points to add for a complete suit
+        //private int pointsForSequence = 1;             //Points to add for cards in correct sequence
+        //private int pointsForPosition = 2;             //Points to add for cards in correct position
+        //private int pointsForCompleteSuit = 10;                  //Points to add for a complete suit
 
-        private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
+        //private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
 
         /*******************************************************************************************
          * Function: isCorrectPosition
          * Compares card position in row and determines if this is correctly placed. Returns "true"
          * if card is in correct position; otherwise returns false.
          */
-        private bool isCorrectPosition(int cardPosition)
-        {
-            Cards.Card thisCard = gameDeck.deckCards[cardPosition];          //Get Card being tested
-            bool placedCorrectly = false;                                 //Set default return value
+        //private bool isCorrectPosition(int cardPosition)
+        //{
+        //    Cards.Card thisCard = gameDeck.deckCards[cardPosition];          //Get Card being tested
+        //    bool placedCorrectly = false;                                 //Set default return value
 
-            if (!(thisCard.Equals(cardNotPlayable)))
-            {
-                String thisRank = thisCard.getRank();                        //Get Current Card Rank
-                int correctPosition = thisCard.findRank(thisRank);  //Get Position in Possible Ranks
-                correctPosition = Math.Abs(correctPosition - 12);         //Adjust for Reverse Order
+        //    if (!(thisCard.Equals(cardNotPlayable)))
+        //    {
+        //        String thisRank = thisCard.getRank();                        //Get Current Card Rank
+        //        int correctPosition = thisCard.findRank(thisRank);  //Get Position in Possible Ranks
+        //        correctPosition = Math.Abs(correctPosition - 12);         //Adjust for Reverse Order
 
-                int thisPosition = (cardPosition % 13);           //Get Current Card Column Position
+        //        int thisPosition = (cardPosition % 13);           //Get Current Card Column Position
 
-                placedCorrectly = (thisPosition == correctPosition);       //Compute Correct Placing
-            }
+        //        placedCorrectly = (thisPosition == correctPosition);       //Compute Correct Placing
+        //    }
 
-            return placedCorrectly;
-        }
+        //    return placedCorrectly;
+        //}
 
         /*******************************************************************************************
          * Method: scoreGame
@@ -1155,75 +1193,75 @@ namespace LeapFrogWinUI
          * 5 points for each card in correct position (column by rank)
          * 10 points for completion of a suit (King through 2 of same suit on same row)
          */
-        private int scoreGame()
-        {
-            int thisGameScore = 0;              //Local variable to accumulate score of current game
-            int completedSuits = 0;                          //Count of the Suits that are completed
-            int countSequence = 0;                   //Count the number of cards in correct sequence
+        //private int scoreGame()
+        //{
+        //    int thisGameScore = 0;              //Local variable to accumulate score of current game
+        //    int completedSuits = 0;                          //Count of the Suits that are completed
+        //    int countSequence = 0;                   //Count the number of cards in correct sequence
 
-            // Sum score for cards that are in correct sequence and correct position
-            for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
-            {
-                countSequence = 0;                     //Ensure Sequence Count is reset for each row
-                int currentRank = 0;       //Set initial column or Rank position for the current row
-                bool correctPosition = false;          //Initialize "Correct Position" flag to "Not"
+        //    // Sum score for cards that are in correct sequence and correct position
+        //    for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
+        //    {
+        //        countSequence = 0;                     //Ensure Sequence Count is reset for each row
+        //        int currentRank = 0;       //Set initial column or Rank position for the current row
+        //        bool correctPosition = false;          //Initialize "Correct Position" flag to "Not"
 
-                while(currentRank < 12)
-                {
-                    //Compute the Play Position of the Current Card being checked
-                    int playPosition = gameDeck.calcArrayPosition(aSuit, currentRank);
+        //        while(currentRank < 12)
+        //        {
+        //            //Compute the Play Position of the Current Card being checked
+        //            int playPosition = gameDeck.calcArrayPosition(aSuit, currentRank);
 
-                    Cards.Card thisCard = gameDeck.deckCards[playPosition];              //This Card
-                    if (!thisCard.cardsMatch(cardNotPlayable))
-                    {
-                        Cards.Card nextCard = gameDeck.deckCards[playPosition + 1];          //Next Card
+        //            Cards.Card thisCard = gameDeck.deckCards[playPosition];              //This Card
+        //            if (!thisCard.cardsMatch(cardNotPlayable))
+        //            {
+        //                Cards.Card nextCard = gameDeck.deckCards[playPosition + 1];          //Next Card
 
-                        Cards.Card nextCardInSequence = gameDeck.findNextCardDescending(thisCard);
+        //                Cards.Card nextCardInSequence = gameDeck.findNextCardDescending(thisCard);
 
-                        if (nextCard.cardsMatch(nextCardInSequence))        //If next card is correct...
-                        {
-                            countSequence++;                            //Increment the Sequence Counter
-                            if (isCorrectPosition(playPosition)) //If Current Card is in correct position...
-                            {
-                                correctPosition = true;       //Set the "Correct Position" flag to "Yes"
-                            }
-                        }
-                        else               //Card is in Current position, begin checking for sequence...
-                        {
-                            countSequence++;                      //Adjust Sequence Count for first card
+        //                if (nextCard.cardsMatch(nextCardInSequence))        //If next card is correct...
+        //                {
+        //                    countSequence++;                            //Increment the Sequence Counter
+        //                    if (isCorrectPosition(playPosition)) //If Current Card is in correct position...
+        //                    {
+        //                        correctPosition = true;       //Set the "Correct Position" flag to "Yes"
+        //                    }
+        //                }
+        //                else               //Card is in Current position, begin checking for sequence...
+        //                {
+        //                    countSequence++;                      //Adjust Sequence Count for first card
 
-                            if (countSequence == 12)                         //If the suit is complete...
-                            {
-                                completedSuits++;                //Increment the Completed Suits counter
-                                thisGameScore += pointsForCompleteSuit; //Add Completed Suits points to score
-                            }
+        //                    if (countSequence == 12)                         //If the suit is complete...
+        //                    {
+        //                        completedSuits++;                //Increment the Completed Suits counter
+        //                        thisGameScore += pointsForCompleteSuit; //Add Completed Suits points to score
+        //                    }
 
-                            if (countSequence > 2)       //If at least 3 cards are in correct sequence...
-                            {
-                                thisGameScore += (countSequence * pointsForSequence); //Add points to score
+        //                    if (countSequence > 2)       //If at least 3 cards are in correct sequence...
+        //                    {
+        //                        thisGameScore += (countSequence * pointsForSequence); //Add points to score
 
-                                if (correctPosition)                //If cards are in correct position...
-                                {
-                                    thisGameScore += (countSequence * pointsForPosition); //Add points to score
-                                }
-                            }
+        //                        if (correctPosition)                //If cards are in correct position...
+        //                        {
+        //                            thisGameScore += (countSequence * pointsForPosition); //Add points to score
+        //                        }
+        //                    }
 
-                            countSequence = 0;                                  //Reset sequence Counter
-                            correctPosition = false;                     //And the Correct Position Flag
-                        }
-                    }
+        //                    countSequence = 0;                                  //Reset sequence Counter
+        //                    correctPosition = false;                     //And the Correct Position Flag
+        //                }
+        //            }
 
-                    currentRank++;                                                //Go the next card
-                }
-            }
+        //            currentRank++;                                                //Go the next card
+        //        }
+        //    }
 
-            if(completedSuits == 4)                                  //If all Suits are completed...
-            {
-                thisGameScore += gameWinningBonus;                          //Add Winning Game Bonus
-            }
+        //    if(completedSuits == 4)                                  //If all Suits are completed...
+        //    {
+        //        thisGameScore += gameWinningBonus;                          //Add Winning Game Bonus
+        //    }
 
-            return thisGameScore;
-        }
+        //    return thisGameScore;
+        //}
 
         #endregion
 

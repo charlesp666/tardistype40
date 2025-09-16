@@ -33,11 +33,12 @@
           CornerRadius="10"
         >
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
             <Grid Name="bdrHeader"
@@ -112,7 +113,7 @@
                 />
             </Grid>
 
-            <Grid Name="bdrFourthGrid"
+            <Grid Name="bdrPlayerStats"
                   Grid.Row="3"
                   Margin="2,2"
                   Background="Blue"
@@ -122,9 +123,24 @@
                   VerticalAlignment="Center"
                   CornerRadius="10"
             >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnIsGameSet"
+                        Grid.Column="0"
+                        Margin="2,2,2,2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="24pi"
+                        Foreground="White"
+                        Click="btnIsGameSet_Click"
+                />
+
                 <Button x:Name="btnPlayerStats"
                         Content="Stats"
-                        Grid.Column="8"
+                        Grid.Column="1"
                         Margin="2,2,2,2"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"

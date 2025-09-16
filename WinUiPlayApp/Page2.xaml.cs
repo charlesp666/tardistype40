@@ -57,6 +57,7 @@ namespace WinUiPlayApp
     /// </summary>
     public sealed partial class Page2 : Page
     {
+        private bool isGameSet = true;                          //Flag indicates play area is ready
         public CurrentActivity myCurrentActivity { get; set; }
 
         private static String folderGameData = "ms-appx:///Assets//Data//";
@@ -76,6 +77,9 @@ namespace WinUiPlayApp
             this.DataContext = myCurrentActivity;
 
             myCurrentActivity.CurrentActivityText = "Reached Page 2..." ;
+
+            string txtIsGameSet = isGameSet.ToString();
+            btnIsGameSet.Content = txtIsGameSet;
 
             //Setup the Game Timer
             InitializeTimer();
@@ -135,13 +139,32 @@ namespace WinUiPlayApp
         }
 
         /*******************************************************************************************
-         * Event Handler: Help
+         * Event Handler: isGameSet
          * Displays the Help/About dialog
          */
         private void btnStartTimer_Click(object sender, RoutedEventArgs e)
         {
             ResetTimer();
             StartTimer();
+        }
+
+        /*******************************************************************************************
+         * Event Handler: Help
+         * Displays the Help/About dialog
+         */
+        private void btnIsGameSet_Click(object sender, RoutedEventArgs e)
+        {
+            if (isGameSet)
+            {
+                isGameSet = false;
+            }
+            else
+            { 
+                isGameSet = true;
+            }
+
+            string txtIsGameSet = isGameSet.ToString();
+            btnIsGameSet.Content = txtIsGameSet;
         }
 
         /*******************************************************************************************
@@ -176,7 +199,7 @@ namespace WinUiPlayApp
             //Title = "Player Statistics",
            var dialog = new ContentDialog
             {
-                Content = new PlayerStatsDialog(myAvatar),
+                Content = new PlayerStatsDialog(myAvatar, isGameSet),
                 Background = new SolidColorBrush(Colors.Blue),
                 PrimaryButtonText = "OK",
                 PrimaryButtonStyle = statsStyle,
