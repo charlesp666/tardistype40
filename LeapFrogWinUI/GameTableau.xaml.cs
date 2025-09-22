@@ -219,7 +219,8 @@ namespace LeapFrogWinUI
          */
         private void btnStats_Click(object sender, RoutedEventArgs e)
         {
-            displayPlayerStats(myAvatar, isGameSet);
+            GameScore thisGame = new GameScore(gameDeck, moveCount, totalTimePlayed);
+            displayPlayerStats(myAvatar, thisGame, isGameSet);
 
             //var statsStyle = (Style)this.Resources["DialogButtonStyle"];
 
@@ -491,13 +492,13 @@ namespace LeapFrogWinUI
          * Method: displayMessage
          * Displays the informational Message passed as parameter.
          */
-        private async Task displayPlayerStats(Player myAvatar, bool isGameSet)
+        private async Task displayPlayerStats(Player myAvatar, GameScore CurrentGame, bool isGameSet)
         {
             var statsStyle = (Style)this.Resources["DialogButtonStyle"];
 
             var dialog = new ContentDialog
             {
-                Content = new PlayerStatsDialog(myAvatar, isGameSet),
+                Content = new PlayerStatsDialog(myAvatar, CurrentGame, isGameSet),
                 Background = new SolidColorBrush(Colors.Blue),
                 PrimaryButtonText = "OK",
                 PrimaryButtonStyle = statsStyle,
@@ -574,7 +575,7 @@ namespace LeapFrogWinUI
             myAvatar.finishGameForPlayer(currentScore, moveCount, totalTimePlayed);
             flgGameOver = true;                                               //Set "Game Over" flag
 
-            await displayPlayerStats(myAvatar, isGameSet);
+            await displayPlayerStats(myAvatar, myScore, isGameSet);
             isGameSet = false;                                               //Set the game set flag
         }
 

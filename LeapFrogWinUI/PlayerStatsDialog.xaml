@@ -304,6 +304,8 @@
         >
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -316,8 +318,36 @@
                        Grid.Row="0"
                        Grid.Column="0"
                        Grid.ColumnSpan="2"
-                       Text="Current Statistics"
+                       Text="Current Game Statistics"
                        Style="{StaticResource styleHdrSections}"
+            />
+
+            <!-- Display the Total Time Played-->
+            <TextBlock Name="lblCurrentTimePlayed"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Total Time: "
+                       Style="{StaticResource styleTextBlocks}"
+            />
+            <TextBlock Name="txtCurrentTimePlayed"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Text=""
+                       Style="{StaticResource styleTextBlocks}"
+            />
+
+            <!-- Display the Players Total Score-->
+            <TextBlock Name="lblCurrentScore"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Total Score For All Games: "
+                       Style="{StaticResource styleTextBlocks}"
+            />
+            <TextBlock Name="txtCurrentScore"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       Text=""
+                       Style="{StaticResource styleTextBlocks}"
             />
         </Grid>
     </Grid>

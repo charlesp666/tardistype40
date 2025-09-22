@@ -39,7 +39,7 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
          * Constructor: PlayerStatsDialog (Default)
          */
-        public PlayerStatsDialog(Player thePlayer, bool isGameSet = false)
+        public PlayerStatsDialog(Player thePlayer, GameScore currentGame, bool isGameSet = false)
         {
             InitializeComponent();
 
@@ -75,6 +75,18 @@ namespace LeapFrogWinUI
 
             string meanScorePerGame = computeMeanScorePerGame(totalScore, totalGamesPlayed);
             txtMeanScorePerGame.Text = meanScorePerGame;
+
+            if(isGameSet)
+            {
+                /*Get and Store Total Time Played, Total Games Played and Total Score                 */
+                string[] transCurrentTimePlayed = (currentGame.getTimePlayed().ToString()).Split(".");
+                string currentTimePlayed = transCurrentTimePlayed[0];
+
+                int currentScore = currentGame.getGameScore();
+
+                txtCurrentTimePlayed.Text = currentTimePlayed;
+                txtCurrentScore.Text = currentScore.ToString();
+            }
         }
 
         /*******************************************************************************************

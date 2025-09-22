@@ -15,7 +15,7 @@ using System;
 
 namespace LeapFrogWinUI
 {
-    internal class GameScore
+    public sealed partial class GameScore
     {
         // Define parameters for Scoring Games (Determining Player's Winnings)
         private int pointsForSequence = 1;             //Points to add for cards in correct sequence
@@ -42,7 +42,8 @@ namespace LeapFrogWinUI
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
             currentMoves = theMoves;                          //Store the value for number of Moves
-            totalTimePlayed.Add(timePlayed);                  //Store the vlue of Total Time Played
+            totalTimePlayed = timePlayed;                  //Store the vlue of Total Time Played
+            //totalTimePlayed.Add(timePlayed);                  //Store the vlue of Total Time Played
 
             gameScore = scoreGame(gameDeck);
         }
