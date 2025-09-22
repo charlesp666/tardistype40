@@ -25,6 +25,8 @@ namespace LeapFrogWinUI
         private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
 
         private int gameScore = 0;                            //Accumulator for the Total Game Score
+        private int currentMoves = 0;                            //Store the Current Value for Moves
+        private TimeSpan totalTimePlayed;                              //Store the Total Time Played
 
         //"Public" Xaml access for Playable and Non-Playable Cards
         public Cards.Card cardPlayable;
@@ -33,13 +35,25 @@ namespace LeapFrogWinUI
         /*******************************************************************************************
          * Constructor: GameScore (Default)
          */
-        public GameScore(Cards gameDeck)
+        public GameScore(Cards gameDeck, int theMoves, TimeSpan timePlayed)
         {
             //Create the "Playable" and "Not-Playable" Cards for Position Markers
             cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
             cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
 
+            currentMoves = theMoves;                          //Store the value for number of Moves
+            totalTimePlayed.Add(timePlayed);                  //Store the vlue of Total Time Played
+
             gameScore = scoreGame(gameDeck);
+        }
+
+        /*******************************************************************************************
+         * Function: getCurrentMoves
+         * Return the Move Count
+         */
+        public int getCurrentMoves()
+        {
+            return currentMoves;
         }
 
         /*******************************************************************************************
@@ -49,6 +63,15 @@ namespace LeapFrogWinUI
         public int getGameScore()
         { 
             return gameScore;
+        }
+
+        /*******************************************************************************************
+         * Function: getTimePlayed
+         * Return the Time Played
+         */
+        public TimeSpan getTimePlayed()
+        {
+            return totalTimePlayed;
         }
 
         /*******************************************************************************************

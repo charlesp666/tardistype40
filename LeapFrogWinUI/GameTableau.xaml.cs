@@ -567,8 +567,8 @@ namespace LeapFrogWinUI
             await displayMessage(msgGameOver);                          //Display "Game Over" Dialog
 
             /* Compute the Score of Current Game                                                  */
-            GameScore myScore = new GameScore(gameDeck);        //Accumulate Current Game Statistics
-            currentScore = myScore.getGameScore();  //Store Current Score for further processing
+            GameScore myScore = new GameScore(gameDeck, moveCount, totalTimePlayed);    //Statistics
+            currentScore = myScore.getGameScore();      //Store Current Score for further processing
 
             //Update Player Statistics then Display Results
             myAvatar.finishGameForPlayer(currentScore, moveCount, totalTimePlayed);
@@ -900,9 +900,9 @@ namespace LeapFrogWinUI
                     }
                     else
                     {
-                        GameScore myScore = new GameScore(gameDeck);
+                        GameScore myScore = new GameScore(gameDeck, moveCount, totalTimePlayed);
                         currentScore = myScore.getGameScore();
-                        updateScoreDisplay(currentScore);
+                        await updateScoreDisplay(currentScore);
                     }
                 }
             }
