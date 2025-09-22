@@ -35,6 +35,10 @@ namespace LeapFrogWinUI
          */
         public GameScore(Cards gameDeck)
         {
+            //Create the "Playable" and "Not-Playable" Cards for Position Markers
+            cardPlayable = new Cards.Card("p", "l", gameDeck.getCardFacePlayable());
+            cardNotPlayable = new Cards.Card("n", "p", gameDeck.getCardFaceNotPlayable());
+
             gameScore = scoreGame(gameDeck);
         }
 
@@ -72,6 +76,23 @@ namespace LeapFrogWinUI
         }
 
         /*******************************************************************************************
+         * Method: isCardPositionMarker
+         * Checks if the Card passed as parameter is either the "Playable" or "Not-Playable" 
+         * position markers.
+         */
+        private bool isCardPositionMarker(Cards.Card testCard)
+        {
+            bool returnResult = false;
+
+            if ((testCard.cardsMatch(cardNotPlayable)) || (testCard.cardsMatch(cardPlayable)))
+            {
+                returnResult = true;
+            }
+
+            return returnResult;  
+        }
+
+        /*******************************************************************************************
          * Method: scoreGame
          * Adds up the score of the current game; scoring as follows:
          * 
@@ -85,61 +106,70 @@ namespace LeapFrogWinUI
             int completedSuits = 0;                          //Count of the Suits that are completed
             int countSequence = 0;                   //Count the number of cards in correct sequence
 
-            // Sum score for cards that are in correct sequence and correct position
+            // Sum score for cards that are in correct sequence and correct position; Use the count
+            // of Suits to process each row.
             for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
             {
                 countSequence = 0;                     //Ensure Sequence Count is reset for each row
-                int currentRank = 0;       //Set initial column or Rank position for the current row
+                int currentRank = 0;        //Set initial column (Rank) position for the current row
                 bool correctPosition = false;          //Initialize "Correct Position" flag to "Not"
 
                 while (currentRank < 12)
                 {
+                    bool doCardsMatch = false;        //Flag indicating Cards are in proper sequence
+
                     //Compute the Play Position of the Current Card being checked
                     int playPosition = gameDeck.calcArrayPosition(aSuit, currentRank);
 
                     Cards.Card thisCard = gameDeck.deckCards[playPosition];              //This Card
-                    if (!thisCard.cardsMatch(cardNotPlayable))
+                    if (!isCardPositionMarker(thisCard))
                     {
-                        Cards.Card nextCard = gameDeck.deckCards[playPosition + 1];          //Next Card
-
                         Cards.Card nextCardInSequence = gameDeck.findNextCardDescending(thisCard);
 
-                        if (nextCard.cardsMatch(nextCardInSequence))        //If next card is correct...
+                        Cards.Card nextCard = gameDeck.deckCards[playPosition + 1];      //Next Card
+                        if (!isCardPositionMarker(nextCard))
                         {
-                            countSequence++;                            //Increment the Sequence Counter
-                            if (isCorrectPosition(playPosition, gameDeck)) //If Current Card is in correct position...
+                            doCardsMatch = nextCard.cardsMatch(nextCardInSequence);
+                        }
+                    }
+
+                    if (doCardsMatch)                                   //If next card is correct...
+                    {
+                        countSequence++;                            //Increment the Sequence Counter
+                        if (isCorrectPosition(playPosition, gameDeck))   //If in correct position...
+                        {
+                            correctPosition = true;       //Set the "Correct Position" flag to "Yes"
+                        }
+                    }
+                    else                   //The End of a sequence is found, process the sequence...
+                    {
+                        countSequence++;                      //Adjust Sequence Count for first card
+
+                        if (countSequence == 12)                        //If the suit is complete...
+                        {
+                            completedSuits++;                //Increment the Completed Suits counter
+                            thisGameScore += pointsForCompleteSuit;            //Add points to score
+                        }
+
+                        if (countSequence > 2)      //If at least 3 cards are in correct sequence...
+                        {
+                            thisGameScore += (countSequence * pointsForSequence);       //Add points
+
+                            if (correctPosition)               //If cards are in correct position...
                             {
-                                correctPosition = true;       //Set the "Correct Position" flag to "Yes"
+                                thisGameScore += (countSequence * pointsForPosition);   //Add points
                             }
                         }
-                        else               //Card is in Current position, begin checking for sequence...
-                        {
-                            countSequence++;                      //Adjust Sequence Count for first card
 
-                            if (countSequence == 12)                         //If the suit is complete...
-                            {
-                                completedSuits++;                //Increment the Completed Suits counter
-                                thisGameScore += pointsForCompleteSuit; //Add Completed Suits points to score
-                            }
-
-                            if (countSequence > 2)       //If at least 3 cards are in correct sequence...
-                            {
-                                thisGameScore += (countSequence * pointsForSequence); //Add points to score
-
-                                if (correctPosition)                //If cards are in correct position...
-                                {
-                                    thisGameScore += (countSequence * pointsForPosition); //Add points to score
-                                }
-                            }
-
-                            countSequence = 0;                                  //Reset sequence Counter
-                            correctPosition = false;                     //And the Correct Position Flag
-                        }
+                        countSequence = 0;                                  //Reset sequence Counter
+                        correctPosition = false;                     //And the Correct Position Flag
                     }
 
                     currentRank++;                                                //Go the next card
                 }
             }
+
+            //Add bonus multiplier here
 
             if (completedSuits == 4)                                  //If all Suits are completed...
             {

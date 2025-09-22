@@ -120,6 +120,7 @@ namespace LeapFrogWinUI
         private int highlightBorderWidth = 5;
 
         private int moveCount = 0;                        //Counter for Number of Moves Made in game
+        private int currentScore = 0;        //Storage for Current Store; updated after each move...
 
         private UndoBuffer myUndoBuffer = new UndoBuffer();                 //Create the Undo Buffer
 
@@ -567,7 +568,7 @@ namespace LeapFrogWinUI
 
             /* Compute the Score of Current Game                                                  */
             GameScore myScore = new GameScore(gameDeck);        //Accumulate Current Game Statistics
-            int currentScore = myScore.getGameScore();  //Store Current Score for further processing
+            currentScore = myScore.getGameScore();  //Store Current Score for further processing
 
             //Update Player Statistics then Display Results
             myAvatar.finishGameForPlayer(currentScore, moveCount, totalTimePlayed);
@@ -813,11 +814,11 @@ namespace LeapFrogWinUI
          * Moves the Card from the Source Position to the Destination Position, then checks if the
          * move ended the game.
          */
-        private void moveCard(int sourceIndex, int destinationIndex)
+        private async Task moveCard(int sourceIndex, int destinationIndex)
         {
             if (sourceIndex != destinationIndex)       //If the Source and Destination not Equal...
             {
-                swapPlayCards(sourceIndex, destinationIndex);              //Move the Selected Card
+                await swapPlayCards(sourceIndex, destinationIndex);        //Move the Selected Card
             }
         }
 
@@ -839,7 +840,7 @@ namespace LeapFrogWinUI
                 //}
                 //else
                 //{
-                    swapPlayCards(sourceIndex, indexKingDestination);       //Move the Selected King
+                    await swapPlayCards(sourceIndex, indexKingDestination); //Move the Selected King
 
                     deactivateKingMove();  //reset King Moving Parameters; i.e. turn off King Moving
                 //}
@@ -897,10 +898,12 @@ namespace LeapFrogWinUI
                     {
                         endGame();           //Close out the current game, and set appropriate flags
                     }
-
-                    GameScore myScore = new GameScore(gameDeck);
-                    //int myScore = scoreGame();
-                    tbScore.Text = "Score: " + myScore.getGameScore().ToString();
+                    else
+                    {
+                        GameScore myScore = new GameScore(gameDeck);
+                        currentScore = myScore.getGameScore();
+                        updateScoreDisplay(currentScore);
+                    }
                 }
             }
         }
@@ -991,12 +994,14 @@ namespace LeapFrogWinUI
                endGame();                          //Score the Current Layout and Reset for New Game
             }
 
+            await updateCurrentActivityText(msgSettingNewGame);
+
             ResetTimer();                                                 //Ensure Timer has stopped
             updateMoveCountText(0);                                  //Clear the move count text box
+            updateScoreDisplay(currentScore);                      //Clear the CurrentScore text box
+
             playableKingPositions.Clear();               //Ensure the Playable Kings List is cleared
 
-            await updateCurrentActivityText(msgSettingNewGame);
-            
             Cards tempDeck = new Cards();              //Create a working deck to shuffle, cut, etc.
             flgGameOver = false;                                       //Set Game Over Flag to false
 
@@ -1025,7 +1030,7 @@ namespace LeapFrogWinUI
             //myUndoItems.Clear();                                             //Clear the Undo Buffer
 
             moveCount = 0;                              //Initialize the Move Counter for a New Game
-            updateMoveCountText(moveCount);                             //Update Move count Text box
+            await updateMoveCountText(moveCount);                             //Update Move count Text box
 
             StartTimer();                                                     //Start the Game Timer
 
@@ -1036,24 +1041,24 @@ namespace LeapFrogWinUI
           * Method: speakText
           * Using Windows Media speech synthesizer, speaks the text passed as parameter.
           */
-        private async Task speakText(string speechText)
-        {
-            string voiceLanguage = "en";
+        //private async Task speakText(string speechText)
+        //{
+        //    string voiceLanguage = "en";
 
-            MediaPlayerElement mediaElement = new MediaPlayerElement();
-            var mediaPlayer = new MediaPlayer();
+        //    MediaPlayerElement mediaElement = new MediaPlayerElement();
+        //    var mediaPlayer = new MediaPlayer();
 
-            var synth = new SpeechSynthesizer();
-            // Set the voice
-            var voices = SpeechSynthesizer.AllVoices;
-            var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains(voiceLanguage));
-            synth.Voice = selectedVoice;
+        //    var synth = new SpeechSynthesizer();
+        //    // Set the voice
+        //    var voices = SpeechSynthesizer.AllVoices;
+        //    var selectedVoice = voices.First(voice => voice.Gender == VoiceGender.Female && voice.Language.Contains(voiceLanguage));
+        //    synth.Voice = selectedVoice;
 
-            var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);
+        //    var audioStream = await synth.SynthesizeTextToStreamAsync(speechText);
 
-            mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
-            mediaPlayer.Play();
-        }
+        //    mediaPlayer.Source = MediaSource.CreateFromStream(audioStream, audioStream.ContentType);
+        //    mediaPlayer.Play();
+        //}
 
         /*******************************************************************************************
          * StartTimer()
@@ -1084,12 +1089,12 @@ namespace LeapFrogWinUI
         * Play Position, then sets the Card Face and Value of the Source to "Playable" if the
         * source position is playable or "NotPlayable" otherwise.
         */
-        private void swapPlayCards(int sourceIndex, int destinationIndex)
+        private async Task swapPlayCards(int sourceIndex, int destinationIndex)
         {
             //Copy Source Card to Destination
             gameDeck.deckCards[destinationIndex] = gameDeck.deckCards[sourceIndex];
 
-            if(isPlayable(sourceIndex))
+            if (isPlayable(sourceIndex))
             {
                 gameDeck.deckCards[sourceIndex] = cardPlayable;
             }
@@ -1098,8 +1103,8 @@ namespace LeapFrogWinUI
                 gameDeck.deckCards[sourceIndex] = cardNotPlayable;
             }
 
-            moveCount++;                                //Initialize the Move Counter for a New Game
-            updateMoveCountText(moveCount);                             //Update Move count Text box
+            moveCount++;                                                  //Increment the Move Counter
+            await updateMoveCountText(moveCount);                         //Update Move count Text box
 
             //UndoItem thisMove = new UndoItem(sourceCard, destinationCard);
             //myUndoItems.Push(thisMove);                                 //Push Move onto Undo Buffer
@@ -1150,120 +1155,16 @@ namespace LeapFrogWinUI
         #endregion
 
         /*******************************************************************************************
-         * Score Game
-         * Stores the procedures used to score the game.
-         ******************************************************************************************/
-        #region
-        // Define parameters for Scoring Games (Determining Player's Winnings)
-        //private int pointsForSequence = 1;             //Points to add for cards in correct sequence
-        //private int pointsForPosition = 2;             //Points to add for cards in correct position
-        //private int pointsForCompleteSuit = 10;                  //Points to add for a complete suit
+        /* Method: updateCurrentActivityText
+        /* 
+        /* Updates the Text in the "Current Activity" TextBlock.
+        /*/
+        private async Task updateScoreDisplay(int currentScore, int delayTask = 1000)
+        {
+            tbScore.Text = "Score: " + currentScore.ToString();
 
-        //private int gameWinningBonus = 100;      //Bonus Amount for a All Cards Correctly Positioned
-
-        /*******************************************************************************************
-         * Function: isCorrectPosition
-         * Compares card position in row and determines if this is correctly placed. Returns "true"
-         * if card is in correct position; otherwise returns false.
-         */
-        //private bool isCorrectPosition(int cardPosition)
-        //{
-        //    Cards.Card thisCard = gameDeck.deckCards[cardPosition];          //Get Card being tested
-        //    bool placedCorrectly = false;                                 //Set default return value
-
-        //    if (!(thisCard.Equals(cardNotPlayable)))
-        //    {
-        //        String thisRank = thisCard.getRank();                        //Get Current Card Rank
-        //        int correctPosition = thisCard.findRank(thisRank);  //Get Position in Possible Ranks
-        //        correctPosition = Math.Abs(correctPosition - 12);         //Adjust for Reverse Order
-
-        //        int thisPosition = (cardPosition % 13);           //Get Current Card Column Position
-
-        //        placedCorrectly = (thisPosition == correctPosition);       //Compute Correct Placing
-        //    }
-
-        //    return placedCorrectly;
-        //}
-
-        /*******************************************************************************************
-         * Method: scoreGame
-         * Adds up the score of the current game; scoring as follows:
-         * 
-         * 2 points for each card in correct sequence (by rank and suit)
-         * 5 points for each card in correct position (column by rank)
-         * 10 points for completion of a suit (King through 2 of same suit on same row)
-         */
-        //private int scoreGame()
-        //{
-        //    int thisGameScore = 0;              //Local variable to accumulate score of current game
-        //    int completedSuits = 0;                          //Count of the Suits that are completed
-        //    int countSequence = 0;                   //Count the number of cards in correct sequence
-
-        //    // Sum score for cards that are in correct sequence and correct position
-        //    for (int aSuit = 0; aSuit < Cards.Card.possibleSuits.Length; aSuit++)
-        //    {
-        //        countSequence = 0;                     //Ensure Sequence Count is reset for each row
-        //        int currentRank = 0;       //Set initial column or Rank position for the current row
-        //        bool correctPosition = false;          //Initialize "Correct Position" flag to "Not"
-
-        //        while(currentRank < 12)
-        //        {
-        //            //Compute the Play Position of the Current Card being checked
-        //            int playPosition = gameDeck.calcArrayPosition(aSuit, currentRank);
-
-        //            Cards.Card thisCard = gameDeck.deckCards[playPosition];              //This Card
-        //            if (!thisCard.cardsMatch(cardNotPlayable))
-        //            {
-        //                Cards.Card nextCard = gameDeck.deckCards[playPosition + 1];          //Next Card
-
-        //                Cards.Card nextCardInSequence = gameDeck.findNextCardDescending(thisCard);
-
-        //                if (nextCard.cardsMatch(nextCardInSequence))        //If next card is correct...
-        //                {
-        //                    countSequence++;                            //Increment the Sequence Counter
-        //                    if (isCorrectPosition(playPosition)) //If Current Card is in correct position...
-        //                    {
-        //                        correctPosition = true;       //Set the "Correct Position" flag to "Yes"
-        //                    }
-        //                }
-        //                else               //Card is in Current position, begin checking for sequence...
-        //                {
-        //                    countSequence++;                      //Adjust Sequence Count for first card
-
-        //                    if (countSequence == 12)                         //If the suit is complete...
-        //                    {
-        //                        completedSuits++;                //Increment the Completed Suits counter
-        //                        thisGameScore += pointsForCompleteSuit; //Add Completed Suits points to score
-        //                    }
-
-        //                    if (countSequence > 2)       //If at least 3 cards are in correct sequence...
-        //                    {
-        //                        thisGameScore += (countSequence * pointsForSequence); //Add points to score
-
-        //                        if (correctPosition)                //If cards are in correct position...
-        //                        {
-        //                            thisGameScore += (countSequence * pointsForPosition); //Add points to score
-        //                        }
-        //                    }
-
-        //                    countSequence = 0;                                  //Reset sequence Counter
-        //                    correctPosition = false;                     //And the Correct Position Flag
-        //                }
-        //            }
-
-        //            currentRank++;                                                //Go the next card
-        //        }
-        //    }
-
-        //    if(completedSuits == 4)                                  //If all Suits are completed...
-        //    {
-        //        thisGameScore += gameWinningBonus;                          //Add Winning Game Bonus
-        //    }
-
-        //    return thisGameScore;
-        //}
-
-        #endregion
+            await Task.Run(() => Thread.Sleep(delayTask));
+        }
 
         /*******************************************************************************************
          * Class: Play Position
