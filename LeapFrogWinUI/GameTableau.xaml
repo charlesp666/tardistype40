@@ -35,6 +35,7 @@
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="2,2,2,2"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -86,9 +87,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <Image x:Name="picGameImage"
@@ -101,52 +99,63 @@
                    FocusVisualPrimaryBrush="#FF0000C0"
             />
 
-            <Border Name="brdCurrentActivity"
-                    Grid.Column="1"
-                    Width="400"
-                    Style="{StaticResource HeaderBorderStyle}"
+            <Grid x:Name="GameHeader"
+                  Grid.Column="1"
+                  Margin="2,2,2,2"
             >
-                <TextBlock x:Name="tbCurrentActivity"
-                           Text="Initializing..."
-                           Width="390"
-                           Style="{StaticResource HeaderTextBlockStyle}"
-                />
-            </Border>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-            <Border Name="brdScore"
-                    Grid.Column="2"
-                    Width="200"
-                   Style="{StaticResource HeaderBorderStyle}"
-            >
-                <TextBlock x:Name="tbScore"
-                           Text="Score: 0"
-                           Width="100"
-                           Style="{StaticResource HeaderTextBlockStyle}"
-                />
-            </Border>
-
-            <Border Name="brdMoveCount"
-                    Grid.Column="3"
-                    Width="200"
-                    Style="{StaticResource HeaderBorderStyle}"
-            >
-                <TextBlock x:Name="tbMoveCount"
-                           Text=""
-                           Width="190"
-                           Style="{StaticResource HeaderTextBlockStyle}"
-                />
-            </Border>
-
-            <Border Name="brdGameTimer"
-                    Grid.Column="4"
-                    Width="200"
-                    Style="{StaticResource HeaderBorderStyle}"
-            >
-                <TextBlock x:Name="myTimerDisplay"
-                           Width="190"
-                           Style="{StaticResource HeaderTextBlockStyle}"
-                />
-            </Border>
+                <Border Name="brdCurrentActivity"
+                        Grid.Column="0"
+                        Width="400"
+                        Style="{StaticResource HeaderBorderStyle}"
+                >
+                    <TextBlock x:Name="tbCurrentActivity"
+                               Text="Initializing..."
+                               Width="390"
+                               Style="{StaticResource HeaderTextBlockStyle}"
+                    />
+                </Border>
+      
+                <Border Name="brdScore"
+                        Grid.Column="1"
+                        Width="200"
+                       Style="{StaticResource HeaderBorderStyle}"
+                >
+                    <TextBlock x:Name="tbScore"
+                               Text="Score: 0"
+                               Width="100"
+                               Style="{StaticResource HeaderTextBlockStyle}"
+                    />
+                </Border>
+      
+                <Border Name="brdMoveCount"
+                        Grid.Column="2"
+                        Width="200"
+                        Style="{StaticResource HeaderBorderStyle}"
+                >
+                    <TextBlock x:Name="tbMoveCount"
+                               Text=""
+                               Width="190"
+                               Style="{StaticResource HeaderTextBlockStyle}"
+                    />
+                </Border>
+      
+                <Border Name="brdGameTimer"
+                        Grid.Column="4"
+                        Width="200"
+                        Style="{StaticResource HeaderBorderStyle}"
+                >
+                    <TextBlock x:Name="myTimerDisplay"
+                               Width="190"
+                               Style="{StaticResource HeaderTextBlockStyle}"
+                    />
+                </Border>
+            </Grid>
         </Grid>
 
         <!--Game Tableu Playing Area -->
