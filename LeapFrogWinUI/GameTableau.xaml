@@ -89,15 +89,19 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="picGameImage"
+            <Border Name="brdGameIcon"
+                    Grid.Column="0"
+                    Style="{StaticResource HeaderBorderStyle}"
+            >
+                <!--Margin="0,0,0,0"
+                   FocusVisualPrimaryBrush="#FF0000C0"-->
+                <Image x:Name="picGameImage"
                    Source="/Assets/GameImages/SmilingFrogFace.ico"
                    Stretch="Uniform"
-                   Grid.Column="0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   Margin="0,0,0,0"
-                   FocusVisualPrimaryBrush="#FF0000C0"
-            />
+                />
+            </Border>
 
             <Grid x:Name="GameHeader"
                   Grid.Column="1"
