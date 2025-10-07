@@ -13,7 +13,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-//using Microsoft.UI.Xaml.Media.Animation;
 
 //using Microsoft.UI.Xaml.Controls.Primitives;
 //using Microsoft.UI.Xaml.Data;
@@ -221,20 +220,6 @@ namespace LeapFrogWinUI
         {
             GameScore thisGame = new GameScore(gameDeck, moveCount, totalTimePlayed);
             displayPlayerStats(myAvatar, thisGame, isGameSet);
-
-            //var statsStyle = (Style)this.Resources["DialogButtonStyle"];
-
-            //var dialog = new ContentDialog
-            //{
-            //    Content = new PlayerStatsDialog(myAvatar, isGameSet),
-            //    Background = new SolidColorBrush(Colors.Blue),
-            //    PrimaryButtonText = "OK",
-            //    PrimaryButtonStyle = statsStyle,
-            //    DefaultButton = ContentDialogButton.Primary,
-            //    XamlRoot = this.XamlRoot // Required in WinUI 3
-            //};
-
-            //await dialog.ShowAsync();
         }
 
         /*******************************************************************************************
@@ -604,6 +589,13 @@ namespace LeapFrogWinUI
                 cardIndex++;                                 //Increment the Card Index to next card
             }
         }
+
+        //private int getDataGridGameBoardSelection(object sender, PointerRoutedEventArgs e)
+        //{
+        //    int theSelectedCell = In.Parse(e.GetCurrentPoint(dataGridGameBoard).Position);
+
+        //    return theSelectedCell;
+        //}
 
         /*******************************************************************************************
          * Method: highlightKingForMoving

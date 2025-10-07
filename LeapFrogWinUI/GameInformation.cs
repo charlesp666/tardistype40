@@ -12,18 +12,10 @@
  * System Class/Library Declarations
  */
 using System;
-//using System.Collections.Generic;
 using System.IO;
-//using System.IO.Packaging;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Reflection;
-//using System.Resources;                                     //To Pull Images from Assembly Resources
 
 using Windows.ApplicationModel;
 using Windows.UI;
-//using Windows.UI.Xaml.Controls;                                            //For Image Data Datatype
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 
@@ -66,19 +58,30 @@ namespace LeapFrogWinUI
         {
             //Get the Package Objects required to collect Game Information
             Package currentPackage = Package.Current;                          //Get Current Package
-            PackageId currentPackageId = currentPackage.Id;                 //Package ID Information
-            PackageVersion currentPackageVersion = currentPackageId.Version;
+            //PackageId currentPackageId = currentPackage.Id;                 //Package ID Information
+            //PackageVersion currentPackageVersion = currentPackageId.Version;
 
             nameOfGame = currentPackage.DisplayName;                              //Name of the Game
-            //subTitleOfGame = currentPackage.Description;                 //Short Description of Game
-            subTitleOfGame = "A Game of Solitaire";                    //Short Description of Game
+            subTitleOfGame = currentPackage.Description;                 //Short Description of Game
+            //subTitleOfGame = "A Game of Solitaire";                    //Short Description of Game
             gamePublisher = currentPackage.PublisherDisplayName;           //Set Name of Publisher
 
             //Compose the full Version number from the Package Version properties.
-            String versionMajor = currentPackageVersion.Major.ToString();         //Get Major Number
-            String versionMinor = currentPackageVersion.Minor.ToString();         //Get Minor Number
-            String versionBuild = currentPackageVersion.Build.ToString();         //Get Build Number
-            String versionRevision = currentPackageVersion.Revision.ToString();//Get Revision Number
+            var myVersion = Package.Current.Id.Version;
+            //ushort major = myVersion.Major;
+            //ushort minor = myVersion.Minor;
+            //ushort build = myVersion.Build;
+            //ushort revision = myVersion.Revision;
+
+            String versionMajor = myVersion.Major.ToString();         //Get Major Number
+            String versionMinor = myVersion.Minor.ToString();         //Get Minor Number
+            String versionBuild = myVersion.Build.ToString();         //Get Build Number
+            String versionRevision = myVersion.Revision.ToString();//Get Revision Number
+
+            //String versionMajor = currentPackageVersion.Major.ToString();         //Get Major Number
+            //String versionMinor = currentPackageVersion.Minor.ToString();         //Get Minor Number
+            //String versionBuild = currentPackageVersion.Build.ToString();         //Get Build Number
+            //String versionRevision = currentPackageVersion.Revision.ToString();//Get Revision Number
 
             gameVersion = versionMajor + "." + versionMinor + "." + versionBuild + "." + versionRevision;
 

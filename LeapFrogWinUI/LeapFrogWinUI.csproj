@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <PackageVersionSettings>None.NoneWithAutoReset.None</PackageVersionSettings>
+    <!--<PackageVersionSettings>None.NoneWithAutoReset.None</PackageVersionSettings>-->
+    <GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
+    <AppxAutoIncrementPackageRevision>true</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
 
   <PropertyGroup>
