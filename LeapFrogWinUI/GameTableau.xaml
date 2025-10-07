@@ -30,7 +30,7 @@
         <Style x:Key="HeaderBorderStyle"
                TargetType="Border"
         >
-            <Setter Property="Height" Value="50"/>
+            <Setter Property="Height" Value="auto"/>
             <Setter Property="Background" Value="Blue"/>
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -44,7 +44,7 @@
         <Style x:Key="HeaderTextBlockStyle"
                TargetType="TextBlock"
         >
-            <Setter Property="Height" Value="48"/>
+            <Setter Property="Height" Value="auto"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="White"/>
@@ -62,10 +62,10 @@
           CornerRadius="10"
     >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1550"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="610"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
@@ -75,7 +75,7 @@
               Grid.Row="0"
               Margin="2,2"
               Width="1548"
-              Height="60"
+              Height="auto"
               Background="Blue"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
